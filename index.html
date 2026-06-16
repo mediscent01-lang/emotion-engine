@@ -2805,6 +2805,604 @@ document.addEventListener('DOMContentLoaded',()=>{
     renderClosedLoopBlock(st);
   };
 })();
+   /* ═══════════════════════════════════════════════════════════════════
+   SHIFTI · MEDISCENT — UNIFIED ENGINE MODULE  (v6.1 consolidated)
+   ───────────────────────────────────────────────────────────────────
+   이 한 블록이 기존의 트레일링 <script> 3~4개를 모두 대체합니다.
+     · MEDISCENT 캐노니컬 폐루프 엔진
+     · 표시 상태/제품 동기화
+     · computeFinal / runAnalysis / renderReport / saveHist (단일 정의)
+     · 폐루프 재측정 피드백
+   설계 원칙: 베이스 스크립트는 건드리지 않고, window.* 후킹으로만 교체.
+═══════════════════════════════════════════════════════════════════ */
+(function(){
+  if (typeof window === 'undefined') return;
+
+  /* ── 0. 전역 브리지 (베이스의 lexical const 들을 window 로 연결) ── */
+  const bridge = (name, ref) => { try { if (window[name] == null && typeof ref !== 'undefined') window[name] = ref; } catch(_){} };
+  try { bridge('S',       S);       } catch(_){}
+  try { bridge('SCENTS',  SCENTS);  } catch(_){}
+  try { bridge('LINKS',   LINKS);   } catch(_){}
+  try { bridge('QS',      QS);      } catch(_){}
+  try { bridge('EQ_META', EQ_META); } catch(_){}
+  try { bridge('CIRC',    CIRC);    } catch(_){}
+
+  const clamp = (v, min=0, max=100) => Math.max(min, Math.min(max, Math.round(Number(v) || 0)));
+  const safe  = v => Number.isFinite(Number(v)) ? Number(v) : 0;
+  const getS  = () => window.S || (typeof S !== 'undefined' ? S : null);
+  const toastSafe = m => { try { if (typeof toast === 'function') toast(m); } catch(_){} };
+
+  const DISPLAY_BY_CODE = (window.SCENTS || []).reduce((a,x)=>{ a[x.code]=x; return a; }, {});
+  const LINKS_MAP = window.LINKS || {};
+  const EQ_META_SAFE = (window.EQ_META) || {
+    valence:{l:'Valence',c:'#4a8a6a'}, arousal:{l:'Arousal',c:'#4a5570'}, stress:{l:'Stress',c:'#a85560'},
+    engagement:{l:'Engagement',c:'#8a6f3c'}, relaxation:{l:'Relaxation',c:'#527a6c'}, interest:{l:'Interest',c:'#6a5a8a'}
+  };
+
+  const CANON_KEYS = ['valence','arousal','stressLoad','focus','relaxation','curiosity'];
+
+  /* ════════════════════════════════════════════════════════════════
+     1. 제품 모델 (감정 EQ + 가드레일 + 포맷 우선순위)
+  ════════════════════════════════════════════════════════════════ */
+  const PRODUCTS = [
+    { code:'AnnE', narrative:'균형형 안정',
+      eq:{valence:88,arousal:72,stressLoad:25,focus:85,relaxation:65,curiosity:90},
+      profile:{ideal:['stabilize','work','daily'],avoidWhen:['hyper-low-energy']},
+      formatRules:{perfume:1.0,pillow_mist:0.9,diffuser:0.85},
+      guardrail:{autoRecommend:true,maxIntensity:'medium'} },
+    { code:'Foggy Study', narrative:'인지 몰입',
+      eq:{valence:50,arousal:78,stressLoad:22,focus:92,relaxation:28,curiosity:95},
+      profile:{ideal:['focus','work','study'],avoidWhen:['high-contradiction-high-stress']},
+      formatRules:{perfume:1.0,diffuser:0.95,pillow_mist:0.4},
+      guardrail:{autoRecommend:true,maxIntensity:'medium'} },
+    { code:'Who am I', narrative:'깊은 내면 리셋',
+      eq:{valence:8,arousal:18,stressLoad:92,focus:15,relaxation:10,curiosity:12},
+      profile:{ideal:['introspective','night','solo'],avoidWhen:['default-auto','uncertain-state']},
+      formatRules:{diffuser:1.0,pillow_mist:0.9,perfume:0.3},
+      guardrail:{autoRecommend:false,requireOptIn:true,maxIntensity:'low'} },
+    { code:'The Great', narrative:'확장 에너지',
+      eq:{valence:75,arousal:88,stressLoad:85,focus:40,relaxation:15,curiosity:82},
+      profile:{ideal:['social','drive','outdoor'],avoidWhen:['high-stress-low-confidence']},
+      formatRules:{perfume:1.0,diffuser:0.55,pillow_mist:0.15},
+      guardrail:{autoRecommend:true,maxIntensity:'medium'} },
+    { code:'Red Tara', narrative:'생존 에너지/회복 전환',
+      eq:{valence:72,arousal:85,stressLoad:78,focus:82,relaxation:18,curiosity:88},
+      profile:{ideal:['transition','reboot','evening'],avoidWhen:['sleep-prep']},
+      formatRules:{perfume:1.0,diffuser:0.8,pillow_mist:0.2},
+      guardrail:{autoRecommend:true,maxIntensity:'medium'} },
+    { code:'말괄량이', narrative:'밝은 전환',
+      eq:{valence:90,arousal:80,stressLoad:12,focus:35,relaxation:78,curiosity:92},
+      profile:{ideal:['change','refresh','gift'],avoidWhen:['deep-focus-needed']},
+      formatRules:{perfume:1.0,diffuser:0.85,pillow_mist:0.4},
+      guardrail:{autoRecommend:true,maxIntensity:'medium'} }
+  ];
+
+  /* ════════════════════════════════════════════════════════════════
+     2. 모달리티 → 캐노니컬 상태 변환
+  ════════════════════════════════════════════════════════════════ */
+  function surveyToCanonical(s){
+    s = s || {};
+    return {
+      valence:    clamp(s.mood*0.50 + s.balance*0.30 + (100-s.stress)*0.20),
+      arousal:    clamp(s.energy*0.50 + s.focus*0.25 + s.stress*0.25),
+      stressLoad: clamp(s.stress),
+      focus:      clamp(s.focus*0.60 + s.balance*0.15 + s.energy*0.25),
+      relaxation: clamp((100-s.stress)*0.40 + s.recovery*0.35 + s.balance*0.25),
+      curiosity:  clamp(s.focus*0.35 + s.energy*0.30 + s.mood*0.35)
+    };
+  }
+  function bioToCanonical(bio){
+    if(!bio || !bio.valid) return null;
+    return {
+      valence:    clamp(bio.mood*0.55 + bio.balance*0.25 + (100-bio.stress)*0.20),
+      arousal:    clamp(bio.energy*0.60 + bio.focus*0.20 + bio.stress*0.20),
+      stressLoad: clamp(bio.stress),
+      focus:      clamp(bio.focus*0.70 + bio.energy*0.30),
+      relaxation: clamp(bio.recovery*0.45 + bio.mood*0.20 + (100-bio.stress)*0.35),
+      curiosity:  clamp(bio.focus*0.30 + bio.energy*0.35 + bio.mood*0.35)
+    };
+  }
+  function faceToCanonical(face){
+    if(!face) return null;
+    const joy=safe(face.joy), sor=safe(face.sorrow), ang=safe(face.anger), sur=safe(face.surprise);
+    return {
+      valence:    clamp(joy*0.70 + (100-sor)*0.30),
+      arousal:    clamp(sur*0.45 + ang*0.20 + joy*0.35),
+      stressLoad: clamp(sor*0.35 + ang*0.50 + sur*0.15),
+      focus:      clamp((100-sor)*0.35 + (100-ang)*0.25 + joy*0.40),
+      relaxation: clamp((100-ang)*0.35 + (100-sor)*0.45 + joy*0.20),
+      curiosity:  clamp(sur*0.50 + joy*0.30 + (100-sor)*0.20)
+    };
+  }
+
+  /* ════════════════════════════════════════════════════════════════
+     3. 신뢰도 / 상충도 / 불확실성
+  ════════════════════════════════════════════════════════════════ */
+  function computeReliability(st){
+    const q = Object.keys(st.survey || {}).length;
+    const survey = q>=6 ? 0.92 : q>=4 ? 0.75 : 0.45;
+    const bio = (!st.bio || !st.bio.valid) ? 0 : clamp(
+      Math.min((st.bio.rows?.eeg||0)/40,1)*35 +
+      Math.min((st.bio.rows?.rr ||0)/60,1)*35 +
+      (st.bio.raw?.rmssd ? 15:0) + (st.bio.raw?.lf_hf ? 15:0), 0, 100) / 100;
+    const fc = safe(st.face?.confidence);
+    const face = st.face?.frozen ? Math.max(fc/100, 0.65) : fc/100;
+    return { survey, bio, face };
+  }
+  function weightedMean(states, w){
+    const out = {};
+    CANON_KEYS.forEach(k=>{
+      let num=0, den=0;
+      Object.keys(states).forEach(m=>{
+        if(states[m] && typeof states[m][k]==='number' && w[m]>0){ num += states[m][k]*w[m]; den += w[m]; }
+      });
+      out[k] = den ? clamp(num/den) : 50;
+    });
+    return out;
+  }
+  function meanGap(a,b){
+    const v = CANON_KEYS.map(k=>Math.abs((a?.[k]??50)-(b?.[k]??50)));
+    return v.reduce((x,y)=>x+y,0)/v.length;
+  }
+  function computeContradiction(states, w){
+    const act = Object.keys(states).filter(k=>states[k] && w[k]>0.12);
+    if(act.length<2) return 0;
+    const gaps=[];
+    for(let i=0;i<act.length;i++) for(let j=i+1;j<act.length;j++) gaps.push(meanGap(states[act[i]], states[act[j]]));
+    return clamp(gaps.reduce((a,b)=>a+b,0)/gaps.length);
+  }
+  function computeUncertainty(rel, contradiction){
+    const mean = ((rel.survey||0)+(rel.bio||0)+(rel.face||0))/3;
+    return clamp((1-mean)*70 + contradiction*0.30);
+  }
+
+  /* ════════════════════════════════════════════════════════════════
+     4. 문맥 / 개입 정책
+  ════════════════════════════════════════════════════════════════ */
+  function inferContext(st){
+    const intent = st.intention || st.survey?.intention || 'neutral';
+    const focus=safe(st.scores?.focus), recovery=safe(st.scores?.recovery), energy=safe(st.scores?.energy);
+    let useCase='daily';
+    if(intent==='change' && focus>=65) useCase='work';
+    else if(intent==='change' && recovery<45) useCase='reboot';
+    else if(intent==='keep' && recovery>=60) useCase='night';
+    else if(energy>=75) useCase='social';
+    return { intent, useCase };
+  }
+  function chooseFormat(p, st8, ctx, unc){
+    const sc = { perfume:p.formatRules?.perfume??0.5, pillow_mist:p.formatRules?.pillow_mist??0.5, diffuser:p.formatRules?.diffuser??0.5 };
+    if(ctx.useCase==='night'){ sc.pillow_mist+=0.35; sc.diffuser+=0.15; sc.perfume-=0.10; }
+    if(ctx.useCase==='work')   sc.perfume+=0.20;
+    if(ctx.useCase==='reboot') sc.diffuser+=0.15;
+    if(unc>60) sc.diffuser+=0.10;
+    return Object.entries(sc).sort((a,b)=>b[1]-a[1])[0][0];
+  }
+  function chooseIntensity(state, unc, p){
+    if(unc>65) return 'low';
+    if(state.stressLoad>75 && p.code!=='The Great') return 'low';
+    if(state.arousal>75 && state.relaxation<35) return 'low';
+    if(p.guardrail?.maxIntensity==='low') return 'low';
+    return 'medium';
+  }
+  function remeasureMinutes(fmt, unc){
+    if(unc>65) return 3;
+    if(fmt==='pillow_mist') return 10;
+    if(fmt==='diffuser') return 15;
+    return 5;
+  }
+
+  /* ════════════════════════════════════════════════════════════════
+     5. 이력 / 선호 / SKU / 매칭
+  ════════════════════════════════════════════════════════════════ */
+  const CL_KEY = 'mediscent_closed_loop_history';
+  function loadCL(){ try { return JSON.parse(localStorage.getItem(CL_KEY) || '[]'); } catch { return []; } }
+
+  function historyScore(code, h){
+    const r = h.filter(x=>x.primary===code);
+    if(!r.length) return 50;
+    return clamp(50 + (r.reduce((s,x)=>s+safe(x.deltaScore),0)/r.length)*0.5);
+  }
+  function preferenceScore(code, h){
+    const r = h.filter(x=>x.primary===code);
+    if(!r.length) return 55;
+    return clamp(r.reduce((s,x)=>s+safe(x.selfLike??60),0)/r.length);
+  }
+  function contextScore(p, ctx){
+    let s=55;
+    if(p.profile?.ideal?.includes(ctx.intent))  s+=15;
+    if(p.profile?.ideal?.includes(ctx.useCase)) s+=20;
+    if(p.profile?.avoidWhen?.includes('default-auto') && ctx.intent!=='keep') s-=25;
+    return clamp(s);
+  }
+  function skuScore(p, st8){
+    let s=50;
+    if(p.code==='AnnE'        && safe(st8.valence)>=55) s+=18;
+    if(p.code==='Foggy Study' && safe(st8.focus)>=60)   s+=18;
+    if(p.code==='말괄량이'    && safe(st8.valence)<55)  s+=15;
+    if(p.code==='Who am I') s-=20;
+    return clamp(s);
+  }
+  function cosineW(a,b){
+    const W={valence:2.0,arousal:1.6,stressLoad:1.9,focus:1.6,relaxation:1.7,curiosity:1.2};
+    let dot=0,ma=0,mb=0;
+    CANON_KEYS.forEach(k=>{ const w=W[k]; dot+=a[k]*b[k]*w; ma+=a[k]*a[k]*w; mb+=b[k]*b[k]*w; });
+    return ma && mb ? (dot/Math.sqrt(ma*mb))*100 : 0;
+  }
+  function guardrailPenalty(p, state, unc, ctx){
+    let pen=0;
+    if(p.code==='Who am I'   && (unc>45 || ctx.intent==='change')) pen+=45;
+    if(p.code==='The Great'  && state.stressLoad>75 && unc>45)     pen+=30;
+    if(p.code==='Red Tara'   && ctx.useCase==='night')             pen+=20;
+    if(p.code==='말괄량이'   && state.focus>80 && ctx.useCase==='work') pen+=15;
+    return pen;
+  }
+
+  /* ════════════════════════════════════════════════════════════════
+     6. 메인 엔진
+  ════════════════════════════════════════════════════════════════ */
+  function makeCopy(p, state, ctx, unc){
+    const u = unc>60 ? '측정 신뢰도가 낮아 보수적으로 추천합니다.' : '현재 상태와 가장 가까운 향 반응 프로파일입니다.';
+    const common = `Valence ${state.valence} · Arousal ${state.arousal} · Stress ${state.stressLoad} · Relaxation ${state.relaxation}. ${u}`;
+    const map = {
+      'AnnE':`정서 안정과 집중 균형이 필요한 상태입니다. ${common}`,
+      'Foggy Study':`몰입 회복이 우선인 상태입니다. ${common}`,
+      'Who am I':`내면 정리용 옵션입니다. 자동 추천보다는 명시적 선택일 때 적합합니다. ${common}`,
+      'The Great':`에너지 확장 욕구가 있으나 과자극 리스크를 함께 봐야 합니다. ${common}`,
+      'Red Tara':`소진 뒤 재가동이 필요한 전환 상태입니다. ${common}`,
+      '말괄량이':`기분 반전과 밝은 전환이 필요한 상태입니다. ${common}`
+    };
+    return map[p.code] || common;
+  }
+
+  function computeFinalMediscent(){
+    if(typeof window.updateScores === 'function') window.updateScores();
+    const st = getS();
+    if(!st) throw new Error('전역 상태 S를 찾을 수 없습니다');
+
+    const states = { survey: surveyToCanonical(st.scores||{}), bio: bioToCanonical(st.bio), face: faceToCanonical(st.face) };
+    const rel = computeReliability(st);
+    const baseW = { survey: rel.survey, bio: rel.bio, face: rel.face };
+    const contradiction = computeContradiction(states, baseW);
+    const uncertainty   = computeUncertainty(rel, contradiction);
+
+    const w = { ...baseW };
+    if(contradiction>40){ w.face*=0.75; if(rel.bio<0.45) w.bio*=0.80; }
+
+    const finalState = weightedMean(states, w);
+    const ctx = inferContext(st);
+    const hist = loadCL();
+
+    const ranked = PRODUCTS.map(p=>{
+      const stateFit = cosineW(finalState, p.eq);
+      const h = historyScore(p.code, hist);
+      const pr = preferenceScore(p.code, hist);
+      const c = contextScore(p, ctx);
+      const k = skuScore(p, finalState);
+      const pen = guardrailPenalty(p, finalState, uncertainty, ctx);
+      const final = clamp(stateFit*0.45 + h*0.20 + pr*0.15 + c*0.10 + k*0.10 - pen, 0, 100);
+      return { product:p, stateFit:Math.round(stateFit), history:Math.round(h), preference:Math.round(pr), context:Math.round(c), sku:Math.round(k), penalty:pen, final };
+    }).sort((a,b)=>b.final-a.final);
+
+    const primary = ranked[0].product, secondary = ranked[1].product, avoid = ranked[ranked.length-1].product;
+    const format = chooseFormat(primary, finalState, ctx, uncertainty);
+    const intensity = chooseIntensity(finalState, uncertainty, primary);
+
+    st.primary = primary; st.alts = [secondary]; st.avoid = avoid; st.matchScore = ranked[0].final;
+    st.matchReason = [
+      `State fit ${ranked[0].stateFit}`, `History ${ranked[0].history}`, `Context ${ranked[0].context}`,
+      contradiction>35 ? `Contradiction ${contradiction}` : null,
+      uncertainty>35 ? `Uncertainty ${uncertainty}` : null
+    ].filter(Boolean).join(' · ');
+
+    st.engine = {
+      canonicalState: finalState, modalityWeights: w, reliability: rel,
+      contradiction, uncertainty, ranked, context: ctx,
+      intervention: {
+        primary: primary.code, secondary: secondary.code, avoid: avoid.code,
+        format, intensity, remeasureIn: remeasureMinutes(format, uncertainty),
+        duration: format==='diffuser' ? '15-20min' : format==='pillow_mist' ? '10min before sleep' : '1-2 spray'
+      }
+    };
+    st.copy = makeCopy(primary, finalState, ctx, uncertainty);
+    return st.engine;
+  }
+  window.computeFinalMediscent = computeFinalMediscent;
+
+  /* ════════════════════════════════════════════════════════════════
+     7. 표시 상태/제품 동기화 → computeFinal (단일 정의)
+  ════════════════════════════════════════════════════════════════ */
+  function syncDisplay(){
+    const st = getS();
+    if(!st?.engine?.canonicalState) return;
+    const cs = st.engine.canonicalState;
+    st._userEQ = {
+      valence:clamp(cs.valence), arousal:clamp(cs.arousal), stress:clamp(cs.stressLoad),
+      engagement:clamp(cs.focus), relaxation:clamp(cs.relaxation), interest:clamp(cs.curiosity)
+    };
+    st.scores = {
+      stress:clamp(cs.stressLoad),
+      balance:clamp(cs.valence*0.55 + cs.relaxation*0.45),
+      energy:clamp(cs.arousal), focus:clamp(cs.focus),
+      mood:clamp(cs.valence), recovery:clamp(cs.relaxation)
+    };
+    // 표시용 SCENTS 객체(노트/키워드/링크 보유)로 매핑
+    if(st.primary?.code && DISPLAY_BY_CODE[st.primary.code]) st.primary = DISPLAY_BY_CODE[st.primary.code];
+    if(Array.isArray(st.alts)) st.alts = st.alts.map(x=>DISPLAY_BY_CODE[x.code]||x);
+    if(st.avoid?.code && DISPLAY_BY_CODE[st.avoid.code]) st.avoid = DISPLAY_BY_CODE[st.avoid.code];
+  }
+
+  window.computeFinal = function computeFinal(){
+    const engine = computeFinalMediscent();
+    syncDisplay();
+    return engine;
+  };
+
+  /* ════════════════════════════════════════════════════════════════
+     8. runAnalysis (단일 정의) — 엔진 인지형 진행 단계
+  ════════════════════════════════════════════════════════════════ */
+  window.runAnalysis = function runAnalysis(){
+    const st = getS();
+    window.computeFinal();
+    st.timers.forEach(clearTimeout); st.timers = [];
+    if(st.waveRAF) cancelAnimationFrame(st.waveRAF);
+
+    const e = st.engine || {}, rel = e.reliability || {};
+    const contradiction = Math.round(e.contradiction||0), uncertainty = Math.round(e.uncertainty||0);
+    const steps = [
+      ['01','Survey Normalize','7문항 → 초기 상태 벡터'],
+      ['02','Signal Reliability', st.bio ? 'EEG·HRV 신뢰도 반영' : '설문 중심 신뢰도 계산'],
+      ['03','Face Integration','FaceMesh 보조 신호 통합'],
+      ['04','Contradiction Control',`상충도 ${contradiction} · 불확실성 ${uncertainty}`],
+      ['05','Hybrid Ranking','상태·이력·문맥 기반 추천']
+    ];
+    const aSteps = document.getElementById('aSteps');
+    if(aSteps) aSteps.innerHTML = steps.map(x=>`<div class="a-step" id="as${x[0]}"><div class="a-step-n">${x[0]}</div><div><span class="a-step-b">${x[1]}</span><span class="a-step-s">${x[2]}</span></div></div>`).join('');
+
+    let frame=0; const wEl=document.getElementById('aWave');
+    const wLoop=()=>{ frame+=2;
+      if(wEl){ const ctx=wEl.getContext('2d'),W=wEl.width=wEl.offsetWidth||340,H=wEl.height=56;
+        ctx.clearRect(0,0,W,H); ctx.strokeStyle='rgba(82,122,108,.65)'; ctx.lineWidth=1.4; ctx.beginPath();
+        for(let x=0;x<W;x++){ const t=(x/W)*Math.PI*6, amp=7+((st.scores?.stress||50)*0.07),
+          y=H/2+Math.sin(t+frame*.04)*amp+Math.sin(t*.5+frame*.06)*3; x===0?ctx.moveTo(x,y):ctx.lineTo(x,y); }
+        ctx.stroke(); }
+      st.waveRAF=requestAnimationFrame(wLoop); }; wLoop();
+
+    const CIRCv = (typeof window.CIRC!=='undefined') ? window.CIRC : 2*Math.PI*38;
+    const stages = [
+      {t:450, p:18, s:'설문 상태 정규화 중…', x:'7문항 응답에서 초기 감정 상태를 정규화했습니다.'},
+      {t:1150,p:38, s:'모달 신뢰도 평가 중…', x:`Survey ${Math.round((rel.survey||0)*100)} · Bio ${Math.round((rel.bio||0)*100)} · Face ${Math.round((rel.face||0)*100)}`},
+      {t:1900,p:62, s:'상충도·불확실성 조정 중…', x:`Contradiction ${contradiction} · Uncertainty ${uncertainty}`},
+      {t:2750,p:84, s:'하이브리드 추천 엔진 실행 중…', x:st.matchReason||'상태·이력·문맥 점수를 통합합니다.'},
+      {t:3550,p:100,s:'추천 완료', x:st.copy||'메디센츠 추천이 완료되었습니다.'}
+    ];
+    stages.forEach((stg,idx)=>{ const tid=setTimeout(()=>{
+      try{
+        const f=document.getElementById('aFill'); if(f)f.style.width=stg.p+'%';
+        const a=document.getElementById('aStatus'); if(a)a.textContent=stg.s;
+        const tx=document.getElementById('aTxt'); if(tx)tx.textContent=stg.x;
+        const arc=document.getElementById('ringArc'); if(arc)arc.style.strokeDasharray=`${(stg.p/100)*CIRCv} ${CIRCv}`;
+        const pt=document.getElementById('ringPct'); if(pt)pt.textContent=stg.p+'%';
+        const step=document.getElementById('as'+String(idx+1).padStart(2,'0')); if(step)step.classList.add('done');
+        if(stg.p===100) setTimeout(()=>{ if(st.waveRAF)cancelAnimationFrame(st.waveRAF); window.goPage('report'); },700);
+      }catch(err){ console.error('analysis stage',err); if(st.waveRAF)cancelAnimationFrame(st.waveRAF); try{window.goPage('report');}catch(_){} }
+    }, stg.t); st.timers.push(tid); });
+  };
+
+  /* ════════════════════════════════════════════════════════════════
+     9. renderReport (단일 정의)
+  ════════════════════════════════════════════════════════════════ */
+  function renderAxis(st){
+    [['aStress','stress'],['aBal','balance'],['aEne','energy'],['aFocus','focus'],['aMood','mood'],['aRecovery','recovery']]
+      .forEach(([id,k])=>{ const el=document.getElementById(id); if(el)el.textContent=clamp(st.scores?.[k]||0); });
+  }
+  function renderEqRows(st){
+    const el=document.getElementById('eqRows'); if(!el) return;
+    const pEq=st.primary?.eq||{}, u=st._userEQ||{};
+    el.innerHTML = Object.entries(pEq).map(([k,v])=>{
+      const m=EQ_META_SAFE[k]||{l:k,c:'#888'}, uv=clamp(u[k]||0);
+      return `<div class="eq-row"><div class="eq-k">${m.l}</div><div class="eq-track" style="position:relative"><i class="eq-fill" style="width:${clamp(v)}%;background:${m.c}"></i><div style="position:absolute;top:-1px;left:${uv}%;width:2px;height:calc(100% + 2px);background:#0e0e0d;border-radius:1px;transform:translateX(-50%);opacity:.45"></div></div><div class="eq-v">${clamp(v)}</div></div>`;
+    }).join('');
+  }
+  function renderBuy(st){
+    const buy=document.getElementById('buyList'); if(!buy) return;
+    const items=[st.primary, ...(st.alts||[])].filter(Boolean);
+    buy.innerHTML = items.map((sc,i)=>`<div class="buy-card ${i===0?'top':''}"><div class="buy-img"><img src="https://ecimg.cafe24img.com/pg2145b53722962042/shifti/web/mobile/newDesign/30p.png" alt="${sc.code}"/></div><div class="buy-meta"><div class="buy-rec" style="${i>0?'color:var(--ink45)':''}">${i===0?'Primary':'Alt.'+i}</div><div class="buy-name">${sc.code}</div><div class="buy-notes">${sc.notes||sc.narrative||''}</div><div class="buy-price">EDP 30ml · ₩58,000</div></div><div class="buy-btns"><button class="btn btn-ink" onclick="location.href='${LINKS_MAP[sc.code]||'#'}'">구매</button><button class="btn btn-ol" onclick="location.href='${LINKS_MAP[sc.code]||'#'}'">상세</button></div></div>`).join('')
+      || '<div class="buy-card top"><div class="buy-meta"><div class="buy-rec">Primary</div><div class="buy-name">추천 결과 준비 중</div></div></div>';
+  }
+  function renderRecoBlock(st){
+    const copyCard=document.querySelector('#pageReport .copy-card');
+    if(!copyCard || !st.engine) return;
+    let block=document.getElementById('recommendationBlock');
+    if(!block){ block=document.createElement('div'); block.id='recommendationBlock'; copyCard.insertAdjacentElement('afterend', block); }
+    const i=st.engine.intervention||{}, rel=st.engine.reliability||{};
+    const cell=(k,v)=>`<div style="padding:12px;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border)"><div style="font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink45)">${k}</div><div style="font-size:13px;font-weight:800;margin-top:4px">${v}</div></div>`;
+    block.innerHTML = `<div class="card card-p"><div class="lbl lbl-c">MEDISCENT Recommendation</div>
+      <div style="font-size:21px;font-weight:800;margin-top:8px">${i.primary||st.primary?.code||'—'}</div>
+      <div style="font-size:11px;color:var(--ink45);margin-top:4px;line-height:1.7">${st.matchReason||'상태 적합도·문맥·이력 기반 추천'}</div>
+      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        ${cell('Secondary', i.secondary||st.alts?.[0]?.code||'—')}
+        ${cell('Avoid', i.avoid||st.avoid?.code||'—')}
+        ${cell('Format', i.format||'perfume')}
+        ${cell('Intensity', i.intensity||'medium')}
+      </div>
+      <div style="margin-top:10px;padding:12px;border-radius:12px;background:var(--cbg);border:1px solid var(--cln);font-size:11px;line-height:1.8;color:var(--cdk)">
+        권장 사용 길이 <strong>${i.duration||'1-2 spray'}</strong><br>
+        재측정 타이밍 <strong>${i.remeasureIn||5}분 후</strong><br>
+        모달 신뢰도 Survey <strong>${Math.round((rel.survey||0)*100)}%</strong> · Bio <strong>${Math.round((rel.bio||0)*100)}%</strong> · Face <strong>${Math.round((rel.face||0)*100)}%</strong>
+      </div></div>`;
+  }
+
+  window.renderReport = function renderReport(){
+    const st=getS(); if(!st) return;
+    window.computeFinal();
+    const p=st.primary||{code:'추천 결과',notes:'',use:'',keywords:[],eq:{}};
+    const pct=clamp(st.matchScore||0);
+    const T=(id,v)=>{ const el=document.getElementById(id); if(el)el.textContent=v; };
+    const H=(id,v)=>{ const el=document.getElementById(id); if(el)el.innerHTML=v; };
+    T('rCode', p.code||'추천 결과');
+    T('rNotes', [p.notes,p.use].filter(Boolean).join(' · ') || (p.narrative||'MEDISCENT 추천 결과'));
+    H('rTags', (p.keywords||[p.narrative]).filter(Boolean).map(k=>`<div class="s-tag">${k}</div>`).join(''));
+    T('rMatchPct', pct+'%');
+    const bar=document.getElementById('rMatchBar'); if(bar)bar.style.width=pct+'%';
+    T('rMatchReason', st.matchReason||'메디센츠 추천 엔진');
+    T('rMatchTag', pct>=85?'Excellent Match':pct>=70?'Good Match':'Suggested');
+    H('rCopy', String(st.copy||'추천 결과를 준비했습니다.').replace(/(\d+[%점ms])/g,'<strong>$1</strong>'));
+    renderAxis(st); renderEqRows(st); renderBuy(st);
+
+    const rTable=document.getElementById('rTable');
+    if(rTable){
+      const u=st._userEQ||{};
+      const rows=[
+        ['Stress',st.scores?.stress,'Engine','긴장·과부하'],['Balance',st.scores?.balance,'Engine','정서 균형'],
+        ['Energy',st.scores?.energy,'Engine','활력·각성'],['Focus',st.scores?.focus,'Engine','집중·선명도'],
+        ['Mood',st.scores?.mood,'Engine','긍정 정서'],['Recovery',st.scores?.recovery,'Engine','회복·이완'],
+        ...(st.bio?[
+          ['Bio RMSSD',st.bio.raw.rmssd+'ms','NNFX2','부교감 회복력'],
+          ['Bio LF/HF',st.bio.raw.lf_hf,'NNFX2','자율신경 균형'],
+          ['Bio HR',st.bio.raw.hr+'bpm','NNFX2','심박수']
+        ]:[
+          ['EQ Valence',clamp(u.valence),'Canonical','정서 가치'],
+          ['EQ Arousal',clamp(u.arousal),'Canonical','각성 에너지']
+        ]),
+        ['Face Conf.',Math.round(st.face?.confidence||0)+'%','FaceMesh','메쉬 신뢰도'],
+        ['Match',pct+'%','Engine','하이브리드 매칭'],
+        ['Closed-loop','READY','MEDISCENT','재측정 가능']
+      ];
+      rTable.innerHTML = rows.map(r=>`<tr><td class="mono">${r[0]}</td><td class="mono">${r[1]??'—'}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('');
+    }
+
+    // Bio 배지
+    if(st.bio){
+      const badge=document.getElementById('bioReportBadge');
+      if(badge){ badge.style.display=''; badge.innerHTML=`<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(29,158,117,.10);border:1px solid rgba(29,158,117,.30);border-radius:12px;margin-bottom:-4px"><span style="font-size:16px">🧠</span><div><div style="font-size:10px;font-weight:700;color:#0f6e56">Bio-Signal 반영됨</div><div style="font-size:9px;color:#1D9E75;margin-top:1px">RMSSD ${st.bio.raw.rmssd}ms · LF/HF ${st.bio.raw.lf_hf} · HR ${st.bio.raw.hr}bpm</div></div></div>`; }
+      document.querySelectorAll('.score-pill').forEach(el=>{ el.classList.add('bio-src'); if(!el.querySelector('.bio-src-label')){ const lb=document.createElement('div'); lb.className='bio-src-label'; lb.textContent='🧠 Bio+Survey'; el.appendChild(lb); } });
+    }
+
+    renderRecoBlock(st);
+    renderClosedLoop(st);
+  };
+
+  /* ════════════════════════════════════════════════════════════════
+     10. saveHist (단일 정의) — 듀얼 라이트
+  ════════════════════════════════════════════════════════════════ */
+  window.saveHist = function saveHist(){
+    const st=getS(); if(!st?.primary) return;
+    try{
+      const list=JSON.parse(localStorage.getItem('shifti_v5bio')||'[]');
+      list.unshift({ ts:Date.now(), primary:st.primary.code, scores:{...st.scores},
+        matchScore:Math.round(st.matchScore||0), copy:(st.copy||'').slice(0,120),
+        hasBio:!!st.bio, rmssd:st.bio?.raw?.rmssd||null });
+      localStorage.setItem('shifti_v5bio', JSON.stringify(list.slice(0,50)));
+    }catch(e){ console.error('saveHist',e); }
+    // 폐루프 baseline 도 기록
+    try{
+      if(!st.engine) return;
+      const h=loadCL();
+      h.unshift({ ts:Date.now(), primary:st.primary.code, secondary:st.alts?.[0]?.code||null,
+        avoid:st.avoid?.code||null, format:st.engine.intervention?.format||null,
+        intensity:st.engine.intervention?.intensity||null, before:st.engine.canonicalState||{},
+        contradiction:st.engine.contradiction, uncertainty:st.engine.uncertainty,
+        deltaScore:0, selfLike:null, note:'', stage:'baseline' });
+      localStorage.setItem(CL_KEY, JSON.stringify(h.slice(0,100)));
+    }catch(e){}
+  };
+  window.saveMediscentHistory = window.saveHist;
+
+  /* ════════════════════════════════════════════════════════════════
+     11. 폐루프 재측정 피드백
+  ════════════════════════════════════════════════════════════════ */
+  function calcDelta(before, after){
+    const parts=[
+      clamp((before.stressLoad||0)-(after.stressLoad||0),-100,100),
+      clamp((after.relaxation||0)-(before.relaxation||0),-100,100),
+      clamp((after.valence||0)-(before.valence||0),-100,100),
+      clamp((after.focus||0)-(before.focus||0),-100,100)
+    ];
+    return Math.round(parts.reduce((a,b)=>a+b,0)/parts.length);
+  }
+  window.applyClosedLoopFeedback = function(payload={}){
+    const st=getS();
+    if(!st?.engine || !st?.primary) throw new Error('추천 결과가 먼저 생성되어야 합니다.');
+    const before=st.engine.canonicalState||{};
+    const after={
+      valence:clamp(payload.afterValence??before.valence), arousal:clamp(payload.afterArousal??before.arousal),
+      stressLoad:clamp(payload.afterStress??before.stressLoad), focus:clamp(payload.afterFocus??before.focus),
+      relaxation:clamp(payload.afterRelaxation??before.relaxation), curiosity:clamp(payload.afterCuriosity??before.curiosity)
+    };
+    const entry={
+      ts:Date.now(), primary:st.primary.code, secondary:st.alts?.[0]?.code||null, avoid:st.avoid?.code||null,
+      format:st.engine.intervention?.format||null, intensity:st.engine.intervention?.intensity||null,
+      before, after, contradiction:clamp(st.engine.contradiction||0), uncertainty:clamp(st.engine.uncertainty||0),
+      deltaScore:calcDelta(before,after), selfLike:payload.selfLike==null?null:clamp(payload.selfLike,0,100),
+      note:String(payload.note||''), remeasureIn:st.engine.intervention?.remeasureIn||null, stage:'remeasured'
+    };
+    const h=loadCL(); h.unshift(entry); localStorage.setItem(CL_KEY, JSON.stringify(h.slice(0,100)));
+    renderClosedLoop(st);
+    return entry;
+  };
+  window.prefillClosedLoopDemo = function(){
+    const st=getS(); if(!st?.engine) return;
+    const b=st.engine.canonicalState||{}, set=(id,v)=>{ const el=document.getElementById(id); if(el)el.value=String(v); };
+    set('clAfterStress', clamp((b.stressLoad||50)-15)); set('clAfterRelax', clamp((b.relaxation||50)+18));
+    set('clAfterValence', clamp((b.valence||50)+15)); set('clAfterFocus', clamp((b.focus||50)+12));
+    set('clSelfLike', 82); const n=document.getElementById('clNote'); if(n)n.value='Demo QA feedback';
+  };
+  window.submitClosedLoopFeedback = function(){
+    const val=id=>Number(document.getElementById(id)?.value||0);
+    const entry=window.applyClosedLoopFeedback({
+      afterStress:val('clAfterStress'), afterRelaxation:val('clAfterRelax'),
+      afterValence:val('clAfterValence'), afterFocus:val('clAfterFocus'),
+      selfLike:val('clSelfLike'), note:document.getElementById('clNote')?.value||''
+    });
+    toastSafe(`폐루프 저장 완료 · Δ ${entry.deltaScore}`);
+    return entry;
+  };
+  function renderClosedLoop(st){
+    const anchor=document.getElementById('recommendationBlock') || document.querySelector('#pageReport .copy-card');
+    if(!anchor || !st.engine) return;
+    let block=document.getElementById('closedLoopBlock');
+    if(!block){ block=document.createElement('div'); block.id='closedLoopBlock'; anchor.insertAdjacentElement('afterend', block); }
+    const b=st.engine.canonicalState||{};
+    const hist=loadCL().filter(x=>x.primary===st.primary.code && x.stage==='remeasured').slice(0,5);
+    const inp=(id,v)=>`<input id="${id}" type="number" min="0" max="100" value="${v}" style="width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.72)">`;
+    block.innerHTML = `<div class="card card-p">
+      <div class="lbl lbl-c">Closed Loop Re-measure</div>
+      <div style="font-size:12px;color:var(--ink45);margin-top:8px;line-height:1.8">향 사용 후 재측정값을 넣으면 <strong>개인 반응 이력</strong>으로 저장되어, 이후 추천의 history·preference 점수에 반영됩니다.</div>
+      <div style="margin-top:10px;padding:12px;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border);font-size:11px;line-height:1.8">
+        권장 재측정 타이밍: <strong>${st.engine.intervention?.remeasureIn||5}분 후</strong><br>
+        Baseline — Stress <strong>${clamp(b.stressLoad)}</strong> · Relaxation <strong>${clamp(b.relaxation)}</strong> · Valence <strong>${clamp(b.valence)}</strong> · Focus <strong>${clamp(b.focus)}</strong>
+      </div>
+      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">After Stress</div>${inp('clAfterStress',clamp(b.stressLoad))}</div>
+        <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">After Relaxation</div>${inp('clAfterRelax',clamp(b.relaxation))}</div>
+        <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">After Valence</div>${inp('clAfterValence',clamp(b.valence))}</div>
+        <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">After Focus</div>${inp('clAfterFocus',clamp(b.focus))}</div>
+      </div>
+      <div style="margin-top:8px;display:grid;grid-template-columns:1fr;gap:8px">
+        <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">Self Like (0-100)</div>${inp('clSelfLike',80)}</div>
+        <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">Note</div><textarea id="clNote" rows="2" style="width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.72);resize:vertical"></textarea></div>
+      </div>
+      <div style="margin-top:10px;display:flex;gap:8px">
+        <button class="btn btn-c" style="flex:1" onclick="submitClosedLoopFeedback()">폐루프 저장</button>
+        <button class="btn btn-ol" onclick="prefillClosedLoopDemo()">Demo 값 채우기</button>
+      </div>
+      <div style="margin-top:12px;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink45)">Recent Closed-loop History</div>
+      <div style="margin-top:8px;display:flex;flex-direction:column;gap:6px">
+        ${hist.length ? hist.map(x=>`<div style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border);font-size:10.5px;line-height:1.7"><strong>${x.primary}</strong> · Δ <strong>${x.deltaScore}</strong> · Like <strong>${x.selfLike??'—'}</strong><br><span style="color:var(--ink45)">Stress ${clamp(x.before?.stressLoad)} → ${clamp(x.after?.stressLoad)} · Relax ${clamp(x.before?.relaxation)} → ${clamp(x.after?.relaxation)}</span></div>`).join('') : '<div style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border);font-size:10.5px;color:var(--ink45)">아직 저장된 폐루프 피드백이 없습니다.</div>'}
+      </div>
+    </div>`;
+  }
+
+  /* ════════════════════════════════════════════════════════════════
+     12. 헤더 리브랜드
+  ════════════════════════════════════════════════════════════════ */
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const n=document.querySelector('.hdr-name'); if(n) n.textContent='SHIFTI · MEDISCENT';
+    const pill=document.getElementById('hdrPill'); if(pill && pill.textContent==='진단 대기') pill.textContent='MEDISCENT 엔진 준비';
+    const t=document.querySelector('title'); if(t) t.textContent='SHIFTI MEDISCENT LAB — Unified Engine';
+  });
+})();
+
 </script>
 </body>
 </html>
