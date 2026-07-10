@@ -1,14 +1,16 @@
 
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-<title>SHIFTI MEDISCENT LAB — Bio-Signal Edition</title>
+<title>SHIFTI MEDISCENT LAB — Report-Verified Edition</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 /* ═══════════════════════════════════
-   SHIFTI MEDISCENT LAB v5 + BIO
+   SHIFTI MEDISCENT LAB v11 · REPORT RENDER FIX
    Design: Pastel Glassmorphism
    Bio-Signal Integration: NNFX2 XLS
 ═══════════════════════════════════ */
@@ -179,72 +181,6 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
 .bio-raw-v{font-size:17px;font-weight:800;color:var(--ink);margin-top:2px;line-height:1}
 .bio-raw-u{font-size:8px;color:var(--ink45);margin-top:1px}
 .bio-blend-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;padding:6px 14px;border-radius:999px;background:linear-gradient(135deg,rgba(108,99,255,.12),rgba(167,139,250,.08));border:1px solid var(--cln);color:var(--cdk)}
-
-/* ══ FACE ══ */
-.cam-card{border-radius:var(--r24);overflow:hidden;border:1px solid var(--glass-border);background:var(--glass);box-shadow:var(--shadow-card);backdrop-filter:blur(12px)}
-.cam-area{position:relative;aspect-ratio:4/3;background:#0f1025;overflow:hidden}
-.cam-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:rgba(255,255,255,.35)}
-.cam-ph svg{width:32px;opacity:.35}
-.cam-ph p{font-size:11.5px;font-weight:600}
-.cam-ph small{font-size:9px;letter-spacing:.12em;opacity:.6}
-#faceVideo{width:100%;height:100%;object-fit:cover;display:none;transform:scaleX(-1)}
-#faceVideo.on{display:block}
-#facePreview{width:100%;height:100%;object-fit:cover;display:none}
-#facePreview.on{display:block}
-#meshCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.cam-chips{position:absolute;top:8px;left:8px;display:flex;gap:4px;flex-wrap:wrap}
-.cam-chip{padding:3px 8px;border-radius:999px;background:rgba(15,16,37,.72);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);font-size:8px;font-weight:600;letter-spacing:.05em;color:rgba(255,255,255,.80)}
-.cam-chip.live{color:#a78bfa;border-color:rgba(167,139,250,.4);animation:livec 1.8s ease-in-out infinite}
-@keyframes livec{0%,100%{opacity:1}50%{opacity:.4}}
-.cam-ctrl{padding:10px 12px;display:flex;gap:5px;flex-wrap:wrap;background:rgba(255,255,255,.60);backdrop-filter:blur(8px)}
-.face-data{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.face-radar-card{grid-column:1/-1;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--r20);padding:14px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow-card);backdrop-filter:blur(12px)}
-.face-radar-inner{position:relative;flex-shrink:0}
-.rl{position:absolute;font-size:7px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink45);white-space:nowrap}
-.rl.top{top:-2px;left:50%;transform:translateX(-50%)}.rl.right{top:50%;right:-2px;transform:translateY(-50%)}
-.rl.br{bottom:0;right:2px}.rl.bl{bottom:0;left:2px}.rl.left{top:50%;left:-2px;transform:translateY(-50%)}
-.face-emo-list{flex:1;display:flex;flex-direction:column;gap:5px}
-.femo-row{display:flex;align-items:center;gap:6px}
-.femo-ico{font-size:13px;width:16px;text-align:center;flex-shrink:0}
-.femo-body{flex:1;min-width:0}
-.femo-k{font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink45)}
-.femo-bar{height:3px;border-radius:999px;background:rgba(255,255,255,.40);overflow:hidden;margin-top:2px}
-.femo-fill{height:100%;border-radius:999px;transition:width .4s var(--eout)}
-.femo-v{font-size:12px;font-weight:800;color:var(--ink);width:22px;text-align:right;flex-shrink:0}
-.muscle-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--r16);padding:12px;box-shadow:var(--shadow-card);backdrop-filter:blur(12px)}
-.muscle-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}
-.mc-item{display:flex;flex-direction:column;gap:2px}
-.mc-k{font-size:9px;font-weight:700;color:var(--ink45)}
-.mc-bar{height:3px;border-radius:999px;background:rgba(255,255,255,.40);overflow:hidden}
-.mc-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--clt),var(--c));transition:width .4s var(--eout)}
-.mc-v{font-size:11px;font-weight:700;color:var(--ink)}
-.conf-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--r16);padding:12px;box-shadow:var(--shadow-card);backdrop-filter:blur(12px)}
-.emo-detail-card{grid-column:1/-1;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--r20);padding:16px;box-shadow:var(--shadow-card);backdrop-filter:blur(12px)}
-.emo-full-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.35)}
-.emo-full-row:last-child{border-bottom:none}
-.emo-full-row.active{background:rgba(108,99,255,.06);border-radius:var(--r12);padding-left:8px;margin:0 -8px}
-.emo-full-left{display:flex;align-items:center;gap:8px;width:108px;flex-shrink:0}
-.emo-full-ico{font-size:20px;width:24px;text-align:center;flex-shrink:0}
-.emo-full-name{font-size:12px;font-weight:800;color:var(--ink);letter-spacing:-.01em;line-height:1.2}
-.emo-full-en{font-size:9px;font-weight:600;color:var(--ink45);letter-spacing:.04em;margin-left:3px}
-.emo-full-desc{font-size:9px;color:var(--ink45);font-weight:500;margin-top:1px}
-.emo-full-right{flex:1;display:flex;align-items:center;gap:8px;min-width:0}
-.emo-full-bar-wrap{flex:1;min-width:0}
-.emo-full-track{height:8px;border-radius:999px;background:rgba(255,255,255,.40);overflow:hidden}
-.emo-full-fill{height:100%;border-radius:999px;transition:width .2s var(--eout)}
-.emo-full-markers{display:flex;justify-content:space-between;margin-top:2px;font-size:7px;color:var(--ink22);font-weight:600}
-.emo-full-meta{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0;width:42px}
-.emo-full-val{font-size:20px;font-weight:800;letter-spacing:-.035em;color:var(--ink);line-height:1}
-.emo-full-level{font-size:8px;font-weight:700;letter-spacing:.04em;padding:2px 7px;border-radius:999px;white-space:nowrap;transition:all .3s;background:rgba(255,255,255,.55);color:var(--ink45)}
-.emo-full-level.lv-high{background:rgba(244,63,94,.12);color:var(--rose)}
-.emo-full-level.lv-mid{background:rgba(245,159,0,.12);color:var(--gold)}
-.emo-full-level.lv-low{background:var(--cbg);color:var(--c)}
-.fmini{background:rgba(255,255,255,.60);border-radius:var(--r12);padding:8px 10px;border:1px solid var(--glass-border)}
-.fmini-k{font-size:7.5px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;color:var(--ink45)}
-.fmini-v{font-size:11px;font-weight:700;color:var(--ink);margin-top:2px}
-.face-badge{font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1px solid var(--glass-border);background:rgba(255,255,255,.60);color:var(--ink45)}
-.face-badge.live{color:var(--c);border-color:var(--cln);background:var(--cbg);animation:livec 1.6s ease-in-out infinite}
-.face-badge.frozen{color:var(--violet);border-color:rgba(139,92,246,.3);background:rgba(139,92,246,.08)}
 
 /* ══ ANALYSIS ══ */
 .ring-wrap{display:flex;justify-content:center;padding:16px}
@@ -473,6 +409,58 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
   background-image:linear-gradient(135deg,#6f9d97,#8bb4ad) !important;
 }
 
+
+/* ══ PREFERENCE-FIRST SURVEY & RECIPE ══ */
+.sq-pref-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:14px}
+.sq-pref-opt{appearance:none;border:2px solid transparent;cursor:pointer;padding:15px 12px;border-radius:18px;background:rgba(255,255,255,.58);text-align:left;transition:all .18s var(--ease);backdrop-filter:blur(8px)}
+.sq-pref-opt:hover{background:rgba(255,255,255,.84);border-color:var(--cln);transform:translateY(-2px);box-shadow:var(--shadow-card)}
+.sq-pref-opt.sel{background:rgba(255,255,255,.94);border-color:var(--c);box-shadow:0 0 0 3px rgba(111,157,151,.13),var(--shadow-card)}
+.sq-pref-ico{font-size:22px;display:block;margin-bottom:7px}
+.sq-pref-t{font-size:12.5px;font-weight:800;color:var(--ink)}
+.sq-pref-d{font-size:9.5px;color:var(--ink45);line-height:1.5;margin-top:3px}
+.sq-pref-opt.sel .sq-pref-t{color:var(--cdk)}
+.pref-counter{margin-top:10px;font-size:9.5px;color:var(--ink45);text-align:right;font-weight:700}
+.multi-action-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
+.multi-action-row .pref-counter{margin-top:0;text-align:left}
+.multi-done{
+  appearance:none;border:1px solid var(--cln);cursor:pointer;
+  padding:10px 16px;border-radius:999px;background:linear-gradient(135deg,var(--c),var(--cdk));
+  color:#fff;font-family:var(--f);font-size:11px;font-weight:800;
+  box-shadow:0 4px 14px rgba(79,120,114,.22);transition:all .16s var(--ease)
+}
+.multi-done:active{transform:scale(.97)}
+.multi-done:disabled{cursor:not-allowed;opacity:.35;box-shadow:none}
+.auto-hint{margin-top:10px;font-size:9.5px;color:var(--ink45);text-align:center;font-weight:600}
+.bbar.back-only .bbar-back{flex:1;text-align:center}
+
+.recipe-shell{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--r20);padding:18px;box-shadow:var(--shadow-card);backdrop-filter:blur(12px)}
+.recipe-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.recipe-title{font-size:20px;font-weight:800;letter-spacing:-.025em;color:var(--ink);margin-top:5px}
+.recipe-sub{font-size:10.5px;color:var(--ink45);line-height:1.65;margin-top:4px}
+.recipe-badge{flex-shrink:0;padding:5px 10px;border-radius:999px;background:var(--cbg);border:1px solid var(--cln);font-size:8.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--cdk)}
+.recipe-family-grid{display:flex;gap:5px;flex-wrap:wrap;margin-top:12px}
+.recipe-family{padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.64);border:1px solid var(--glass-border);font-size:9.5px;font-weight:700;color:var(--ink70)}
+.recipe-family strong{color:var(--cdk)}
+.recipe-pyramid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.recipe-layer{padding:13px 10px;border-radius:15px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border);min-height:128px}
+.recipe-layer-k{font-size:8px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--ink45)}
+.recipe-layer-v{font-size:22px;font-weight:900;line-height:1;margin-top:4px;color:var(--ink)}
+.recipe-layer-notes{font-size:9.5px;color:var(--ink45);line-height:1.65;margin-top:7px}
+.recipe-layer-notes b{color:var(--cdk);font-weight:800}
+.recipe-flow{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:14px;padding:10px;border-radius:13px;background:var(--cbg);border:1px solid var(--cln);font-size:9.5px;font-weight:700;color:var(--cdk)}
+.recipe-flow span{padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.62);border:1px solid var(--glass-border)}
+.recipe-grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.recipe-metric{padding:12px;border-radius:13px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border)}
+.recipe-metric-k{font-size:8px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink45)}
+.recipe-metric-v{font-size:14px;font-weight:900;color:var(--ink);margin-top:4px}
+.recipe-note{font-size:9.5px;color:var(--ink45);line-height:1.65;margin-top:10px}
+.system-evidence{margin-top:12px;padding:12px;border-radius:14px;background:rgba(255,255,255,.50);border:1px solid var(--glass-border)}
+.system-evidence-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.system-evidence-cell{padding:9px 7px;border-radius:11px;background:rgba(255,255,255,.62);border:1px solid var(--glass-border);text-align:center}
+.system-evidence-k{font-size:7px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink45)}
+.system-evidence-v{font-size:13px;font-weight:900;color:var(--ink);margin-top:2px}
+@media(max-width:420px){.recipe-pyramid{grid-template-columns:1fr}.recipe-layer{min-height:auto}.system-evidence-grid{grid-template-columns:repeat(2,1fr)}}
+
 </style>
 </head>
 <body>
@@ -500,9 +488,9 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
       <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.05) 50%,rgba(0,0,0,.20) 100%);z-index:1;pointer-events:none"></div>
       <div class="hero-inner">
         <div>
-          <div class="hero-tag"><span class="hero-dot"></span>Emotion Scent Engine v5 · Bio-Signal Edition</div>
+          <div class="hero-tag"><span class="hero-dot"></span>Emotion Scent Engine v11 · Report-Verified UX</div>
           <div class="hero-title" style="margin-top:8px">당신의 향기를<br><span>추천합니다</span></div>
-          <div class="hero-desc" style="margin-top:7px">7문항 설문 + EEG·HRV 바이오 + 얼굴 분석<br>→ 6축 정밀 진단 → 개인 향 추천</div>
+          <div class="hero-desc" style="margin-top:7px">상태 설문 + 향 취향 프로파일 + 선택형 EEG·HRV<br>→ 스탠다드 레시피 → 개인 향 추천</div>
         </div>
         <div class="hero-data">
           <canvas id="wRadar" width="100" height="100" style="flex-shrink:0"></canvas>
@@ -519,15 +507,15 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
     </div>
     <div class="trust-strip wa" style="--d:100ms">
       <div class="trust-it"><div class="trust-n" data-target="98">0<sup>%</sup></div><div class="trust-u">Natural</div><div class="trust-d">ISO 16128<br>자연유래</div></div>
-      <div class="trust-it"><div class="trust-n" data-target="468">0</div><div class="trust-u">Landmarks</div><div class="trust-d">FaceMesh<br>정밀분석</div></div>
+      <div class="trust-it"><div class="trust-n" data-target="8">0</div><div class="trust-u">Scent DNA</div><div class="trust-d">8개 향 계열<br>취향 분석</div></div>
       <div class="trust-it"><div class="trust-n" data-target="6">0</div><div class="trust-u">Axes</div><div class="trust-d">감정축<br>진단엔진</div></div>
       <div class="trust-it"><div class="trust-n" data-target="6">0</div><div class="trust-u">Scents</div><div class="trust-d">TATE<br>ARCHIVE</div></div>
     </div>
     <div class="tech-grid wa" style="--d:180ms">
       <div class="tech-card"><div class="tech-ico">🧠</div><div><div class="tech-t">EEG·HRV 분석</div><div class="tech-d">NNFX2 XLS → 6축 자동 계산</div></div></div>
-      <div class="tech-card"><div class="tech-ico">🎯</div><div><div class="tech-t">FaceMesh 468pt</div><div class="tech-d">실시간 표정 분석</div></div></div>
+      <div class="tech-card"><div class="tech-ico">🧬</div><div><div class="tech-t">Preference DNA</div><div class="tech-d">향 취향 기반 기준 레시피</div></div></div>
       <div class="tech-card"><div class="tech-ico">🌿</div><div><div class="tech-t">6D Vector Match</div><div class="tech-d">코사인 유사도 매칭</div></div></div>
-      <div class="tech-card"><div class="tech-ico">🔒</div><div><div class="tech-t">Privacy-First</div><div class="tech-d">No upload · Local only</div></div></div>
+      <div class="tech-card"><div class="tech-ico">🔒</div><div><div class="tech-t">Privacy-First</div><div class="tech-d">카메라·얼굴 이미지 미수집</div></div></div>
     </div>
   </div>
 </div>
@@ -537,7 +525,7 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
   <div class="shell">
     <div class="sq-progress-card">
       <div style="display:flex;justify-content:space-between;align-items:center">
-        <div class="lbl lbl-c">상태 설문</div>
+        <div class="lbl lbl-c">상태·향 취향 설문</div>
         <div style="font-size:9.5px;font-weight:700;color:var(--ink45)" id="sqFrac">0 / 7</div>
       </div>
       <div class="sq-prog-bar"><div class="sq-prog-fill" id="sqFill" style="width:0%"></div></div>
@@ -563,6 +551,15 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
       <div class="vhdr-desc">NNFX2 장비 XLS 파일을 업로드하면 EEG·HRV 데이터가 6축 점수에 60% 반영됩니다.</div>
     </div>
 
+
+    <div class="card card-p" style="background:rgba(255,255,255,.62)">
+      <div class="lbl lbl-c">Privacy Design</div>
+      <div style="font-size:12px;line-height:1.75;color:var(--ink70);margin-top:6px">
+        카메라와 얼굴 이미지는 수집하지 않습니다. 추천에는 향 취향 설문, 현재 상태 설문,
+        고객이 선택적으로 제공한 EEG·HRV 데이터만 사용합니다.
+      </div>
+    </div>
+
     <!-- 업로드 카드 -->
     <div class="card card-p" id="bioUploadCard">
       <div class="bio-blend-badge" style="margin-bottom:14px">
@@ -574,7 +571,7 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
         <div style="font-size:11px;color:var(--ink45);line-height:1.7">EEG · Power Spectrum · HRV 3개 시트 포함<br>파일명 예: 127016_omnifit001_M_60_*.xls</div>
         <div style="margin-top:12px;font-size:9px;color:var(--ink22);font-weight:600;letter-spacing:.06em">클릭 또는 드래그 앤 드롭</div>
       </div>
-      <input type="file" id="bioFile" accept=".xls,.xlsx" style="display:none"/>
+      <input type="file" id="bioFile" accept=".xls,.xlsx,.csv" style="display:none"/>
       <button class="btn btn-c" style="width:100%;margin-top:12px;padding:13px" onclick="$('bioFile').click()">파일 선택하기</button>
       <button class="btn btn-gh" style="width:100%;margin-top:6px;padding:10px;font-size:12px;color:var(--ink45)" onclick="skipBio()">건너뛰기 → 설문 점수만 사용</button>
     </div>
@@ -586,6 +583,8 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
         <span id="bioFileName" style="font-size:9px;color:var(--ink45);font-weight:600;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
       </div>
       <div style="font-size:10px;color:var(--ink45);margin-bottom:14px;padding:8px 10px;background:var(--cbg);border-radius:var(--r8);border:1px solid var(--cln)" id="bioInterpret"></div>
+      <div id="bioApplyStatus" style="margin-bottom:12px;padding:11px 12px;border-radius:12px;background:rgba(29,158,117,.10);border:1px solid rgba(29,158,117,.28);font-size:10.5px;line-height:1.7;color:#0f6e56"></div>
+      <div id="bioFusionPreview" style="margin-bottom:15px"></div>
 
       <!-- 6축 바 -->
       <div class="lbl" style="margin-bottom:8px">BIO 6축 점수</div>
@@ -596,7 +595,7 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
       <div class="bio-raw-grid" id="bioRawGrid"></div>
 
       <div style="margin-top:14px;display:flex;gap:8px">
-        <button class="btn btn-c" style="flex:1;padding:12px" onclick="confirmBio()">얼굴 분석으로 →</button>
+        <button class="btn btn-c" style="flex:1;padding:12px" onclick="confirmBio()">향 추천 분석으로 →</button>
         <button class="btn btn-ol btn-sm" onclick="clearBio()">다시 업로드</button>
       </div>
     </div>
@@ -614,129 +613,11 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
   </div>
 </div>
 
-<!-- ══ PAGE: FACE ══ -->
-<div class="page" id="pageFace">
-  <div class="shell">
-    <div class="vhdr">
-      <div class="vhdr-kicker"><div class="vhdr-line"></div><span class="vhdr-txt">Step 4 · Face Analysis</span></div>
-      <div class="vhdr-title">얼굴 메쉬 분석</div>
-      <div class="vhdr-desc">정면·밝은 조명에서 분석하세요. 촬영 시 데이터가 고정됩니다.</div>
-    </div>
-    <div class="cam-card">
-      <div class="cam-area">
-        <div class="cam-ph" id="camPh">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 7h-3.2a2 2 0 0 1-1.4-.6L14 5h-4L8.6 6.4A2 2 0 0 1 7.2 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><circle cx="12" cy="13" r="3"/></svg>
-          <p>카메라 시작 또는 업로드</p>
-          <small>MediaPipe FaceMesh · 468 Landmarks</small>
-        </div>
-        <video id="faceVideo" autoplay playsinline muted></video>
-        <img id="facePreview" alt=""/>
-        <canvas id="meshCanvas"></canvas>
-        <div class="cam-chips">
-          <span class="cam-chip" id="chipMesh">MESH·OFF</span>
-          <span class="cam-chip" id="chipMode">Idle</span>
-          <span class="cam-chip" id="chipFace">Waiting</span>
-        </div>
-        <div id="calBar" style="display:none;position:absolute;bottom:0;left:0;right:0;padding:8px 12px;background:rgba(14,14,13,.72);backdrop-filter:blur(10px)">
-          <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:4px" id="calStatus">캘리브레이션 대기 중</div>
-          <div style="height:2px;border-radius:999px;background:rgba(255,255,255,.15);overflow:hidden">
-            <div id="calProgress" style="height:100%;border-radius:999px;background:var(--clt);width:0%;transition:width .3s"></div>
-          </div>
-        </div>
-      </div>
-      <div class="cam-ctrl">
-        <button class="btn btn-ink btn-sm" id="btnCam">카메라+메쉬</button>
-        <button class="btn btn-ol btn-sm" id="btnCap">촬영</button>
-        <button class="btn btn-ol btn-sm" id="btnUp">업로드</button>
-        <button class="btn btn-gh btn-sm" id="btnDemo">Demo</button>
-        <input type="file" id="faceFile" accept="image/*" style="display:none"/>
-      </div>
-    </div>
-    <div class="face-data">
-      <div class="face-radar-card">
-        <div class="face-radar-inner" style="position:relative">
-          <canvas id="faceRadar" width="120" height="120"></canvas>
-          <div class="rl top" style="font-size:8px;color:var(--c);font-weight:800">기쁨</div>
-          <div class="rl right" style="font-size:8px;color:var(--gold);font-weight:800">놀람</div>
-          <div class="rl br" style="font-size:8px;color:var(--rose);font-weight:800">화남</div>
-          <div class="rl bl" style="font-size:8px;color:var(--slate);font-weight:800">슬픔</div>
-          <div class="rl left" style="font-size:8px;color:var(--ink45);font-weight:800">신뢰</div>
-        </div>
-        <div style="flex:1;display:flex;flex-direction:column;gap:5px">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <span class="lbl lbl-c">감정 레이더</span>
-            <span class="face-badge" id="faceBadge">대기중</span>
-          </div>
-          <div style="font-size:9px;color:var(--ink45);font-weight:600;line-height:1.5" id="fTag">얼굴 인식 대기 중</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:2px">
-            <div class="fmini"><div class="fmini-k">랜드마크</div><div class="fmini-v" id="lmCount">0/468</div></div>
-            <div class="fmini"><div class="fmini-k">신뢰도</div><div class="fmini-v" id="confV">0%</div></div>
-            <div class="fmini"><div class="fmini-k">상태</div><div class="fmini-v" id="fStatus">대기</div></div>
-            <div class="fmini"><div class="fmini-k">품질</div><div class="fmini-v" id="fQuality">—</div></div>
-          </div>
-        </div>
-      </div>
-      <div class="emo-detail-card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <span class="lbl lbl-c">실시간 감정 분석</span>
-          <div style="width:6px;height:6px;border-radius:50%;background:var(--c);animation:dot 1.8s ease-in-out infinite" id="emoDot" style="display:none"></div>
-        </div>
-        <div class="emo-full-row" id="emoRowJoy">
-          <div class="emo-full-left"><div class="emo-full-ico">😊</div><div><div class="emo-full-name">기쁨</div><div class="emo-full-desc" id="emoDescJoy">입꼬리 상승</div></div></div>
-          <div class="emo-full-right"><div class="emo-full-bar-wrap"><div class="emo-full-track"><div class="emo-full-fill" id="fJoyB" style="background:linear-gradient(90deg,#5aaa88,#4a8a6a);width:0%"></div></div><div class="emo-full-markers"><span>0</span><span>50</span><span>100</span></div></div><div class="emo-full-meta"><span class="emo-full-val" id="fJoyV">0</span><span class="emo-full-level" id="emoLvJoy">중립</span></div></div>
-        </div>
-        <div class="emo-full-row" id="emoRowSor">
-          <div class="emo-full-left"><div class="emo-full-ico">😔</div><div><div class="emo-full-name">슬픔</div><div class="emo-full-desc" id="emoDescSor">입꼬리 처짐</div></div></div>
-          <div class="emo-full-right"><div class="emo-full-bar-wrap"><div class="emo-full-track"><div class="emo-full-fill" id="fSorB" style="background:linear-gradient(90deg,#6a7a9a,#4a5570);width:0%"></div></div><div class="emo-full-markers"><span>0</span><span>50</span><span>100</span></div></div><div class="emo-full-meta"><span class="emo-full-val" id="fSorV">0</span><span class="emo-full-level" id="emoLvSor">중립</span></div></div>
-        </div>
-        <div class="emo-full-row" id="emoRowAng">
-          <div class="emo-full-left"><div class="emo-full-ico">😤</div><div><div class="emo-full-name">화남</div><div class="emo-full-desc" id="emoDescAng">미간 수축</div></div></div>
-          <div class="emo-full-right"><div class="emo-full-bar-wrap"><div class="emo-full-track"><div class="emo-full-fill" id="fAngB" style="background:linear-gradient(90deg,#cc7a85,#a85560);width:0%"></div></div><div class="emo-full-markers"><span>0</span><span>50</span><span>100</span></div></div><div class="emo-full-meta"><span class="emo-full-val" id="fAngV">0</span><span class="emo-full-level" id="emoLvAng">중립</span></div></div>
-        </div>
-        <div class="emo-full-row" id="emoRowSur">
-          <div class="emo-full-left"><div class="emo-full-ico">😮</div><div><div class="emo-full-name">놀람</div><div class="emo-full-desc" id="emoDescSur">눈썹 상승</div></div></div>
-          <div class="emo-full-right"><div class="emo-full-bar-wrap"><div class="emo-full-track"><div class="emo-full-fill" id="fSurB" style="background:linear-gradient(90deg,#b09050,#8a6f3c);width:0%"></div></div><div class="emo-full-markers"><span>0</span><span>50</span><span>100</span></div></div><div class="emo-full-meta"><span class="emo-full-val" id="fSurV">0</span><span class="emo-full-level" id="emoLvSur">중립</span></div></div>
-        </div>
-        <div class="emo-full-row" id="emoRowConf">
-          <div class="emo-full-left"><div class="emo-full-ico">🎯</div><div><div class="emo-full-name">신뢰도</div><div class="emo-full-desc" id="emoDescConf">랜드마크 정확도</div></div></div>
-          <div class="emo-full-right"><div class="emo-full-bar-wrap"><div class="emo-full-track"><div class="emo-full-fill" id="confB" style="background:linear-gradient(90deg,var(--clt),var(--c));width:0%"></div></div><div class="emo-full-markers"><span>0</span><span>50</span><span>100</span></div></div><div class="emo-full-meta"><span class="emo-full-val" id="confVDisp">0</span><span class="emo-full-level" id="emoLvConf">대기</span></div></div>
-        </div>
-      </div>
-      <div class="muscle-card" style="grid-column:1/-1">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <span class="lbl lbl-c">얼굴 근육 (Action Unit)</span>
-        </div>
-        <div class="muscle-grid" style="grid-template-columns:repeat(3,1fr)">
-          <div class="mc-item"><div class="mc-k">😊 입꼬리</div><div class="mc-bar"><div class="mc-fill" id="mSmile" style="background:#4a8a6a;width:0%"></div></div><div class="mc-v" id="mSmileV">0</div></div>
-          <div class="mc-item"><div class="mc-k">👁 눈 개방도</div><div class="mc-bar"><div class="mc-fill" id="mEye" style="width:0%"></div></div><div class="mc-v" id="mEyeV">0</div></div>
-          <div class="mc-item"><div class="mc-k">🙄 눈썹 올라감</div><div class="mc-bar"><div class="mc-fill" id="mBrowR" style="background:#8a6f3c;width:0%"></div></div><div class="mc-v" id="mBrowRV">0</div></div>
-          <div class="mc-item"><div class="mc-k">🤨 미간 찌푸림</div><div class="mc-bar"><div class="mc-fill" id="mBrowF" style="background:#a85560;width:0%"></div></div><div class="mc-v" id="mBrowFV">0</div></div>
-          <div class="mc-item"><div class="mc-k">😮 입 열림</div><div class="mc-bar"><div class="mc-fill" id="mMouth" style="background:#6a5a8a;width:0%"></div></div><div class="mc-v" id="mMouthV">0</div></div>
-          <div class="mc-item"><div class="mc-k">↔ 입 너비</div><div class="mc-bar"><div class="mc-fill" id="mMouthW" style="background:#4a5570;width:0%"></div></div><div class="mc-v" id="mMouthWV">0</div></div>
-        </div>
-      </div>
-      <div class="conf-card" style="grid-column:1/-1">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-          <span class="lbl lbl-c">메쉬 분석 상태</span>
-          <button class="btn btn-gh btn-sm" onclick="resetCalibration();toast('재캘리브레이션 시작')">🔄 재캘리브레이션</button>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
-          <div class="fmini"><div class="fmini-k">랜드마크</div><div class="fmini-v" id="lmCount2">0/468</div></div>
-          <div class="fmini"><div class="fmini-k">메쉬 상태</div><div class="fmini-v" id="fStatus2">대기</div></div>
-          <div class="fmini"><div class="fmini-k">분석 품질</div><div class="fmini-v" id="fQuality2">—</div></div>
-          <div class="fmini"><div class="fmini-k">주요 감정</div><div class="fmini-v" id="fTag2">—</div></div>
-        </div>
-      </div>
-    </div>
-    <button class="btn btn-c" id="btnFaceNext" style="width:100%;padding:14px;font-size:13px;border-radius:var(--r16)">분석 확정 · 다음 단계 →</button>
-  </div>
-</div>
-
 <!-- ══ PAGE: ANALYSIS ══ -->
 <div class="page" id="pageAnalysis">
   <div class="shell">
     <div class="vhdr">
-      <div class="vhdr-kicker"><div class="vhdr-line"></div><span class="vhdr-txt">Step 5 · AI Analysis</span></div>
+      <div class="vhdr-kicker"><div class="vhdr-line"></div><span class="vhdr-txt">Step 4 · AI Analysis</span></div>
       <div class="vhdr-title">향 매칭 중</div>
     </div>
     <div class="card card-p">
@@ -768,8 +649,8 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
 <div class="page" id="pageReport">
   <div class="shell">
     <div class="vhdr">
-      <div class="vhdr-kicker"><div class="vhdr-line"></div><span class="vhdr-txt">Step 6 · Report</span></div>
-      <div class="vhdr-title">향 추천 리포트</div>
+      <div class="vhdr-kicker"><div class="vhdr-line"></div><span class="vhdr-txt">Step 5 · Report</span></div>
+      <div class="vhdr-title">취향 기반 향 추천 리포트</div>
     </div>
     <div id="bioReportBadge" style="display:none"></div>
     <div class="scent-hero">
@@ -799,6 +680,7 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
       <div class="score-pill"><div class="score-k">Recovery</div><div class="score-v" id="aRecovery">—</div><div class="score-d">회복·탄력성</div></div>
     </div>
     <div class="copy-card"><div class="lbl lbl-c" style="margin-bottom:7px">Analysis</div><div class="copy-t" id="rCopy">—</div></div>
+    <div id="preferenceRecipeBlock"></div>
     <div class="card card-p" id="eqCompare"></div>
     <div class="card card-p"><div class="lbl lbl-c" style="margin-bottom:10px">Recommended Scents</div><div id="buyList"></div></div>
     <div class="card" style="overflow:hidden"><table class="tbl"><thead><tr><th>Axis</th><th>Score</th><th>Source</th><th>Interpretation</th></tr></thead><tbody id="rTable"></tbody></table></div>
@@ -814,7 +696,7 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
 <div class="page" id="pageInsight">
   <div class="shell">
     <div class="vhdr">
-      <div class="vhdr-kicker"><div class="vhdr-line"></div><span class="vhdr-txt">Step 7 · Insight</span></div>
+      <div class="vhdr-kicker"><div class="vhdr-line"></div><span class="vhdr-txt">Step 6 · Insight</span></div>
       <div class="vhdr-title">향 언어로 해석합니다</div>
     </div>
     <div class="ins-dark">
@@ -895,18 +777,15 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
 </div>
 
 <!-- ★ SheetJS (XLS 파싱) -->
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-<!-- ★ MediaPipe FaceMesh -->
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" onerror="var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';document.head.appendChild(s)"></script>
 <!-- ★ html2canvas (공유 카드) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
 /* ═══════════════════════════════════════════════════════
-   SHIFTI MEDISCENT LAB v5 + BIO-SIGNAL EDITION
+   SHIFTI MEDISCENT LAB v11 · REPORT RENDER FIX-SIGNAL EDITION
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    통합 구조:
-   Survey (40%) + Bio-Signal/NNFX2 (60%) + Face → 향 추천
+   Preference DNA + Survey + optional Bio-Signal/NNFX2 → Standard Recipe → 향 추천
    
    Bio 데이터 소스: NNFX2 XLS (EEG + HRV)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -919,8 +798,7 @@ const LINKS={'말괄량이':'https://shifti.co.kr/product/shifti-%EB%A7%90%EA%B4
 
 /* ══ STATE ══ */
 const S={
-  page:'welcome',survey:{},intention:null,
-  face:{joy:0,sorrow:0,anger:0,surprise:0,confidence:0,tag:'—',image:'',frozen:false},
+  page:'welcome',survey:{},intention:null,preferenceProfile:null,standardRecipe:null,personalizedRecipe:null,
   scores:{stress:0,balance:0,energy:0,focus:0,mood:0,recovery:0},
   bio:null,   /* NNFX2 Bio-Signal 데이터 */
   primary:null,alts:[],copy:'',matchScore:0,matchReason:'',
@@ -934,142 +812,246 @@ const S={
    (가중치 민감도 테스트 std < 3 — 안정성 확인됨)
 ══════════════════════════════════════════════════════ */
 const bioNorm = {
-  eeg:  (v,lo=1,  hi=10)  => Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
-  rmssd:(v,lo=10, hi=80)  => Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
-  lfhf: (v,lo=0.5,hi=3.0) => Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
-  hf:   (v,lo=0.5,hi=15)  => Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
-  tp:   (v,lo=0.5,hi=15)  => Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
-  hr:   (v,lo=50, hi=100) => Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
-  ab:   (v,lo=0.5,hi=3.0) => Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100))
+  eeg:  (v,lo=1,  hi=10)  => v==null?null:Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
+  rmssd:(v,lo=10, hi=80)  => v==null?null:Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
+  lfhf: (v,lo=0.5,hi=3.0) => v==null?null:Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
+  hf:   (v,lo=0.5,hi=15)  => v==null?null:Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
+  tp:   (v,lo=0.5,hi=15)  => v==null?null:Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
+  hr:   (v,lo=50, hi=100) => v==null?null:Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
+  ab:   (v,lo=0.5,hi=3.0) => v==null?null:Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100))
 };
+
+const bioNum=v=>{
+  if(typeof v==='number' && Number.isFinite(v)) return v;
+  if(v==null || v==='') return null;
+  const s=String(v).trim().replace(/,/g,'.').replace(/[^\d+\-.eE]/g,'');
+  const n=Number(s);
+  return Number.isFinite(n)?n:null;
+};
+const bioKey=v=>String(v??'').toLowerCase().replace(/[\s_\-\/().:%·]/g,'');
+const bioMatch=(cell,aliases)=>{
+  const k=bioKey(cell);
+  return aliases.some(a=>{
+    const x=bioKey(a);
+    return x.length<=2 ? k===x : (k===x || k.includes(x));
+  });
+};
+const bioAvg=arr=>{
+  const a=arr.filter(v=>v!=null && Number.isFinite(v));
+  return a.length?a.reduce((s,v)=>s+v,0)/a.length:null;
+};
+const bioClamp=v=>Math.min(100,Math.max(0,Math.round(v)));
+const bioWavg=(parts,fallback=50)=>{
+  let n=0,d=0;
+  parts.forEach(([v,w])=>{if(v!=null&&Number.isFinite(v)){n+=v*w;d+=w;}});
+  return d?n/d:fallback;
+};
+
+const EEG_ALIASES={
+  thetaL:['left theta size determination value','left theta','l theta','theta left'],
+  thetaR:['right theta size determination value','right theta','r theta','theta right'],
+  theta:['theta','theta power'],
+  alphaL:['left alpha size determination value','left alpha','l alpha','alpha left'],
+  alphaR:['right alpha size determination value','right alpha','r alpha','alpha right'],
+  alpha:['alpha','alpha power'],
+  betaL:['left l-beta size determination value','left m-beta size determination value','left beta','l beta','beta left'],
+  betaR:['right l-beta size determination value','right m-beta size determination value','right beta','r beta','beta right'],
+  beta:['beta','low beta','mid beta','beta power'],
+  concentration:['concentration size determination value','concentration','attention','focus index'],
+  relaxationL:['left relaxation size determination value','left relaxation','relaxation left'],
+  relaxationR:['right relaxation size determination value','right relaxation','relaxation right'],
+  relaxation:['relaxation','relax index'],
+  balance:['left-right balance size determination value','left right balance','lr balance','balance']
+};
+const HRV_ALIASES={
+  rr:['rrinterval','rr interval','r-r interval','ibi','inter beat interval'],
+  rmssd:['rmssd'],
+  tp:['total power','totalpower','tp'],
+  hf:['hf power','high frequency','hf'],
+  lf:['lf power','low frequency','lf'],
+  lfhf:['lf/hf','lf hf ratio','lfhfratio'],
+  hr:['heart rate','heartrate','pulse','hr']
+};
+
+function extractMetricsFromRows(rows, aliasMap){
+  if(!Array.isArray(rows)||!rows.length) return {values:{},dataRows:0,headerScore:0};
+  let best={row:-1,score:-1,map:{}};
+  const scan=Math.min(rows.length,80);
+  for(let r=0;r<scan;r++){
+    const row=Array.isArray(rows[r])?rows[r]:[];
+    const map={}; let score=0;
+    Object.entries(aliasMap).forEach(([metric,aliases])=>{
+      const idx=row.findIndex(c=>bioMatch(c,aliases));
+      if(idx>=0){map[metric]=idx;score++;}
+    });
+    if(score>best.score) best={row:r,score,map};
+  }
+
+  const found={};
+  let dataRows=0;
+  if(best.score>0){
+    Object.keys(best.map).forEach(k=>found[k]=[]);
+    for(let r=best.row+1;r<rows.length;r++){
+      const row=Array.isArray(rows[r])?rows[r]:[];
+      let numeric=0;
+      Object.entries(best.map).forEach(([metric,idx])=>{
+        const v=bioNum(row[idx]);
+        if(v!=null){found[metric].push(v);numeric++;}
+      });
+      if(numeric) dataRows++;
+    }
+  }
+
+  // Key-value and report-style fallback: label can be anywhere, value may be beside/below it.
+  for(let r=0;r<rows.length;r++){
+    const row=Array.isArray(rows[r])?rows[r]:[];
+    row.forEach((cell,c)=>{
+      Object.entries(aliasMap).forEach(([metric,aliases])=>{
+        if(!bioMatch(cell,aliases)) return;
+        const candidates=[
+          row[c+1],row[c+2],
+          Array.isArray(rows[r+1])?rows[r+1][c]:null,
+          Array.isArray(rows[r+1])?rows[r+1][c+1]:null
+        ].map(bioNum).filter(v=>v!=null);
+        if(candidates.length){
+          if(!found[metric])found[metric]=[];
+          found[metric].push(candidates[0]);
+        }
+      });
+    });
+  }
+
+  const values={};
+  Object.entries(found).forEach(([k,v])=>values[k]=bioAvg(v));
+  return {values,dataRows,headerScore:Math.max(0,best.score)};
+}
+
+function normalizeRR(raw){
+  const v=bioNum(raw);
+  if(v==null||v<=0) return null;
+  if(v>=0.35&&v<=2.5) return v*1000; // seconds -> milliseconds
+  if(v>=350&&v<=2500) return v;
+  return null;
+}
 
 async function parseBioXLS(file){
   return new Promise((resolve,reject)=>{
     const reader=new FileReader();
     reader.onload=e=>{
       try{
-        if(typeof XLSX==='undefined') throw new Error('SheetJS 로드 실패 — 새로고침 후 재시도');
+        if(typeof XLSX==='undefined') throw new Error('엑셀 해석 모듈을 불러오지 못했습니다. 인터넷 연결을 확인하고 다시 시도해 주세요.');
         const data=new Uint8Array(e.target.result);
-        const wb=XLSX.read(data,{type:'array'});
+        const wb=XLSX.read(data,{type:'array',cellDates:false,raw:true});
+        if(!wb.SheetNames?.length) throw new Error('읽을 수 있는 시트가 없습니다.');
 
-        /* ── EEG 시트 파싱 ── */
-        if(!wb.SheetNames.includes('EEG')) throw new Error('EEG 시트가 없습니다');
-        const eegRows=XLSX.utils.sheet_to_json(wb.Sheets['EEG'],{header:1});
-        let eegHeader=null,eegData=[];
-        for(const row of eegRows){
-          if(!row) continue;
-          if(row[0]==='Interval Section'&&row[1]==='Time') eegHeader=row;
-          else if(eegHeader&&row[0]==='DEFAULT') eegData.push(row);
-        }
-        if(!eegHeader||!eegData.length) throw new Error('EEG 데이터 행을 찾을 수 없습니다');
+        const sheets=wb.SheetNames.map(name=>({
+          name,
+          rows:XLSX.utils.sheet_to_json(wb.Sheets[name],{header:1,defval:null,raw:true})
+        }));
 
-        const idx={};
-        eegHeader.forEach((col,i)=>{if(col)idx[col]=i;});
-        const avg=(rows,col)=>{
-          const i=idx[col];
-          if(i===undefined) return null;
-          const vals=rows.map(r=>parseFloat(r[i])).filter(v=>!isNaN(v));
-          return vals.length?vals.reduce((s,v)=>s+v,0)/vals.length:null;
-        };
+        // Sheet name is only a hint. Every sheet is inspected to support different NNFX2 exports.
+        let bestEEG={score:-1,name:'',values:{},dataRows:0};
+        let bestHRV={score:-1,name:'',values:{},dataRows:0,rows:[]};
+        sheets.forEach(sh=>{
+          const eeg=extractMetricsFromRows(sh.rows,EEG_ALIASES);
+          const hrv=extractMetricsFromRows(sh.rows,HRV_ALIASES);
+          const nameKey=bioKey(sh.name);
+          const eegScore=eeg.headerScore+(nameKey.includes('eeg')||nameKey.includes('power')?3:0);
+          const hrvScore=hrv.headerScore+(nameKey.includes('hrv')||nameKey.includes('heart')?3:0);
+          if(eegScore>bestEEG.score)bestEEG={...eeg,score:eegScore,name:sh.name,rows:sh.rows};
+          if(hrvScore>bestHRV.score)bestHRV={...hrv,score:hrvScore,name:sh.name,rows:sh.rows};
+        });
 
-        const thetaL =avg(eegData,'Left Theta Size Determination Value');
-        const thetaR =avg(eegData,'Right Theta Size Determination Value');
-        const alphaL =avg(eegData,'Left Alpha Size Determination Value');
-        const alphaR =avg(eegData,'Right Alpha Size Determination Value');
-        const lbetaL =avg(eegData,'Left L-beta Size Determination Value')||0;
-        const lbetaR =avg(eegData,'Right L-beta Size Determination Value')||0;
-        const mbetaL =avg(eegData,'Left M-beta Size Determination Value')||0;
-        const mbetaR =avg(eegData,'Right M-beta Size Determination Value')||0;
-        const conc   =avg(eegData,'Concentration Size Determination Value');
-        const relaxL =avg(eegData,'Left Relaxation Size Determination Value')||0;
-        const relaxR =avg(eegData,'Right Relaxation Size Determination Value')||0;
-        const lrbal  =avg(eegData,'Left-right balance Size Determination Value');
+        const ev=bestEEG.values||{}, hv=bestHRV.values||{};
 
-        if(thetaL===null||alphaL===null) throw new Error('EEG 필수 컬럼이 없습니다');
-
-        const th_avg=(thetaL+thetaR)/2;
-        const al_avg=(alphaL+alphaR)/2;
-        const bt_avg=(lbetaL+lbetaR+mbetaL+mbetaR)/4;
-        const re_avg=(relaxL+relaxR)/2;
-        const ab_ratio=bt_avg>0?al_avg/bt_avg:1.0;
-
-        /* ── HRV 시트 파싱 ── */
-        if(!wb.SheetNames.includes('HRV')) throw new Error('HRV 시트가 없습니다');
-        const hrvRows=XLSX.utils.sheet_to_json(wb.Sheets['HRV'],{header:1});
-        let hrvHeader=null,hrvMainRow=null;
+        // Collect RR intervals independently; support milliseconds and seconds.
         const rrIntervals=[];
-        for(const row of hrvRows){
-          if(!row||!row.length) continue;
-          if(row[0]==='HeartRate'&&row[1]==='RRInterval') hrvHeader=row;
-          else if(hrvHeader){
-            const rr=parseFloat(row[1]);
-            if(!isNaN(rr)&&rr>400&&rr<2000) rrIntervals.push(rr);
-            if(hrvMainRow===null&&!isNaN(parseFloat(row[2]))) hrvMainRow=row;
-          }
-        }
-        if(!hrvMainRow) throw new Error('HRV 데이터 행을 찾을 수 없습니다');
+        (bestHRV.rows||[]).forEach(row=>{
+          if(!Array.isArray(row))return;
+          row.forEach(cell=>{
+            const rr=normalizeRR(cell);
+            if(rr!=null)rrIntervals.push(rr);
+          });
+        });
+        // Avoid treating unrelated numbers as RR: keep a stable physiological run when possible.
+        const rrClean=rrIntervals.length>4 ? rrIntervals : [];
 
-        const tp  =parseFloat(hrvMainRow[2])||0;
-        const hf  =parseFloat(hrvMainRow[3])||0;
-        const lf  =parseFloat(hrvMainRow[4])||0;
-        const hr  =parseFloat(hrvMainRow[7])||parseFloat(hrvMainRow[0])||65;
-        const lf_hf=hf>0?lf/hf:1.0;
-
-        /* RMSSD 계산 (RR interval 시계열) */
-        let rmssd=30;
-        if(rrIntervals.length>2){
+        let rmssd=hv.rmssd;
+        if((rmssd==null||rmssd<=0) && rrClean.length>2){
           const diffs=[];
-          for(let i=1;i<rrIntervals.length;i++) diffs.push(rrIntervals[i]-rrIntervals[i-1]);
+          for(let i=1;i<rrClean.length;i++)diffs.push(rrClean[i]-rrClean[i-1]);
           rmssd=Math.sqrt(diffs.reduce((s,d)=>s+d*d,0)/diffs.length);
         }
 
-        /* ── 정규화 ── */
-        const th_n =bioNorm.eeg(th_avg);
-        const al_n =bioNorm.eeg(al_avg);
-        const bt_n =bioNorm.eeg(bt_avg);
-        const co_n =conc!==null?bioNorm.eeg(conc):50;
-        const re_n =bioNorm.eeg(Math.max(re_avg,1));
-        const lr_n =lrbal!==null?bioNorm.eeg(lrbal):50;
-        const ab_n =bioNorm.ab(ab_ratio);
-        const rm_n =bioNorm.rmssd(rmssd);
-        const lf_n =bioNorm.lfhf(lf_hf);
-        const hf_n =bioNorm.hf(hf);
-        const tp_n =bioNorm.tp(tp);
-        const hr_n =bioNorm.hr(hr);
+        let hr=hv.hr;
+        if((hr==null||hr<=0) && rrClean.length)hr=60000/bioAvg(rrClean);
 
-        /* ── 6축 계산 (검증 완료 공식) ── */
-        const stress   =Math.round(th_n*0.35+lf_n*0.40+(100-co_n)*0.25);
-        const balance  =Math.round((100-lf_n)*0.35+al_n*0.35+lr_n*0.30);
-        const energy   =Math.round(tp_n*0.30+bt_n*0.40+hr_n*0.30);
-        const focus    =Math.round(co_n*0.40+ab_n*0.35+hf_n*0.25);
-        const mood     =Math.round(al_n*0.45+re_n*0.35+(100-th_n)*0.20);
-        const recovery =Math.round(rm_n*0.50+hf_n*0.30+re_n*0.20);
+        const theta=bioAvg([ev.thetaL,ev.thetaR,ev.theta]);
+        const alpha=bioAvg([ev.alphaL,ev.alphaR,ev.alpha]);
+        const beta =bioAvg([ev.betaL,ev.betaR,ev.beta]);
+        const relax=bioAvg([ev.relaxationL,ev.relaxationR,ev.relaxation]);
+        const conc=ev.concentration;
+        const lrbal=ev.balance;
 
-        const clamp=v=>Math.min(100,Math.max(0,v));
+        const hf=hv.hf, lf=hv.lf, tp=hv.tp;
+        const lf_hf=hv.lfhf!=null?hv.lfhf:(hf!=null&&hf>0&&lf!=null?lf/hf:null);
+        const ab_ratio=alpha!=null&&beta!=null&&beta>0?alpha/beta:null;
+
+        const available=[
+          theta,alpha,beta,conc,relax,lrbal,rmssd,lf_hf,hf,tp,hr
+        ].filter(v=>v!=null&&Number.isFinite(v)).length;
+        if(available<2) throw new Error(`생체신호 항목을 충분히 찾지 못했습니다. 인식된 항목 ${available}개 · 시트: ${wb.SheetNames.join(', ')}`);
+
+        const th_n=bioNorm.eeg(theta), al_n=bioNorm.eeg(alpha), bt_n=bioNorm.eeg(beta);
+        const co_n=bioNorm.eeg(conc), re_n=bioNorm.eeg(relax), lr_n=bioNorm.eeg(lrbal);
+        const ab_n=bioNorm.ab(ab_ratio), rm_n=bioNorm.rmssd(rmssd), lf_n=bioNorm.lfhf(lf_hf);
+        const hf_n=bioNorm.hf(hf), tp_n=bioNorm.tp(tp), hr_n=bioNorm.hr(hr);
+
+        // Missing inputs are omitted rather than silently replaced with zero.
+        const stress   =bioWavg([[th_n,.35],[lf_n,.40],[co_n==null?null:100-co_n,.25]]);
+        const balance  =bioWavg([[lf_n==null?null:100-lf_n,.35],[al_n,.35],[lr_n,.30]]);
+        const energy   =bioWavg([[tp_n,.30],[bt_n,.40],[hr_n,.30]]);
+        const focus    =bioWavg([[co_n,.40],[ab_n,.35],[hf_n,.25]]);
+        const mood     =bioWavg([[al_n,.45],[re_n,.35],[th_n==null?null:100-th_n,.20]]);
+        const recovery =bioWavg([[rm_n,.50],[hf_n,.30],[re_n,.20]]);
+
+        const eegMetricCount=[theta,alpha,beta,conc,relax,lrbal].filter(v=>v!=null).length;
+        const hrvMetricCount=[rmssd,lf_hf,hf,tp,hr].filter(v=>v!=null).length;
+        const coverage=(eegMetricCount/6+hrvMetricCount/5)/2;
+        const rowSignal=Math.min(1,((bestEEG.dataRows||0)/20+(rrClean.length||bestHRV.dataRows||0)/40)/2);
+        const quality=Math.max(.45,Math.min(.98,.45+coverage*.40+rowSignal*.13));
+        const sources=[];
+        if(eegMetricCount)sources.push(`EEG:${bestEEG.name}`);
+        if(hrvMetricCount)sources.push(`HRV:${bestHRV.name}`);
+
         resolve({
           valid:true,
-          stress:clamp(stress), balance:clamp(balance), energy:clamp(energy),
-          focus:clamp(focus),   mood:clamp(mood),        recovery:clamp(recovery),
+          stress:bioClamp(stress),balance:bioClamp(balance),energy:bioClamp(energy),
+          focus:bioClamp(focus),mood:bioClamp(mood),recovery:bioClamp(recovery),
+          quality:Math.round(quality*100)/100,
+          coverage:{eeg:eegMetricCount,hrv:hrvMetricCount,total:available},
+          source:sources.join(' · ')||wb.SheetNames.join(', '),
           raw:{
-            rmssd:Math.round(rmssd*10)/10,
-            lf_hf:Math.round(lf_hf*1000)/1000,
-            hf:Math.round(hf*100)/100,
-            lf:Math.round(lf*100)/100,
-            tp:Math.round(tp*100)/100,
-            hr:Math.round(hr*10)/10,
-            theta:Math.round(th_avg*100)/100,
-            alpha:Math.round(al_avg*100)/100,
-            beta:Math.round(bt_avg*100)/100,
-            conc:conc!==null?Math.round(conc*100)/100:null,
-            relax:Math.round(re_avg*100)/100,
-            lrbal:lrbal!==null?Math.round(lrbal*100)/100:null,
+            rmssd:rmssd==null?null:Math.round(rmssd*10)/10,
+            lf_hf:lf_hf==null?null:Math.round(lf_hf*1000)/1000,
+            hf:hf==null?null:Math.round(hf*100)/100,
+            lf:lf==null?null:Math.round(lf*100)/100,
+            tp:tp==null?null:Math.round(tp*100)/100,
+            hr:hr==null?null:Math.round(hr*10)/10,
+            theta:theta==null?null:Math.round(theta*100)/100,
+            alpha:alpha==null?null:Math.round(alpha*100)/100,
+            beta:beta==null?null:Math.round(beta*100)/100,
+            conc:conc==null?null:Math.round(conc*100)/100,
+            relax:relax==null?null:Math.round(relax*100)/100,
+            lrbal:lrbal==null?null:Math.round(lrbal*100)/100
           },
           device:file.name,
-          rows:{eeg:eegData.length,rr:rrIntervals.length}
+          rows:{eeg:bestEEG.dataRows||0,rr:rrClean.length||bestHRV.dataRows||0},
+          sheets:wb.SheetNames
         });
-      }catch(err){reject(err.message||'XLS 파싱 실패');}
+      }catch(err){reject(err?.message||String(err)||'생체신호 파일 파싱 실패');}
     };
-    reader.onerror=()=>reject('파일 읽기 실패');
+    reader.onerror=()=>reject('파일 읽기에 실패했습니다.');
     reader.readAsArrayBuffer(file);
   });
 }
@@ -1083,11 +1065,28 @@ function renderBioResult(bio){
   /* 상태 해석 */
   const lfStatus=bio.raw.lf_hf<1.0?'부교감 우세 (이완)':bio.raw.lf_hf<2.0?'자율신경 균형':'교감 우세 (긴장)';
   const dom=bio.focus<40?'집중력 저하':bio.stress>60?'긴장 상태':bio.balance>55?'균형 양호':'보통 상태';
+  const fmt=v=>v==null?'—':v;
   $('bioInterpret').innerHTML=
-    `<strong>LF/HF ${bio.raw.lf_hf}</strong> — ${lfStatus}&nbsp;·&nbsp;`+
-    `<strong>RMSSD ${bio.raw.rmssd}ms</strong>&nbsp;·&nbsp;`+
-    `<strong>HR ${bio.raw.hr}bpm</strong><br>`+
-    `주요 상태: <strong>${dom}</strong> · EEG ${bio.rows.eeg}행 · RR ${bio.rows.rr}개`;
+    `<strong>LF/HF ${fmt(bio.raw.lf_hf)}</strong> — ${lfStatus}&nbsp;·&nbsp;`+
+    `<strong>RMSSD ${fmt(bio.raw.rmssd)}${bio.raw.rmssd==null?'':'ms'}</strong>&nbsp;·&nbsp;`+
+    `<strong>HR ${fmt(bio.raw.hr)}${bio.raw.hr==null?'':'bpm'}</strong><br>`+
+    `주요 상태: <strong>${dom}</strong> · EEG ${bio.rows.eeg}행 · RR/HRV ${bio.rows.rr}행`;
+
+  const quality=Math.round((bio.quality||0)*100);
+  $('bioApplyStatus').innerHTML=
+    `<strong>✓ 업로드 데이터가 추천 엔진에 연결되었습니다.</strong><br>`+
+    `인식 소스: ${bio.source||'—'} · 데이터 품질 ${quality}% · `+
+    `EEG 지표 ${bio.coverage?.eeg||0}/6 · HRV 지표 ${bio.coverage?.hrv||0}/5`;
+
+  if(typeof updateScores==='function')updateScores();
+  const survey={...S.scores};
+  const axes=[['Stress','stress'],['Balance','balance'],['Energy','energy'],['Focus','focus'],['Mood','mood'],['Recovery','recovery']];
+  $('bioFusionPreview').innerHTML=
+    `<div class="lbl" style="margin-bottom:7px">업로드 반영 미리보기</div>`+
+    `<div style="overflow:auto;border:1px solid var(--glass-border);border-radius:12px;background:rgba(255,255,255,.58)">`+
+    `<table class="tbl"><thead><tr><th>Axis</th><th>Survey</th><th>Uploaded Bio</th><th>60:40 Preview</th></tr></thead><tbody>`+
+    axes.map(([label,k])=>`<tr><td>${label}</td><td>${survey[k]}</td><td><strong>${bio[k]}</strong></td><td>${Math.round(survey[k]*.4+bio[k]*.6)}</td></tr>`).join('')+
+    `</tbody></table></div>`;
 
   /* 6축 바 */
   const scoreColors={stress:'#B87878',balance:'#5E9E98',energy:'#B89050',focus:'#7878A8',mood:'#82B9B4',recovery:'#3B7872'};
@@ -1102,20 +1101,27 @@ function renderBioResult(bio){
   /* 원시 지표 */
   const r=bio.raw;
   $('bioRawGrid').innerHTML=[
-    {k:'RMSSD',v:r.rmssd,u:'ms'},{k:'LF/HF',v:r.lf_hf,u:'ratio'},{k:'HR',v:r.hr,u:'bpm'},
-    {k:'Theta',v:r.theta,u:'/10'},{k:'Alpha',v:r.alpha,u:'/10'},{k:'Conc.',v:r.conc!==null?r.conc:'—',u:'/10'}
+    {k:'RMSSD',v:r.rmssd??'—',u:r.rmssd==null?'':'ms'},{k:'LF/HF',v:r.lf_hf??'—',u:'ratio'},{k:'HR',v:r.hr??'—',u:r.hr==null?'':'bpm'},
+    {k:'Theta',v:r.theta??'—',u:'/10'},{k:'Alpha',v:r.alpha??'—',u:'/10'},{k:'Conc.',v:r.conc??'—',u:'/10'}
   ].map(it=>`<div class="bio-raw-cell"><div class="bio-raw-k">${it.k}</div><div class="bio-raw-v">${it.v}</div><div class="bio-raw-u">${it.u}</div></div>`).join('');
 }
 
+function invalidateRecommendation(){
+  S.primary=null;S.alts=[];S.copy='';S.matchScore=0;S.matchReason='';
+  S._userEQ=null;S.engine=null;S.preferenceProfile=null;S.standardRecipe=null;S.personalizedRecipe=null;
+}
 function clearBio(){
-  S.bio=null;
+  S.bio=null;invalidateRecommendation();
   $('bioResultCard').style.display='none';
   $('bioErrorCard').style.display='none';
   $('bioUploadCard').style.display='';
   $('bioFile').value='';
 }
-function skipBio(){S.bio=null;goPage('face');}
-function confirmBio(){goPage('face');}
+function skipBio(){S.bio=null;invalidateRecommendation();safeEnterAnalysis();}
+function confirmBio(){
+  if(!S.bio?.valid){toast('먼저 유효한 생체신호 파일을 업로드하거나 건너뛰기를 선택해 주세요.');return;}
+  safeEnterAnalysis();
+}
 
 function initBioHandler(){
   const bioFile=$('bioFile');
@@ -1126,9 +1132,10 @@ function initBioHandler(){
     toast('XLS 파싱 중…');
     try{
       const bio=await parseBioXLS(file);
+      invalidateRecommendation();
       S.bio=bio;
       renderBioResult(bio);
-      toast('✓ 생체신호 적용 완료 — 얼굴 분석으로 이동하세요');
+      toast('✓ 생체신호 적용 완료 — 향 추천 분석을 진행합니다');
     }catch(err){
       $('bioErrorMsg').textContent=err;
       $('bioErrorCard').style.display='';
@@ -1150,6 +1157,7 @@ function initBioHandler(){
       toast('XLS 파싱 중…');
       try{
         const bio=await parseBioXLS(file);
+        invalidateRecommendation();
         S.bio=bio;renderBioResult(bio);
         toast('✓ 생체신호 적용 완료');
       }catch(err){
@@ -1166,33 +1174,27 @@ function initBioHandler(){
 const SCENTS=[
   {code:'Foggy Study',mood:'calm-focus',notes:'Tea Leaves · Cedar · Warm Musk',use:'과부하된 사고를 정돈하고 집중력을 정제합니다',color:'#2b5c8a',keywords:['집중','정돈','지적'],
    eq:{valence:50,arousal:78,stress:22,engagement:92,relaxation:28,interest:95},
-   profile:{stress:30,balance:60,energy:65,focus:80,mood:55,recovery:50},
-   faceW:{joy:35,sorrow:28,anger:20,surprise:70},intentW:{change:1.4,keep:0.8,neutral:1.1},
+   profile:{stress:30,balance:60,energy:65,focus:80,mood:55,recovery:50},intentW:{change:1.4,keep:0.8,neutral:1.1},
    strength:'인지 과부하 → 집중 정제. Engagement 92·Interest 95'},
   {code:'AnnE',mood:'gentle-balance',notes:'White Floral · Cotton · Clean Musk',use:'섬세함과 안정감의 균형',color:'#a85560',keywords:['균형','안정','우아'],
    eq:{valence:88,arousal:72,stress:25,engagement:85,relaxation:65,interest:90},
-   profile:{stress:25,balance:78,energy:58,focus:65,mood:76,recovery:68},
-   faceW:{joy:80,sorrow:30,anger:12,surprise:42},intentW:{change:0.7,keep:1.5,neutral:1.2},
+   profile:{stress:25,balance:78,energy:58,focus:65,mood:76,recovery:68},intentW:{change:0.7,keep:1.5,neutral:1.2},
    strength:'균형·안정의 완성형. Valence 88·Relaxation 65'},
   {code:'Who am I',mood:'introspective',notes:'Iris · Dark Wood · Quiet Amber',use:'내면 정리와 깊은 사색',color:'#5a4a8a',keywords:['내면','사색','고요'],
    eq:{valence:8,arousal:18,stress:92,engagement:15,relaxation:10,interest:12},
-   profile:{stress:82,balance:28,energy:18,focus:30,mood:22,recovery:18},
-   faceW:{joy:8,sorrow:85,anger:55,surprise:15},intentW:{change:0.5,keep:1.6,neutral:0.9},
+   profile:{stress:82,balance:28,energy:18,focus:30,mood:22,recovery:18},intentW:{change:0.5,keep:1.6,neutral:0.9},
    strength:'극한 소진 수용. Stress 92 target'},
   {code:'Red Tara',mood:'recovery',notes:'Warm Spice · Benzoin · Sandalwood',use:'소진 후 회복과 따뜻한 전환',color:'#a03a3a',keywords:['회복','따뜻함','재생'],
    eq:{valence:72,arousal:85,stress:78,engagement:82,relaxation:18,interest:88},
-   profile:{stress:65,balance:44,energy:58,focus:48,mood:52,recovery:76},
-   faceW:{joy:45,sorrow:62,anger:68,surprise:38},intentW:{change:1.5,keep:0.9,neutral:1.1},
+   profile:{stress:65,balance:44,energy:58,focus:48,mood:52,recovery:76},intentW:{change:1.5,keep:0.9,neutral:1.1},
    strength:'소진 → 회복 전환. Arousal 85·Engagement 82'},
   {code:'The Great',mood:'lifted-energy',notes:'Bergamot · Green Tea · Bright Cedar',use:'활력과 방향성의 확장',color:'#2a6040',keywords:['활력','확장','방향'],
    eq:{valence:75,arousal:88,stress:85,engagement:40,relaxation:15,interest:82},
-   profile:{stress:40,balance:55,energy:85,focus:75,mood:68,recovery:50},
-   faceW:{joy:72,sorrow:12,anger:28,surprise:82},intentW:{change:1.6,keep:0.6,neutral:1.2},
+   profile:{stress:40,balance:55,energy:85,focus:75,mood:68,recovery:50},intentW:{change:1.6,keep:0.6,neutral:1.2},
    strength:'에너지 폭발. Arousal 88 — Bergamot으로 방향성 부여'},
   {code:'말괄량이',mood:'playful-reset',notes:'Yuzu · Peony · Soft Fig',use:'가벼운 기분 전환과 리프레시',color:'#4a8a6a',keywords:['리프레시','경쾌','전환'],
    eq:{valence:90,arousal:80,stress:12,engagement:35,relaxation:78,interest:92},
-   profile:{stress:14,balance:72,energy:70,focus:50,mood:90,recovery:65},
-   faceW:{joy:92,sorrow:8,anger:8,surprise:65},intentW:{change:1.2,keep:1.1,neutral:1.4},
+   profile:{stress:14,balance:72,energy:70,focus:50,mood:90,recovery:65},intentW:{change:1.2,keep:1.1,neutral:1.4},
    strength:'기분 전환의 왕. Valence 90·Relaxation 78·Interest 92'}
 ];
 
@@ -1204,20 +1206,51 @@ const QS=[
   {id:'mood',type:'scale',q:'지금 기분의 무게감은 어떻습니까?',hint:'감정이 가볍고 활기찬지, 무겁고 가라앉아 있는지 표시하세요.',dim:'→ Mood·Balance 반영',low:'가볍고 활기',high:'무겁게 가라앉음',labels:['가벼움','약간무거움','중간','무거움','매우무거움']},
   {id:'social',type:'scale',q:'다른 사람과 교류할 에너지가 있습니까?',hint:'지금 이 순간 에너지 수준을 평가하세요.',dim:'→ Energy·Balance 반영',low:'전혀 없음',high:'충분히 있음',labels:['없음','부족','보통','충분','넘침']},
   {id:'sensitivity',type:'scale',q:'소리, 빛, 자극에 얼마나 예민하게 반응합니까?',hint:'자극에 대한 반응 역치를 평가하세요.',dim:'→ Stress·Recovery 반영',low:'거의 반응 없음',high:'매우 예민',labels:['둔감','약간','보통','예민','극도예민']},
-  {id:'intention',type:'semantic',q:'향을 통해 지금 무엇을 원하십니까?',hint:'이 선택이 향 매칭 방향성에 직접 반영됩니다.',dim:'→ 추천 방향 결정',
-   options:[{val:'change',ico:'🔥',t:'전환이 필요합니다',d:'현재 감정에서 벗어나 새로운 상태로'},{val:'keep',ico:'🌿',t:'지금을 유지합니다',d:'현재 컨디션을 깊고 안정적으로 유지'}]}
+  {id:'intention',type:'semantic',q:'향을 통해 지금 무엇을 원하십니까?',hint:'현재 상태를 바꿀지 유지할지 선택합니다.',dim:'→ 목표 감정 상태·개입 방향 결정',
+   options:[{val:'change',ico:'🔥',t:'전환이 필요합니다',d:'현재 감정에서 벗어나 새로운 상태로'},{val:'keep',ico:'🌿',t:'지금을 유지합니다',d:'현재 컨디션을 깊고 안정적으로 유지'}]},
+  {id:'scentFamilies',type:'multi',q:'평소 좋아하는 향 계열을 선택해 주세요.',hint:'최대 3개까지 선택할 수 있습니다. 이 값이 스탠다드 레시피의 가장 큰 기준이 됩니다.',dim:'→ 취향 DNA·스탠다드 레시피 40% 핵심 기준',max:3,min:1,
+   options:[
+    {val:'citrus',ico:'🍋',t:'시트러스',d:'베르가못·유자처럼 밝고 산뜻함'},
+    {val:'green',ico:'🍃',t:'그린·티',d:'찻잎·허브·잎사귀의 선명함'},
+    {val:'floral',ico:'🌸',t:'플로럴',d:'네롤리·피오니·화이트 플로럴'},
+    {val:'woody',ico:'🌲',t:'우디',d:'시더·샌달우드의 차분한 깊이'},
+    {val:'musk',ico:'☁️',t:'머스크·클린',d:'코튼·화이트 머스크의 깨끗함'},
+    {val:'powdery',ico:'🫧',t:'파우더리',d:'아이리스·파우더 머스크의 부드러움'},
+    {val:'amber_spice',ico:'🪵',t:'앰버·스파이스',d:'벤조인·앰버·은은한 향신료'},
+    {val:'fruity',ico:'🍐',t:'프루티',d:'배·무화과처럼 생기 있는 달콤함'}]},
+  {id:'scentAvoid',type:'multi',q:'피하고 싶은 향 계열이 있습니까?',hint:'불호 향은 추천 점수와 레시피에서 제외하거나 강하게 감점합니다.',dim:'→ 비선호 배제 마스크',max:3,min:1,exclusive:'none',
+   options:[
+    {val:'none',ico:'✓',t:'특별히 없음',d:'모든 계열을 후보로 유지'},
+    {val:'citrus',ico:'🍋',t:'시트러스',d:'산뜻하고 톡 쏘는 향'},
+    {val:'green',ico:'🍃',t:'그린·티',d:'풀·허브·찻잎 향'},
+    {val:'floral',ico:'🌸',t:'플로럴',d:'꽃 중심의 화사한 향'},
+    {val:'woody',ico:'🌲',t:'우디',d:'나무·흙·수지 계열'},
+    {val:'musk',ico:'☁️',t:'머스크',d:'살결·세탁물 같은 잔향'},
+    {val:'powdery',ico:'🫧',t:'파우더리',d:'분가루처럼 포근한 향'},
+    {val:'amber_spice',ico:'🪵',t:'앰버·스파이스',d:'따뜻하고 묵직한 향신료'},
+    {val:'fruity',ico:'🍐',t:'프루티',d:'과일의 달콤한 향'}]},
+  {id:'scentCharacter',type:'semantic',q:'가장 선호하는 향의 인상은 무엇입니까?',hint:'동일한 향 계열도 원하는 인상에 따라 탑·미들·베이스 비율이 달라집니다.',dim:'→ 스탠다드 레시피의 노트 구조 결정',
+   options:[
+    {val:'fresh_clean',ico:'💧',t:'맑고 깨끗한',d:'산뜻하고 투명한 첫인상'},
+    {val:'soft_comfort',ico:'🕊️',t:'부드럽고 편안한',d:'포근하고 안정적인 잔향'},
+    {val:'elegant_floral',ico:'🤍',t:'섬세하고 우아한',d:'정제된 플로럴과 균형감'},
+    {val:'deep_woody',ico:'🌒',t:'깊고 차분한',d:'우디·앰버 중심의 지속감'}]},
+  {id:'scentIntensity',type:'semantic',q:'원하는 향의 강도는 어느 정도입니까?',hint:'추천 제품의 사용량과 개인화 레시피의 확산감을 결정합니다.',dim:'→ 제공 강도·사용 가이드 결정',
+   options:[
+    {val:'light',ico:'○',t:'가볍게',d:'가까이에서 은은하게 느껴지는 정도'},
+    {val:'medium',ico:'◐',t:'보통',d:'일상에서 존재감이 느껴지는 정도'},
+    {val:'strong',ico:'●',t:'분명하게',d:'공간과 잔향에 존재감이 남는 정도'}]}
 ];
 
 /* ══ PAGE MANAGEMENT ══ */
-const PAGES=['welcome','survey','bio','face','analysis','report','insight','history'];
-const PROG_MAP={welcome:0,survey:20,bio:36,face:52,analysis:72,report:90,insight:100,history:0};
-const HDR_LABEL={welcome:'진단 대기',survey:'설문 중',bio:'생체신호',face:'얼굴 분석',analysis:'AI 매칭',report:'추천 완료',insight:'Insight',history:'기록'};
+const PAGES=['welcome','survey','bio','analysis','report','insight','history'];
+const PROG_MAP={welcome:0,survey:24,bio:46,analysis:70,report:90,insight:100,history:0};
+const HDR_LABEL={welcome:'진단 대기',survey:'설문 중',bio:'생체신호',analysis:'AI 매칭',report:'추천 완료',insight:'Insight',history:'기록'};
 const BBAR_CFG={
-  survey: {back:'← 처음으로',   backFn:()=>goPage('welcome'), next:'다음 →',       nextFn:sqNext,       nc:false},
-  bio:    {back:'← 설문으로',   backFn:()=>goPage('survey'),  next:'얼굴 분석 →',   nextFn:confirmBio,   nc:false},
-  face:   {back:'← 생체신호',   backFn:()=>goPage('bio'),     next:'분석 확정 →',   nextFn:confirmFace,  nc:true},
-  analysis:{back:'← 다시 촬영', backFn:()=>goPage('face'),    next:'리포트 →',      nextFn:()=>goPage('report'),nc:true},
-  report: {back:'← 다시 분석',  backFn:()=>goPage('face'),    next:'Insight →',     nextFn:()=>goPage('insight'),nc:false},
+  survey: {back:'← 처음으로',   backFn:surveyBack, next:null, nextFn:null, nc:false},
+  bio:    {back:'← 설문으로',   backFn:()=>goPage('survey'),  next:'향 추천 분석 →', nextFn:confirmBio, nc:false},
+  analysis:{back:'← 생체신호', backFn:()=>goPage('bio'),      next:'리포트 →',      nextFn:()=>goPage('report'),nc:true},
+  report: {back:'← 다시 분석',  backFn:()=>goPage('analysis'), next:'Insight →',    nextFn:()=>goPage('insight'),nc:false},
   insight:{back:'← 리포트',     backFn:()=>goPage('report'),  next:'새 진단',       nextFn:resetAll,     nc:false}
 };
 
@@ -1232,21 +1265,32 @@ function goPage(name){
   const prog=$('progFill');if(prog)prog.style.width=(PROG_MAP[name]||0)+'%';
   const bbar=$('bbar'),cfg=BBAR_CFG[name];
   if(cfg&&bbar){
-    bbar.className='bbar on';
+    const hasNext=!!cfg.next;
+    bbar.className='bbar on'+(hasNext?'':' back-only');
     const back=$('bbarBack'),next=$('bbarNext');
-    if(back){back.textContent=cfg.back;back.onclick=cfg.backFn;}
-    if(next){next.textContent=cfg.next;next.onclick=cfg.nextFn;next.className='bbar-next'+(cfg.nc?' celadon':'');}
+    if(back){back.style.display='';back.textContent=cfg.back;back.onclick=cfg.backFn;}
+    if(next){
+      if(hasNext){
+        next.style.display='';
+        next.textContent=cfg.next;
+        next.onclick=cfg.nextFn;
+        next.className='bbar-next'+(cfg.nc?' celadon':'');
+      }else{
+        next.style.display='none';
+        next.onclick=null;
+      }
+    }
   }else if(bbar){bbar.className='bbar';}
   try{
-    if(name==='analysis') runAnalysis();
-    if(name==='report')   renderReport();
-    if(name==='insight')  renderInsight();
-    if(name==='history')  renderHistory();
+    if(name==='analysis') (window.runAnalysis || runAnalysis)();
+    if(name==='report')   (window.renderReport || renderReport)();
+    if(name==='insight')  (window.renderInsight || renderInsight)();
+    if(name==='history')  (window.renderHistory || renderHistory)();
   }catch(err){
     console.error('goPage render error', name, err);
     if(name==='analysis'){
       toast('분석 화면 오류로 리포트로 바로 이동합니다');
-      try{ renderReport(); }catch(err2){ console.error('report fallback failed', err2); }
+      try{ (window.renderReport || renderReport)(); }catch(err2){ console.error('report fallback failed', err2); }
       PAGES.forEach(p=>{ const el=$('page'+p[0].toUpperCase()+p.slice(1)); if(el) el.className='page'+(p==='report'?' on':''); });
       const hdr2=$('hdrPill'); if(hdr2) hdr2.textContent=HDR_LABEL.report||'report';
     }
@@ -1264,21 +1308,55 @@ function buildCards(){
     let body='';
     if(q.type==='scale'){
       body=`<div class="sq-scale-lbl"><span>${q.low}</span><span>${q.high}</span></div>
-      <div class="sq-opts">${[1,2,3,4,5].map(v=>`<button class="sq-opt${S.survey[q.id]===v?' sel':''}" type="button" data-q="${q.id}" data-v="${v}"><div class="sq-opt-n">${v}</div><div class="sq-opt-l">${q.labels[v-1]}</div></button>`).join('')}</div>`;
+      <div class="sq-opts">${[1,2,3,4,5].map(v=>`<button class="sq-opt${S.survey[q.id]===v?' sel':''}" type="button" data-q="${q.id}" data-v="${v}"><div class="sq-opt-n">${v}</div><div class="sq-opt-l">${q.labels[v-1]}</div></button>`).join('')}</div><div class="auto-hint">응답을 선택하면 다음 질문으로 자동 이동합니다.</div>`;
+    }else if(q.type==='multi'){
+      const selected=Array.isArray(S.survey[q.id])?S.survey[q.id]:[];
+      body=`<div class="sq-pref-grid">${q.options.map(o=>`<button class="sq-pref-opt${selected.includes(o.val)?' sel':''}" type="button" data-q="${q.id}" data-v="${o.val}"><span class="sq-pref-ico">${o.ico}</span><div class="sq-pref-t">${o.t}</div><div class="sq-pref-d">${o.d}</div></button>`).join('')}</div><div class="multi-action-row"><div class="pref-counter" id="prefCount-${q.id}">${selected.length} / ${q.max} 선택</div><button type="button" class="multi-done" data-multi-done="${q.id}" ${selected.length>=(q.min||1)?'':'disabled'}>선택 완료</button></div>`;
     }else{
-      body=`<div class="sq-sem">${q.options.map(o=>`<button class="sq-sem-opt${S.survey[q.id]===o.val?' sel':''}" type="button" data-q="${q.id}" data-v="${o.val}"><span class="sq-sem-ico">${o.ico}</span><div class="sq-sem-t">${o.t}</div><div class="sq-sem-d">${o.d}</div></button>`).join('')}</div>`;
+      body=`<div class="sq-sem">${q.options.map(o=>`<button class="sq-sem-opt${S.survey[q.id]===o.val?' sel':''}" type="button" data-q="${q.id}" data-v="${o.val}"><span class="sq-sem-ico">${o.ico}</span><div class="sq-sem-t">${o.t}</div><div class="sq-sem-d">${o.d}</div></button>`).join('')}</div><div class="auto-hint">카드를 선택하면 다음 질문으로 자동 이동합니다.</div>`;
     }
     div.innerHTML=`<div class="sq-inner"><div class="sq-num">Q${i+1}/${QS.length}</div><div class="sq-q">${q.q}</div><div class="sq-hint">${q.hint}</div>${body}<div class="sq-dim">📊 ${q.dim}</div></div>`;
-    div.querySelectorAll('.sq-opt,.sq-sem-opt').forEach(btn=>btn.addEventListener('click',()=>{
-      const isScale=q.type==='scale',val=isScale?Number(btn.dataset.v):btn.dataset.v;
-      S.survey[q.id]=val;if(q.id==='intention')S.intention=val;
-      div.querySelectorAll('.sq-opt,.sq-sem-opt').forEach(b=>b.classList.toggle('sel',isScale?Number(b.dataset.v)===val:b.dataset.v===val));
-      updateScores();updateAxes();if(isScale)setTimeout(()=>sqGo(i+1),250);
+    div.querySelectorAll('.sq-opt,.sq-sem-opt,.sq-pref-opt').forEach(btn=>btn.addEventListener('click',()=>{
+      if(q.type==='multi'){
+        let arr=Array.isArray(S.survey[q.id])?[...S.survey[q.id]]:[];
+        const val=btn.dataset.v;
+        if(q.exclusive && val===q.exclusive){ arr=[val]; }
+        else{
+          arr=arr.filter(x=>x!==q.exclusive);
+          if(arr.includes(val)) arr=arr.filter(x=>x!==val);
+          else if(arr.length<(q.max||3)) arr.push(val);
+          else { toast(`최대 ${q.max||3}개까지 선택할 수 있습니다.`); return; }
+        }
+        S.survey[q.id]=arr;
+        div.querySelectorAll('.sq-pref-opt').forEach(b=>b.classList.toggle('sel',arr.includes(b.dataset.v)));
+        const cnt=$(`prefCount-${q.id}`);if(cnt)cnt.textContent=`${arr.length} / ${q.max} 선택`;
+        const doneBtn=div.querySelector(`[data-multi-done="${q.id}"]`);
+        if(doneBtn) doneBtn.disabled=arr.length<(q.min||1);
+
+        // Exclusive "없음" and maximum selections are unambiguous completion points.
+        if((q.exclusive && val===q.exclusive) || arr.length===(q.max||3)){
+          setTimeout(()=>sqGo(i+1),260);
+        }
+      }else{
+        const isScale=q.type==='scale',val=isScale?Number(btn.dataset.v):btn.dataset.v;
+        S.survey[q.id]=val;if(q.id==='intention')S.intention=val;
+        div.querySelectorAll('.sq-opt,.sq-sem-opt').forEach(b=>b.classList.toggle('sel',isScale?Number(b.dataset.v)===val:b.dataset.v===val));
+        setTimeout(()=>sqGo(i+1),260);
+      }
+      updateScores();updateAxes();updateSqUI();
     }));
+
+    const multiDone=div.querySelector(`[data-multi-done="${q.id}"]`);
+    if(multiDone){
+      multiDone.addEventListener('click',()=>{
+        if(!isSurveyAnswered(q)){toast('향 취향을 1개 이상 선택해 주세요.');return;}
+        sqGo(i+1);
+      });
+    }
     wrap.appendChild(div);
   });
   const done=document.createElement('div');done.className='sq-card';done.id='sqC'+QS.length;
-  done.innerHTML=`<div class="sq-done-card"><div class="sq-done-ico">✓</div><div class="sq-done-t">설문 완료</div><div class="sq-done-d">다음은 생체신호 업로드 단계입니다.<br>NNFX2 XLS 파일이 있으면 더 정확한 추천이 가능합니다.</div><div class="sq-done-pills" id="donePills"></div><div style="margin-top:14px;display:flex;gap:6px;justify-content:center"><button class="btn btn-c" onclick="goPage('bio')">생체신호 업로드 →</button><button class="btn btn-ol btn-sm" onclick="goPage('face')">건너뛰기</button></div></div>`;
+  done.innerHTML=`<div class="sq-done-card"><div class="sq-done-ico">✓</div><div class="sq-done-t">취향 프로파일 완료</div><div class="sq-done-d">선택한 향 취향으로 스탠다드 레시피를 만들고,<br>현재 상태와 선택형 생체신호를 반영해 오늘의 추천을 계산합니다.</div><div class="sq-done-pills" id="donePills"></div><div style="margin-top:14px;display:flex;gap:6px;justify-content:center"><button class="btn btn-c" onclick="goPage('bio')">생체신호 업로드 →</button><button class="btn btn-ol btn-sm" onclick="safeEnterAnalysis()">생체신호 없이 분석</button></div></div>`;
   wrap.appendChild(done);
 }
 function sqGo(idx){
@@ -1287,15 +1365,38 @@ function sqGo(idx){
   const nc=$('sqC'+sqCur);
   if(nc){nc.classList.add('vis');const inn=nc.querySelector('.sq-inner');if(inn){inn.style.animation='none';void inn.offsetWidth;inn.style.animation='';}}
   if(sqCur===QS.length){
-    const p=$('donePills');if(p)p.innerHTML=[{l:'Stress',v:S.scores.stress,c:'#a85560'},{l:'Balance',v:S.scores.balance,c:'#527a6c'},{l:'Energy',v:S.scores.energy,c:'#4a5570'},{l:'Focus',v:S.scores.focus,c:'#4a8a6a'},{l:'Mood',v:S.scores.mood,c:'#8a6f3c'},{l:'Recovery',v:S.scores.recovery,c:'#6a5a8a'}].map(x=>`<div class="sq-pill" style="border-color:${x.c};color:${x.c}">${x.l}·${x.v}</div>`).join('');
+    const p=$('donePills');if(p){const fam=(S.survey.scentFamilies||[]).map(x=>({citrus:'시트러스',green:'그린',floral:'플로럴',woody:'우디',musk:'머스크',powdery:'파우더리',amber_spice:'앰버',fruity:'프루티'}[x]||x)).join(' · ');p.innerHTML=[{l:'취향',v:fam||'미선택',c:'#4f7872'},{l:'Stress',v:S.scores.stress,c:'#a85560'},{l:'Focus',v:S.scores.focus,c:'#4a8a6a'},{l:'Mood',v:S.scores.mood,c:'#8a6f3c'}].map(x=>`<div class="sq-pill" style="border-color:${x.c};color:${x.c}">${x.l}·${x.v}</div>`).join('');}
   }
   updateSqUI();
 }
-function sqNext(){if(sqCur<QS.length)sqGo(sqCur+1);else goPage('bio');}
+function isSurveyAnswered(q){
+  const v=S.survey[q.id];
+  if(q.type==='multi') return Array.isArray(v) && v.length>=(q.min||1);
+  return v!==undefined && v!==null && v!=='';
+}
+function surveyBack(){
+  if(sqCur>0) sqGo(sqCur-1);
+  else goPage('welcome');
+}
+function sqNext(){
+  if(sqCur<QS.length){
+    const q=QS[sqCur];
+    if(!isSurveyAnswered(q)){ toast(q.type==='multi'?'향 취향을 1개 이상 선택해 주세요.':'응답을 선택해 주세요.'); return; }
+    sqGo(sqCur+1);
+  }else goPage('bio');
+}
 function updateSqUI(){
-  const ans=Object.keys(S.survey).length,pct=Math.round(ans/QS.length*100);
+  const ans=QS.filter(isSurveyAnswered).length,pct=Math.round(ans/QS.length*100);
   const fill=$('sqFill');if(fill)fill.style.width=pct+'%';
   const frac=$('sqFrac');if(frac)frac.textContent=`${ans} / ${QS.length}`;
+
+  if(S.page==='survey'){
+    const back=$('bbarBack');
+    if(back){
+      back.textContent=sqCur>0?'← 이전 질문':'← 처음으로';
+      back.onclick=surveyBack;
+    }
+  }
 }
 function updateAxes(){
   const sc=S.scores;
@@ -1312,188 +1413,14 @@ function updateScores(){
   S.scores.recovery =Math.round((((6-sv('fatigue'))*2+(6-sv('tension'))+sv('social'))/20)*100);
 }
 
-/* ══ FACE MESH ══ */
-let mediaStream=null,faceMeshInst=null,mpCamera=null,liveLoop=null,lastLM=null;
-const TRIS=[[10,338,297],[10,297,332],[10,332,284],[10,284,251],[61,185,40],[0,267,269],[269,270,409],[409,291,375],[152,377,400],[33,7,163],[163,144,145],[145,153,154],[263,249,390],[390,373,374],[374,380,381],[70,63,105],[105,66,107],[336,296,334]];
-const CAL={done:false,frames:[],N:60,baseline:null};
-
-function resetCalibration(){CAL.done=false;CAL.frames=[];CAL.baseline=null;const el=$('calStatus');if(el){el.textContent='캘리브레이션 중… 정면을 보세요';el.style.color='var(--gold)';}}
-async function initMesh(){
-  if(faceMeshInst)return;
-  try{
-    if(typeof FaceMesh==='undefined')return;
-    faceMeshInst=new FaceMesh({locateFile:f=>`https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${f}`});
-    faceMeshInst.setOptions({maxNumFaces:1,refineLandmarks:true,minDetectionConfidence:.55,minTrackingConfidence:.55});
-    faceMeshInst.onResults(onMesh);
-    if(faceMeshInst.initialize)await faceMeshInst.initialize();
-  }catch(e){console.warn(e);}
-}
-function drawMesh(canvas,video,lm){
-  const W=canvas.width=video.offsetWidth||480,H=canvas.height=video.offsetHeight||360;
-  const ctx=canvas.getContext('2d');ctx.clearRect(0,0,W,H);if(!lm?.length)return;
-  const pts=lm.map(p=>({x:(1-p.x)*W,y:p.y*H}));
-  ctx.fillStyle='rgba(82,122,108,.05)';ctx.strokeStyle='rgba(82,122,108,.22)';ctx.lineWidth=.65;
-  for(const[a,b,c]of TRIS){if(!pts[a]||!pts[b]||!pts[c])continue;ctx.beginPath();ctx.moveTo(pts[a].x,pts[a].y);ctx.lineTo(pts[b].x,pts[b].y);ctx.lineTo(pts[c].x,pts[c].y);ctx.closePath();ctx.fill();ctx.stroke();}
-  ctx.fillStyle='rgba(82,122,108,.6)';
-  for(let i=0;i<pts.length;i+=3){ctx.beginPath();ctx.arc(pts[i].x,pts[i].y,1.2,0,Math.PI*2);ctx.fill();}
-}
-function extractAU(lm){
-  if(!lm||lm.length<468)return null;
-  const p=lm,dist=(a,b)=>Math.hypot(p[a].x-p[b].x,p[a].y-p[b].y),yDiff=(a,b)=>p[b].y-p[a].y;
-  const faceH=dist(10,152)||.001,faceW=dist(234,454)||.001;
-  const browInDist=(dist(107,336)/faceW*.6+dist(55,285)/faceW*.4);
-  const lBrowY=(yDiff(159,107)*.45+yDiff(159,105)*.30+yDiff(159,70)*.25);
-  const rBrowY=(yDiff(386,336)*.45+yDiff(386,334)*.30+yDiff(386,300)*.25);
-  const browRaise=-((lBrowY+rBrowY)/2)/faceH;
-  const eyeOpen=((dist(159,145)+dist(158,153))/2+(dist(386,374)+dist(385,380))/2)/(2*faceH);
-  const mCenterY=(p[13].y+p[14].y)/2;
-  const smileRel=((mCenterY-p[61].y)+(mCenterY-p[291].y))/(2*faceH);
-  const smileAbs=((p[0].y-p[61].y)+(p[0].y-p[291].y))/(2*faceH);
-  const smileAmt=smileRel*.70+smileAbs*.30;
-  const mouthOpenH=Math.max(0,(p[14].y-p[13].y)/faceH);
-  const mouthW=dist(61,291)/faceW;
-  return{browInDist,browRaise,eyeOpen,smileAmt,mouthOpenH,mouthW,faceH,faceW};
-}
-function collectCalibration(au){
-  if(CAL.done)return;
-  const calBar=$('calBar');if(calBar)calBar.style.display='block';
-  CAL.frames.push({browInDist:au.browInDist,browRaise:au.browRaise,eyeOpen:au.eyeOpen,smileAmt:au.smileAmt,mouthOpenH:au.mouthOpenH});
-  const pct=Math.round(CAL.frames.length/CAL.N*100);
-  const el=$('calStatus'),pb=$('calProgress');
-  if(el)el.textContent=`기준선 캘리브레이션 중… (${CAL.frames.length}/${CAL.N})`;
-  if(pb)pb.style.width=pct+'%';
-  if(CAL.frames.length>=CAL.N){
-    const avg=k=>CAL.frames.reduce((s,f)=>s+f[k],0)/CAL.N;
-    CAL.baseline={browInDist:avg('browInDist'),browRaise:avg('browRaise'),eyeOpen:avg('eyeOpen'),smileAmt:avg('smileAmt'),mouthOpenH:avg('mouthOpenH')};
-    CAL.done=true;if(pb)pb.style.width='100%';
-    if(el){el.textContent='✓ 완료';el.style.color='var(--clt)';}
-    setTimeout(()=>{if(calBar)calBar.style.display='none';},2000);
-    toast('✓ 기준선 설정 완료');
-  }
-}
-function computeEmo(lm){
-  if(!lm||lm.length<468)return null;
-  const au=extractAU(lm);if(!au)return null;
-  if(!CAL.done){collectCalibration(au);return{joy:0,sorrow:0,anger:0,surprise:0,confidence:computeConf(lm),tag:'😐 Calibrating…',au:{}};}
-  const B=CAL.baseline;
-  const amp=(delta,k=8.0)=>Math.min(100,(1-Math.exp(-k*Math.max(0,delta)))*100);
-  const browFurrowRatio=Math.max(0,(B.browInDist-au.browInDist)/Math.max(B.browInDist,.001));
-  const browRaiseDelta=au.browRaise-B.browRaise;
-  const dBrowFurrow=browFurrowRatio;
-  const dBrowRaise=Math.max(0,browRaiseDelta)/Math.max(B.eyeOpen*.5,.008);
-  const dBrowDown=Math.max(0,-browRaiseDelta)/Math.max(B.eyeOpen*.5,.008);
-  const eyeOpenDelta=au.eyeOpen-B.eyeOpen;
-  const dEyeOpen=Math.max(0,eyeOpenDelta)/Math.max(B.eyeOpen*.3,.005);
-  const dEyeClose=Math.max(0,-eyeOpenDelta)/Math.max(B.eyeOpen*.3,.005);
-  const smileDelta=au.smileAmt-B.smileAmt;
-  const dSmile=Math.max(0,smileDelta)/Math.max(Math.abs(B.smileAmt)+.003,.003)+Math.max(0,au.smileAmt*.3);
-  const dFrown=Math.max(0,-smileDelta)/Math.max(Math.abs(B.smileAmt)+.003,.003);
-  const mouthDelta=au.mouthOpenH-B.mouthOpenH;
-  const dMouthOpen=Math.max(0,mouthDelta)/Math.max(B.eyeOpen*.4,.006);
-  const joy    =Math.min(100,Math.max(0,Math.round(amp(dSmile*.75+dEyeClose*.12+dBrowRaise*.08-dBrowFurrow*.15,6.0))));
-  const anger  =Math.min(100,Math.max(0,Math.round(amp(dBrowFurrow*.55+dBrowDown*.28+dFrown*.17-dSmile*.25,9.0))));
-  const sorrow =Math.min(100,Math.max(0,Math.round(amp(dFrown*.60+dBrowDown*.18+dEyeClose*.15-dBrowFurrow*.15-dSmile*.40,7.0))));
-  const surprise=Math.min(100,Math.max(0,Math.round(amp(dBrowRaise*.42+dEyeOpen*.38+dMouthOpen*.20-dBrowFurrow*.20,7.0))));
-  const confidence=computeConf(lm);
-  const scores={joy,sorrow,anger,surprise};
-  const top=Object.entries(scores).sort((a,b)=>b[1]-a[1])[0];
-  const labels={joy:'😊 기쁨',sorrow:'😔 슬픔',anger:'😤 화남',surprise:'😮 놀람'};
-  const tag=top[1]<8?'😐 중립':`${labels[top[0]]} (${top[1]})`;
-  const auDisp={smileAmt:Math.round(Math.max(0,dSmile)*100),browFurrow:Math.round(Math.max(0,dBrowFurrow)*100),browRaise:Math.round(Math.max(0,dBrowRaise)*100),browDepress:Math.round(Math.max(0,dBrowDown)*100),eyeOpen:Math.round(Math.max(0,dEyeOpen)*100),mouthOpen:Math.round(Math.max(0,dMouthOpen)*100),mouthWidth:Math.round(au.mouthW*100)};
-  return{joy,sorrow,anger,surprise,confidence,tag,au:auDisp};
-}
-function computeConf(lm){const fH=Math.hypot(lm[10].x-lm[152].x,lm[10].y-lm[152].y);return Math.min(99,Math.round(Math.min(fH*600,1)*100));}
-function updateFaceUI(f){
-  const joy=Math.round(f.joy||0),sor=Math.round(f.sorrow||0),ang=Math.round(f.anger||0),sur=Math.round(f.surprise||0),conf=Math.round(f.confidence||0);
-  drawFaceRadar(joy,sor,ang,sur,conf);
-  const getLv=v=>v>=60?{t:'강함',c:'lv-high'}:v>=30?{t:'보통',c:'lv-mid'}:v>=12?{t:'약함',c:'lv-low'}:{t:'중립',c:''};
-  const confLv=conf>=75?{t:'우수',c:'lv-low'}:conf>=50?{t:'양호',c:'lv-low'}:conf>=25?{t:'보통',c:'lv-mid'}:{t:'불안정',c:'lv-high'};
-  const emoDesc={joy:joy>=60?'입꼬리 뚜렷한 상승':joy>=30?'미소 신호 감지':joy>=12?'약한 긍정 반응':'중립',sor:sor>=60?'입꼬리 처짐·눈 무거움':sor>=30?'약간 무거운 표정':'중립',ang:ang>=60?'미간 수축 감지':ang>=30?'미간 긴장 중':ang>=12?'약한 긴장':'중립',sur:sur>=60?'눈썹 상승·눈 크게':sur>=30?'놀람 신호 중':'중립',conf:conf>=75?'선명히 감지':conf>=50?'대부분 감지':conf>=25?'일부 감지':'감지 불안정'};
-  [{bar:'fJoyB',val:'fJoyV',lv:'emoLvJoy',desc:'emoDescJoy',row:'emoRowJoy',v:joy,lvo:getLv(joy),dk:'joy'},{bar:'fSorB',val:'fSorV',lv:'emoLvSor',desc:'emoDescSor',row:'emoRowSor',v:sor,lvo:getLv(sor),dk:'sor'},{bar:'fAngB',val:'fAngV',lv:'emoLvAng',desc:'emoDescAng',row:'emoRowAng',v:ang,lvo:getLv(ang),dk:'ang'},{bar:'fSurB',val:'fSurV',lv:'emoLvSur',desc:'emoDescSur',row:'emoRowSur',v:sur,lvo:getLv(sur),dk:'sur'},{bar:'confB',val:'confVDisp',lv:'emoLvConf',desc:'emoDescConf',row:'emoRowConf',v:conf,lvo:confLv,dk:'conf'}]
-  .forEach(({bar,val,lv,desc,row,v,lvo,dk})=>{const bEl=$(bar),vEl=$(val),lvEl=$(lv),dEl=$(desc),rEl=$(row);if(bEl)bEl.style.width=v+'%';if(vEl)vEl.textContent=v;if(lvEl){lvEl.textContent=lvo.t;lvEl.className='emo-full-level'+(lvo.c?' '+lvo.c:'');}if(dEl)dEl.textContent=emoDesc[dk]||'';if(rEl)rEl.classList.toggle('active',v>=30);});
-  const cEl=$('confV');if(cEl)cEl.textContent=conf+'%';
-  const lmVal=(lastLM?lastLM.length:0)+'/468';
-  const stVal=S.face.frozen?'고정됨 ✓':conf>10?'추적 중':'대기';
-  const qVal=conf>=75?'우수':conf>=50?'양호':conf>=25?'보통':'불안정';
-  ['lmCount','lmCount2'].forEach(id=>{const e=$(id);if(e)e.textContent=lmVal;});
-  ['fStatus','fStatus2'].forEach(id=>{const e=$(id);if(e)e.textContent=stVal;});
-  ['fQuality','fQuality2'].forEach(id=>{const e=$(id);if(e)e.textContent=qVal;});
-  const maxV=Math.max(joy,sor,ang,sur);
-  const tMap={joy:'😊 기쁨',sor:'😔 슬픔',ang:'😤 화남',sur:'😮 놀람'};
-  const tKey=maxV===joy?'joy':maxV===sor?'sor':maxV===ang?'ang':'sur';
-  const tagTxt=maxV>12?`${tMap[tKey]} (${maxV})`:'😐 중립';
-  ['fTag','fTag2'].forEach(id=>{const e=$(id);if(e)e.textContent=tagTxt;});
-  const badge=$('faceBadge');
-  if(badge){badge.textContent=S.face.frozen?'● 고정됨':conf>10?'● 실시간':'대기중';badge.className='face-badge'+(S.face.frozen?' frozen':conf>10?' live':'');}
-  const au=f.au||{};
-  if(au.smileAmt!==undefined){
-    const cl=v=>Math.min(100,Math.max(0,Math.round(v)));
-    [['mSmile','mSmileV',cl((au.smileAmt||0)*4)],['mEye','mEyeV',cl(au.eyeOpen||0)],['mBrowR','mBrowRV',cl(au.browRaise||0)],['mBrowF','mBrowFV',cl(au.browFurrow||0)],['mMouth','mMouthV',cl(au.mouthOpen||0)],['mMouthW','mMouthWV',cl(au.mouthWidth||0)]]
-    .forEach(([b,v,val])=>{const be=$(b),ve=$(v);if(be)be.style.width=val+'%';if(ve)ve.textContent=val;});
-  }
-}
-function drawFaceRadar(joy,sor,ang,sur,conf){
-  const canvas=$('faceRadar');if(!canvas)return;
-  const ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,r=W/2-10;
-  ctx.clearRect(0,0,W,H);const vals=[joy,sor,ang,sur,conf].map(v=>v/100),N=5,angles=Array.from({length:N},(_,i)=>(i*2*Math.PI/N)-Math.PI/2);
-  [.25,.5,.75,1].forEach(s=>{ctx.beginPath();angles.forEach((a,i)=>{const x=cx+Math.cos(a)*r*s,y=cy+Math.sin(a)*r*s;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});ctx.closePath();ctx.strokeStyle=`rgba(82,122,108,${s===1?.22:.09})`;ctx.lineWidth=s===1?1:.7;ctx.stroke();});
-  angles.forEach(a=>{ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);ctx.strokeStyle='rgba(82,122,108,.12)';ctx.lineWidth=.8;ctx.stroke();});
-  ctx.beginPath();angles.forEach((a,i)=>{const x=cx+Math.cos(a)*r*vals[i],y=cy+Math.sin(a)*r*vals[i];i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});ctx.closePath();ctx.fillStyle='rgba(82,122,108,.20)';ctx.fill();ctx.strokeStyle='rgba(82,122,108,.75)';ctx.lineWidth=1.5;ctx.stroke();
-}
-function onMesh(results){
-  const canvas=$('meshCanvas'),video=$('faceVideo');if(!canvas||!video)return;
-  if(S.face.frozen)return;
-  if(results.multiFaceLandmarks?.length){
-    lastLM=results.multiFaceLandmarks[0];
-    drawMesh(canvas,video,lastLM);
-    const emo=computeEmo(lastLM);
-    if(emo){
-      if(!CAL.done){S.face.joy=0;S.face.sorrow=0;S.face.anger=0;S.face.surprise=0;S.face.confidence=emo.confidence;S.face.tag=emo.tag;S.face.au=emo.au;}
-      else{const sm=(o,n)=>Math.round(o*.18+n*.82);S.face.joy=sm(S.face.joy,emo.joy);S.face.sorrow=sm(S.face.sorrow,emo.sorrow);S.face.anger=sm(S.face.anger,emo.anger);S.face.surprise=sm(S.face.surprise,emo.surprise);S.face.confidence=emo.confidence;S.face.tag=emo.tag;S.face.au=emo.au;}
-      updateFaceUI(S.face);
-      $('chipMesh').textContent=CAL.done?'MESH·LIVE':'MESH·CAL';$('chipMesh').className='cam-chip live';
-      $('chipFace').textContent=CAL.done?'Tracking':'Calibrating';
-    }
-  }else{$('meshCanvas')?.getContext('2d')?.clearRect(0,0,9999,9999);$('chipFace').textContent='Not detected';}
-}
-async function startCam(){
-  const secure=location.protocol==='https:'||location.hostname==='localhost'||location.protocol==='file:';
-  if(!secure){toast('카메라는 HTTPS에서만 동작합니다');return;}
-  try{
-    mediaStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:640},height:{ideal:480}},audio:false});
-    const v=$('faceVideo');v.srcObject=mediaStream;v.classList.add('on');$('facePreview').classList.remove('on');$('camPh').style.display='none';$('chipMode').textContent='Camera';
-    await initMesh();
-    if(faceMeshInst&&typeof Camera!=='undefined'){mpCamera=new Camera(v,{onFrame:async()=>{await faceMeshInst.send({image:v});},width:640,height:480});mpCamera.start();}
-    else if(faceMeshInst){const loop=async()=>{if(!mediaStream)return;try{await faceMeshInst.send({image:v});}catch(e){}liveLoop=requestAnimationFrame(loop);};loop();}
-    else toast('FaceMesh 로드 중 — Demo를 사용하세요');
-  }catch(e){toast('카메라 접근 불가 — Demo를 사용하세요');}
-}
-function stopCam(){if(mpCamera){try{mpCamera.stop();}catch(e){}mpCamera=null;}if(liveLoop){cancelAnimationFrame(liveLoop);liveLoop=null;}if(mediaStream){mediaStream.getTracks().forEach(t=>t.stop());mediaStream=null;}$('meshCanvas')?.getContext('2d')?.clearRect(0,0,9999,9999);$('chipMesh').textContent='MESH·OFF';$('chipMesh').className='cam-chip';}
-function captureFace(){const v=$('faceVideo');if(!v.srcObject){toast('카메라를 먼저 시작하세요');return;}const c=document.createElement('canvas');c.width=v.videoWidth||640;c.height=v.videoHeight||480;const ctx=c.getContext('2d');ctx.save();ctx.scale(-1,1);ctx.drawImage(v,-c.width,0,c.width,c.height);ctx.restore();const shot=c.toDataURL('image/jpeg',.92);const frozenEmo=computeEmo(lastLM);S.face=Object.assign({},frozenEmo||S.face,{image:shot,frozen:true});stopCam();$('facePreview').src=shot;$('facePreview').classList.add('on');$('faceVideo').classList.remove('on');$('camPh').style.display='none';updateFaceUI(S.face);$('chipMode').textContent='Captured';$('chipMesh').textContent='FROZEN';$('chipFace').textContent='Fixed ✓';toast('촬영 완료');}
-function setDemo(){
-  stopCam();
-  const demoSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6c63ff"/><stop offset="1" stop-color="#f472b6"/></linearGradient></defs><rect width="640" height="480" fill="url(#g)"/><circle cx="320" cy="180" r="84" fill="rgba(255,255,255,.18)"/><rect x="210" y="290" width="220" height="90" rx="45" fill="rgba(255,255,255,.14)"/><text x="320" y="430" text-anchor="middle" font-family="Arial,sans-serif" font-size="28" fill="white">MEDISCENT DEMO FACE</text></svg>`;
-  const demoImage = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(demoSvg);
-  S.face={joy:22,sorrow:60,anger:46,surprise:29,confidence:85,tag:'Sorrow · 무거움',image:demoImage,frozen:true,demo:true,au:{smileAmt:0,browFurrow:62,browRaise:8,browDepress:45,eyeOpen:28,mouthOpen:12,mouthWidth:45}};
-  lastLM=null;
-  const preview=$('facePreview');
-  if(preview){preview.src=demoImage;preview.classList.add('on');}
-  $('camPh').style.display='none';
-  $('faceVideo').classList.remove('on');
-  updateFaceUI(S.face);
-  $('chipMode').textContent='Demo';
-  $('chipMesh').textContent='FROZEN';
-  $('chipFace').textContent='Demo ✓';
-  const badge=$('faceBadge'); if(badge){badge.textContent='DEMO'; badge.className='face-badge frozen';}
-  toast('Demo 데이터 적용');
-}
-
 function safeEnterAnalysis(){
   try{
-    if(typeof computeFinalMediscent==='function') computeFinalMediscent();
+    if(typeof window.computeFinal==='function') window.computeFinal();
+    else if(typeof window.computeFinalMediscent==='function') window.computeFinalMediscent();
     else if(typeof computeFinal==='function') computeFinal();
   }catch(err){
     console.error('compute before analysis failed', err);
+    toast('추천 계산 중 오류가 발생했습니다. 입력값을 다시 확인해 주세요.');
   }
   try{
     if(typeof saveMediscentHistory==='function') saveMediscentHistory();
@@ -1509,129 +1436,55 @@ function safeEnterAnalysis(){
     try{ goPage('report'); }catch(err2){ console.error('report fallback failed', err2); }
   }
 }
-async function confirmFace(){
-  if(confirmFace._busy) return;
-  confirmFace._busy = true;
-  try{
-    if(!S.face || !S.face.frozen){
-      if($('faceVideo').srcObject) captureFace();
-      else if(lastLM){
-        const emo=computeEmo(lastLM);
-        if(emo) S.face=Object.assign({},emo,{image:'',frozen:true});
-        else { toast('얼굴을 인식하지 못했습니다'); return; }
-        stopCam();
-      } else {
-        toast('촬영 또는 Demo를 먼저 실행하세요');
-        return;
-      }
-    }
-    updateFaceUI(S.face);
-    safeEnterAnalysis();
-  }catch(err){
-    console.error('confirmFace error', err);
-    toast('분석 단계 오류를 우회합니다');
-    try{ safeEnterAnalysis(); }catch(err2){ console.error('confirmFace fallback error', err2); toast('다음 단계 이동 오류가 발생했습니다'); }
-  }finally{
-    setTimeout(()=>{ confirmFace._busy = false; }, 300);
-  }
-}
-
 /* ══════════════════════════════════════════════════════
    MATCHING ENGINE v6 + BIO-SIGNAL INTEGRATION
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Bio 데이터가 있으면: Bio 60% + Survey 40% 블렌딩
    없으면: Survey 100%
    
-   블렌딩 후 Face 감정으로 추가 보정
+   설문과 선택형 Bio-Signal을 신뢰도 기반으로 통합
    → 6D EQ Vector → 코사인 유사도 매칭
 ══════════════════════════════════════════════════════ */
 function computeFinal(){
   updateScores();
 
-  /* ── Bio-Signal 블렌딩 (NNFX2 XLS 업로드된 경우) ── */
   if(S.bio && S.bio.valid){
-    const BW=0.60, SW=0.40;  /* Bio 60% + Survey 40% */
+    const BW=0.60, SW=0.40;
     const sc=S.scores;
     S.scores={
-      stress:   Math.round(sc.stress  *SW + S.bio.stress  *BW),
-      balance:  Math.round(sc.balance *SW + S.bio.balance *BW),
-      energy:   Math.round(sc.energy  *SW + S.bio.energy  *BW),
-      focus:    Math.round(sc.focus   *SW + S.bio.focus   *BW),
-      mood:     Math.round(sc.mood    *SW + S.bio.mood    *BW),
-      recovery: Math.round(sc.recovery*SW + S.bio.recovery*BW)
+      stress:Math.round(sc.stress*SW+S.bio.stress*BW),
+      balance:Math.round(sc.balance*SW+S.bio.balance*BW),
+      energy:Math.round(sc.energy*SW+S.bio.energy*BW),
+      focus:Math.round(sc.focus*SW+S.bio.focus*BW),
+      mood:Math.round(sc.mood*SW+S.bio.mood*BW),
+      recovery:Math.round(sc.recovery*SW+S.bio.recovery*BW)
     };
-    /* 범위 클램프 */
-    for(const k in S.scores) S.scores[k]=Math.min(100,Math.max(0,S.scores[k]));
+    Object.keys(S.scores).forEach(k=>S.scores[k]=Math.min(100,Math.max(0,S.scores[k])));
   }
 
-  const{stress,balance,energy,focus,mood,recovery}=S.scores;
-  const f=S.face;
-
-  /* ── Face 감정 보정 ── */
-  const conf=f.confidence||0;
-  const faceWeight=conf>60?0.35:conf>30?0.20:0.08;
-  const faceContrib={
-    stress:  (f.sorrow||0)*.40+(f.anger||0)*.45+(f.surprise||0)*.15,
-    balance: (f.joy||0)*.65+(100-(f.anger||0))*.20+(100-(f.sorrow||0))*.15,
-    energy:  (f.surprise||0)*.35+(f.joy||0)*.40+(100-(f.sorrow||0))*.25,
-    focus:   (f.joy||0)*.45+(100-(f.sorrow||0))*.35+(100-(f.anger||0))*.20,
-    mood:    (f.joy||0)*.65+(100-(f.sorrow||0))*.35,
-    recovery:(100-(f.sorrow||0))*.50+(100-(f.anger||0))*.30+(f.joy||0)*.20
-  };
-  const blend=(sv,fv)=>Math.min(100,Math.max(0,Math.round(sv*(1-faceWeight)+fv*faceWeight)));
-  S.scores={
-    stress:   blend(stress,   faceContrib.stress),
-    balance:  blend(balance,  faceContrib.balance),
-    energy:   blend(energy,   faceContrib.energy),
-    focus:    blend(focus,    faceContrib.focus),
-    mood:     blend(mood,     faceContrib.mood),
-    recovery: blend(recovery, faceContrib.recovery)
-  };
-
-  /* ── EQ 추정 ── */
-  const adj=S.scores;
+  const a=S.scores;
   const userEQ={
-    valence:    Math.round(adj.mood*.50+adj.balance*.30+(100-adj.stress)*.20),
-    arousal:    Math.round(adj.energy*.45+adj.focus*.30+(100-adj.recovery)*.25),
-    stress:     adj.stress,
-    engagement: Math.round(adj.focus*.55+adj.energy*.30+adj.balance*.15),
-    relaxation: Math.round((100-adj.stress)*.40+adj.recovery*.35+adj.balance*.25),
-    interest:   Math.round(adj.focus*.40+adj.mood*.30+adj.energy*.30)
+    valence:Math.round(a.mood*.50+a.balance*.30+(100-a.stress)*.20),
+    arousal:Math.round(a.energy*.45+a.focus*.30+(100-a.recovery)*.25),
+    stress:a.stress,
+    engagement:Math.round(a.focus*.55+a.energy*.30+a.balance*.15),
+    relaxation:Math.round((100-a.stress)*.40+a.recovery*.35+a.balance*.25),
+    interest:Math.round(a.focus*.40+a.mood*.30+a.energy*.30)
   };
-
-  const intent=S.intention||S.survey.intention||'neutral';
-  let targetEQ={...userEQ};
-  if(intent==='change'){
-    targetEQ.valence   =Math.min(100,userEQ.valence<50?userEQ.valence+35:userEQ.valence+10);
-    targetEQ.arousal   =Math.min(100,userEQ.arousal<40?userEQ.arousal+30:userEQ.arousal);
-    targetEQ.relaxation=Math.min(100,userEQ.relaxation<40?userEQ.relaxation+30:userEQ.relaxation);
-    targetEQ.stress    =Math.max(0,  userEQ.stress>60?userEQ.stress-20:userEQ.stress);
-  }
-
-  const EQ_KEYS=['valence','arousal','stress','engagement','relaxation','interest'];
-  const EQ_W={valence:2.0,arousal:1.6,stress:1.8,engagement:1.4,relaxation:1.5,interest:1.2};
-  function cosineSim(a,b){let dot=0,mA=0,mB=0;EQ_KEYS.forEach(k=>{const w=EQ_W[k];dot+=a[k]*b[k]*w;mA+=a[k]*a[k]*w;mB+=b[k]*b[k]*w;});return mA>0&&mB>0?dot/Math.sqrt(mA*mB):0;}
-
-  const userFace={joy:f.joy||0,sorrow:f.sorrow||0,anger:f.anger||0,surprise:f.surprise||0};
-  const scored=SCENTS.map(sc=>{
-    const eqSim=cosineSim(sc.eq,targetEQ)*100;
-    const fw=sc.faceW,fTotal=fw.joy+fw.sorrow+fw.anger+fw.surprise||1;
-    const faceSim=((userFace.joy/100)*fw.joy+(userFace.sorrow/100)*fw.sorrow+(userFace.anger/100)*fw.anger+(userFace.surprise/100)*fw.surprise)/fTotal*100;
-    let bonus=0;
-    if(intent==='change'){if(userEQ.valence<45&&sc.eq.valence>75)bonus+=20;if(userEQ.relaxation<35&&sc.eq.relaxation>65)bonus+=15;if(userEQ.stress>65&&sc.eq.stress<35)bonus+=18;}
-    else if(intent==='keep'){if(userEQ.valence>65&&sc.eq.valence>65)bonus+=15;if(userEQ.relaxation>55&&sc.eq.relaxation>55)bonus+=10;}
-    const iw=sc.intentW[intent]||1.0;
-    const final=Math.min(98,Math.round((eqSim*.55+faceSim*.25+bonus*.20)*iw));
-    return{sc,final,eqSim,faceSim,bonus};
-  });
-  scored.sort((a,b)=>b.final-a.final);
-  S.primary=scored[0].sc;S.alts=scored.slice(1,3).map(x=>x.sc);S.matchScore=scored[0].final;S._userEQ=userEQ;
-  const t=scored[0];
-  const rParts=[`EQ 유사도 ${Math.round(t.eqSim)}%`];
-  if(t.faceSim>50)rParts.push(`표정 친화도 ${Math.round(t.faceSim)}%`);
-  if(S.bio)rParts.push('Bio-Signal 반영');
-  S.matchReason=rParts.join(' · ');
-  S.copy=makeCopy(adj.stress,adj.balance,adj.energy,adj.focus,adj.mood,adj.recovery,S.primary.code,userEQ,S.primary.eq);
+  const keys=['valence','arousal','stress','engagement','relaxation','interest'];
+  const weights={valence:2,arousal:1.6,stress:1.8,engagement:1.4,relaxation:1.5,interest:1.2};
+  const cosine=(x,y)=>{
+    let dot=0,mx=0,my=0;
+    keys.forEach(k=>{const w=weights[k];dot+=x[k]*y[k]*w;mx+=x[k]*x[k]*w;my+=y[k]*y[k]*w;});
+    return mx&&my?dot/Math.sqrt(mx*my):0;
+  };
+  const scored=SCENTS.map(sc=>({sc,final:Math.min(98,Math.round(cosine(userEQ,sc.eq)*100))})).sort((x,y)=>y.final-x.final);
+  S.primary=scored[0].sc;
+  S.alts=scored.slice(1,3).map(x=>x.sc);
+  S.matchScore=scored[0].final;
+  S._userEQ=userEQ;
+  S.matchReason=`상태 벡터 적합도 ${S.matchScore}%${S.bio?' · Bio-Signal 반영':''}`;
+  S.copy=makeCopy(a.stress,a.balance,a.energy,a.focus,a.mood,a.recovery,S.primary.code,userEQ,S.primary.eq);
 }
 
 function makeCopy(stress,balance,energy,focus,mood,recovery,code,userEQ,productEQ){
@@ -1662,11 +1515,11 @@ function runAnalysis(){
   if(S.waveRAF)cancelAnimationFrame(S.waveRAF);
   const steps=[['01','Survey Normalize','7문항 → 6축 정규화']];
   if(S.bio)steps.push(['02','Bio-Signal Blend',`NNFX2 EEG·HRV → 6축 (Bio 60% + Survey 40%)`]);
-  steps.push(['0'+(steps.length+1),'Face Parse','FaceMesh → 6축 통합'],['0'+(steps.length+2),'Vector Match','코사인 유사도 매칭']);
+  steps.push(['0'+(steps.length+1),'Dynamic Weight','Survey·Bio 신뢰도 통합'],['0'+(steps.length+2),'Vector Match','코사인 유사도 매칭']);
   $('aSteps').innerHTML=steps.map(x=>`<div class="a-step" id="as${x[0]}"><div class="a-step-n">${x[0]}</div><div><span class="a-step-b">${x[1]}</span><span class="a-step-s">${x[2]}</span></div></div>`).join('');
   let frame=0;const wEl=$('aWave');
   const wLoop=()=>{frame+=2;if(wEl){const ctx=wEl.getContext('2d'),W=wEl.width=wEl.offsetWidth||340,H=wEl.height=56;ctx.clearRect(0,0,W,H);ctx.strokeStyle='rgba(82,122,108,.65)';ctx.lineWidth=1.4;ctx.beginPath();for(let x=0;x<W;x++){const t=(x/W)*Math.PI*6,amp=7+(S.scores.stress||50)*.07,y=H/2+Math.sin(t+frame*.04)*amp+Math.sin(t*.5+frame*.06)*3;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();}S.waveRAF=requestAnimationFrame(wLoop);};wLoop();
-  const stages=[{t:500,p:20,status:'설문 데이터 정규화 중…',text:'7문항 응답에서 6축 벡터를 추출했습니다.'},{t:1200,p:S.bio?45:52,status:S.bio?'Bio-Signal 블렌딩 중…':'얼굴 감정 파싱 중…',text:S.bio?`EEG·HRV → 6축 블렌딩 (Bio 60% + Survey 40%) S${S.scores.stress}·B${S.scores.balance}·F${S.scores.focus}`:`FaceMesh 5감정 → 6축 통합`},{t:2200,p:75,status:'6D 벡터 매칭 중…',text:`S${S.scores.stress}·B${S.scores.balance}·E${S.scores.energy}·F${S.scores.focus}·M${S.scores.mood}·R${S.scores.recovery} — 매칭`},{t:3200,p:100,status:'추천 완료',text:S.copy}];
+  const stages=[{t:500,p:20,status:'설문 데이터 정규화 중…',text:'상태 설문과 향 취향을 공통 벡터로 변환했습니다.'},{t:1200,p:S.bio?45:52,status:S.bio?'Bio-Signal 블렌딩 중…':'설문 신뢰도 평가 중…',text:S.bio?`EEG·HRV → 6축 블렌딩 (Bio 60% + Survey 40%) S${S.scores.stress}·B${S.scores.balance}·F${S.scores.focus}`:`향 취향과 상태 설문만으로 분석합니다.`},{t:2200,p:75,status:'6D 벡터 매칭 중…',text:`S${S.scores.stress}·B${S.scores.balance}·E${S.scores.energy}·F${S.scores.focus}·M${S.scores.mood}·R${S.scores.recovery} — 매칭`},{t:3200,p:100,status:'추천 완료',text:S.copy}];
   stages.forEach((st,idx)=>{const tid=setTimeout(()=>{try{$('aFill').style.width=st.p+'%';$('aStatus').textContent=st.status;$('aTxt').textContent=st.text;const arc=$('ringArc');if(arc)arc.style.strokeDasharray=`${(st.p/100)*CIRC} ${CIRC}`;const pt=$('ringPct');if(pt)pt.textContent=st.p+'%';const step=$('as'+String(idx+1).padStart(2,'0'));if(step)step.classList.add('done');if(st.p===100)setTimeout(()=>{if(S.waveRAF)cancelAnimationFrame(S.waveRAF);goPage('report');},700);}catch(err){console.error('analysis stage error', err);if(S.waveRAF)cancelAnimationFrame(S.waveRAF);try{goPage('report');}catch(_){}}},st.t);S.timers.push(tid);});
 }
 
@@ -1675,7 +1528,6 @@ const EQ_META={valence:{l:'Valence',c:'#4a8a6a',d:'긍정 정서'},arousal:{l:'A
 function renderReport(){
   if(!S.primary)computeFinal();
   const p=S.primary;
-  const f=S.face||{};
   $('rCode').textContent=p.code;
   $('rNotes').textContent=`${p.notes} · ${p.use}`;
   $('rTags').innerHTML=p.keywords.map(k=>`<div class="s-tag">${k}</div>`).join('');
@@ -1698,7 +1550,7 @@ function renderReport(){
     ['Stress',S.scores.stress,bioSrc,'긴장·과부하'],['Balance',S.scores.balance,bioSrc,'안정·회복력'],['Energy',S.scores.energy,bioSrc,'집중·활력'],['Focus',S.scores.focus,bioSrc,'인지·선명도'],['Mood',S.scores.mood,bioSrc,'정서·쾌감가'],['Recovery',S.scores.recovery,bioSrc,'회복·탄력성'],
     ...(S.bio?[['Bio RMSSD',S.bio.raw.rmssd+'ms','NNFX2','부교감 회복력'],['Bio LF/HF',S.bio.raw.lf_hf,'NNFX2','자율신경 균형'],['Bio HR',S.bio.raw.hr+'bpm','NNFX2','심박수'],['Bio Theta',S.bio.raw.theta+'/10','NNFX2','감정·스트레스'],['Bio Alpha',S.bio.raw.alpha+'/10','NNFX2','이완·집중'],['Bio Conc.',S.bio.raw.conc+'/10','NNFX2','집중도']]:
     [['EQ Valence',Math.round(uEQ.valence||0),'추정','긍정 정서'],['EQ Arousal',Math.round(uEQ.arousal||0),'추정','각성 에너지']]),
-    ['Face Conf.',Math.round(S.face.confidence||0)+'%','FaceMesh','메쉬 신뢰도'],['Match',S.matchScore+'%','Engine','EQ 코사인 매칭']
+    ['Privacy','NO CAMERA','MEDISCENT','얼굴·이미지 미수집'],['Match',S.matchScore+'%','Engine','EQ 코사인 매칭']
   ].map(r=>`<tr><td class="mono">${r[0]}</td><td class="mono">${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('');
 }
 
@@ -1748,27 +1600,20 @@ function dlShare(){if(typeof html2canvas==='undefined'){toast('html2canvas 미�
 /* ══ RESET ══ */
 function resetAll(){
   S.timers.forEach(clearTimeout);S.timers=[];if(S.waveRAF)cancelAnimationFrame(S.waveRAF);
-  stopCam();sqCur=0;
-  S.survey={};S.intention=null;S.bio=null;
-  S.face={joy:0,sorrow:0,anger:0,surprise:0,confidence:0,tag:'—',image:'',frozen:false};
+  sqCur=0;
+  S.survey={};S.intention=null;S.bio=null;S.preferenceProfile=null;S.standardRecipe=null;S.personalizedRecipe=null;
   S.scores={stress:0,balance:0,energy:0,focus:0,mood:0,recovery:0};
-  S.primary=null;S.alts=[];S.copy='';S.matchScore=0;S.matchReason='';S._userEQ=null;lastLM=null;
-  resetCalibration();
-  const v=$('faceVideo');if(v){v.srcObject=null;v.classList.remove('on');}
-  $('facePreview').classList.remove('on');$('camPh').style.display='';
-  $('chipMode').textContent='Idle';$('chipFace').textContent='Waiting';
+  S.primary=null;S.alts=[];S.copy='';S.matchScore=0;S.matchReason='';S._userEQ=null;
   /* Bio 카드 초기화 */
   $('bioResultCard').style.display='none';$('bioErrorCard').style.display='none';$('bioUploadCard').style.display='';
   const badge=$('bioReportBadge');if(badge)badge.style.display='none';
   /* 리포트 score-pill bio 배지 제거 */
   document.querySelectorAll('.score-pill').forEach(el=>{el.classList.remove('bio-src');const lb=el.querySelector('.bio-src-label');if(lb)lb.remove();});
-  updateFaceUI(S.face);initSurvey();closeShare();goPage('welcome');toast('새 진단 시작');
+  initSurvey();closeShare();goPage('welcome');toast('새 진단 시작');
 }
 
 /* ══ BIND ══ */
 function bind(){
-  on('btnCam','click',startCam);on('btnCap','click',captureFace);on('btnUp','click',()=>$('faceFile').click());on('btnDemo','click',setDemo);on('btnFaceNext','click',confirmFace);
-  $('faceFile').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;const r=new FileReader();r.onload=async ev=>{stopCam();$('facePreview').src=ev.target.result;$('facePreview').classList.add('on');$('faceVideo').classList.remove('on');$('camPh').style.display='none';S.face.image=ev.target.result;$('chipMode').textContent='Upload';$('chipFace').textContent='Analyzing…';toast('분석 중…');await initMesh();if(faceMeshInst){const img=new Image();img.onload=async()=>{try{await faceMeshInst.send({image:img});await new Promise(res=>setTimeout(res,120));S.face=Object.assign({},S.face,{image:ev.target.result,frozen:true});updateFaceUI(S.face);$('chipFace').textContent='Fixed ✓';$('chipMesh').textContent='FROZEN';toast('분석 완료');}catch(err){S.face=Object.assign({},S.face,{image:ev.target.result,frozen:true});$('chipFace').textContent='Uploaded ✓';toast('업로드 완료');}};img.src=ev.target.result;}else{S.face=Object.assign({},S.face,{image:ev.target.result,frozen:true});$('chipFace').textContent='Uploaded ✓';toast('업로드 완료');}};r.readAsDataURL(file);});
   on('btnSkip','click',()=>{S.timers.forEach(clearTimeout);if(S.waveRAF)cancelAnimationFrame(S.waveRAF);goPage('report');});
   on('btnShare','click',openShare);on('btnInsight','click',()=>goPage('insight'));on('btnReset','click',resetAll);
   on('btnHDel','click',()=>{if(confirm('모든 기록을 삭제하시겠습니까?')){localStorage.removeItem('shifti_v5bio');renderHistory();toast('삭제 완료');}});
@@ -1791,7 +1636,6 @@ function initWelcomeRadar(){
 document.addEventListener('DOMContentLoaded',()=>{
   initSurvey();
   initBioHandler();
-  updateFaceUI(S.face);
   bind();
   setTimeout(()=>animCounters(),350);
   setTimeout(()=>initWelcomeRadar(),550);
@@ -1814,10 +1658,133 @@ document.addEventListener('DOMContentLoaded',()=>{
   const clamp = (v, min=0, max=100) => Math.max(min, Math.min(max, Math.round(v)));
   const safe = v => Number.isFinite(Number(v)) ? Number(v) : 0;
 
+  // Stable access to the page-level state declared earlier in this document.
+  const getS = () => {
+    try {
+      if (typeof S !== 'undefined' && S) return S;
+    } catch (_) {}
+    return window.S || null;
+  };
+
+  // Bridge the new recommendation engine to the original product/report UI data.
+  const DISPLAY_BY_CODE = Object.fromEntries(
+    ((typeof SCENTS !== 'undefined' && Array.isArray(SCENTS)) ? SCENTS : [])
+      .map(item => [item.code, item])
+  );
+
+  const LINKS_MAP = {
+    'Foggy Study':'#',
+    'AnnE':'#',
+    'Who am I':'#',
+    'Red Tara':'#',
+    'The Great':'#',
+    '말괄량이':'#'
+  };
+
+  const EQ_META_SAFE = {
+    valence:{l:'Valence',c:'#4a8a6a'},
+    arousal:{l:'Arousal',c:'#4a5570'},
+    stressLoad:{l:'Stress Load',c:'#a85560'},
+    stress:{l:'Stress',c:'#a85560'},
+    focus:{l:'Focus',c:'#4f7872'},
+    engagement:{l:'Engagement',c:'#8a6f3c'},
+    relaxation:{l:'Relaxation',c:'#527a6c'},
+    curiosity:{l:'Curiosity',c:'#6a5a8a'},
+    interest:{l:'Interest',c:'#6a5a8a'}
+  };
+
   /* ------------------------------------------------------------------
      1) Canonical state model for MEDISCENT
      ------------------------------------------------------------------ */
   const CANON_KEYS = ['valence','arousal','stressLoad','focus','relaxation','curiosity'];
+
+  const FAMILY_LABELS={citrus:'시트러스',green:'그린·티',floral:'플로럴',woody:'우디',musk:'머스크·클린',powdery:'파우더리',amber_spice:'앰버·스파이스',fruity:'프루티'};
+  const FAMILY_KEYS=Object.keys(FAMILY_LABELS);
+  const FAMILY_NOTES={
+    citrus:{top:'Bergamot / Yuzu',middle:'Neroli',base:'Citrus Musk'},
+    green:{top:'Green Tea / Fig Leaf',middle:'Tea Leaves',base:'Vetiver'},
+    floral:{top:'Neroli',middle:'Peony / White Floral',base:'Iris'},
+    woody:{top:'Cypress',middle:'Cedar',base:'Sandalwood'},
+    musk:{top:'Aldehydic Air',middle:'Cotton',base:'White Musk'},
+    powdery:{top:'Soft Aldehyde',middle:'Iris',base:'Powdery Musk'},
+    amber_spice:{top:'Pink Pepper',middle:'Soft Spice',base:'Amber / Benzoin'},
+    fruity:{top:'Pear / Yuzu',middle:'Fig',base:'Soft Musk'}
+  };
+  const FAMILY_AFFINITY={
+    citrus:{top:.78,middle:.18,base:.04},green:{top:.45,middle:.40,base:.15},floral:{top:.15,middle:.70,base:.15},
+    woody:{top:.08,middle:.34,base:.58},musk:{top:.03,middle:.18,base:.79},powdery:{top:.04,middle:.44,base:.52},
+    amber_spice:{top:.08,middle:.34,base:.58},fruity:{top:.55,middle:.40,base:.05}
+  };
+  const CHARACTER_CONFIG={
+    fresh_clean:{label:'맑고 깨끗한',layers:{top:38,middle:38,base:24},boost:{citrus:18,green:12,musk:5}},
+    soft_comfort:{label:'부드럽고 편안한',layers:{top:18,middle:38,base:44},boost:{musk:18,powdery:14,woody:7}},
+    elegant_floral:{label:'섬세하고 우아한',layers:{top:22,middle:52,base:26},boost:{floral:22,musk:8,powdery:6}},
+    deep_woody:{label:'깊고 차분한',layers:{top:14,middle:34,base:52},boost:{woody:20,amber_spice:16,musk:7}}
+  };
+  const PRODUCT_SCENT_PROFILES={
+    'AnnE':{floral:42,musk:32,powdery:16,woody:10},
+    'Foggy Study':{green:34,woody:30,musk:20,citrus:16},
+    'Who am I':{woody:34,powdery:26,amber_spice:25,floral:15},
+    'Red Tara':{amber_spice:38,woody:30,floral:12,musk:10,citrus:10},
+    'The Great':{citrus:36,green:30,woody:24,amber_spice:10},
+    '말괄량이':{fruity:34,citrus:30,floral:24,green:12}
+  };
+  function normalizeMap(map){
+    const out={}; let sum=0; FAMILY_KEYS.forEach(k=>{out[k]=Math.max(0,safe(map?.[k]));sum+=out[k];});
+    if(!sum){out.musk=35;out.woody=35;out.citrus=30;sum=100;}
+    FAMILY_KEYS.forEach(k=>out[k]=Math.round(out[k]/sum*100));
+    let diff=100-FAMILY_KEYS.reduce((s,k)=>s+out[k],0); if(diff) out[FAMILY_KEYS.sort((a,b)=>out[b]-out[a])[0]]+=diff;
+    return out;
+  }
+  function buildPreferenceProfile(st){
+    const selected=Array.isArray(st.survey?.scentFamilies)?st.survey.scentFamilies:[];
+    const avoid=(Array.isArray(st.survey?.scentAvoid)?st.survey.scentAvoid:[]).filter(x=>x!=='none');
+    const character=st.survey?.scentCharacter||'fresh_clean';
+    const intensity=st.survey?.scentIntensity||'medium';
+    const base={}; const rankWeights=selected.length===1?[100]:selected.length===2?[58,42]:[46,34,20];
+    selected.forEach((k,i)=>base[k]=(base[k]||0)+(rankWeights[i]||20));
+    const cfg=CHARACTER_CONFIG[character]||CHARACTER_CONFIG.fresh_clean;
+    Object.entries(cfg.boost||{}).forEach(([k,v])=>base[k]=(base[k]||0)+v);
+    avoid.forEach(k=>base[k]=0);
+    const familyWeights=normalizeMap(base);
+    return {selected,avoid,character,intensity,characterLabel:cfg.label,familyWeights};
+  }
+  function recipeNotes(familyWeights,layers){
+    const out={top:[],middle:[],base:[]};
+    ['top','middle','base'].forEach(layer=>{
+      const weighted=FAMILY_KEYS.map(k=>({k,v:(familyWeights[k]||0)*(FAMILY_AFFINITY[k]?.[layer]||0)})).filter(x=>x.v>0).sort((a,b)=>b.v-a.v);
+      const denom=weighted.reduce((s,x)=>s+x.v,0)||1;
+      weighted.slice(0,4).forEach(x=>{
+        const pct=Math.round((x.v/denom)*(layers[layer]||0));
+        if(pct>=2) out[layer].push({family:x.k,note:FAMILY_NOTES[x.k]?.[layer]||FAMILY_LABELS[x.k],pct});
+      });
+      const diff=(layers[layer]||0)-out[layer].reduce((s,x)=>s+x.pct,0); if(out[layer][0])out[layer][0].pct+=diff;
+    });
+    return out;
+  }
+  function buildStandardRecipe(profile){
+    const cfg=CHARACTER_CONFIG[profile.character]||CHARACTER_CONFIG.fresh_clean;
+    const layers={...cfg.layers};
+    return {type:'standard',familyWeights:{...profile.familyWeights},layers,notes:recipeNotes(profile.familyWeights,layers),characterLabel:profile.characterLabel,intensity:profile.intensity};
+  }
+  function buildPersonalizedRecipe(standard,state,ctx){
+    const f={...standard.familyWeights}; const l={...standard.layers}; const reasons=[];
+    if(state.stressLoad>=65){f.woody=(f.woody||0)+8;f.musk=(f.musk||0)+7;l.base+=5;l.top-=5;reasons.push('긴장 완화를 위해 우디·머스크와 베이스를 보강');}
+    if(state.relaxation<45){f.musk=(f.musk||0)+6;f.powdery=(f.powdery||0)+4;reasons.push('회복도가 낮아 포근한 잔향을 보강');}
+    if(state.focus<55 && ctx.useCase==='work'){f.green=(f.green||0)+9;f.woody=(f.woody||0)+4;reasons.push('집중 보조를 위해 그린·우디를 보강');}
+    if(state.valence<50){f.citrus=(f.citrus||0)+8;f.fruity=(f.fruity||0)+5;reasons.push('기분 전환을 위해 시트러스·프루티를 보강');}
+    if(state.arousal<45){f.citrus=(f.citrus||0)+8;f.green=(f.green||0)+5;l.top+=5;l.base-=5;reasons.push('활력 보완을 위해 탑 노트를 보강');}
+    const familyWeights=normalizeMap(f); l.top=clamp(l.top,10,50);l.middle=clamp(l.middle,25,55);l.base=100-l.top-l.middle;if(l.base<15){l.base=15;l.middle=100-l.top-l.base;}
+    return {type:'personalized',familyWeights,layers:l,notes:recipeNotes(familyWeights,l),reasons:reasons.length?reasons:['현재 상태가 스탠다드 레시피와 안정적으로 일치'],characterLabel:standard.characterLabel,intensity:standard.intensity};
+  }
+  function familyCosine(a,b){
+    let dot=0,ma=0,mb=0; FAMILY_KEYS.forEach(k=>{const x=safe(a?.[k]),y=safe(b?.[k]);dot+=x*y;ma+=x*x;mb+=y*y;});
+    return ma&&mb?(dot/Math.sqrt(ma*mb))*100:50;
+  }
+  function avoidPenalty(profile,productCode){
+    const pp=PRODUCT_SCENT_PROFILES[productCode]||{}; return (profile.avoid||[]).reduce((s,k)=>s+(safe(pp[k])*.55),0);
+  }
+
 
   const MEDISCENT_PRODUCTS = [
     {
@@ -1876,6 +1843,18 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
   ];
 
+
+  const PRODUCTS = MEDISCENT_PRODUCTS.map(product => {
+    const display = DISPLAY_BY_CODE[product.code] || {};
+    return {
+      ...display,
+      ...product,
+      code: product.code,
+      narrative: product.narrative,
+      eq: product.eq
+    };
+  });
+
   /* ------------------------------------------------------------------
      2) Modality -> canonical state translators
      ------------------------------------------------------------------ */
@@ -1902,1018 +1881,6 @@ document.addEventListener('DOMContentLoaded',()=>{
     };
   }
 
-  function faceToCanonical(face){
-    if(!face) return null;
-    const joy = safe(face.joy), sorrow = safe(face.sorrow), anger = safe(face.anger), surprise = safe(face.surprise);
-    return {
-      valence: clamp(joy * 0.70 + (100 - sorrow) * 0.30),
-      arousal: clamp(surprise * 0.45 + anger * 0.20 + joy * 0.35),
-      stressLoad: clamp(sorrow * 0.35 + anger * 0.50 + surprise * 0.15),
-      focus: clamp((100 - sorrow) * 0.35 + (100 - anger) * 0.25 + joy * 0.40),
-      relaxation: clamp((100 - anger) * 0.35 + (100 - sorrow) * 0.45 + joy * 0.20),
-      curiosity: clamp(surprise * 0.50 + joy * 0.30 + (100 - sorrow) * 0.20)
-    };
-  }
-
-  /* ------------------------------------------------------------------
-     3) Reliability / contradiction / uncertainty
-     ------------------------------------------------------------------ */
-  function computeReliability(S){
-    const surveyQ = Object.keys(S.survey || {}).length;
-    const survey = surveyQ >= 6 ? 0.92 : surveyQ >= 4 ? 0.75 : 0.45;
-
-    const bio = (!S.bio || !S.bio.valid)
-      ? 0
-      : clamp(
-          (Math.min((S.bio.rows?.eeg || 0) / 40, 1) * 35) +
-          (Math.min((S.bio.rows?.rr || 0) / 60, 1) * 35) +
-          (S.bio.raw?.rmssd ? 15 : 0) +
-          (S.bio.raw?.lf_hf ? 15 : 0),
-          0,
-          100
-        ) / 100;
-
-    const faceConf = safe(S.face?.confidence);
-    const face = S.face?.frozen ? Math.max(faceConf / 100, 0.65) : faceConf / 100;
-
-    return { survey, bio, face };
-  }
-
-  function weightedMean(states, weights){
-    const out = {};
-    CANON_KEYS.forEach(k => {
-      let num = 0, den = 0;
-      Object.keys(states).forEach(m => {
-        if(states[m] && typeof states[m][k] === 'number' && weights[m] > 0){
-          num += states[m][k] * weights[m];
-          den += weights[m];
-        }
-      });
-      out[k] = den ? clamp(num / den) : 50;
-    });
-    return out;
-  }
-
-  function meanAbsoluteGap(a,b){
-    const vals = CANON_KEYS.map(k => Math.abs((a?.[k] ?? 50) - (b?.[k] ?? 50)));
-    return vals.reduce((x,y)=>x+y,0) / vals.length;
-  }
-
-  function computeContradiction(states, weights){
-    const active = Object.keys(states).filter(k => states[k] && weights[k] > 0.12);
-    if(active.length < 2) return 0;
-    const gaps = [];
-    for(let i=0;i<active.length;i++){
-      for(let j=i+1;j<active.length;j++) gaps.push(meanAbsoluteGap(states[active[i]], states[active[j]]));
-    }
-    return clamp(gaps.reduce((a,b)=>a+b,0) / gaps.length);
-  }
-
-  function computeUncertainty(rel, contradiction){
-    const meanRel = ((rel.survey || 0) + (rel.bio || 0) + (rel.face || 0)) / 3;
-    return clamp((1 - meanRel) * 70 + contradiction * 0.30);
-  }
-
-  /* ------------------------------------------------------------------
-     4) Context & intervention policy
-     ------------------------------------------------------------------ */
-  function inferContext(S){
-    const intent = S.intention || S.survey?.intention || 'neutral';
-    const focus = safe(S.scores?.focus);
-    const recovery = safe(S.scores?.recovery);
-    const energy = safe(S.scores?.energy);
-
-    let useCase = 'daily';
-    if(intent === 'change' && focus >= 65) useCase = 'work';
-    else if(intent === 'change' && recovery < 45) useCase = 'reboot';
-    else if(intent === 'keep' && recovery >= 60) useCase = 'night';
-    else if(energy >= 75) useCase = 'social';
-
-    return { intent, useCase };
-  }
-
-  function chooseFormat(product, state, context, uncertainty){
-    const candidates = ['perfume','pillow_mist','diffuser'];
-    const scores = {};
-    candidates.forEach(fmt => scores[fmt] = product.formatRules?.[fmt] ?? 0.5);
-
-    if(context.useCase === 'night'){
-      scores.pillow_mist += 0.35;
-      scores.diffuser += 0.15;
-      scores.perfume -= 0.10;
-    }
-    if(context.useCase === 'work') scores.perfume += 0.20;
-    if(context.useCase === 'reboot') scores.diffuser += 0.15;
-    if(uncertainty > 60) scores.diffuser += 0.10;
-
-    return Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
-  }
-
-  function chooseIntensity(state, uncertainty, product){
-    if(uncertainty > 65) return 'low';
-    if(state.stressLoad > 75 && product.code !== 'The Great') return 'low';
-    if(state.arousal > 75 && state.relaxation < 35) return 'low';
-    if(product.guardrail?.maxIntensity === 'low') return 'low';
-    return 'medium';
-  }
-
-  function remeasureMinutes(format, uncertainty){
-    if(uncertainty > 65) return 3;
-    if(format === 'pillow_mist') return 10;
-    if(format === 'diffuser') return 15;
-    return 5;
-  }
-
-  /* ------------------------------------------------------------------
-     5) History / preference / SKU strategy
-     ------------------------------------------------------------------ */
-  function loadHistory(){
-    try { return JSON.parse(localStorage.getItem('mediscent_closed_loop_history') || '[]'); }
-    catch { return []; }
-  }
-
-  function historyScore(productCode, history){
-    const relevant = history.filter(x => x.primary === productCode);
-    if(!relevant.length) return 50;
-    const avgDelta = relevant.reduce((s,x)=>s + safe(x.deltaScore),0) / relevant.length;
-    return clamp(50 + avgDelta * 0.5);
-  }
-
-  function preferenceScore(productCode, history){
-    const relevant = history.filter(x => x.primary === productCode);
-    if(!relevant.length) return 55;
-    const avgLike = relevant.reduce((s,x)=>s + safe(x.selfLike ?? 60),0) / relevant.length;
-    return clamp(avgLike);
-  }
-
-  function contextScore(product, context){
-    let s = 55;
-    if(product.profile?.ideal?.includes(context.intent)) s += 15;
-    if(product.profile?.ideal?.includes(context.useCase)) s += 20;
-    if(product.profile?.avoidWhen?.includes('default-auto') && context.intent !== 'keep') s -= 25;
-    return clamp(s);
-  }
-
-  function skuStrategyScore(product, state){
-    let s = 50;
-    if(product.code === 'AnnE' && state.balance >= 55) s += 18;
-    if(product.code === 'Foggy Study' && state.focus >= 60) s += 18;
-    if(product.code === '말괄량이' && state.valence < 55) s += 15;
-    if(product.code === 'Who am I') s -= 20;
-    return clamp(s);
-  }
-
-  function cosineWeighted(a,b){
-    const W = { valence:2.0, arousal:1.6, stressLoad:1.9, focus:1.6, relaxation:1.7, curiosity:1.2 };
-    let dot = 0, ma = 0, mb = 0;
-    CANON_KEYS.forEach(k => {
-      const w = W[k];
-      dot += a[k] * b[k] * w;
-      ma += a[k] * a[k] * w;
-      mb += b[k] * b[k] * w;
-    });
-    return ma && mb ? (dot / Math.sqrt(ma * mb)) * 100 : 0;
-  }
-
-  function guardrailPenalty(product, state, uncertainty, context){
-    let p = 0;
-    if(product.code === 'Who am I' && (uncertainty > 45 || context.intent === 'change')) p += 45;
-    if(product.code === 'The Great' && state.stressLoad > 75 && uncertainty > 45) p += 30;
-    if(product.code === 'Red Tara' && context.useCase === 'night') p += 20;
-    if(product.code === '말괄량이' && state.focus > 80 && context.useCase === 'work') p += 15;
-    return p;
-  }
-
-  /* ------------------------------------------------------------------
-     6) Main engine replacement
-     ------------------------------------------------------------------ */
-  window.computeFinalMediscent = function computeFinalMediscent(){
-    if(typeof window.updateScores === 'function') window.updateScores();
-
-    const surveyState = surveyToCanonical(window.S.scores || {});
-    const bioState = bioToCanonical(window.S.bio);
-    const faceState = faceToCanonical(window.S.face);
-
-    const reliability = computeReliability(window.S);
-    const baseWeights = {
-      survey: reliability.survey,
-      bio: reliability.bio,
-      face: reliability.face
-    };
-
-    const states = { survey: surveyState, bio: bioState, face: faceState };
-    const contradiction = computeContradiction(states, baseWeights);
-    const uncertainty = computeUncertainty(reliability, contradiction);
-
-    const modalityWeights = { ...baseWeights };
-    if(contradiction > 40){
-      modalityWeights.face *= 0.75;
-      if(reliability.bio < 0.45) modalityWeights.bio *= 0.80;
-    }
-    const finalState = weightedMean(states, modalityWeights);
-    const context = inferContext(window.S);
-    const history = loadHistory();
-
-    const ranked = MEDISCENT_PRODUCTS.map(product => {
-      const stateFit = cosineWeighted(finalState, product.eq);
-      const hist = historyScore(product.code, history);
-      const pref = preferenceScore(product.code, history);
-      const ctx = contextScore(product, context);
-      const sku = skuStrategyScore(product, finalState);
-      const penalty = guardrailPenalty(product, finalState, uncertainty, context);
-
-      const finalScore = clamp(
-        stateFit * 0.45 + hist * 0.20 + pref * 0.15 + ctx * 0.10 + sku * 0.10 - penalty,
-        0,
-        100
-      );
-
-      return {
-        product,
-        stateFit: Math.round(stateFit),
-        history: Math.round(hist),
-        preference: Math.round(pref),
-        context: Math.round(ctx),
-        sku: Math.round(sku),
-        penalty,
-        final: finalScore
-      };
-    }).sort((a,b)=>b.final-a.final);
-
-    const primary = ranked[0].product;
-    const secondary = ranked[1].product;
-    const avoid = ranked[ranked.length - 1].product;
-    const format = chooseFormat(primary, finalState, context, uncertainty);
-    const intensity = chooseIntensity(finalState, uncertainty, primary);
-    const remeasureIn = remeasureMinutes(format, uncertainty);
-
-    window.S.primary = primary;
-    window.S.alts = [secondary];
-    window.S.avoid = avoid;
-    window.S.matchScore = ranked[0].final;
-    window.S.matchReason = [
-      `State fit ${ranked[0].stateFit}`,
-      `History ${ranked[0].history}`,
-      `Context ${ranked[0].context}`,
-      contradiction > 35 ? `Contradiction ${contradiction}` : null,
-      uncertainty > 35 ? `Uncertainty ${uncertainty}` : null
-    ].filter(Boolean).join(' · ');
-
-    window.S.engine = {
-      canonicalState: finalState,
-      modalityWeights,
-      reliability,
-      contradiction,
-      uncertainty,
-      ranked,
-      context,
-      intervention: {
-        primary: primary.code,
-        secondary: secondary.code,
-        avoid: avoid.code,
-        format,
-        intensity,
-        remeasureIn,
-        duration: format === 'diffuser' ? '15-20min' : format === 'pillow_mist' ? '10min before sleep' : '1-2 spray'
-      }
-    };
-
-    window.S.copy = makeMediscentCopy(primary, finalState, context, uncertainty);
-    return window.S.engine;
-  };
-
-  function makeMediscentCopy(primary, state, context, uncertainty){
-    const u = uncertainty > 60 ? '측정 신뢰도가 낮아 보수적으로 추천합니다.' : '현재 상태와 가장 가까운 향 반응 프로파일입니다.';
-    const common = `Valence ${state.valence} · Arousal ${state.arousal} · Stress ${state.stressLoad} · Relaxation ${state.relaxation}. ${u}`;
-    const map = {
-      'AnnE': `정서 안정과 집중 균형이 필요한 상태입니다. ${common}`,
-      'Foggy Study': `몰입 회복이 우선인 상태입니다. ${common}`,
-      'Who am I': `내면 정리용 옵션입니다. 자동 추천보다는 명시적 선택일 때 적합합니다. ${common}`,
-      'The Great': `에너지 확장 욕구가 있으나 과자극 리스크를 함께 봐야 합니다. ${common}`,
-      'Red Tara': `소진 뒤 재가동이 필요한 전환 상태입니다. ${common}`,
-      '말괄량이': `기분 반전과 밝은 전환이 필요한 상태입니다. ${common}`
-    };
-    return map[primary.code] || common;
-  }
-
-  /* ------------------------------------------------------------------
-     7) Closed-loop history writer
-     ------------------------------------------------------------------ */
-  window.saveMediscentHistory = function saveMediscentHistory(extra={}){
-    if(!window.S?.primary || !window.S?.engine) return;
-    const before = window.S.engine.canonicalState || {};
-    const payload = {
-      ts: Date.now(),
-      primary: window.S.primary.code,
-      secondary: window.S.alts?.[0]?.code || null,
-      avoid: window.S.avoid?.code || null,
-      format: window.S.engine.intervention?.format || null,
-      intensity: window.S.engine.intervention?.intensity || null,
-      contradiction: window.S.engine.contradiction,
-      uncertainty: window.S.engine.uncertainty,
-      before,
-      deltaScore: extra.deltaScore ?? 0,
-      selfLike: extra.selfLike ?? null,
-      note: extra.note ?? ''
-    };
-    const history = loadHistory();
-    history.unshift(payload);
-    localStorage.setItem('mediscent_closed_loop_history', JSON.stringify(history.slice(0,100)));
-  };
-
-  /* ------------------------------------------------------------------
-     8) Optional helper for report rendering
-     ------------------------------------------------------------------ */
-  window.renderMediscentRecommendationBlock = function renderMediscentRecommendationBlock(targetId){
-    const el = document.getElementById(targetId);
-    if(!el || !window.S?.engine) return;
-    const i = window.S.engine.intervention;
-    el.innerHTML = `
-      <div class="card card-p">
-        <div class="lbl lbl-c">MEDISCENT Intervention</div>
-        <div style="font-size:20px;font-weight:800;margin-top:6px">${i.primary}</div>
-        <div style="margin-top:8px;font-size:12px;line-height:1.8;color:var(--ink70)">
-          보조 추천: <strong>${i.secondary}</strong><br>
-          회피 추천: <strong>${i.avoid}</strong><br>
-          권장 포맷: <strong>${i.format}</strong><br>
-          권장 강도: <strong>${i.intensity}</strong><br>
-          사용 길이: <strong>${i.duration}</strong><br>
-          재측정: <strong>${i.remeasureIn}분 후</strong>
-        </div>
-      </div>`;
-  };
-
-})();
-
-</script>
-<script>
-
-(function(){
-  if (typeof window === 'undefined') return;
-
-  const ORIGINAL_SCENTS_BY_CODE = (window.SCENTS || []).reduce((acc, item) => {
-    acc[item.code] = item;
-    return acc;
-  }, {});
-
-  function toDisplayScores(state){
-    state = state || {};
-    return {
-      stress: Math.round(state.stressLoad || 0),
-      balance: Math.round(((state.valence || 0) * 0.55) + ((state.relaxation || 0) * 0.45)),
-      energy: Math.round(state.arousal || 0),
-      focus: Math.round(state.focus || 0),
-      mood: Math.round(state.valence || 0),
-      recovery: Math.round(state.relaxation || 0)
-    };
-  }
-
-  function syncDisplayProducts(){
-    if(window.S?.primary?.code && ORIGINAL_SCENTS_BY_CODE[window.S.primary.code]){
-      window.S.primary = ORIGINAL_SCENTS_BY_CODE[window.S.primary.code];
-    }
-    if(Array.isArray(window.S?.alts)){
-      window.S.alts = window.S.alts.map(item => ORIGINAL_SCENTS_BY_CODE[item.code] || item);
-    }
-    if(window.S?.avoid?.code && ORIGINAL_SCENTS_BY_CODE[window.S.avoid.code]){
-      window.S.avoid = ORIGINAL_SCENTS_BY_CODE[window.S.avoid.code];
-    }
-  }
-
-  function syncDisplayStateFromEngine(){
-    if(!window.S?.engine?.canonicalState) return;
-    const cs = window.S.engine.canonicalState;
-    window.S._userEQ = {
-      valence: Math.round(cs.valence || 0),
-      arousal: Math.round(cs.arousal || 0),
-      stress: Math.round(cs.stressLoad || 0),
-      engagement: Math.round(cs.focus || 0),
-      relaxation: Math.round(cs.relaxation || 0),
-      interest: Math.round(cs.curiosity || 0)
-    };
-    window.S.scores = toDisplayScores(cs);
-  }
-
-  const _origRenderReport = window.renderReport;
-  const _origSaveHist = window.saveHist;
-
-  window.computeFinal = function computeFinalIntegrated(){
-    const engine = window.computeFinalMediscent();
-    syncDisplayStateFromEngine();
-    syncDisplayProducts();
-    return engine;
-  };
-
-  window.saveHist = function saveHistIntegrated(){
-    try{
-      if (typeof _origSaveHist === 'function') _origSaveHist();
-    }catch(e){}
-    try{
-      if (typeof window.saveMediscentHistory === 'function') window.saveMediscentHistory();
-    }catch(e){}
-  };
-
-  window.runAnalysis = function runAnalysisIntegrated(){
-    window.computeFinal();
-    window.S.timers.forEach(clearTimeout);
-    window.S.timers = [];
-    if(window.S.waveRAF) cancelAnimationFrame(window.S.waveRAF);
-
-    const engine = window.S.engine || {};
-    const reliability = engine.reliability || {};
-    const contradiction = Math.round(engine.contradiction || 0);
-    const uncertainty = Math.round(engine.uncertainty || 0);
-
-    const steps = [
-      ['01','Survey Normalize','7문항 → 초기 상태 벡터'],
-      [window.S.bio ? '02' : '02','Bio/Signal Reliability', window.S.bio ? 'EEG·HRV 신뢰도 반영' : '설문 중심 신뢰도 계산'],
-      ['03','Face Integration','FaceMesh 보조 신호 통합'],
-      ['04','Contradiction Control',`상충도 ${contradiction} · 불확실성 ${uncertainty}`],
-      ['05','Hybrid Scent Ranking','상태·이력·문맥 기반 추천']
-    ];
-    const aSteps = document.getElementById('aSteps');
-    if(aSteps){
-      aSteps.innerHTML = steps.map(x => `
-        <div class="a-step" id="as${x[0]}">
-          <div class="a-step-n">${x[0]}</div>
-          <div>
-            <span class="a-step-b">${x[1]}</span>
-            <span class="a-step-s">${x[2]}</span>
-          </div>
-        </div>`).join('');
-    }
-
-    let frame = 0;
-    const wEl = document.getElementById('aWave');
-    const wLoop = ()=>{
-      frame += 2;
-      if(wEl){
-        const ctx = wEl.getContext('2d');
-        const W = wEl.width = wEl.offsetWidth || 340;
-        const H = wEl.height = 56;
-        ctx.clearRect(0,0,W,H);
-        ctx.strokeStyle = 'rgba(82,122,108,.65)';
-        ctx.lineWidth = 1.4;
-        ctx.beginPath();
-        for(let x=0; x<W; x++){
-          const t = (x/W) * Math.PI * 6;
-          const amp = 7 + ((window.S.scores?.stress || 50) * 0.07);
-          const y = H/2 + Math.sin(t + frame*.04) * amp + Math.sin(t*.5 + frame*.06) * 3;
-          x===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
-        }
-        ctx.stroke();
-      }
-      window.S.waveRAF = requestAnimationFrame(wLoop);
-    };
-    wLoop();
-
-    const stages = [
-      {t:450,p:18,status:'설문 상태 정규화 중…',text:'7문항 응답에서 초기 감정 상태를 정규화했습니다.'},
-      {t:1150,p:38,status:'모달 신뢰도 평가 중…',text:`Survey ${Math.round((reliability.survey||0)*100)} · Bio ${Math.round((reliability.bio||0)*100)} · Face ${Math.round((reliability.face||0)*100)}`},
-      {t:1900,p:62,status:'상충도·불확실성 조정 중…',text:`Contradiction ${contradiction} · Uncertainty ${uncertainty}`},
-      {t:2750,p:84,status:'하이브리드 추천 엔진 실행 중…',text:window.S.matchReason || '상태·이력·문맥 점수를 통합합니다.'},
-      {t:3550,p:100,status:'추천 완료',text:window.S.copy || '메디센츠 추천이 완료되었습니다.'}
-    ];
-
-    stages.forEach((st, idx) => {
-      const tid = setTimeout(() => {
-        const aFill = document.getElementById('aFill');
-        const aStatus = document.getElementById('aStatus');
-        const aTxt = document.getElementById('aTxt');
-        if(aFill) aFill.style.width = st.p + '%';
-        if(aStatus) aStatus.textContent = st.status;
-        if(aTxt) aTxt.textContent = st.text;
-        const arc = document.getElementById('ringArc');
-        if(arc && typeof window.CIRC !== 'undefined') arc.style.strokeDasharray = `${(st.p/100) * window.CIRC} ${window.CIRC}`;
-        const pt = document.getElementById('ringPct');
-        if(pt) pt.textContent = st.p + '%';
-        const step = document.getElementById('as' + String(idx+1).padStart(2,'0'));
-        if(step) step.classList.add('done');
-        if(st.p===100){
-          setTimeout(() => {
-            if(window.S.waveRAF) cancelAnimationFrame(window.S.waveRAF);
-            window.goPage('report');
-          }, 700);
-        }
-      }, st.t);
-      window.S.timers.push(tid);
-    });
-  };
-
-  function minimalMediscentReportFallback(){
-    const p = window.S?.primary || {code:'추천 결과', notes:'', use:'', keywords:[]};
-    const setText = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
-    const setHtml = (id, val) => { const el = document.getElementById(id); if(el) el.innerHTML = val; };
-    setText('rCode', p.code || '추천 결과');
-    setText('rNotes', [p.notes, p.use].filter(Boolean).join(' · '));
-    setHtml('rTags', (p.keywords || []).map(k=>`<div class="s-tag">${k}</div>`).join(''));
-    const pct = Math.round(window.S?.matchScore || 0);
-    setText('rMatchPct', pct + '%');
-    const bar = document.getElementById('rMatchBar'); if(bar) bar.style.width = pct + '%';
-    setText('rMatchReason', window.S?.matchReason || '메디센츠 엔진 기반 추천');
-    setText('rMatchTag', pct >= 75 ? 'Good Match' : 'Suggested');
-    setHtml('rCopy', (window.S?.copy || '추천 결과를 준비했습니다.').replace(/(\d+[%점ms])/g,'<strong>$1</strong>'));
-    ['stress','balance','energy','focus','mood','recovery'].forEach((k, i) => {
-      const ids = ['aStress','aBal','aEne','aFocus','aMood','aRecovery'];
-      const el = document.getElementById(ids[i]);
-      if(el) el.textContent = Math.round(window.S?.scores?.[k] || 0);
-    });
-    const buy = document.getElementById('buyList');
-    if(buy){
-      const items = [window.S?.primary, ...(window.S?.alts || [])].filter(Boolean);
-      buy.innerHTML = items.map((sc, i) => `<div class="buy-card ${i===0?'top':''}"><div class="buy-meta"><div class="buy-rec">${i===0?'Primary':'Alt.'+i}</div><div class="buy-name">${sc.code || '—'}</div><div class="buy-notes">${sc.notes || ''}</div></div></div>`).join('');
-    }
-  }
-
-  function renderMediscentSystemBlock(){
-    const shell = document.querySelector('#pageReport .shell');
-    const copyCard = document.querySelector('#pageReport .copy-card');
-    if(!shell || !copyCard || !window.S?.engine) return;
-
-    let block = document.getElementById('recommendationBlock');
-    if(!block){
-      block = document.createElement('div');
-      block.id = 'recommendationBlock';
-      copyCard.insertAdjacentElement('afterend', block);
-    }
-
-    const i = window.S.engine.intervention || {};
-    const r = window.S.engine.reliability || {};
-    const relSurvey = Math.round((r.survey || 0) * 100);
-    const relBio = Math.round((r.bio || 0) * 100);
-    const relFace = Math.round((r.face || 0) * 100);
-    const contradiction = Math.round(window.S.engine.contradiction || 0);
-    const uncertainty = Math.round(window.S.engine.uncertainty || 0);
-
-    block.innerHTML = `
-      <div class="card card-p">
-        <div class="lbl lbl-c">MEDISCENT System Output</div>
-        <div style="font-size:20px;font-weight:800;margin-top:8px">${i.primary || '—'}</div>
-        <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,.55);border:1px solid var(--glass-border)">
-            <div style="font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink45)">Secondary</div>
-            <div style="font-size:13px;font-weight:800;color:var(--ink);margin-top:4px">${i.secondary || '—'}</div>
-          </div>
-          <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,.55);border:1px solid var(--glass-border)">
-            <div style="font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink45)">Avoid</div>
-            <div style="font-size:13px;font-weight:800;color:var(--ink);margin-top:4px">${i.avoid || '—'}</div>
-          </div>
-          <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,.55);border:1px solid var(--glass-border)">
-            <div style="font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink45)">Format</div>
-            <div style="font-size:13px;font-weight:800;color:var(--ink);margin-top:4px">${i.format || '—'}</div>
-          </div>
-          <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,.55);border:1px solid var(--glass-border)">
-            <div style="font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink45)">Intensity</div>
-            <div style="font-size:13px;font-weight:800;color:var(--ink);margin-top:4px">${i.intensity || '—'}</div>
-          </div>
-        </div>
-        <div style="margin-top:10px;padding:12px;border-radius:12px;background:var(--cbg);border:1px solid var(--cln);font-size:11px;line-height:1.8;color:var(--cdk)">
-          권장 사용 길이 <strong>${i.duration || '—'}</strong><br>
-          재측정 타이밍 <strong>${i.remeasureIn || '—'}분 후</strong>
-        </div>
-        <div style="margin-top:10px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
-          <div class="fmini"><div class="fmini-k">Survey</div><div class="fmini-v">${relSurvey}%</div></div>
-          <div class="fmini"><div class="fmini-k">Bio</div><div class="fmini-v">${relBio}%</div></div>
-          <div class="fmini"><div class="fmini-k">Face</div><div class="fmini-v">${relFace}%</div></div>
-          <div class="fmini"><div class="fmini-k">Match</div><div class="fmini-v">${window.S.matchScore || 0}%</div></div>
-        </div>
-        <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:10px;border-radius:12px;background:rgba(255,255,255,.55);border:1px solid var(--glass-border)">
-            <div style="font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink45)">Contradiction</div>
-            <div style="font-size:18px;font-weight:800;color:var(--ink);margin-top:2px">${contradiction}</div>
-          </div>
-          <div style="padding:10px;border-radius:12px;background:rgba(255,255,255,.55);border:1px solid var(--glass-border)">
-            <div style="font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink45)">Uncertainty</div>
-            <div style="font-size:18px;font-weight:800;color:var(--ink);margin-top:2px">${uncertainty}</div>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  window.renderReport = function renderReportIntegrated(){
-    if(!window.S?.primary) window.computeFinal();
-    try{
-      if(typeof _origRenderReport === 'function') _origRenderReport();
-    }catch(err){
-      console.error('renderReport fallback', err);
-      minimalMediscentReportFallback();
-    }
-    renderMediscentSystemBlock();
-  };
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const hdrName = document.querySelector('.hdr-name');
-    if(hdrName) hdrName.textContent = 'SHIFTI · MEDISCENT';
-    const hdrPill = document.getElementById('hdrPill');
-    if(hdrPill && hdrPill.textContent === '진단 대기') hdrPill.textContent = 'MEDISCENT 엔진 준비';
-    const title = document.querySelector('title');
-    if(title) title.textContent = 'SHIFTI MEDISCENT LAB — MEDISCENT Engine Applied';
-  });
-})();
-
-</script>
-
-<script>
-(function(){
-  if (typeof window === 'undefined') return;
-
-  try { if (!window.S && typeof S !== 'undefined') window.S = S; } catch(e){}
-  try { if (!window.SCENTS && typeof SCENTS !== 'undefined') window.SCENTS = SCENTS; } catch(e){}
-  try { if (!window.LINKS && typeof LINKS !== 'undefined') window.LINKS = LINKS; } catch(e){}
-  try { if (!window.QS && typeof QS !== 'undefined') window.QS = QS; } catch(e){}
-
-  const clamp = (v,min=0,max=100)=>Math.max(min,Math.min(max,Math.round(Number(v)||0)));
-  const getState = ()=>window.S || (typeof S !== 'undefined' ? S : null);
-  const DISPLAY_SCENTS = Array.isArray(window.SCENTS) ? window.SCENTS : [];
-  const DISPLAY_BY_CODE = DISPLAY_SCENTS.reduce((acc, item) => { acc[item.code] = item; return acc; }, {});
-  const LINKS_MAP = window.LINKS || {};
-  const EQ_META_SAFE = (typeof EQ_META !== 'undefined') ? EQ_META : {
-    valence:{l:'Valence',c:'#a85560'}, arousal:{l:'Arousal',c:'#2a6040'}, stress:{l:'Stress',c:'#a03a3a'},
-    engagement:{l:'Engagement',c:'#2b5c8a'}, relaxation:{l:'Relaxation',c:'#5a4a8a'}, interest:{l:'Interest',c:'#4a8a6a'}
-  };
-
-  function syncStateFromEngine(){
-    const st = getState();
-    if(!st || !st.engine || !st.engine.canonicalState) return;
-    const cs = st.engine.canonicalState;
-    st._userEQ = {
-      valence: clamp(cs.valence),
-      arousal: clamp(cs.arousal),
-      stress: clamp(cs.stressLoad),
-      engagement: clamp(cs.focus),
-      relaxation: clamp(cs.relaxation),
-      interest: clamp(cs.curiosity)
-    };
-    st.scores = {
-      stress: clamp(cs.stressLoad),
-      balance: clamp(cs.valence * 0.55 + cs.relaxation * 0.45),
-      energy: clamp(cs.arousal),
-      focus: clamp(cs.focus),
-      mood: clamp(cs.valence),
-      recovery: clamp(cs.relaxation)
-    };
-  }
-
-  function syncProductsFromEngine(){
-    const st = getState();
-    if(!st || !st.engine) return;
-    const ranked = Array.isArray(st.engine.ranked) ? st.engine.ranked : [];
-    const primaryCode = st.engine.intervention?.primary || ranked[0]?.product?.code;
-    const avoidCode = st.engine.intervention?.avoid || ranked[ranked.length-1]?.product?.code;
-    const altCodes = ranked.slice(1,3).map(x=>x.product?.code).filter(Boolean);
-    st.primary = DISPLAY_BY_CODE[primaryCode] || ranked[0]?.product || st.primary;
-    st.alts = altCodes.map(c => DISPLAY_BY_CODE[c] || ranked.find(x=>x.product?.code===c)?.product).filter(Boolean);
-    st.avoid = DISPLAY_BY_CODE[avoidCode] || ranked[ranked.length-1]?.product || st.avoid;
-  }
-
-  window.computeFinal = function computeFinalPatched(){
-    try { if (!window.S && typeof S !== 'undefined') window.S = S; } catch(e){}
-    const st = getState();
-    if(!st) throw new Error('Global state S not found');
-    const engine = (typeof window.computeFinalMediscent === 'function')
-      ? window.computeFinalMediscent()
-      : (typeof computeFinalMediscent === 'function' ? computeFinalMediscent() : null);
-    syncStateFromEngine();
-    syncProductsFromEngine();
-    return engine;
-  };
-
-  window.saveHist = function saveHistPatched(){
-    const st = getState();
-    if(!st || !st.primary) return;
-    try{
-      const list = JSON.parse(localStorage.getItem('shifti_v5bio') || '[]');
-      list.unshift({
-        ts: Date.now(),
-        primary: st.primary.code,
-        scores: {...st.scores},
-        matchScore: Math.round(st.matchScore || 0),
-        copy: (st.copy || '').slice(0,120),
-        hasBio: !!st.bio,
-        rmssd: st.bio?.raw?.rmssd || null
-      });
-      localStorage.setItem('shifti_v5bio', JSON.stringify(list.slice(0,50)));
-    }catch(e){ console.error('saveHistPatched', e); }
-  };
-
-  function renderAxisScores(st){
-    [['aStress','stress'],['aBal','balance'],['aEne','energy'],['aFocus','focus'],['aMood','mood'],['aRecovery','recovery']].forEach(([id,k])=>{
-      const el=document.getElementById(id); if(el) el.textContent = clamp(st.scores?.[k] || 0);
-    });
-  }
-
-  function renderEqRows(st){
-    const el = document.getElementById('eqRows');
-    if(!el) return;
-    const pEq = st.primary?.eq || {};
-    const u = st._userEQ || {};
-    const rows = Object.entries(pEq).map(([k,v])=>{
-      const m = EQ_META_SAFE[k] || {l:k,c:'#888'};
-      const uv = clamp(u[k] || 0);
-      return `<div class="eq-row"><div class="eq-k">${m.l}</div><div class="eq-track" style="position:relative"><i class="eq-fill" style="width:${clamp(v)}%;background:${m.c}"></i><div style="position:absolute;top:-1px;left:${uv}%;width:2px;height:calc(100% + 2px);background:#0e0e0d;border-radius:1px;transform:translateX(-50%);opacity:.45"></div></div><div class="eq-v">${clamp(v)}</div></div>`;
-    }).join('');
-    el.innerHTML = rows;
-  }
-
-  function renderBuyList(st){
-    const buy = document.getElementById('buyList');
-    if(!buy) return;
-    const items = [st.primary, ...(st.alts || [])].filter(Boolean);
-    buy.innerHTML = items.map((sc,i)=>`<div class="buy-card ${i===0?'top':''}"><div class="buy-img"><img src="https://ecimg.cafe24img.com/pg2145b53722962042/shifti/web/mobile/newDesign/30p.png" alt="${sc.code}"/></div><div class="buy-meta"><div class="buy-rec" style="${i>0?'color:var(--ink45)':''}">${i===0?'Primary':'Alt.'+i}</div><div class="buy-name">${sc.code}</div><div class="buy-notes">${sc.notes || sc.narrative || ''}</div><div class="buy-price">EDP 30ml · ₩58,000</div></div><div class="buy-btns"><button class="btn btn-ink" onclick="location.href='${LINKS_MAP[sc.code]||'#'}'">구매</button><button class="btn btn-ol" onclick="location.href='${LINKS_MAP[sc.code]||'#'}'">상세</button></div></div>`).join('');
-    if(!buy.innerHTML.trim()){
-      buy.innerHTML = '<div class="buy-card top"><div class="buy-meta"><div class="buy-rec">Primary</div><div class="buy-name">추천 결과 준비 중</div></div></div>';
-    }
-  }
-
-  function renderRecommendationBlock(st){
-    const copyCard = document.querySelector('#pageReport .copy-card');
-    if(!copyCard || !st.engine) return;
-    let block = document.getElementById('recommendationBlock');
-    if(!block){ block = document.createElement('div'); block.id = 'recommendationBlock'; copyCard.insertAdjacentElement('afterend', block); }
-    const i = st.engine.intervention || {};
-    const rel = st.engine.reliability || {};
-    block.innerHTML = `
-      <div class="card card-p">
-        <div class="lbl lbl-c">MEDISCENT Recommendation Service</div>
-        <div style="font-size:21px;font-weight:800;margin-top:8px">${i.primary || st.primary?.code || '—'}</div>
-        <div style="font-size:11px;color:var(--ink45);margin-top:4px;line-height:1.7">${st.matchReason || '상태 적합도·문맥·이력 기반 추천'}</div>
-        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border)"><div style="font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink45)">Secondary</div><div style="font-size:13px;font-weight:800;margin-top:4px">${i.secondary || st.alts?.[0]?.code || '—'}</div></div>
-          <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border)"><div style="font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink45)">Avoid</div><div style="font-size:13px;font-weight:800;margin-top:4px">${i.avoid || st.avoid?.code || '—'}</div></div>
-          <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border)"><div style="font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink45)">Format</div><div style="font-size:13px;font-weight:800;margin-top:4px">${i.format || 'perfume'}</div></div>
-          <div style="padding:12px;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border)"><div style="font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink45)">Intensity</div><div style="font-size:13px;font-weight:800;margin-top:4px">${i.intensity || 'medium'}</div></div>
-        </div>
-        <div style="margin-top:10px;padding:12px;border-radius:12px;background:var(--cbg);border:1px solid var(--cln);font-size:11px;line-height:1.8;color:var(--cdk)">
-          권장 사용 길이 <strong>${i.duration || '1-2 spray'}</strong><br>
-          재측정 타이밍 <strong>${i.remeasureIn || 5}분 후</strong><br>
-          모달 신뢰도 Survey <strong>${Math.round((rel.survey||0)*100)}%</strong> · Bio <strong>${Math.round((rel.bio||0)*100)}%</strong> · Face <strong>${Math.round((rel.face||0)*100)}%</strong>
-        </div>
-      </div>`;
-  }
-
-  function getClosedLoopHistory(){
-    try { return JSON.parse(localStorage.getItem('mediscent_closed_loop_history') || '[]'); }
-    catch { return []; }
-  }
-
-  function calcDelta(before, after){
-    const parts = [
-      clamp((before.stressLoad || 0) - (after.stressLoad || 0), -100, 100),
-      clamp((after.relaxation || 0) - (before.relaxation || 0), -100, 100),
-      clamp((after.valence || 0) - (before.valence || 0), -100, 100),
-      clamp((after.focus || 0) - (before.focus || 0), -100, 100)
-    ];
-    return Math.round(parts.reduce((a,b)=>a+b,0) / parts.length);
-  }
-
-  window.applyClosedLoopFeedback = function applyClosedLoopFeedback(payload={}){
-    const st = getState();
-    if(!st || !st.engine || !st.primary) throw new Error('추천 결과가 먼저 생성되어야 합니다.');
-    const before = st.engine.canonicalState || {};
-    const after = {
-      valence: clamp(payload.afterValence ?? before.valence),
-      arousal: clamp(payload.afterArousal ?? before.arousal),
-      stressLoad: clamp(payload.afterStress ?? before.stressLoad),
-      focus: clamp(payload.afterFocus ?? before.focus),
-      relaxation: clamp(payload.afterRelaxation ?? before.relaxation),
-      curiosity: clamp(payload.afterCuriosity ?? before.curiosity)
-    };
-    const selfLike = payload.selfLike == null ? null : clamp(payload.selfLike, 0, 100);
-    const entry = {
-      ts: Date.now(),
-      primary: st.primary.code,
-      secondary: st.alts?.[0]?.code || null,
-      avoid: st.avoid?.code || null,
-      format: st.engine.intervention?.format || null,
-      intensity: st.engine.intervention?.intensity || null,
-      before,
-      after,
-      contradiction: clamp(st.engine.contradiction || 0),
-      uncertainty: clamp(st.engine.uncertainty || 0),
-      deltaScore: calcDelta(before, after),
-      selfLike,
-      note: String(payload.note || ''),
-      remeasureIn: st.engine.intervention?.remeasureIn || null,
-      stage: 'remeasured'
-    };
-    const history = getClosedLoopHistory();
-    history.unshift(entry);
-    localStorage.setItem('mediscent_closed_loop_history', JSON.stringify(history.slice(0,100)));
-    renderClosedLoopBlock(st);
-    return entry;
-  };
-
-  window.prefillClosedLoopDemo = function prefillClosedLoopDemo(){
-    const st = getState();
-    if(!st || !st.engine) return;
-    const b = st.engine.canonicalState || {};
-    const set=(id,v)=>{ const el=document.getElementById(id); if(el) el.value = String(v); };
-    set('clAfterStress', clamp((b.stressLoad || 50) - 15));
-    set('clAfterRelax', clamp((b.relaxation || 50) + 18));
-    set('clAfterValence', clamp((b.valence || 50) + 15));
-    set('clAfterFocus', clamp((b.focus || 50) + 12));
-    set('clSelfLike', 82);
-    const note=document.getElementById('clNote'); if(note) note.value='Demo QA feedback';
-  };
-
-  window.submitClosedLoopFeedback = function submitClosedLoopFeedback(){
-    const val = id => Number(document.getElementById(id)?.value || 0);
-    const note = document.getElementById('clNote')?.value || '';
-    const entry = window.applyClosedLoopFeedback({
-      afterStress: val('clAfterStress'),
-      afterRelaxation: val('clAfterRelax'),
-      afterValence: val('clAfterValence'),
-      afterFocus: val('clAfterFocus'),
-      selfLike: val('clSelfLike'),
-      note
-    });
-    try { toast(`폐루프 저장 완료 · Δ ${entry.deltaScore}`); } catch(e){}
-    return entry;
-  };
-
-  function renderClosedLoopBlock(st){
-    const anchor = document.getElementById('recommendationBlock') || document.querySelector('#pageReport .copy-card');
-    if(!anchor || !st.engine) return;
-    let block = document.getElementById('closedLoopBlock');
-    if(!block){ block = document.createElement('div'); block.id = 'closedLoopBlock'; anchor.insertAdjacentElement('afterend', block); }
-    const b = st.engine.canonicalState || {};
-    const history = getClosedLoopHistory().filter(x=>x.primary === st.primary.code).slice(0,5);
-    block.innerHTML = `
-      <div class="card card-p">
-        <div class="lbl lbl-c">Closed Loop Re-measure</div>
-        <div style="font-size:12px;color:var(--ink45);margin-top:8px;line-height:1.8">향 사용 후 재측정값을 넣으면 <strong>개인 반응 이력</strong>으로 저장됩니다. 이후 추천 엔진의 history / preference 점수에 반영됩니다.</div>
-        <div style="margin-top:10px;padding:12px;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border);font-size:11px;line-height:1.8">
-          권장 재측정 타이밍: <strong>${st.engine.intervention?.remeasureIn || 5}분 후</strong><br>
-          Baseline — Stress <strong>${clamp(b.stressLoad)}</strong> · Relaxation <strong>${clamp(b.relaxation)}</strong> · Valence <strong>${clamp(b.valence)}</strong> · Focus <strong>${clamp(b.focus)}</strong>
-        </div>
-        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">After Stress</div><input id="clAfterStress" type="number" min="0" max="100" value="${clamp(b.stressLoad)}" style="width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.72)"></div>
-          <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">After Relaxation</div><input id="clAfterRelax" type="number" min="0" max="100" value="${clamp(b.relaxation)}" style="width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.72)"></div>
-          <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">After Valence</div><input id="clAfterValence" type="number" min="0" max="100" value="${clamp(b.valence)}" style="width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.72)"></div>
-          <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">After Focus</div><input id="clAfterFocus" type="number" min="0" max="100" value="${clamp(b.focus)}" style="width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.72)"></div>
-        </div>
-        <div style="margin-top:8px;display:grid;grid-template-columns:1fr;gap:8px">
-          <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">Self Like (0-100)</div><input id="clSelfLike" type="number" min="0" max="100" value="80" style="width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.72)"></div>
-          <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">Note</div><textarea id="clNote" rows="2" style="width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.72);resize:vertical"></textarea></div>
-        </div>
-        <div style="margin-top:10px;display:flex;gap:8px">
-          <button class="btn btn-c" style="flex:1" onclick="submitClosedLoopFeedback()">폐루프 저장</button>
-          <button class="btn btn-ol" onclick="prefillClosedLoopDemo()">Demo 값 채우기</button>
-        </div>
-        <div style="margin-top:12px;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink45)">Recent Closed-loop History</div>
-        <div style="margin-top:8px;display:flex;flex-direction:column;gap:6px">
-          ${history.length ? history.map(x=>`<div style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border);font-size:10.5px;line-height:1.7"><strong>${x.primary}</strong> · Δ <strong>${x.deltaScore}</strong> · Like <strong>${x.selfLike ?? '—'}</strong><br><span style="color:var(--ink45)">Stress ${clamp(x.before?.stressLoad)} → ${clamp(x.after?.stressLoad)} · Relax ${clamp(x.before?.relaxation)} → ${clamp(x.after?.relaxation)}</span></div>`).join('') : '<div style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border);font-size:10.5px;color:var(--ink45)">아직 저장된 폐루프 피드백이 없습니다.</div>'}
-        </div>
-      </div>`;
-  }
-
-  window.renderReport = function renderReportPatched(){
-    const st = getState();
-    if(!st) return;
-    window.computeFinal();
-    syncStateFromEngine();
-    syncProductsFromEngine();
-    const p = st.primary || {code:'추천 결과',notes:'',use:'',keywords:[],eq:{}};
-    const pct = clamp(st.matchScore || 0);
-    const setText = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
-    const setHtml = (id, val) => { const el = document.getElementById(id); if(el) el.innerHTML = val; };
-    setText('rCode', p.code || '추천 결과');
-    setText('rNotes', [p.notes, p.use].filter(Boolean).join(' · ') || (p.narrative || 'MEDISCENT 추천 결과'));
-    setHtml('rTags', (p.keywords || [p.narrative]).filter(Boolean).map(k=>`<div class="s-tag">${k}</div>`).join(''));
-    setText('rMatchPct', pct + '%');
-    const bar = document.getElementById('rMatchBar'); if(bar) bar.style.width = pct + '%';
-    setText('rMatchReason', st.matchReason || '메디센츠 추천 엔진');
-    setText('rMatchTag', pct >= 85 ? 'Excellent Match' : pct >= 70 ? 'Good Match' : 'Suggested');
-    setHtml('rCopy', String(st.copy || '추천 결과를 준비했습니다.').replace(/(\d+[%점ms])/g,'<strong>$1</strong>'));
-    renderAxisScores(st);
-    renderEqRows(st);
-    renderBuyList(st);
-    const rTable = document.getElementById('rTable');
-    if(rTable){
-      const u = st._userEQ || {};
-      const rows = [
-        ['Stress', st.scores?.stress, 'Engine', '긴장·과부하'], ['Balance', st.scores?.balance, 'Engine', '정서 균형'],
-        ['Energy', st.scores?.energy, 'Engine', '활력·각성'], ['Focus', st.scores?.focus, 'Engine', '집중·선명도'],
-        ['Mood', st.scores?.mood, 'Engine', '긍정 정서'], ['Recovery', st.scores?.recovery, 'Engine', '회복·이완'],
-        ['EQ Valence', u.valence, 'Canonical', '정서 가치'], ['EQ Arousal', u.arousal, 'Canonical', '각성 에너지'],
-        ['EQ Relax', u.relaxation, 'Canonical', '이완도'], ['Closed-loop Ready', 'YES', 'MEDISCENT', '재측정 가능']
-      ];
-      rTable.innerHTML = rows.map(r=>`<tr><td class="mono">${r[0]}</td><td class="mono">${r[1] ?? '—'}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('');
-    }
-    renderRecommendationBlock(st);
-    renderClosedLoopBlock(st);
-  };
-})();
-   /* ═══════════════════════════════════════════════════════════════════
-   SHIFTI · MEDISCENT — UNIFIED ENGINE MODULE  (v6.1 consolidated)
-   ───────────────────────────────────────────────────────────────────
-   이 한 블록이 기존의 트레일링 <script> 3~4개를 모두 대체합니다.
-     · MEDISCENT 캐노니컬 폐루프 엔진
-     · 표시 상태/제품 동기화
-     · computeFinal / runAnalysis / renderReport / saveHist (단일 정의)
-     · 폐루프 재측정 피드백
-   설계 원칙: 베이스 스크립트는 건드리지 않고, window.* 후킹으로만 교체.
-═══════════════════════════════════════════════════════════════════ */
-(function(){
-  if (typeof window === 'undefined') return;
-
-  /* ── 0. 전역 브리지 (베이스의 lexical const 들을 window 로 연결) ── */
-  const bridge = (name, ref) => { try { if (window[name] == null && typeof ref !== 'undefined') window[name] = ref; } catch(_){} };
-  try { bridge('S',       S);       } catch(_){}
-  try { bridge('SCENTS',  SCENTS);  } catch(_){}
-  try { bridge('LINKS',   LINKS);   } catch(_){}
-  try { bridge('QS',      QS);      } catch(_){}
-  try { bridge('EQ_META', EQ_META); } catch(_){}
-  try { bridge('CIRC',    CIRC);    } catch(_){}
-
-  const clamp = (v, min=0, max=100) => Math.max(min, Math.min(max, Math.round(Number(v) || 0)));
-  const safe  = v => Number.isFinite(Number(v)) ? Number(v) : 0;
-  const getS  = () => window.S || (typeof S !== 'undefined' ? S : null);
-  const toastSafe = m => { try { if (typeof toast === 'function') toast(m); } catch(_){} };
-
-  const DISPLAY_BY_CODE = (window.SCENTS || []).reduce((a,x)=>{ a[x.code]=x; return a; }, {});
-  const LINKS_MAP = window.LINKS || {};
-  const EQ_META_SAFE = (window.EQ_META) || {
-    valence:{l:'Valence',c:'#4a8a6a'}, arousal:{l:'Arousal',c:'#4a5570'}, stress:{l:'Stress',c:'#a85560'},
-    engagement:{l:'Engagement',c:'#8a6f3c'}, relaxation:{l:'Relaxation',c:'#527a6c'}, interest:{l:'Interest',c:'#6a5a8a'}
-  };
-
-  const CANON_KEYS = ['valence','arousal','stressLoad','focus','relaxation','curiosity'];
-
-  /* ════════════════════════════════════════════════════════════════
-     1. 제품 모델 (감정 EQ + 가드레일 + 포맷 우선순위)
-  ════════════════════════════════════════════════════════════════ */
-  const PRODUCTS = [
-    { code:'AnnE', narrative:'균형형 안정',
-      eq:{valence:88,arousal:72,stressLoad:25,focus:85,relaxation:65,curiosity:90},
-      profile:{ideal:['stabilize','work','daily'],avoidWhen:['hyper-low-energy']},
-      formatRules:{perfume:1.0,pillow_mist:0.9,diffuser:0.85},
-      guardrail:{autoRecommend:true,maxIntensity:'medium'} },
-    { code:'Foggy Study', narrative:'인지 몰입',
-      eq:{valence:50,arousal:78,stressLoad:22,focus:92,relaxation:28,curiosity:95},
-      profile:{ideal:['focus','work','study'],avoidWhen:['high-contradiction-high-stress']},
-      formatRules:{perfume:1.0,diffuser:0.95,pillow_mist:0.4},
-      guardrail:{autoRecommend:true,maxIntensity:'medium'} },
-    { code:'Who am I', narrative:'깊은 내면 리셋',
-      eq:{valence:8,arousal:18,stressLoad:92,focus:15,relaxation:10,curiosity:12},
-      profile:{ideal:['introspective','night','solo'],avoidWhen:['default-auto','uncertain-state']},
-      formatRules:{diffuser:1.0,pillow_mist:0.9,perfume:0.3},
-      guardrail:{autoRecommend:false,requireOptIn:true,maxIntensity:'low'} },
-    { code:'The Great', narrative:'확장 에너지',
-      eq:{valence:75,arousal:88,stressLoad:85,focus:40,relaxation:15,curiosity:82},
-      profile:{ideal:['social','drive','outdoor'],avoidWhen:['high-stress-low-confidence']},
-      formatRules:{perfume:1.0,diffuser:0.55,pillow_mist:0.15},
-      guardrail:{autoRecommend:true,maxIntensity:'medium'} },
-    { code:'Red Tara', narrative:'생존 에너지/회복 전환',
-      eq:{valence:72,arousal:85,stressLoad:78,focus:82,relaxation:18,curiosity:88},
-      profile:{ideal:['transition','reboot','evening'],avoidWhen:['sleep-prep']},
-      formatRules:{perfume:1.0,diffuser:0.8,pillow_mist:0.2},
-      guardrail:{autoRecommend:true,maxIntensity:'medium'} },
-    { code:'말괄량이', narrative:'밝은 전환',
-      eq:{valence:90,arousal:80,stressLoad:12,focus:35,relaxation:78,curiosity:92},
-      profile:{ideal:['change','refresh','gift'],avoidWhen:['deep-focus-needed']},
-      formatRules:{perfume:1.0,diffuser:0.85,pillow_mist:0.4},
-      guardrail:{autoRecommend:true,maxIntensity:'medium'} }
-  ];
-
-  /* ════════════════════════════════════════════════════════════════
-     2. 모달리티 → 캐노니컬 상태 변환
-  ════════════════════════════════════════════════════════════════ */
-  function surveyToCanonical(s){
-    s = s || {};
-    return {
-      valence:    clamp(s.mood*0.50 + s.balance*0.30 + (100-s.stress)*0.20),
-      arousal:    clamp(s.energy*0.50 + s.focus*0.25 + s.stress*0.25),
-      stressLoad: clamp(s.stress),
-      focus:      clamp(s.focus*0.60 + s.balance*0.15 + s.energy*0.25),
-      relaxation: clamp((100-s.stress)*0.40 + s.recovery*0.35 + s.balance*0.25),
-      curiosity:  clamp(s.focus*0.35 + s.energy*0.30 + s.mood*0.35)
-    };
-  }
-  function bioToCanonical(bio){
-    if(!bio || !bio.valid) return null;
-    return {
-      valence:    clamp(bio.mood*0.55 + bio.balance*0.25 + (100-bio.stress)*0.20),
-      arousal:    clamp(bio.energy*0.60 + bio.focus*0.20 + bio.stress*0.20),
-      stressLoad: clamp(bio.stress),
-      focus:      clamp(bio.focus*0.70 + bio.energy*0.30),
-      relaxation: clamp(bio.recovery*0.45 + bio.mood*0.20 + (100-bio.stress)*0.35),
-      curiosity:  clamp(bio.focus*0.30 + bio.energy*0.35 + bio.mood*0.35)
-    };
-  }
-  function faceToCanonical(face){
-    if(!face) return null;
-    const joy=safe(face.joy), sor=safe(face.sorrow), ang=safe(face.anger), sur=safe(face.surprise);
-    return {
-      valence:    clamp(joy*0.70 + (100-sor)*0.30),
-      arousal:    clamp(sur*0.45 + ang*0.20 + joy*0.35),
-      stressLoad: clamp(sor*0.35 + ang*0.50 + sur*0.15),
-      focus:      clamp((100-sor)*0.35 + (100-ang)*0.25 + joy*0.40),
-      relaxation: clamp((100-ang)*0.35 + (100-sor)*0.45 + joy*0.20),
-      curiosity:  clamp(sur*0.50 + joy*0.30 + (100-sor)*0.20)
-    };
-  }
 
   /* ════════════════════════════════════════════════════════════════
      3. 신뢰도 / 상충도 / 불확실성
@@ -2921,13 +1888,17 @@ document.addEventListener('DOMContentLoaded',()=>{
   function computeReliability(st){
     const q = Object.keys(st.survey || {}).length;
     const survey = q>=6 ? 0.92 : q>=4 ? 0.75 : 0.45;
-    const bio = (!st.bio || !st.bio.valid) ? 0 : clamp(
-      Math.min((st.bio.rows?.eeg||0)/40,1)*35 +
-      Math.min((st.bio.rows?.rr ||0)/60,1)*35 +
-      (st.bio.raw?.rmssd ? 15:0) + (st.bio.raw?.lf_hf ? 15:0), 0, 100) / 100;
-    const fc = safe(st.face?.confidence);
-    const face = st.face?.frozen ? Math.max(fc/100, 0.65) : fc/100;
-    return { survey, bio, face };
+    let bio=0;
+    if(st.bio?.valid){
+      const parserQ=Number(st.bio.quality);
+      if(Number.isFinite(parserQ)&&parserQ>0) bio=clamp(parserQ,0,1);
+      else bio=clamp(
+        Math.min((st.bio.rows?.eeg||0)/20,1)*30 +
+        Math.min((st.bio.rows?.rr ||0)/30,1)*30 +
+        (st.bio.raw?.rmssd!=null ? 20:0) + (st.bio.raw?.lf_hf!=null ? 20:0), 0, 100) / 100;
+      bio=Math.max(.45,bio);
+    }
+    return { survey, bio };
   }
   function weightedMean(states, w){
     const out = {};
@@ -2952,7 +1923,8 @@ document.addEventListener('DOMContentLoaded',()=>{
     return clamp(gaps.reduce((a,b)=>a+b,0)/gaps.length);
   }
   function computeUncertainty(rel, contradiction){
-    const mean = ((rel.survey||0)+(rel.bio||0)+(rel.face||0))/3;
+    const active = [rel.survey, rel.bio].filter(v=>v>0);
+    const mean = active.length ? active.reduce((a,b)=>a+b,0)/active.length : 0;
     return clamp((1-mean)*70 + contradiction*0.30);
   }
 
@@ -3054,59 +2026,82 @@ document.addEventListener('DOMContentLoaded',()=>{
     return map[p.code] || common;
   }
 
+  function computeDynamicWeights(st,states,rel,contradiction,hist){
+    const base={survey:.40,bio:.60};
+    const availability={survey:1,bio:states.bio?1:0};
+    const quality={survey:rel.survey||0,bio:rel.bio||0};
+    const completed=hist.filter(x=>x.stage==='remeasured').length;
+    // A first valid device upload must not be suppressed simply because no personal history exists yet.
+    const longTerm={survey:.94,bio:Math.min(.98,.90+completed*.01)};
+    const conflict={survey:1,bio:contradiction>55?.78:contradiction>40?.88:1};
+    const raw={}; let sum=0;
+    ['survey','bio'].forEach(m=>{raw[m]=base[m]*availability[m]*quality[m]*longTerm[m]*conflict[m];sum+=raw[m];});
+    const normalized={survey:0,bio:0};
+    if(sum>0)Object.keys(normalized).forEach(m=>normalized[m]=raw[m]/sum);else normalized.survey=1;
+    return {base,availability,quality,longTerm,conflict,raw,normalized};
+  }
+  function computeIntervention(state,rel,contradiction,uncertainty,historyPreference,ctx){
+    const targetDistance=clamp((Math.abs(state.stressLoad-35)+Math.abs(state.relaxation-65)+Math.abs(state.valence-68)+Math.abs(state.focus-(ctx.useCase==='work'?72:60)))/4);
+    const activeRel=[rel.survey,rel.bio].filter(v=>v>0);
+    const confidence=clamp((activeRel.length?activeRel.reduce((a,b)=>a+b,0)/activeRel.length:0)*100);
+    const safety=100;
+    const score=clamp(targetDistance*.34+confidence*.26+historyPreference*.18+(100-contradiction)*.12+safety*.10);
+    const override=contradiction>=60 || uncertainty>=68 || confidence<38;
+    const stage=override?'HOLD':score>=70?'STAGE 1':score>=45?'STAGE 2':'HOLD';
+    return {score,targetDistance,confidence,historyPreference,safety,override,stage};
+  }
   function computeFinalMediscent(){
     if(typeof window.updateScores === 'function') window.updateScores();
-    const st = getS();
-    if(!st) throw new Error('전역 상태 S를 찾을 수 없습니다');
+    const st=getS(); if(!st)throw new Error('전역 상태 S를 찾을 수 없습니다');
+    const surveyAxes={...(st.scores||{})};
+    const states={survey:surveyToCanonical(st.scores||{}),bio:bioToCanonical(st.bio)};
+    const rel=computeReliability(st);
+    const hist=loadCL();
+    const baseForConflict={survey:rel.survey,bio:rel.bio};
+    const contradiction=computeContradiction(states,baseForConflict);
+    const uncertainty=computeUncertainty(rel,contradiction);
+    const dynamic=computeDynamicWeights(st,states,rel,contradiction,hist);
+    const finalState=weightedMean(states,dynamic.normalized);
+    const ctx=inferContext(st);
+    const preferenceProfile=buildPreferenceProfile(st);
+    const standardRecipe=buildStandardRecipe(preferenceProfile);
+    const personalizedRecipe=buildPersonalizedRecipe(standardRecipe,finalState,ctx);
+    st.preferenceProfile=preferenceProfile;st.standardRecipe=standardRecipe;st.personalizedRecipe=personalizedRecipe;
 
-    const states = { survey: surveyToCanonical(st.scores||{}), bio: bioToCanonical(st.bio), face: faceToCanonical(st.face) };
-    const rel = computeReliability(st);
-    const baseW = { survey: rel.survey, bio: rel.bio, face: rel.face };
-    const contradiction = computeContradiction(states, baseW);
-    const uncertainty   = computeUncertainty(rel, contradiction);
-
-    const w = { ...baseW };
-    if(contradiction>40){ w.face*=0.75; if(rel.bio<0.45) w.bio*=0.80; }
-
-    const finalState = weightedMean(states, w);
-    const ctx = inferContext(st);
-    const hist = loadCL();
-
-    const ranked = PRODUCTS.map(p=>{
-      const stateFit = cosineW(finalState, p.eq);
-      const h = historyScore(p.code, hist);
-      const pr = preferenceScore(p.code, hist);
-      const c = contextScore(p, ctx);
-      const k = skuScore(p, finalState);
-      const pen = guardrailPenalty(p, finalState, uncertainty, ctx);
-      const final = clamp(stateFit*0.45 + h*0.20 + pr*0.15 + c*0.10 + k*0.10 - pen, 0, 100);
-      return { product:p, stateFit:Math.round(stateFit), history:Math.round(h), preference:Math.round(pr), context:Math.round(c), sku:Math.round(k), penalty:pen, final };
+    const ranked=PRODUCTS.map(p=>{
+      const stateFit=cosineW(finalState,p.eq);
+      const preferenceFit=familyCosine(personalizedRecipe.familyWeights,PRODUCT_SCENT_PROFILES[p.code]||{});
+      const h=historyScore(p.code,hist);
+      const pr=preferenceScore(p.code,hist);
+      const c=contextScore(p,ctx);
+      const k=skuScore(p,finalState);
+      const prefHistory=(h+pr)/2;
+      const pen=guardrailPenalty(p,finalState,uncertainty,ctx)+avoidPenalty(preferenceProfile,p.code);
+      const final=clamp(preferenceFit*.40+stateFit*.30+prefHistory*.10+c*.10+k*.10-pen,0,100);
+      return {product:p,stateFit:Math.round(stateFit),preferenceFit:Math.round(preferenceFit),history:Math.round(h),preference:Math.round(pr),context:Math.round(c),sku:Math.round(k),penalty:Math.round(pen),final};
     }).sort((a,b)=>b.final-a.final);
 
-    const primary = ranked[0].product, secondary = ranked[1].product, avoid = ranked[ranked.length-1].product;
-    const format = chooseFormat(primary, finalState, ctx, uncertainty);
-    const intensity = chooseIntensity(finalState, uncertainty, primary);
+    const primary=ranked[0].product,secondary=ranked[1].product,avoid=ranked[ranked.length-1].product;
+    const intervention=computeIntervention(finalState,rel,contradiction,uncertainty,ranked[0].preference,ctx);
+    const format=chooseFormat(primary,finalState,ctx,uncertainty);
+    let intensity=preferenceProfile.intensity||chooseIntensity(finalState,uncertainty,primary);
+    if(intervention.stage==='STAGE 2'||intervention.stage==='HOLD')intensity='low';
 
-    st.primary = primary; st.alts = [secondary]; st.avoid = avoid; st.matchScore = ranked[0].final;
-    st.matchReason = [
-      `State fit ${ranked[0].stateFit}`, `History ${ranked[0].history}`, `Context ${ranked[0].context}`,
-      contradiction>35 ? `Contradiction ${contradiction}` : null,
-      uncertainty>35 ? `Uncertainty ${uncertainty}` : null
-    ].filter(Boolean).join(' · ');
-
-    st.engine = {
-      canonicalState: finalState, modalityWeights: w, reliability: rel,
-      contradiction, uncertainty, ranked, context: ctx,
-      intervention: {
-        primary: primary.code, secondary: secondary.code, avoid: avoid.code,
-        format, intensity, remeasureIn: remeasureMinutes(format, uncertainty),
-        duration: format==='diffuser' ? '15-20min' : format==='pillow_mist' ? '10min before sleep' : '1-2 spray'
-      }
-    };
-    st.copy = makeCopy(primary, finalState, ctx, uncertainty);
+    st.primary=primary;st.alts=[secondary];st.avoid=avoid;st.matchScore=ranked[0].final;
+    st.matchReason=[`Preference fit ${ranked[0].preferenceFit}`,`State fit ${ranked[0].stateFit}`,`History ${ranked[0].history}`,`Context ${ranked[0].context}`,contradiction>35?`Contradiction ${contradiction}`:null].filter(Boolean).join(' · ');
+    st.engine={canonicalState:finalState,modalityWeights:dynamic.normalized,weightComponents:dynamic,reliability:rel,contradiction,uncertainty,ranked,context:ctx,preferenceProfile,standardRecipe,personalizedRecipe,
+      axisSources:{survey:surveyAxes,bio:st.bio?{stress:st.bio.stress,balance:st.bio.balance,energy:st.bio.energy,focus:st.bio.focus,mood:st.bio.mood,recovery:st.bio.recovery}:null},
+      intervention:{...intervention,primary:primary.code,secondary:secondary.code,avoid:avoid.code,format,intensity,remeasureIn:remeasureMinutes(format,uncertainty),duration:format==='diffuser'?'15-20min':format==='pillow_mist'?'10min before sleep':'1-2 spray'}};
+    st.copy=makeCopy(primary,finalState,ctx,uncertainty)+` 선호 향 계열 적합도 ${ranked[0].preferenceFit}점을 우선 반영했으며, 스탠다드 레시피를 현재 상태에 맞게 조정했습니다.`;
     return st.engine;
   }
   window.computeFinalMediscent = computeFinalMediscent;
+  window.getMediscentDiagnostic = ()=>({
+    hasBio:!!getS()?.bio?.valid,
+    bio:getS()?.bio?{device:getS().bio.device,quality:getS().bio.quality,coverage:getS().bio.coverage,rows:getS().bio.rows,scores:{stress:getS().bio.stress,balance:getS().bio.balance,energy:getS().bio.energy,focus:getS().bio.focus,mood:getS().bio.mood,recovery:getS().bio.recovery}}:null,
+    weights:getS()?.engine?.modalityWeights||null,
+    finalScores:getS()?.scores||null
+  });
 
   /* ════════════════════════════════════════════════════════════════
      7. 표시 상태/제품 동기화 → computeFinal (단일 정의)
@@ -3149,11 +2144,12 @@ document.addEventListener('DOMContentLoaded',()=>{
     const e = st.engine || {}, rel = e.reliability || {};
     const contradiction = Math.round(e.contradiction||0), uncertainty = Math.round(e.uncertainty||0);
     const steps = [
-      ['01','Survey Normalize','7문항 → 초기 상태 벡터'],
-      ['02','Signal Reliability', st.bio ? 'EEG·HRV 신뢰도 반영' : '설문 중심 신뢰도 계산'],
-      ['03','Face Integration','FaceMesh 보조 신호 통합'],
+      ['01','Preference DNA','선호·비선호 향 계열 → 스탠다드 레시피'],
+      ['02','State Normalize','상태 설문 → 공통 감정 벡터'],
+      ['03','Dynamic Weight', st.bio ? 'Survey·EEG·HRV 신뢰도 동적 가중' : 'Survey 신뢰도 기반 분석'],
       ['04','Contradiction Control',`상충도 ${contradiction} · 불확실성 ${uncertainty}`],
-      ['05','Hybrid Ranking','상태·이력·문맥 기반 추천']
+      ['05','Recipe Personalize','스탠다드 레시피 + 현재 상태 조정'],
+      ['06','Preference-first Ranking','취향 40% · 상태 30% · 이력·문맥 30%']
     ];
     const aSteps = document.getElementById('aSteps');
     if(aSteps) aSteps.innerHTML = steps.map(x=>`<div class="a-step" id="as${x[0]}"><div class="a-step-n">${x[0]}</div><div><span class="a-step-b">${x[1]}</span><span class="a-step-s">${x[2]}</span></div></div>`).join('');
@@ -3169,11 +2165,12 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     const CIRCv = (typeof window.CIRC!=='undefined') ? window.CIRC : 2*Math.PI*38;
     const stages = [
-      {t:450, p:18, s:'설문 상태 정규화 중…', x:'7문항 응답에서 초기 감정 상태를 정규화했습니다.'},
-      {t:1150,p:38, s:'모달 신뢰도 평가 중…', x:`Survey ${Math.round((rel.survey||0)*100)} · Bio ${Math.round((rel.bio||0)*100)} · Face ${Math.round((rel.face||0)*100)}`},
-      {t:1900,p:62, s:'상충도·불확실성 조정 중…', x:`Contradiction ${contradiction} · Uncertainty ${uncertainty}`},
-      {t:2750,p:84, s:'하이브리드 추천 엔진 실행 중…', x:st.matchReason||'상태·이력·문맥 점수를 통합합니다.'},
-      {t:3550,p:100,s:'추천 완료', x:st.copy||'메디센츠 추천이 완료되었습니다.'}
+      {t:350, p:14, s:'향 취향 DNA 생성 중…', x:'선호·비선호 향 계열과 원하는 인상을 스탠다드 레시피로 변환합니다.'},
+      {t:950,p:30, s:'상태 벡터 정규화 중…', x:'상태 설문을 공통 감정 공간으로 변환합니다.'},
+      {t:1550,p:48, s:'동적 가중치 계산 중…', x:`Survey ${Math.round((rel.survey||0)*100)} · Bio ${Math.round((rel.bio||0)*100)}`},
+      {t:2200,p:66, s:'상충도·안전 게이트 확인 중…', x:`Contradiction ${contradiction} · Uncertainty ${uncertainty}`},
+      {t:2850,p:84, s:'개인화 레시피 조정 중…', x:(st.personalizedRecipe?.reasons||[]).join(' · ')},
+      {t:3600,p:100,s:'추천 완료', x:st.matchReason||'취향 40%를 우선 적용한 추천이 완료되었습니다.'}
     ];
     stages.forEach((stg,idx)=>{ const tid=setTimeout(()=>{
       try{
@@ -3210,31 +2207,89 @@ document.addEventListener('DOMContentLoaded',()=>{
       || '<div class="buy-card top"><div class="buy-meta"><div class="buy-rec">Primary</div><div class="buy-name">추천 결과 준비 중</div></div></div>';
   }
   function renderRecoBlock(st){
-    const copyCard=document.querySelector('#pageReport .copy-card');
-    if(!copyCard || !st.engine) return;
-    let block=document.getElementById('recommendationBlock');
-    if(!block){ block=document.createElement('div'); block.id='recommendationBlock'; copyCard.insertAdjacentElement('afterend', block); }
-    const i=st.engine.intervention||{}, rel=st.engine.reliability||{};
+    const copyCard=document.querySelector('#pageReport .copy-card');if(!copyCard||!st.engine)return;
+    let block=document.getElementById('recommendationBlock');if(!block){block=document.createElement('div');block.id='recommendationBlock';copyCard.insertAdjacentElement('afterend',block);}
+    const i=st.engine.intervention||{},rel=st.engine.reliability||{},top=st.engine.ranked?.[0]||{};
     const cell=(k,v)=>`<div style="padding:12px;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border)"><div style="font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink45)">${k}</div><div style="font-size:13px;font-weight:800;margin-top:4px">${v}</div></div>`;
-    block.innerHTML = `<div class="card card-p"><div class="lbl lbl-c">MEDISCENT Recommendation</div>
+    block.innerHTML=`<div class="card card-p"><div class="lbl lbl-c">MEDISCENT Preference-First Recommendation Service</div>
       <div style="font-size:21px;font-weight:800;margin-top:8px">${i.primary||st.primary?.code||'—'}</div>
-      <div style="font-size:11px;color:var(--ink45);margin-top:4px;line-height:1.7">${st.matchReason||'상태 적합도·문맥·이력 기반 추천'}</div>
+      <div style="font-size:11px;color:var(--ink45);margin-top:4px;line-height:1.7">${st.matchReason||'향 취향·현재 상태·이력·문맥을 통합한 추천'}</div>
       <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        ${cell('Secondary', i.secondary||st.alts?.[0]?.code||'—')}
-        ${cell('Avoid', i.avoid||st.avoid?.code||'—')}
-        ${cell('Format', i.format||'perfume')}
-        ${cell('Intensity', i.intensity||'medium')}
+        ${cell('Preference Fit',(top.preferenceFit??'—')+' / 100')}${cell('State Fit',(top.stateFit??'—')+' / 100')}
+        ${cell('Secondary',i.secondary||st.alts?.[0]?.code||'—')}${cell('Avoid',i.avoid||st.avoid?.code||'—')}
+        ${cell('Intervention',`${i.stage||'—'} · ${i.score??'—'}`)}${cell('Format / Intensity',`${i.format||'perfume'} · ${i.intensity||'medium'}`)}
       </div>
       <div style="margin-top:10px;padding:12px;border-radius:12px;background:var(--cbg);border:1px solid var(--cln);font-size:11px;line-height:1.8;color:var(--cdk)">
-        권장 사용 길이 <strong>${i.duration||'1-2 spray'}</strong><br>
-        재측정 타이밍 <strong>${i.remeasureIn||5}분 후</strong><br>
-        모달 신뢰도 Survey <strong>${Math.round((rel.survey||0)*100)}%</strong> · Bio <strong>${Math.round((rel.bio||0)*100)}%</strong> · Face <strong>${Math.round((rel.face||0)*100)}%</strong>
+        추천 가중치 <strong>향 취향 40%</strong> · 현재 상태 30% · 개인 이력 10% · 사용 문맥 10% · 제품 적합성 10%<br>
+        권장 사용 <strong>${i.duration||'1-2 spray'}</strong> · 재측정 <strong>${i.remeasureIn||5}분 후</strong><br>
+        모달 신뢰도 Survey <strong>${Math.round((rel.survey||0)*100)}%</strong> · Bio <strong>${Math.round((rel.bio||0)*100)}%</strong>
       </div></div>`;
   }
 
+
+  function renderPreferenceRecipeBlock(st){
+    const host=document.getElementById('preferenceRecipeBlock');if(!host||!st.engine)return;
+    const pf=st.engine.preferenceProfile||{},sr=st.engine.standardRecipe||{},pr=st.engine.personalizedRecipe||{},wc=st.engine.weightComponents||{},i=st.engine.intervention||{};
+    const fams=Object.entries(sr.familyWeights||{}).filter(([,v])=>v>=3).sort((a,b)=>b[1]-a[1]);
+    const noteHtml=(layer)=>((pr.notes?.[layer]||[]).map(n=>`<div><b>${n.pct}%</b> ${n.note}</div>`).join('')||'—');
+    const weight=(m)=>Math.round((st.engine.modalityWeights?.[m]||0)*100)+'%';
+    host.innerHTML=`<div class="recipe-shell">
+      <div class="recipe-head"><div><div class="lbl lbl-c">Preference DNA → Standard Recipe</div><div class="recipe-title">${pf.characterLabel||'개인 향 취향'} 스탠다드 레시피</div><div class="recipe-sub">선호 향을 먼저 기준선으로 만들고, 현재 상태 설문과 선택형 생체신호는 오늘의 조정값으로 사용합니다.</div></div><div class="recipe-badge">Preference First</div></div>
+      <div class="recipe-family-grid">${fams.map(([k,v])=>`<div class="recipe-family">${FAMILY_LABELS[k]||k} <strong>${v}%</strong></div>`).join('')}</div>
+      <div class="recipe-flow"><span>향 취향 DNA</span>→<span>Standard Recipe</span>→<span>Current-State Adjustment</span>→<span>Product / Custom Blend</span></div>
+      <div class="recipe-pyramid">
+        <div class="recipe-layer"><div class="recipe-layer-k">Top Note</div><div class="recipe-layer-v">${pr.layers?.top||0}%</div><div class="recipe-layer-notes">${noteHtml('top')}</div></div>
+        <div class="recipe-layer"><div class="recipe-layer-k">Middle Note</div><div class="recipe-layer-v">${pr.layers?.middle||0}%</div><div class="recipe-layer-notes">${noteHtml('middle')}</div></div>
+        <div class="recipe-layer"><div class="recipe-layer-k">Base Note</div><div class="recipe-layer-v">${pr.layers?.base||0}%</div><div class="recipe-layer-notes">${noteHtml('base')}</div></div>
+      </div>
+      <div class="recipe-grid2"><div class="recipe-metric"><div class="recipe-metric-k">Standard Character</div><div class="recipe-metric-v">${sr.characterLabel||'—'} · ${pf.intensity||'medium'}</div></div><div class="recipe-metric"><div class="recipe-metric-k">Today Adjustment</div><div class="recipe-metric-v">${(pr.reasons||[])[0]||'기준 레시피 유지'}</div></div></div>
+      <div class="system-evidence"><div class="lbl">PCT-aligned System Evidence</div><div class="system-evidence-grid">
+        <div class="system-evidence-cell"><div class="system-evidence-k">Survey W</div><div class="system-evidence-v">${weight('survey')}</div></div>
+        <div class="system-evidence-cell"><div class="system-evidence-k">Bio W</div><div class="system-evidence-v">${weight('bio')}</div></div>
+        <div class="system-evidence-cell"><div class="system-evidence-k">Contradiction</div><div class="system-evidence-v">${st.engine.contradiction}</div></div>
+        <div class="system-evidence-cell"><div class="system-evidence-k">Uncertainty</div><div class="system-evidence-v">${st.engine.uncertainty}</div></div>
+        <div class="system-evidence-cell"><div class="system-evidence-k">Intervention</div><div class="system-evidence-v">${i.stage||'—'}</div></div>
+      </div></div>
+      <div class="recipe-note">※ 본 레시피는 향 추천 서비스용 상대 조합비입니다. 실제 제조 처방은 원료 규격·IFRA 제한·안전성 검토 후 별도 확정해야 합니다.</div>
+    </div>`;
+  }
+
+
+  function renderBioFusionBlock(st){
+    const old=document.getElementById('bioFusionBlock');
+    if(!st.bio?.valid){if(old)old.remove();return;}
+    const anchor=document.getElementById('preferenceRecipeBlock')||document.getElementById('bioReportBadge');
+    if(!anchor)return;
+    let block=old;
+    if(!block){block=document.createElement('div');block.id='bioFusionBlock';anchor.insertAdjacentElement('afterend',block);}
+    const src=st.engine?.axisSources||{},sw=Math.round((st.engine?.modalityWeights?.survey||0)*100),bw=Math.round((st.engine?.modalityWeights?.bio||0)*100);
+    const axes=[['Stress','stress'],['Balance','balance'],['Energy','energy'],['Focus','focus'],['Mood','mood'],['Recovery','recovery']];
+    block.innerHTML=`<div class="card card-p">
+      <div class="lbl lbl-c">Uploaded Bio Data Application Check</div>
+      <div style="font-size:12px;font-weight:800;margin-top:6px">실제 최종 가중치 · Survey ${sw}% / Bio ${bw}%</div>
+      <div style="font-size:10px;color:var(--ink45);margin-top:4px;line-height:1.7">${st.bio.device} · 품질 ${Math.round((st.bio.quality||0)*100)}% · ${st.bio.source||''}</div>
+      <div style="overflow:auto;margin-top:10px;border:1px solid var(--glass-border);border-radius:12px;background:rgba(255,255,255,.58)">
+        <table class="tbl"><thead><tr><th>Axis</th><th>Survey</th><th>Uploaded Bio</th><th>Final</th></tr></thead><tbody>
+        ${axes.map(([label,k])=>`<tr><td>${label}</td><td>${src.survey?.[k]??'—'}</td><td><strong>${src.bio?.[k]??'—'}</strong></td><td><strong>${st.scores?.[k]??'—'}</strong></td></tr>`).join('')}
+        </tbody></table>
+      </div>
+    </div>`;
+  }
+
   window.renderReport = function renderReport(){
-    const st=getS(); if(!st) return;
-    window.computeFinal();
+    const st=getS();
+    if(!st){
+      console.error('MEDISCENT report: global state S is unavailable');
+      return;
+    }
+    try{
+      window.computeFinal();
+    }catch(err){
+      console.error('MEDISCENT report compute error', err);
+      const copy=document.getElementById('rCopy');
+      if(copy) copy.innerHTML='<strong>리포트 계산 오류</strong><br>설문 또는 업로드 데이터를 다시 확인해 주세요.';
+      return;
+    }
     const p=st.primary||{code:'추천 결과',notes:'',use:'',keywords:[],eq:{}};
     const pct=clamp(st.matchScore||0);
     const T=(id,v)=>{ const el=document.getElementById(id); if(el)el.textContent=v; };
@@ -3247,7 +2302,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     T('rMatchReason', st.matchReason||'메디센츠 추천 엔진');
     T('rMatchTag', pct>=85?'Excellent Match':pct>=70?'Good Match':'Suggested');
     H('rCopy', String(st.copy||'추천 결과를 준비했습니다.').replace(/(\d+[%점ms])/g,'<strong>$1</strong>'));
-    renderAxis(st); renderEqRows(st); renderBuy(st);
+    renderAxis(st); renderEqRows(st); renderBuy(st); renderPreferenceRecipeBlock(st); renderBioFusionBlock(st);
 
     const rTable=document.getElementById('rTable');
     if(rTable){
@@ -3264,8 +2319,9 @@ document.addEventListener('DOMContentLoaded',()=>{
           ['EQ Valence',clamp(u.valence),'Canonical','정서 가치'],
           ['EQ Arousal',clamp(u.arousal),'Canonical','각성 에너지']
         ]),
-        ['Face Conf.',Math.round(st.face?.confidence||0)+'%','FaceMesh','메쉬 신뢰도'],
-        ['Match',pct+'%','Engine','하이브리드 매칭'],
+        ['Preference Fit',(st.engine?.ranked?.[0]?.preferenceFit??'—')+'/100','Preference DNA','선호 향 계열 적합도'],
+        ['Intervention',`${st.engine?.intervention?.stage||'—'} · ${st.engine?.intervention?.score??'—'}`,'Safety Gate','개입 단계·점수'],
+        ['Match',pct+'%','Engine','취향 우선 하이브리드 매칭'],
         ['Closed-loop','READY','MEDISCENT','재측정 가능']
       ];
       rTable.innerHTML = rows.map(r=>`<tr><td class="mono">${r[0]}</td><td class="mono">${r[1]??'—'}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('');
@@ -3274,7 +2330,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     // Bio 배지
     if(st.bio){
       const badge=document.getElementById('bioReportBadge');
-      if(badge){ badge.style.display=''; badge.innerHTML=`<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(29,158,117,.10);border:1px solid rgba(29,158,117,.30);border-radius:12px;margin-bottom:-4px"><span style="font-size:16px">🧠</span><div><div style="font-size:10px;font-weight:700;color:#0f6e56">Bio-Signal 반영됨</div><div style="font-size:9px;color:#1D9E75;margin-top:1px">RMSSD ${st.bio.raw.rmssd}ms · LF/HF ${st.bio.raw.lf_hf} · HR ${st.bio.raw.hr}bpm</div></div></div>`; }
+      if(badge){ const bw=Math.round((st.engine?.modalityWeights?.bio||0)*100),sw=Math.round((st.engine?.modalityWeights?.survey||0)*100); badge.style.display=''; badge.innerHTML=`<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(29,158,117,.10);border:1px solid rgba(29,158,117,.30);border-radius:12px;margin-bottom:-4px"><span style="font-size:16px">🧠</span><div><div style="font-size:10px;font-weight:700;color:#0f6e56">Bio-Signal 실제 반영 완료 · Bio ${bw}% / Survey ${sw}%</div><div style="font-size:9px;color:#1D9E75;margin-top:1px">품질 ${Math.round((st.bio.quality||0)*100)}% · RMSSD ${st.bio.raw.rmssd??'—'} · LF/HF ${st.bio.raw.lf_hf??'—'} · HR ${st.bio.raw.hr??'—'}</div></div></div>`; }
       document.querySelectorAll('.score-pill').forEach(el=>{ el.classList.add('bio-src'); if(!el.querySelector('.bio-src-label')){ const lb=document.createElement('div'); lb.className='bio-src-label'; lb.textContent='🧠 Bio+Survey'; el.appendChild(lb); } });
     }
 
@@ -3291,7 +2347,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       const list=JSON.parse(localStorage.getItem('shifti_v5bio')||'[]');
       list.unshift({ ts:Date.now(), primary:st.primary.code, scores:{...st.scores},
         matchScore:Math.round(st.matchScore||0), copy:(st.copy||'').slice(0,120),
-        hasBio:!!st.bio, rmssd:st.bio?.raw?.rmssd||null });
+        hasBio:!!st.bio, rmssd:st.bio?.raw?.rmssd||null, scentFamilies:st.preferenceProfile?.selected||[], standardRecipe:st.standardRecipe||null });
       localStorage.setItem('shifti_v5bio', JSON.stringify(list.slice(0,50)));
     }catch(e){ console.error('saveHist',e); }
     // 폐루프 baseline 도 기록
@@ -3399,7 +2455,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.addEventListener('DOMContentLoaded', ()=>{
     const n=document.querySelector('.hdr-name'); if(n) n.textContent='SHIFTI · MEDISCENT';
     const pill=document.getElementById('hdrPill'); if(pill && pill.textContent==='진단 대기') pill.textContent='MEDISCENT 엔진 준비';
-    const t=document.querySelector('title'); if(t) t.textContent='SHIFTI MEDISCENT LAB — Unified Engine';
+    const t=document.querySelector('title'); if(t) t.textContent='SHIFTI MEDISCENT LAB — Preference-First Engine v11';
   });
 })();
 
