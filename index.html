@@ -472,7 +472,7 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
     <div class="hdr-mark">S</div>
     <span class="hdr-name">SHIFTI</span>
   </div>
-  <div class="hdr-pill" id="hdrPill">진단 대기</div>
+  <div class="hdr-pill" id="hdrPill">분석 대기</div>
 </header>
 <div class="progbar"><div class="progbar-fill" id="progFill" style="width:0%"></div></div>
 
@@ -498,7 +498,7 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
         </div>
         <div class="hero-cta">
           <button class="hero-start" onclick="goPage('survey')">
-            진단 시작하기
+            분석 시작하기
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
           <button class="hero-hist" onclick="goPage('history')">기록</button>
@@ -508,7 +508,7 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
     <div class="trust-strip wa" style="--d:100ms">
       <div class="trust-it"><div class="trust-n" data-target="98">0<sup>%</sup></div><div class="trust-u">Natural</div><div class="trust-d">ISO 16128<br>자연유래</div></div>
       <div class="trust-it"><div class="trust-n" data-target="8">0</div><div class="trust-u">Scent DNA</div><div class="trust-d">8개 향 계열<br>취향 분석</div></div>
-      <div class="trust-it"><div class="trust-n" data-target="6">0</div><div class="trust-u">Axes</div><div class="trust-d">감정축<br>진단엔진</div></div>
+      <div class="trust-it"><div class="trust-n" data-target="6">0</div><div class="trust-u">Axes</div><div class="trust-d">감정축<br>분석엔진</div></div>
       <div class="trust-it"><div class="trust-n" data-target="6">0</div><div class="trust-u">Scents</div><div class="trust-d">TATE<br>ARCHIVE</div></div>
     </div>
     <div class="tech-grid wa" style="--d:180ms">
@@ -565,14 +565,18 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
       <div class="bio-blend-badge" style="margin-bottom:14px">
         🧠 Bio 60% + 📋 설문 40% 블렌딩
       </div>
-      <div class="bio-upload-zone" id="bioDropZone" onclick="$('bioFile').click()">
+      <label style="display:flex;gap:9px;align-items:flex-start;margin-bottom:12px;padding:11px 12px;border-radius:12px;background:rgba(255,255,255,.62);border:1px solid var(--glass-border);font-size:11px;line-height:1.65;color:var(--ink70);cursor:pointer">
+        <input type="checkbox" id="bioConsent" style="margin-top:3px;width:16px;height:16px;flex:none">
+        <span><strong>생체신호 이용 동의 (선택)</strong><br>EEG·HRV 파일을 이 기기 안에서 향 추천 계산에만 사용하는 데 동의합니다. 파일과 측정값은 서버로 보내거나 저장하지 않으며, 새 분석을 시작하면 지워집니다. 동의하지 않아도 설문만으로 추천받을 수 있습니다.</span>
+      </label>
+      <div class="bio-upload-zone" id="bioDropZone" onclick="bioPick()">
         <div style="font-size:36px;margin-bottom:10px">📂</div>
         <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px">NNFX2 XLS 파일 선택</div>
         <div style="font-size:11px;color:var(--ink45);line-height:1.7">EEG · Power Spectrum · HRV 3개 시트 포함<br>파일명 예: 127016_omnifit001_M_60_*.xls</div>
         <div style="margin-top:12px;font-size:9px;color:var(--ink22);font-weight:600;letter-spacing:.06em">클릭 또는 드래그 앤 드롭</div>
       </div>
       <input type="file" id="bioFile" accept=".xls,.xlsx,.csv" style="display:none"/>
-      <button class="btn btn-c" style="width:100%;margin-top:12px;padding:13px" onclick="$('bioFile').click()">파일 선택하기</button>
+      <button class="btn btn-c" style="width:100%;margin-top:12px;padding:13px" onclick="bioPick()">파일 선택하기</button>
       <button class="btn btn-gh" style="width:100%;margin-top:6px;padding:10px;font-size:12px;color:var(--ink45)" onclick="skipBio()">건너뛰기 → 설문 점수만 사용</button>
     </div>
 
@@ -687,7 +691,7 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
     <div style="display:flex;gap:6px;flex-wrap:wrap">
       <button class="btn btn-ink btn-sm" id="btnShare">공유 카드</button>
       <button class="btn btn-c btn-sm" id="btnInsight">Insight →</button>
-      <button class="btn btn-gh btn-sm" id="btnReset">새 진단</button>
+      <button class="btn btn-gh btn-sm" id="btnReset">새 분석</button>
     </div>
   </div>
 </div>
@@ -716,7 +720,7 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
     <div class="ins-box" id="insB2"><div class="ins-box-k">C. 사용 가이드</div><div class="ins-box-t" id="insC">—</div></div>
     <div style="display:flex;gap:6px">
       <button class="btn btn-gh btn-sm" onclick="goPage('welcome')">처음으로</button>
-      <button class="btn btn-gh btn-sm" onclick="resetAll()">새 진단</button>
+      <button class="btn btn-gh btn-sm" onclick="resetAll()">새 분석</button>
     </div>
   </div>
 </div>
@@ -726,10 +730,10 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
   <div class="shell">
     <div class="vhdr">
       <div class="vhdr-kicker"><div class="vhdr-line"></div><span class="vhdr-txt">History</span></div>
-      <div class="vhdr-title">진단 기록</div>
+      <div class="vhdr-title">분석 기록</div>
     </div>
     <div style="display:flex;gap:6px;margin-bottom:10px">
-      <button class="btn btn-ink btn-sm" onclick="resetAll()">새 진단</button>
+      <button class="btn btn-ink btn-sm" onclick="resetAll()">새 분석</button>
       <button class="btn btn-gh btn-sm" id="btnHDel">전체 삭제</button>
       <button class="btn btn-gh btn-sm" onclick="goPage('welcome')">← 홈</button>
     </div>
@@ -777,7 +781,7 @@ body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--
 </div>
 
 <!-- ★ SheetJS (XLS 파싱) -->
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" onerror="var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';document.head.appendChild(s)"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js" onerror="var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';document.head.appendChild(s)"></script>
 <!-- ★ html2canvas (공유 카드) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
@@ -794,7 +798,10 @@ const $=id=>document.getElementById(id);
 const on=(id,ev,fn)=>{const e=$(id);if(e)e.addEventListener(ev,fn)};
 function toast(msg,dur=2400){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),dur)}
 
-const LINKS={'말괄량이':'https://shifti.co.kr/product/shifti-%EB%A7%90%EA%B4%84%EB%9F%89%EC%9D%B4-eau-de-parfum-30ml/47/','Red Tara':'https://shifti.co.kr/product/shifti-red-tara-eau-de-parfum-30ml/46/','Who am I':'https://shifti.co.kr/product/shifti-who-am-i-eau-de-parfum-30ml/45/','Foggy Study':'https://shifti.co.kr/product/shifti-foggy-study-eau-de-parfum-30ml/44/','AnnE':'https://shifti.co.kr/product/shifti-anne-eau-de-parfum-30ml/43/','The Great':'https://shifti.co.kr/product/shifti-the-great-eau-de-parfum-30ml/38/'};
+/* v12: 공식몰 상품 번호 기준 링크 (2026-10-20 확인). 제인·뉴리프는 상품 페이지가 없어 목록으로 연결 */
+const SHOP_LIST='https://shifti.co.kr/product/list.html?cate_no=60';
+const LINKS={'AnnE':'https://shifti.co.kr/product/detail.html?product_no=43','Foggy Study':'https://shifti.co.kr/product/detail.html?product_no=44','Who am I':'https://shifti.co.kr/product/detail.html?product_no=45','Red Tara':'https://shifti.co.kr/product/detail.html?product_no=46','말괄량이':'https://shifti.co.kr/product/detail.html?product_no=47','The Great':'https://shifti.co.kr/product/detail.html?product_no=38','Secret Garden':'https://shifti.co.kr/product/detail.html?product_no=34','Violet Hill':'https://shifti.co.kr/product/detail.html?product_no=33','Sunlit Window':'https://shifti.co.kr/product/detail.html?product_no=32','Urban Forest':'https://shifti.co.kr/product/detail.html?product_no=31'};
+const STORE_MODE=/[?&]store=1\b/.test(location.search);
 
 /* ══ STATE ══ */
 const S={
@@ -923,8 +930,36 @@ function extractMetricsFromRows(rows, aliasMap){
 
   const values={};
   Object.entries(found).forEach(([k,v])=>values[k]=bioAvg(v));
-  return {values,dataRows,headerScore:Math.max(0,best.score)};
+  return {values,dataRows,headerScore:Math.max(0,best.score),headerRow:best.row,map:best.map};
 }
+
+/* v12 HRV: RR 간격 이상값 제거.
+   ① 생리 범위 300~2000ms 밖 제거 ② 직전 정상 박동 대비 20% 넘게 변한 박동 제거(이소성 박동·측정 오류, Malik 기준)
+   HRV 지표 정의는 Task Force of ESC/NASPE(1996)를 따른다. */
+function cleanRR(rr){
+  const inRange=rr.filter(v=>v>=300&&v<=2000);
+  const clean=[];
+  if(!inRange.length)return {clean,removed:rr.length,artifactRatio:rr.length?1:0};
+  // 기준은 중앙값에서 시작한다(첫 박동이 이상값이어도 이후 정상 박동을 버리지 않도록).
+  const sorted=[...inRange].sort((a,b)=>a-b);
+  let ref=sorted[Math.floor(sorted.length/2)];
+  inRange.forEach(v=>{
+    if(Math.abs(v-ref)<=ref*0.20){clean.push(v);ref=v;}
+  });
+  return {clean,removed:rr.length-clean.length,artifactRatio:rr.length?(rr.length-clean.length)/rr.length:0};
+}
+function hrvTimeDomain(rr){
+  if(rr.length<2)return {rmssd:null,sdnn:null,pnn50:null,hr:null};
+  const mean=rr.reduce((s,v)=>s+v,0)/rr.length;
+  const diffs=[];for(let i=1;i<rr.length;i++)diffs.push(rr[i]-rr[i-1]);
+  return {
+    rmssd:Math.sqrt(diffs.reduce((s,d)=>s+d*d,0)/diffs.length),
+    sdnn:Math.sqrt(rr.reduce((s,v)=>s+(v-mean)*(v-mean),0)/(rr.length-1)),
+    pnn50:diffs.filter(d=>Math.abs(d)>50).length/diffs.length*100,
+    hr:60000/mean
+  };
+}
+const HRV_MIN_BEATS=60; /* 약 1분. 이보다 짧으면 RR로 계산한 HRV를 쓰지 않는다 */
 
 function normalizeRR(raw){
   const v=bioNum(raw);
@@ -964,38 +999,50 @@ async function parseBioXLS(file){
 
         const ev=bestEEG.values||{}, hv=bestHRV.values||{};
 
-        // Collect RR intervals independently; support milliseconds and seconds.
+        // v12: RR은 'RR Interval' 열에서만 읽는다. (v11은 시트의 모든 숫자를 RR로 오인해 LF/HF 1.4가 1400ms로 섞였음)
         const rrIntervals=[];
-        (bestHRV.rows||[]).forEach(row=>{
-          if(!Array.isArray(row))return;
-          row.forEach(cell=>{
-            const rr=normalizeRR(cell);
-            if(rr!=null)rrIntervals.push(rr);
-          });
-        });
-        // Avoid treating unrelated numbers as RR: keep a stable physiological run when possible.
-        const rrClean=rrIntervals.length>4 ? rrIntervals : [];
-
-        let rmssd=hv.rmssd;
-        if((rmssd==null||rmssd<=0) && rrClean.length>2){
-          const diffs=[];
-          for(let i=1;i<rrClean.length;i++)diffs.push(rrClean[i]-rrClean[i-1]);
-          rmssd=Math.sqrt(diffs.reduce((s,d)=>s+d*d,0)/diffs.length);
+        const hrvRows=bestHRV.rows||[];
+        let rrCol=bestHRV.map&&bestHRV.map.rr!=null?bestHRV.map.rr:-1, rrStart=bestHRV.headerRow+1;
+        if(rrCol<0){
+          sheets.some(sh=>sh.rows.slice(0,80).some((row,r)=>{
+            const c=Array.isArray(row)?row.findIndex(cell=>bioMatch(cell,HRV_ALIASES.rr)):-1;
+            if(c>=0){rrCol=c;rrStart=r+1;bestHRV.rows=sh.rows;return true;}
+            return false;
+          }));
         }
+        if(rrCol>=0){
+          for(let r=rrStart;r<(bestHRV.rows||hrvRows).length;r++){
+            const row=(bestHRV.rows||hrvRows)[r];
+            if(!Array.isArray(row))continue;
+            const raw=row[rrCol];
+            if(raw==null||raw===''){ if(rrIntervals.length)break; else continue; }
+            const v=normalizeRR(raw);
+            if(v!=null)rrIntervals.push(v);
+          }
+        }
+        const rrQ=cleanRR(rrIntervals);
+        const rrClean=rrQ.clean.length>=HRV_MIN_BEATS?rrQ.clean:[];
+        const td=hrvTimeDomain(rrClean);
 
-        let hr=hv.hr;
-        if((hr==null||hr<=0) && rrClean.length)hr=60000/bioAvg(rrClean);
+        // 파일에 RMSSD가 있으면 그 값, 없으면 정제된 RR(1분 이상)로 계산
+        let rmssd=hv.rmssd!=null&&hv.rmssd>0?hv.rmssd:td.rmssd;
+        let hr=hv.hr!=null&&hv.hr>0?hv.hr:td.hr;
+        const sdnn=td.sdnn, pnn50=td.pnn50;
 
-        const theta=bioAvg([ev.thetaL,ev.thetaR,ev.theta]);
-        const alpha=bioAvg([ev.alphaL,ev.alphaR,ev.alpha]);
-        const beta =bioAvg([ev.betaL,ev.betaR,ev.beta]);
-        const relax=bioAvg([ev.relaxationL,ev.relaxationR,ev.relaxation]);
+        const thetaArr=[ev.thetaL,ev.thetaR].filter(v=>v!=null);
+        const theta=thetaArr.length?bioAvg(thetaArr):ev.theta;
+        const alpha=bioAvg([ev.alphaL,ev.alphaR].filter(v=>v!=null))??ev.alpha;
+        const beta =bioAvg([ev.betaL,ev.betaR].filter(v=>v!=null))??ev.beta;
+        const relax=bioAvg([ev.relaxationL,ev.relaxationR].filter(v=>v!=null))??ev.relaxation;
         const conc=ev.concentration;
         const lrbal=ev.balance;
 
         const hf=hv.hf, lf=hv.lf, tp=hv.tp;
         const lf_hf=hv.lfhf!=null?hv.lfhf:(hf!=null&&hf>0&&lf!=null?lf/hf:null);
-        const ab_ratio=alpha!=null&&beta!=null&&beta>0?alpha/beta:null;
+        // 전두엽 알파 비대칭 FAA = ln(우 알파) − ln(좌 알파). 양수 = 좌측 활성 우세 = 접근·긍정 정서 경향 (Davidson; Smith 등 2017)
+        const faa=ev.alphaL>0&&ev.alphaR>0?Math.log(ev.alphaR)-Math.log(ev.alphaL):null;
+        // 참여 지수 EI = β/(α+θ) (Pope 등 1995). 각성·몰입 경향. v11의 α/β는 이완 지표라 집중에 반대로 쓰였음
+        const ei=beta!=null&&alpha!=null&&theta!=null&&(alpha+theta)>0?beta/(alpha+theta):null;
 
         const available=[
           theta,alpha,beta,conc,relax,lrbal,rmssd,lf_hf,hf,tp,hr
@@ -1004,25 +1051,37 @@ async function parseBioXLS(file){
 
         const th_n=bioNorm.eeg(theta), al_n=bioNorm.eeg(alpha), bt_n=bioNorm.eeg(beta);
         const co_n=bioNorm.eeg(conc), re_n=bioNorm.eeg(relax), lr_n=bioNorm.eeg(lrbal);
-        const ab_n=bioNorm.ab(ab_ratio), rm_n=bioNorm.rmssd(rmssd), lf_n=bioNorm.lfhf(lf_hf);
+        const rm_n=bioNorm.rmssd(rmssd), lf_n=bioNorm.lfhf(lf_hf);
         const hf_n=bioNorm.hf(hf), tp_n=bioNorm.tp(tp), hr_n=bioNorm.hr(hr);
+        const faa_n=faa==null?null:Math.max(0,Math.min(100,50+faa*100));
+        const ei_n=ei==null?null:Math.max(0,Math.min(100,(ei-0.2)/(1.2-0.2)*100));
+        const inv=v=>v==null?null:100-v;
 
-        // Missing inputs are omitted rather than silently replaced with zero.
-        const stress   =bioWavg([[th_n,.35],[lf_n,.40],[co_n==null?null:100-co_n,.25]]);
-        const balance  =bioWavg([[lf_n==null?null:100-lf_n,.35],[al_n,.35],[lr_n,.30]]);
+        // 빠진 지표는 0으로 채우지 않고 가중 평균에서 뺀다.
+        const stress   =bioWavg([[lf_n,.40],[inv(rm_n),.30],[th_n,.15],[inv(re_n),.15]]);
+        const balance  =bioWavg([[inv(lf_n),.35],[al_n,.35],[lr_n,.30]]);
         const energy   =bioWavg([[tp_n,.30],[bt_n,.40],[hr_n,.30]]);
-        const focus    =bioWavg([[co_n,.40],[ab_n,.35],[hf_n,.25]]);
-        const mood     =bioWavg([[al_n,.45],[re_n,.35],[th_n==null?null:100-th_n,.20]]);
+        const focus    =bioWavg([[co_n,.50],[ei_n,.50]]);
+        const mood     =bioWavg([[faa_n,.35],[al_n,.25],[re_n,.25],[inv(th_n),.15]]);
         const recovery =bioWavg([[rm_n,.50],[hf_n,.30],[re_n,.20]]);
 
         const eegMetricCount=[theta,alpha,beta,conc,relax,lrbal].filter(v=>v!=null).length;
         const hrvMetricCount=[rmssd,lf_hf,hf,tp,hr].filter(v=>v!=null).length;
         const coverage=(eegMetricCount/6+hrvMetricCount/5)/2;
-        const rowSignal=Math.min(1,((bestEEG.dataRows||0)/20+(rrClean.length||bestHRV.dataRows||0)/40)/2);
-        const quality=Math.max(.45,Math.min(.98,.45+coverage*.40+rowSignal*.13));
+        const rowSignal=Math.min(1,((bestEEG.dataRows||0)/20+(rrClean.length||0)/120)/2);
+        // 이상 박동이 10%를 넘거나 RR이 1분보다 짧으면 품질을 낮춘다 → 엔진이 설문 비중을 자동으로 올린다
+        let quality=.45+coverage*.40+rowSignal*.13;
+        if(rrIntervals.length&&rrQ.artifactRatio>0.10)quality-=Math.min(.25,(rrQ.artifactRatio-0.10)*1.5);
+        if(rrIntervals.length&&rrQ.clean.length<HRV_MIN_BEATS)quality-=.10;
+        quality=Math.max(.30,Math.min(.98,quality));
+        const warnings=[];
+        if(rrIntervals.length&&rrQ.clean.length<HRV_MIN_BEATS)warnings.push(`RR 기록이 ${rrQ.clean.length}박으로 짧아(1분 미만) RR 기반 HRV는 계산하지 않았습니다.`);
+        if(rrQ.artifactRatio>0.10)warnings.push(`이상 박동·측정 오류 ${Math.round(rrQ.artifactRatio*100)}%를 제외했습니다. 재측정을 권장합니다.`);
         const sources=[];
         if(eegMetricCount)sources.push(`EEG:${bestEEG.name}`);
         if(hrvMetricCount)sources.push(`HRV:${bestHRV.name}`);
+        const ext=(String(file.name||'').match(/\.[a-z0-9]+$/i)||[''])[0].toLowerCase();
+        const r1=(v,d)=>v==null?null:Math.round(v*d)/d;
 
         resolve({
           valid:true,
@@ -1032,21 +1091,16 @@ async function parseBioXLS(file){
           coverage:{eeg:eegMetricCount,hrv:hrvMetricCount,total:available},
           source:sources.join(' · ')||wb.SheetNames.join(', '),
           raw:{
-            rmssd:rmssd==null?null:Math.round(rmssd*10)/10,
-            lf_hf:lf_hf==null?null:Math.round(lf_hf*1000)/1000,
-            hf:hf==null?null:Math.round(hf*100)/100,
-            lf:lf==null?null:Math.round(lf*100)/100,
-            tp:tp==null?null:Math.round(tp*100)/100,
-            hr:hr==null?null:Math.round(hr*10)/10,
-            theta:theta==null?null:Math.round(theta*100)/100,
-            alpha:alpha==null?null:Math.round(alpha*100)/100,
-            beta:beta==null?null:Math.round(beta*100)/100,
-            conc:conc==null?null:Math.round(conc*100)/100,
-            relax:relax==null?null:Math.round(relax*100)/100,
-            lrbal:lrbal==null?null:Math.round(lrbal*100)/100
+            rmssd:r1(rmssd,10),sdnn:r1(sdnn,10),pnn50:r1(pnn50,10),
+            lf_hf:r1(lf_hf,1000),hf:r1(hf,100),lf:r1(lf,100),tp:r1(tp,100),hr:r1(hr,10),
+            theta:r1(theta,100),alpha:r1(alpha,100),beta:r1(beta,100),conc:r1(conc,100),relax:r1(relax,100),lrbal:r1(lrbal,100),
+            faa:r1(faa,1000),ei:r1(ei,1000)
           },
-          device:file.name,
-          rows:{eeg:bestEEG.dataRows||0,rr:rrClean.length||bestHRV.dataRows||0},
+          rr:{total:rrIntervals.length,clean:rrQ.clean.length,removed:rrQ.removed,artifactPct:Math.round(rrQ.artifactRatio*1000)/10},
+          warnings,
+          // 파일명에는 측정 ID·성별·나이가 들어 있을 수 있어 화면·기록에 남기지 않는다.
+          device:`NNFX2 파일${ext?' ('+ext+')':''}`,
+          rows:{eeg:bestEEG.dataRows||0,rr:rrClean.length},
           sheets:wb.SheetNames
         });
       }catch(err){reject(err?.message||String(err)||'생체신호 파일 파싱 실패');}
@@ -1070,7 +1124,9 @@ function renderBioResult(bio){
     `<strong>LF/HF ${fmt(bio.raw.lf_hf)}</strong> — ${lfStatus}&nbsp;·&nbsp;`+
     `<strong>RMSSD ${fmt(bio.raw.rmssd)}${bio.raw.rmssd==null?'':'ms'}</strong>&nbsp;·&nbsp;`+
     `<strong>HR ${fmt(bio.raw.hr)}${bio.raw.hr==null?'':'bpm'}</strong><br>`+
-    `주요 상태: <strong>${dom}</strong> · EEG ${bio.rows.eeg}행 · RR/HRV ${bio.rows.rr}행`;
+    `주요 상태: <strong>${dom}</strong> · EEG ${bio.rows.eeg}행 · 정상 RR ${bio.rr?.clean??bio.rows.rr}박`+
+    (bio.rr?.removed?` (이상값 ${bio.rr.removed}개 제외)`:'')+
+    ((bio.warnings||[]).length?`<br><span style="color:#b45309">⚠ ${bio.warnings.join(' ')}</span>`:'');
 
   const quality=Math.round((bio.quality||0)*100);
   $('bioApplyStatus').innerHTML=
@@ -1102,7 +1158,8 @@ function renderBioResult(bio){
   const r=bio.raw;
   $('bioRawGrid').innerHTML=[
     {k:'RMSSD',v:r.rmssd??'—',u:r.rmssd==null?'':'ms'},{k:'LF/HF',v:r.lf_hf??'—',u:'ratio'},{k:'HR',v:r.hr??'—',u:r.hr==null?'':'bpm'},
-    {k:'Theta',v:r.theta??'—',u:'/10'},{k:'Alpha',v:r.alpha??'—',u:'/10'},{k:'Conc.',v:r.conc??'—',u:'/10'}
+    {k:'SDNN',v:r.sdnn??'—',u:r.sdnn==null?'':'ms'},{k:'pNN50',v:r.pnn50??'—',u:r.pnn50==null?'':'%'},{k:'Conc.',v:r.conc??'—',u:'/10'},
+    {k:'FAA',v:r.faa??'—',u:'ln R−L'},{k:'EI',v:r.ei??'—',u:'β/(α+θ)'},{k:'Alpha',v:r.alpha??'—',u:'/10'}
   ].map(it=>`<div class="bio-raw-cell"><div class="bio-raw-k">${it.k}</div><div class="bio-raw-v">${it.v}</div><div class="bio-raw-u">${it.u}</div></div>`).join('');
 }
 
@@ -1123,6 +1180,11 @@ function confirmBio(){
   safeEnterAnalysis();
 }
 
+function bioConsented(){const c=$('bioConsent');return !!(c&&c.checked);}
+function bioPick(){
+  if(!bioConsented()){toast('생체신호 이용 동의에 체크한 뒤 파일을 선택해 주세요.');$('bioConsent')?.focus();return;}
+  $('bioFile').click();
+}
 function initBioHandler(){
   const bioFile=$('bioFile');
   if(!bioFile) return;
@@ -1154,6 +1216,7 @@ function initBioHandler(){
       e.preventDefault();zone.classList.remove('drag');
       const file=e.dataTransfer?.files?.[0];
       if(!file) return;
+      if(!bioConsented()){toast('생체신호 이용 동의에 체크한 뒤 파일을 올려 주세요.');return;}
       toast('XLS 파싱 중…');
       try{
         const bio=await parseBioXLS(file);
@@ -1170,33 +1233,63 @@ function initBioHandler(){
   }
 }
 
-/* ══ SCENT DATABASE v5 ══ */
-const SCENTS=[
-  {code:'Foggy Study',mood:'calm-focus',notes:'Tea Leaves · Cedar · Warm Musk',use:'과부하된 사고를 정돈하고 집중력을 정제합니다',color:'#2b5c8a',keywords:['집중','정돈','지적'],
-   eq:{valence:50,arousal:78,stress:22,engagement:92,relaxation:28,interest:95},
-   profile:{stress:30,balance:60,energy:65,focus:80,mood:55,recovery:50},intentW:{change:1.4,keep:0.8,neutral:1.1},
-   strength:'인지 과부하 → 집중 정제. Engagement 92·Interest 95'},
-  {code:'AnnE',mood:'gentle-balance',notes:'White Floral · Cotton · Clean Musk',use:'섬세함과 안정감의 균형',color:'#a85560',keywords:['균형','안정','우아'],
+/* ══ SCENT DATABASE v12 ══
+   노트: 공식몰 상세페이지·ERP 제품 마스터 기준 (2026-10-20 확인).
+   eq(6D): 기존 STATE ARCHIVE 6향은 v11 값 유지. Nature's Breath 4향은 노트·테마 기반 초기값(추정) — 시향 패널 데이터로 보정 필요.
+   status: 'pending' = 노트·상품 정보가 없어 추천에서 제외 (제인·뉴리프). 정보가 들어오면 'active'로 바꾼다. */
+const NOTE_FAMILY={
+  'Lemon':'citrus','Yuzu':'citrus','Grapefruit':'citrus','Orange':'citrus','Sweet Orange':'citrus','Bergamot':'citrus','Citrus':'citrus','Elemi':'citrus',
+  'Lavender':'green','Rosemary':'green','Peppermint':'green','Petitgrain':'green','Clary Sage':'green','Pine':'green','Green Leaves':'green','Violet Leaf':'green','Aqua':'green',
+  'Jasmine':'floral','Rose':'floral','Neroli':'floral','Magnolia':'floral','Narcissus':'floral','White Floral':'floral',
+  'Violet':'powdery',
+  'Cedarwood':'woody','Cedar':'woody','Woody':'woody','Wood':'woody','Sandalwood':'woody','Cypress':'woody','Vetiver':'woody','Patchouli':'woody',
+  'Musk':'musk','Clean Musk':'musk','Soft Musk':'musk',
+  'Amber':'amber_spice','Ambroxan':'amber_spice','Incense':'amber_spice','Benzoin':'amber_spice','Black Pepper':'amber_spice','Pink Pepper':'amber_spice','Cinnamon':'amber_spice','Cardamom':'amber_spice',
+  'Raspberry':'fruity'
+};
+const SCENTS_ALL=[
+  {code:'AnnE',collection:'STATE ARCHIVE',mood:'gentle-balance',top:['Lemon','Yuzu','Grapefruit'],middle:['Lavender','Jasmine'],base:['Cedarwood','Musk'],use:'균형감 있는 하루를 위한 향',color:'#a85560',keywords:['균형','안정','산뜻'],
    eq:{valence:88,arousal:72,stress:25,engagement:85,relaxation:65,interest:90},
-   profile:{stress:25,balance:78,energy:58,focus:65,mood:76,recovery:68},intentW:{change:0.7,keep:1.5,neutral:1.2},
-   strength:'균형·안정의 완성형. Valence 88·Relaxation 65'},
-  {code:'Who am I',mood:'introspective',notes:'Iris · Dark Wood · Quiet Amber',use:'내면 정리와 깊은 사색',color:'#5a4a8a',keywords:['내면','사색','고요'],
+   guide:'외출 전 목선·소매에 각 1회. 시트러스로 시작해 우디·머스크로 잔잔하게 남습니다.'},
+  {code:'Foggy Study',collection:'STATE ARCHIVE',mood:'calm-focus',top:['Orange','Rosemary','Black Pepper'],middle:['Jasmine','Rose'],base:['Woody','Musk','Amber'],use:'생각을 정리하고 싶은 순간의 향',color:'#2b5c8a',keywords:['몰입','정돈','지적'],
+   eq:{valence:50,arousal:78,stress:22,engagement:92,relaxation:28,interest:95},
+   guide:'작업을 시작하기 전 손목에 1회. 로즈마리·후추의 첫인상 뒤로 앰버 우디가 오래 머뭅니다.'},
+  {code:'Who am I',collection:'STATE ARCHIVE',mood:'introspective',top:['Bergamot','Pine','Aqua'],middle:['Incense','Cedarwood','Clary Sage'],base:['Ambroxan','Sandalwood','Musk'],use:'혼자만의 고요한 시간을 위한 향',color:'#5a4a8a',keywords:['내면','사색','고요'],
    eq:{valence:8,arousal:18,stress:92,engagement:15,relaxation:10,interest:12},
-   profile:{stress:82,balance:28,energy:18,focus:30,mood:22,recovery:18},intentW:{change:0.5,keep:1.6,neutral:0.9},
-   strength:'극한 소진 수용. Stress 92 target'},
-  {code:'Red Tara',mood:'recovery',notes:'Warm Spice · Benzoin · Sandalwood',use:'소진 후 회복과 따뜻한 전환',color:'#a03a3a',keywords:['회복','따뜻함','재생'],
+   guide:'혼자 있는 공간에 2~3회 공간 분사. 인센스와 샌달우드가 차분한 분위기를 만듭니다.'},
+  {code:'Red Tara',collection:'STATE ARCHIVE',mood:'recovery',top:['Pink Pepper','Raspberry'],middle:['Rose','Neroli','Cinnamon'],base:['Patchouli','Benzoin','Incense'],use:'하루를 따뜻하게 마무리하는 향',color:'#a03a3a',keywords:['전환','따뜻함','존재감'],
    eq:{valence:72,arousal:85,stress:78,engagement:82,relaxation:18,interest:88},
-   profile:{stress:65,balance:44,energy:58,focus:48,mood:52,recovery:76},intentW:{change:1.5,keep:0.9,neutral:1.1},
-   strength:'소진 → 회복 전환. Arousal 85·Engagement 82'},
-  {code:'The Great',mood:'lifted-energy',notes:'Bergamot · Green Tea · Bright Cedar',use:'활력과 방향성의 확장',color:'#2a6040',keywords:['활력','확장','방향'],
+   guide:'저녁 마무리 시간에 가슴 쪽 1회. 로즈·시나몬 뒤로 벤조인의 따뜻한 잔향이 남습니다.'},
+  {code:'The Great',collection:'STATE ARCHIVE',mood:'lifted-energy',top:['Orange','Bergamot','Elemi'],middle:['Petitgrain','Peppermint','Rosemary'],base:['Woody','Vetiver','Amber'],use:'활기찬 시작을 위한 향',color:'#2a6040',keywords:['활력','확장','방향'],
    eq:{valence:75,arousal:88,stress:85,engagement:40,relaxation:15,interest:82},
-   profile:{stress:40,balance:55,energy:85,focus:75,mood:68,recovery:50},intentW:{change:1.6,keep:0.6,neutral:1.2},
-   strength:'에너지 폭발. Arousal 88 — Bergamot으로 방향성 부여'},
-  {code:'말괄량이',mood:'playful-reset',notes:'Yuzu · Peony · Soft Fig',use:'가벼운 기분 전환과 리프레시',color:'#4a8a6a',keywords:['리프레시','경쾌','전환'],
+   guide:'아침 손목에 1회 뿌리고 자연건조. 오렌지·페퍼민트의 밝은 첫인상이 특징입니다.'},
+  {code:'말괄량이',collection:'STATE ARCHIVE',mood:'playful-reset',top:['Sweet Orange','Yuzu','Pink Pepper'],middle:['Magnolia','Jasmine'],base:['Cedarwood','Amber'],use:'가볍게 기분을 바꾸고 싶을 때의 향',color:'#4a8a6a',keywords:['리프레시','경쾌','전환'],
    eq:{valence:90,arousal:80,stress:12,engagement:35,relaxation:78,interest:92},
-   profile:{stress:14,balance:72,energy:70,focus:50,mood:90,recovery:65},intentW:{change:1.2,keep:1.1,neutral:1.4},
-   strength:'기분 전환의 왕. Valence 90·Relaxation 78·Interest 92'}
-];
+   guide:'언제 어디서나 옷깃·가방에 1회. 유자와 매그놀리아의 경쾌한 인상이 특징입니다.'},
+  {code:'Secret Garden',collection:"Nature's Breath",mood:'garden-walk',top:['Green Leaves','Citrus'],middle:['Narcissus','White Floral'],base:['Soft Musk','Wood'],use:'정원을 산책하는 듯한 산뜻한 향',color:'#5f8a5a',keywords:['산뜻','플로럴','정원'],
+   eq:{valence:85,arousal:50,stress:18,engagement:40,relaxation:85,interest:70},
+   guide:'산책이나 외출 전 손목·목선에 1회. 초록 잎과 수선화가 부드럽게 이어집니다.'},
+  {code:'Violet Hill',collection:"Nature's Breath",mood:'quiet-meditation',top:['Bergamot','Violet Leaf'],middle:['Violet','Lavender'],base:['Musk','Cedar'],use:'조용히 생각을 내려놓는 시간의 향',color:'#6a5a8a',keywords:['고요','명상','파우더리'],
+   eq:{valence:40,arousal:22,stress:75,engagement:30,relaxation:30,interest:28},
+   guide:'쉬는 시간이나 잠들기 전 공간에 1~2회. 바이올렛·라벤더가 부드럽게 퍼집니다.'},
+  {code:'Sunlit Window',collection:"Nature's Breath",mood:'bright-start',top:['Lemon','Orange'],middle:['Neroli','Petitgrain'],base:['Clean Musk','Amber'],use:'햇살이 드는 창가 같은 밝은 향',color:'#b8903a',keywords:['밝음','시작','시트러스'],
+   eq:{valence:90,arousal:90,stress:20,engagement:70,relaxation:40,interest:88},
+   guide:'아침이나 오후 기분 전환이 필요할 때 손목에 1회. 레몬·네롤리가 밝게 시작합니다. 룸스프레이로도 있습니다.'},
+  {code:'Urban Forest',collection:"Nature's Breath",mood:'forest-comfort',top:['Pine','Cardamom'],middle:['Cypress','Cedar'],base:['Vetiver','Amber'],use:'도심 속 숲 같은 차분한 향',color:'#3b6a52',keywords:['숲','차분','우디'],
+   eq:{valence:55,arousal:35,stress:60,engagement:80,relaxation:40,interest:40},
+   guide:'업무 공간이나 거실에 1~2회. 파인·사이프러스가 숲 같은 인상을 줍니다. 디퓨저 오브제로도 있습니다.'},
+  {code:'제인',collection:'SHIFTI',status:'pending',top:[],middle:[],base:[],use:'정보 준비 중',color:'#888',keywords:[],eq:{valence:50,arousal:50,stress:50,engagement:50,relaxation:50,interest:50},guide:''},
+  {code:'뉴리프',collection:'SHIFTI',status:'pending',top:[],middle:[],base:[],use:'새로운 시작을 응원하는 향 (정보 준비 중)',color:'#888',keywords:[],eq:{valence:50,arousal:50,stress:50,engagement:50,relaxation:50,interest:50},guide:''}
+].map(s=>({status:'active',...s,notes:[s.top.join(', '),s.middle.join(', '),s.base.join(', ')].filter(Boolean).join(' · ')}));
+/* 추천 대상: 정보가 확정된 향만 */
+const SCENTS=SCENTS_ALL.filter(s=>s.status==='active');
+/* 노트 → 향 계열 분포 (탑 30% · 미들 40% · 베이스 30%, 층 안에서는 균등) */
+function scentFamilyProfile(s){
+  const out={},add=(notes,w)=>{if(!notes.length)return;notes.forEach(n=>{const f=NOTE_FAMILY[n];if(f)out[f]=(out[f]||0)+w/notes.length;});};
+  add(s.top,30);add(s.middle,40);add(s.base,30);
+  Object.keys(out).forEach(k=>out[k]=Math.round(out[k]));
+  return out;
+}
 
 /* ══ SURVEY ══ */
 const QS=[
@@ -1245,13 +1338,13 @@ const QS=[
 /* ══ PAGE MANAGEMENT ══ */
 const PAGES=['welcome','survey','bio','analysis','report','insight','history'];
 const PROG_MAP={welcome:0,survey:24,bio:46,analysis:70,report:90,insight:100,history:0};
-const HDR_LABEL={welcome:'진단 대기',survey:'설문 중',bio:'생체신호',analysis:'AI 매칭',report:'추천 완료',insight:'Insight',history:'기록'};
+const HDR_LABEL={welcome:'분석 대기',survey:'설문 중',bio:'생체신호',analysis:'AI 매칭',report:'추천 완료',insight:'Insight',history:'기록'};
 const BBAR_CFG={
   survey: {back:'← 처음으로',   backFn:surveyBack, next:null, nextFn:null, nc:false},
   bio:    {back:'← 설문으로',   backFn:()=>goPage('survey'),  next:'향 추천 분석 →', nextFn:confirmBio, nc:false},
   analysis:{back:'← 생체신호', backFn:()=>goPage('bio'),      next:'리포트 →',      nextFn:()=>goPage('report'),nc:true},
   report: {back:'← 다시 분석',  backFn:()=>goPage('analysis'), next:'Insight →',    nextFn:()=>goPage('insight'),nc:false},
-  insight:{back:'← 리포트',     backFn:()=>goPage('report'),  next:'새 진단',       nextFn:resetAll,     nc:false}
+  insight:{back:'← 리포트',     backFn:()=>goPage('report'),  next:'새 분석',       nextFn:resetAll,     nc:false}
 };
 
 function goPage(name){
@@ -1490,15 +1583,9 @@ function computeFinal(){
 function makeCopy(stress,balance,energy,focus,mood,recovery,code,userEQ,productEQ){
   const pe=productEQ||{},uv=userEQ||{};
   const bioNote=S.bio?`(Bio: RMSSD ${S.bio.raw.rmssd}ms · LF/HF ${S.bio.raw.lf_hf}) `:'' ;
-  const C={
-    'Foggy Study':()=>`${bioNote}Focus ${focus}로 인지 과부하 상태. Foggy Study의 Engagement(${pe.engagement})·Interest(${pe.interest})가 인지 몰입을 자극합니다.`,
-    'AnnE':()=>`${bioNote}Balance ${balance}·Mood ${mood} 상태. AnnE의 Valence(${pe.valence})·Relaxation(${pe.relaxation})·Engagement(${pe.engagement})로 정서와 집중을 동시에 지원합니다.`,
-    'Who am I':()=>`${bioNote}Stress ${stress}·Mood ${mood} — 저항보다 수용이 필요한 시간. Who am I의 Stress EQ(${pe.stress})가 가장 무거운 상태를 target합니다.`,
-    'Red Tara':()=>`${bioNote}Stress ${stress}·Recovery ${recovery}에서 따뜻한 전환. Arousal(${pe.arousal})·Engagement(${pe.engagement})로 에너지를 재점화합니다.`,
-    'The Great':()=>`${bioNote}Energy ${energy} 상태에 방향이 필요합니다. Arousal(${pe.arousal}) — 전 향수 중 최고 각성값. Bergamot이 막힌 흐름을 터뜨립니다.`,
-    '말괄량이':()=>`${bioNote}Mood ${mood} 상태에 즉각 리프레시. Valence(${pe.valence})·Interest(${pe.interest})·Relaxation(${pe.relaxation}) — Yuzu·Peony가 즉각 긍정 에너지를 생성합니다.`
-  };
-  return C[code]?C[code]():'EQ 데이터 기반으로 최적의 향을 추천했습니다.';
+  // v12: 효능 단정 표현 없이, 상태 점수와 향 프로파일이 가깝다는 사실만 말한다.
+  const sc=SCENTS.find(x=>x.code===code);
+  return `${bioNote}현재 상태(Stress ${stress}·Balance ${balance}·Energy ${energy}·Focus ${focus}·Mood ${mood}·Recovery ${recovery})와 가장 가까운 향 프로파일은 ${code}입니다.${sc?` ${sc.use}.`:''}`;
 }
 
 /* ══ ANALYSIS ══ */
@@ -1524,7 +1611,7 @@ function runAnalysis(){
 }
 
 /* ══ REPORT ══ */
-const EQ_META={valence:{l:'Valence',c:'#4a8a6a',d:'긍정 정서'},arousal:{l:'Arousal',c:'#4a5570',d:'각성 에너지'},stress:{l:'Stress',c:'#a85560',d:'스트레스 대응'},engagement:{l:'Engagement',c:'#8a6f3c',d:'집중 몰입도'},relaxation:{l:'Relaxation',c:'#527a6c',d:'이완 효과'},interest:{l:'Interest',c:'#6a5a8a',d:'자극 흥미도'}};
+const EQ_META={valence:{l:'Valence',c:'#4a8a6a',d:'긍정 정서'},arousal:{l:'Arousal',c:'#4a5570',d:'각성 에너지'},stress:{l:'Stress',c:'#a85560',d:'스트레스 대응'},engagement:{l:'Engagement',c:'#8a6f3c',d:'집중 몰입도'},relaxation:{l:'Relaxation',c:'#527a6c',d:'편안함'},interest:{l:'Interest',c:'#6a5a8a',d:'자극 흥미도'}};
 function renderReport(){
   if(!S.primary)computeFinal();
   const p=S.primary;
@@ -1559,15 +1646,14 @@ function renderInsight(){
   if(!S.primary)computeFinal();const{stress,balance,energy,focus,mood,recovery}=S.scores,p=S.primary;
   $('insName').textContent=p.code;$('insBody').textContent=S.copy;
   let st='';
-  if(stress>=75)st=`Stress ${stress}·Recovery ${recovery} — 긴장이 상당합니다.${S.bio?` (Bio RMSSD ${S.bio.raw.rmssd}ms 확인됨)`:''} 이완이 필요합니다.`;
-  else if(focus<40)st=`Focus ${focus} — 인지 선명도가 낮습니다.${S.bio?` (Bio Conc. ${S.bio.raw.conc}/10)`:''} 집중력 회복이 우선입니다.`;
-  else if(mood<40)st=`Mood ${mood} — 정서 무게감이 높습니다. 향이 기분을 조율합니다.`;
-  else if(recovery<40)st=`Recovery ${recovery} — 재충전이 필요합니다.${S.bio?` (RMSSD ${S.bio.raw.rmssd}ms)`:''} 회복 방향으로 추천했습니다.`;
+  if(stress>=75)st=`Stress ${stress}·Recovery ${recovery} — 긴장감이 높게 응답되었습니다.${S.bio?` (Bio RMSSD ${S.bio.raw.rmssd??'—'}ms)`:''} 이 상태를 향 취향과 함께 반영했습니다.`;
+  else if(focus<40)st=`Focus ${focus} — 머리가 흐릿하다고 응답하셨습니다.${S.bio?` (Bio Conc. ${S.bio.raw.conc??'—'}/10)`:''} 이 상태를 향 취향과 함께 반영했습니다.`;
+  else if(mood<40)st=`Mood ${mood} — 기분이 무겁다고 응답하셨습니다. 이 상태를 향 취향과 함께 반영했습니다.`;
+  else if(recovery<40)st=`Recovery ${recovery} — 피로가 쌓였다고 응답하셨습니다.${S.bio?` (RMSSD ${S.bio.raw.rmssd??'—'}ms)`:''} 이 상태를 향 취향과 함께 반영했습니다.`;
   else st=`6축: S${stress}·B${balance}·E${energy}·F${focus}·M${mood}·R${recovery}${S.bio?` | Bio: RMSSD ${S.bio.raw.rmssd}ms`:''}.`;
   const topEQ=Object.entries(p.eq).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([k,v])=>`${EQ_META[k]?.l||k} ${v}%`).join('·');
-  const G={'Foggy Study':'작업 전 손목에 1회. 3회 깊게 호흡하면 Focus 전환이 촉진됩니다.','AnnE':'외출 전 목선·소매에 각 1회. 하루 종일 Mood·Balance를 유지합니다.','Who am I':'혼자 있는 공간에서 2~3회 공간 분사. 호흡 속도를 낮춥니다.','Red Tara':'저녁 마무리 시 가슴에 1회. Recovery를 따뜻하게 지원합니다.','The Great':'아침 손목에 1회, 자연건조. Energy·Focus를 동시에 활성화합니다.','말괄량이':'언제 어디서나. 옷깃·가방에도 OK. Mood 즉각 상승 효과.'};
-  $('insA').textContent=st;$('insB').textContent=`${p.code}의 EQUILIBRIUM에서 ${topEQ}가 두드러집니다.`;$('insC').textContent=G[p.code]||'손목·목선에 1~2회. 처음 3분은 호흡에 집중하세요.';
-  $('btnInsProd').onclick=()=>location.href=LINKS[p.code]||'https://shifti.co.kr/product/list.html?cate_no=60';
+  $('insA').textContent=st;$('insB').textContent=`${p.code}의 EQUILIBRIUM에서 ${topEQ}가 두드러집니다.${S.engine?.noteMatch?.notes?.length?` 선택하신 취향과 겹치는 노트: ${S.engine.noteMatch.notes.join(', ')}.`:''}`;$('insC').textContent=p.guide||'손목·목선에 1~2회 뿌려 주세요.';
+  $('btnInsProd').onclick=()=>location.href=LINKS[p.code]||SHOP_LIST;
   ['insB0','insB1','insB2'].forEach(id=>$(id).classList.remove('on'));
   ['insB0','insB1','insB2'].forEach((id,i)=>setTimeout(()=>$(id).classList.add('on'),140+i*230));
 }
@@ -1585,9 +1671,10 @@ function renderHistory(){
   try{
     const list=JSON.parse(localStorage.getItem('shifti_v5bio')||'[]');
     const g=$('histList');
-    if(!list.length){g.innerHTML=`<div class="card card-p" style="text-align:center;padding:40px"><div style="font-size:22px;font-weight:800;margin-bottom:8px">기록이 없습니다</div><div style="color:var(--ink45)">첫 진단을 시작하세요.</div></div>`;return;}
+    if(STORE_MODE){g.innerHTML=`<div class="card card-p" style="text-align:center;padding:40px"><div style="font-size:18px;font-weight:800;margin-bottom:8px">매장 모드</div><div style="color:var(--ink45)">공용 기기에서는 분석 기록을 저장하지 않습니다.</div></div>`;return;}
+    if(!list.length){g.innerHTML=`<div class="card card-p" style="text-align:center;padding:40px"><div style="font-size:22px;font-weight:800;margin-bottom:8px">기록이 없습니다</div><div style="color:var(--ink45)">첫 분석을 시작하세요.</div></div>`;return;}
     g.innerHTML=list.map(it=>{const d=new Date(it.ts),ds=`${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
-    return`<div class="hist-card"><div class="hist-date">${ds}</div><div class="hist-name">${it.primary}</div><div class="hist-copy">${(it.copy||'').slice(0,50)}…</div><div class="hist-chips"><div class="hist-chip">S·${it.scores.stress??'—'}</div><div class="hist-chip">B·${it.scores.balance??'—'}</div><div class="hist-chip">F·${it.scores.focus??'—'}</div><div class="hist-chip">M·${it.scores.mood??'—'}</div><div class="hist-chip">R·${it.scores.recovery??'—'}</div><div class="hist-chip match">Match ${it.matchScore||0}%</div>${it.hasBio?`<div class="hist-chip bio">🧠 Bio·${it.rmssd}ms</div>`:''}</div></div>`;
+    return`<div class="hist-card"><div class="hist-date">${ds}</div><div class="hist-name">${it.primary}</div><div class="hist-copy">${(it.copy||'').slice(0,50)}…</div><div class="hist-chips"><div class="hist-chip">S·${it.scores.stress??'—'}</div><div class="hist-chip">B·${it.scores.balance??'—'}</div><div class="hist-chip">F·${it.scores.focus??'—'}</div><div class="hist-chip">M·${it.scores.mood??'—'}</div><div class="hist-chip">R·${it.scores.recovery??'—'}</div><div class="hist-chip match">Match ${it.matchScore||0}%</div>${it.hasBio?`<div class="hist-chip bio">🧠 Bio 반영</div>`:''}</div></div>`;
     }).join('');
   }catch(e){}
 }
@@ -1606,10 +1693,11 @@ function resetAll(){
   S.primary=null;S.alts=[];S.copy='';S.matchScore=0;S.matchReason='';S._userEQ=null;
   /* Bio 카드 초기화 */
   $('bioResultCard').style.display='none';$('bioErrorCard').style.display='none';$('bioUploadCard').style.display='';
+  const bc=$('bioConsent');if(bc)bc.checked=false;
   const badge=$('bioReportBadge');if(badge)badge.style.display='none';
   /* 리포트 score-pill bio 배지 제거 */
   document.querySelectorAll('.score-pill').forEach(el=>{el.classList.remove('bio-src');const lb=el.querySelector('.bio-src-label');if(lb)lb.remove();});
-  initSurvey();closeShare();goPage('welcome');toast('새 진단 시작');
+  initSurvey();closeShare();goPage('welcome');toast('새 분석 시작');
 }
 
 /* ══ BIND ══ */
@@ -1633,7 +1721,20 @@ function initWelcomeRadar(){
 }
 
 /* ══ INIT ══ */
+/* v12 개인정보: 예전 기록에 남은 RMSSD 값을 지운다. 매장 모드(?store=1)는 3분 동안 조작이 없으면 처음 화면으로 돌아가며 기록을 남기지 않는다. */
+function privacyInit(){
+  try{
+    const list=JSON.parse(localStorage.getItem('shifti_v5bio')||'[]');
+    if(list.some(x=>x&&x.rmssd!=null)){list.forEach(x=>{if(x)delete x.rmssd;});localStorage.setItem('shifti_v5bio',JSON.stringify(list));}
+  }catch(e){}
+  if(!STORE_MODE)return;
+  let idle;
+  const arm=()=>{clearTimeout(idle);idle=setTimeout(()=>{if(S.page!=='welcome')resetAll();},180000);};
+  ['click','touchstart','keydown','scroll'].forEach(ev=>document.addEventListener(ev,arm,{passive:true}));
+  arm();
+}
 document.addEventListener('DOMContentLoaded',()=>{
+  privacyInit();
   initSurvey();
   initBioHandler();
   bind();
@@ -1672,14 +1773,9 @@ document.addEventListener('DOMContentLoaded',()=>{
       .map(item => [item.code, item])
   );
 
-  const LINKS_MAP = {
-    'Foggy Study':'#',
-    'AnnE':'#',
-    'Who am I':'#',
-    'Red Tara':'#',
-    'The Great':'#',
-    '말괄량이':'#'
-  };
+  // v12: v11은 구매 링크가 모두 '#'였다. 상단 LINKS(공식몰 상품 번호)를 그대로 쓴다.
+  const LINKS_MAP = (typeof LINKS!=='undefined') ? LINKS : {};
+  const SHOP = (typeof SHOP_LIST!=='undefined') ? SHOP_LIST : 'https://shifti.co.kr/';
 
   const EQ_META_SAFE = {
     valence:{l:'Valence',c:'#4a8a6a'},
@@ -1721,14 +1817,16 @@ document.addEventListener('DOMContentLoaded',()=>{
     elegant_floral:{label:'섬세하고 우아한',layers:{top:22,middle:52,base:26},boost:{floral:22,musk:8,powdery:6}},
     deep_woody:{label:'깊고 차분한',layers:{top:14,middle:34,base:52},boost:{woody:20,amber_spice:16,musk:7}}
   };
-  const PRODUCT_SCENT_PROFILES={
-    'AnnE':{floral:42,musk:32,powdery:16,woody:10},
-    'Foggy Study':{green:34,woody:30,musk:20,citrus:16},
-    'Who am I':{woody:34,powdery:26,amber_spice:25,floral:15},
-    'Red Tara':{amber_spice:38,woody:30,floral:12,musk:10,citrus:10},
-    'The Great':{citrus:36,green:30,woody:24,amber_spice:10},
-    '말괄량이':{fruity:34,citrus:30,floral:24,green:12}
-  };
+  // v12: 공식 노트(탑·미들·베이스)에서 향 계열 분포를 계산한다. (v11은 실제 제품과 다른 노트로 손으로 적은 값)
+  const SCENT_LIST = (typeof SCENTS!=='undefined' && Array.isArray(SCENTS)) ? SCENTS : [];
+  const PRODUCT_SCENT_PROFILES=Object.fromEntries(SCENT_LIST.map(s=>[s.code,(typeof scentFamilyProfile==='function')?scentFamilyProfile(s):{}]));
+  // 사용자가 고른 향 계열과 겹치는 실제 노트 (추천 이유 설명용)
+  function noteMatch(code,selected){
+    const s=SCENT_LIST.find(x=>x.code===code); if(!s||!selected?.length) return {notes:[],families:[]};
+    const fam=(typeof NOTE_FAMILY!=='undefined')?NOTE_FAMILY:{};
+    const notes=[...s.top,...s.middle,...s.base].filter(n=>selected.includes(fam[n]));
+    return {notes:[...new Set(notes)],families:[...new Set(notes.map(n=>fam[n]))]};
+  }
   function normalizeMap(map){
     const out={}; let sum=0; FAMILY_KEYS.forEach(k=>{out[k]=Math.max(0,safe(map?.[k]));sum+=out[k];});
     if(!sum){out.musk=35;out.woody=35;out.citrus=30;sum=100;}
@@ -1769,11 +1867,11 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
   function buildPersonalizedRecipe(standard,state,ctx){
     const f={...standard.familyWeights}; const l={...standard.layers}; const reasons=[];
-    if(state.stressLoad>=65){f.woody=(f.woody||0)+8;f.musk=(f.musk||0)+7;l.base+=5;l.top-=5;reasons.push('긴장 완화를 위해 우디·머스크와 베이스를 보강');}
-    if(state.relaxation<45){f.musk=(f.musk||0)+6;f.powdery=(f.powdery||0)+4;reasons.push('회복도가 낮아 포근한 잔향을 보강');}
-    if(state.focus<55 && ctx.useCase==='work'){f.green=(f.green||0)+9;f.woody=(f.woody||0)+4;reasons.push('집중 보조를 위해 그린·우디를 보강');}
-    if(state.valence<50){f.citrus=(f.citrus||0)+8;f.fruity=(f.fruity||0)+5;reasons.push('기분 전환을 위해 시트러스·프루티를 보강');}
-    if(state.arousal<45){f.citrus=(f.citrus||0)+8;f.green=(f.green||0)+5;l.top+=5;l.base-=5;reasons.push('활력 보완을 위해 탑 노트를 보강');}
+    if(state.stressLoad>=65){f.woody=(f.woody||0)+8;f.musk=(f.musk||0)+7;l.base+=5;l.top-=5;reasons.push('긴장 응답이 높아 차분한 우디·머스크와 베이스를 보강');}
+    if(state.relaxation<45){f.musk=(f.musk||0)+6;f.powdery=(f.powdery||0)+4;reasons.push('피로 응답이 높아 포근한 잔향을 보강');}
+    if(state.focus<55 && ctx.useCase==='work'){f.green=(f.green||0)+9;f.woody=(f.woody||0)+4;reasons.push('또렷한 인상을 위해 그린·우디를 보강');}
+    if(state.valence<50){f.citrus=(f.citrus||0)+8;f.fruity=(f.fruity||0)+5;reasons.push('밝은 인상을 위해 시트러스·프루티를 보강');}
+    if(state.arousal<45){f.citrus=(f.citrus||0)+8;f.green=(f.green||0)+5;l.top+=5;l.base-=5;reasons.push('생기 있는 첫인상을 위해 탑 노트를 보강');}
     const familyWeights=normalizeMap(f); l.top=clamp(l.top,10,50);l.middle=clamp(l.middle,25,55);l.base=100-l.top-l.middle;if(l.base<15){l.base=15;l.middle=100-l.top-l.base;}
     return {type:'personalized',familyWeights,layers:l,notes:recipeNotes(familyWeights,l),reasons:reasons.length?reasons:['현재 상태가 스탠다드 레시피와 안정적으로 일치'],characterLabel:standard.characterLabel,intensity:standard.intensity};
   }
@@ -1786,7 +1884,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
 
 
-  const MEDISCENT_PRODUCTS = [
+  const PRODUCT_META = [
     {
       code:'AnnE',
       narrative:'균형형 안정',
@@ -1840,8 +1938,45 @@ document.addEventListener('DOMContentLoaded',()=>{
       formatPriority:['perfume','diffuser'],
       formatRules:{perfume:1.0,diffuser:0.85,pillow_mist:0.4},
       guardrail:{autoRecommend:true, maxIntensity:'medium'}
+    },
+    {
+      code:'Secret Garden',
+      narrative:'정원 산책 같은 전환',
+      profile:{ideal:['refresh','gift','daily'], avoidWhen:[]},
+      formatPriority:['perfume','diffuser'],
+      formatRules:{perfume:1.0,diffuser:0.85,pillow_mist:0.5},
+      guardrail:{autoRecommend:true, maxIntensity:'medium'}
+    },
+    {
+      code:'Violet Hill',
+      narrative:'고요한 정리',
+      profile:{ideal:['night','solo','introspective'], avoidWhen:[]},
+      formatPriority:['diffuser','pillow_mist','perfume'],
+      formatRules:{diffuser:1.0,pillow_mist:0.95,perfume:0.8},
+      guardrail:{autoRecommend:true, maxIntensity:'medium'}
+    },
+    {
+      code:'Sunlit Window',
+      narrative:'햇살 같은 시작',
+      profile:{ideal:['change','social','morning'], avoidWhen:['sleep-prep']},
+      formatPriority:['perfume','diffuser'],
+      formatRules:{perfume:1.0,diffuser:0.9,pillow_mist:0.2},
+      guardrail:{autoRecommend:true, maxIntensity:'medium'}
+    },
+    {
+      code:'Urban Forest',
+      narrative:'숲속 같은 안정',
+      profile:{ideal:['work','stabilize'], avoidWhen:[]},
+      formatPriority:['perfume','diffuser'],
+      formatRules:{perfume:1.0,diffuser:1.0,pillow_mist:0.4},
+      guardrail:{autoRecommend:true, maxIntensity:'medium'}
     }
   ];
+  // v12: 6D 값은 SCENTS 한 곳에서 관리한다 (stress→stressLoad, engagement→focus, interest→curiosity)
+  const toCanon = e => ({valence:e.valence, arousal:e.arousal, stressLoad:e.stress, focus:e.engagement, relaxation:e.relaxation, curiosity:e.interest});
+  const MEDISCENT_PRODUCTS = PRODUCT_META
+    .filter(m => SCENT_LIST.some(s => s.code === m.code))
+    .map(m => ({...m, eq: toCanon(SCENT_LIST.find(s => s.code === m.code).eq)}));
 
 
   const PRODUCTS = MEDISCENT_PRODUCTS.map(product => {
@@ -1988,9 +2123,20 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
   function skuScore(p, st8){
     let s=50;
-    if(p.code==='AnnE'        && safe(st8.valence)>=55) s+=18;
-    if(p.code==='Foggy Study' && safe(st8.focus)>=60)   s+=18;
-    if(p.code==='말괄량이'    && safe(st8.valence)<55)  s+=15;
+    // v12: 모든 향이 자기 특징 구간에서 같은 크기(+15)로 보정받는다. (v11은 AnnE가 valence≥55면 +18 → 대부분의 손님이 AnnE로 쏠림)
+    const v=safe(st8.valence), a=safe(st8.arousal), sl=safe(st8.stressLoad), f=safe(st8.focus), r=safe(st8.relaxation);
+    const zone={
+      'AnnE':          v>=55 && sl<40,
+      'Foggy Study':   f>=60 && r<55,
+      '말괄량이':      v<55 && sl<55,
+      'The Great':     a>=65 && sl<60,
+      'Red Tara':      sl>=60 && a>=55,
+      'Secret Garden': r>=60 && v>=55,
+      'Violet Hill':   sl>=60 && a<45,
+      'Sunlit Window': v<55 && a<55,
+      'Urban Forest':  f>=55 && r<55 && a<60
+    };
+    if(zone[p.code]) s+=15;
     if(p.code==='Who am I') s-=20;
     return clamp(s);
   }
@@ -2006,6 +2152,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(p.code==='The Great'  && state.stressLoad>75 && unc>45)     pen+=30;
     if(p.code==='Red Tara'   && ctx.useCase==='night')             pen+=20;
     if(p.code==='말괄량이'   && state.focus>80 && ctx.useCase==='work') pen+=15;
+    if(p.code==='Sunlit Window' && ctx.useCase==='night')            pen+=15;
     return pen;
   }
 
@@ -2016,12 +2163,16 @@ document.addEventListener('DOMContentLoaded',()=>{
     const u = unc>60 ? '측정 신뢰도가 낮아 보수적으로 추천합니다.' : '현재 상태와 가장 가까운 향 반응 프로파일입니다.';
     const common = `Valence ${state.valence} · Arousal ${state.arousal} · Stress ${state.stressLoad} · Relaxation ${state.relaxation}. ${u}`;
     const map = {
-      'AnnE':`정서 안정과 집중 균형이 필요한 상태입니다. ${common}`,
-      'Foggy Study':`몰입 회복이 우선인 상태입니다. ${common}`,
+      'AnnE':`균형감 있는 인상이 어울리는 상태입니다. ${common}`,
+      'Foggy Study':`생각을 정리하는 시간이 어울리는 상태입니다. ${common}`,
       'Who am I':`내면 정리용 옵션입니다. 자동 추천보다는 명시적 선택일 때 적합합니다. ${common}`,
-      'The Great':`에너지 확장 욕구가 있으나 과자극 리스크를 함께 봐야 합니다. ${common}`,
-      'Red Tara':`소진 뒤 재가동이 필요한 전환 상태입니다. ${common}`,
-      '말괄량이':`기분 반전과 밝은 전환이 필요한 상태입니다. ${common}`
+      'The Great':`활기찬 인상이 어울리지만 강도는 가볍게 시작하길 권합니다. ${common}`,
+      'Red Tara':`따뜻한 전환이 어울리는 상태입니다. ${common}`,
+      '말괄량이':`밝고 경쾌한 인상이 어울리는 상태입니다. ${common}`,
+      'Secret Garden':`산뜻한 플로럴로 가볍게 분위기를 바꾸기 좋은 상태입니다. ${common}`,
+      'Violet Hill':`조용히 머무는 시간이 어울리는 상태입니다. ${common}`,
+      'Sunlit Window':`밝은 시트러스로 시작하기 좋은 상태입니다. ${common}`,
+      'Urban Forest':`차분한 우디 계열이 어울리는 상태입니다. ${common}`
     };
     return map[p.code] || common;
   }
@@ -2092,7 +2243,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     st.engine={canonicalState:finalState,modalityWeights:dynamic.normalized,weightComponents:dynamic,reliability:rel,contradiction,uncertainty,ranked,context:ctx,preferenceProfile,standardRecipe,personalizedRecipe,
       axisSources:{survey:surveyAxes,bio:st.bio?{stress:st.bio.stress,balance:st.bio.balance,energy:st.bio.energy,focus:st.bio.focus,mood:st.bio.mood,recovery:st.bio.recovery}:null},
       intervention:{...intervention,primary:primary.code,secondary:secondary.code,avoid:avoid.code,format,intensity,remeasureIn:remeasureMinutes(format,uncertainty),duration:format==='diffuser'?'15-20min':format==='pillow_mist'?'10min before sleep':'1-2 spray'}};
-    st.copy=makeCopy(primary,finalState,ctx,uncertainty)+` 선호 향 계열 적합도 ${ranked[0].preferenceFit}점을 우선 반영했으며, 스탠다드 레시피를 현재 상태에 맞게 조정했습니다.`;
+    const nm=noteMatch(primary.code,preferenceProfile.selected);
+    st.engine.noteMatch=nm;
+    st.copy=makeCopy(primary,finalState,ctx,uncertainty)+` 선호 향 계열 적합도 ${ranked[0].preferenceFit}점을 우선 반영했습니다.`+
+      (nm.notes.length?` 선택하신 ${nm.families.map(f=>FAMILY_LABELS[f]||f).join('·')} 취향과 겹치는 실제 노트: ${nm.notes.join(', ')}.`:'');
     return st.engine;
   }
   window.computeFinalMediscent = computeFinalMediscent;
@@ -2203,7 +2357,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   function renderBuy(st){
     const buy=document.getElementById('buyList'); if(!buy) return;
     const items=[st.primary, ...(st.alts||[])].filter(Boolean);
-    buy.innerHTML = items.map((sc,i)=>`<div class="buy-card ${i===0?'top':''}"><div class="buy-img"><img src="https://ecimg.cafe24img.com/pg2145b53722962042/shifti/web/mobile/newDesign/30p.png" alt="${sc.code}"/></div><div class="buy-meta"><div class="buy-rec" style="${i>0?'color:var(--ink45)':''}">${i===0?'Primary':'Alt.'+i}</div><div class="buy-name">${sc.code}</div><div class="buy-notes">${sc.notes||sc.narrative||''}</div><div class="buy-price">EDP 30ml · ₩58,000</div></div><div class="buy-btns"><button class="btn btn-ink" onclick="location.href='${LINKS_MAP[sc.code]||'#'}'">구매</button><button class="btn btn-ol" onclick="location.href='${LINKS_MAP[sc.code]||'#'}'">상세</button></div></div>`).join('')
+    buy.innerHTML = items.map((sc,i)=>`<div class="buy-card ${i===0?'top':''}"><div class="buy-img"><img src="https://ecimg.cafe24img.com/pg2145b53722962042/shifti/web/mobile/newDesign/30p.png" alt="${sc.code}"/></div><div class="buy-meta"><div class="buy-rec" style="${i>0?'color:var(--ink45)':''}">${i===0?'Primary':'Alt.'+i}</div><div class="buy-name">${sc.code}</div><div class="buy-notes">${sc.notes||sc.narrative||''}</div><div class="buy-price">${sc.collection||'SHIFTI'} · EDP 10·30·50ml</div></div><div class="buy-btns"><button class="btn btn-ink" onclick="location.href='${LINKS_MAP[sc.code]||SHOP}'">구매</button><button class="btn btn-ol" onclick="location.href='${LINKS_MAP[sc.code]||SHOP}'">상세</button></div></div>`).join('')
       || '<div class="buy-card top"><div class="buy-meta"><div class="buy-rec">Primary</div><div class="buy-name">추천 결과 준비 중</div></div></div>';
   }
   function renderRecoBlock(st){
@@ -2223,7 +2377,9 @@ document.addEventListener('DOMContentLoaded',()=>{
         추천 가중치 <strong>향 취향 40%</strong> · 현재 상태 30% · 개인 이력 10% · 사용 문맥 10% · 제품 적합성 10%<br>
         권장 사용 <strong>${i.duration||'1-2 spray'}</strong> · 재측정 <strong>${i.remeasureIn||5}분 후</strong><br>
         모달 신뢰도 Survey <strong>${Math.round((rel.survey||0)*100)}%</strong> · Bio <strong>${Math.round((rel.bio||0)*100)}%</strong>
-      </div></div>`;
+        ${st.engine.noteMatch?.notes?.length?`<br>취향과 겹치는 노트 <strong>${st.engine.noteMatch.notes.join(', ')}</strong>`:''}
+      </div>
+      <div style="margin-top:8px;font-size:9.5px;line-height:1.7;color:var(--ink45)">본 결과는 향 선택을 돕는 참고 정보입니다. 의학적 진단·치료를 위한 것이 아니며, 향에 대한 느낌은 사람마다 다를 수 있습니다.</div></div>`;
   }
 
 
@@ -2343,11 +2499,12 @@ document.addEventListener('DOMContentLoaded',()=>{
   ════════════════════════════════════════════════════════════════ */
   window.saveHist = function saveHist(){
     const st=getS(); if(!st?.primary) return;
+    if(typeof STORE_MODE!=='undefined' && STORE_MODE) return;
     try{
       const list=JSON.parse(localStorage.getItem('shifti_v5bio')||'[]');
       list.unshift({ ts:Date.now(), primary:st.primary.code, scores:{...st.scores},
         matchScore:Math.round(st.matchScore||0), copy:(st.copy||'').slice(0,120),
-        hasBio:!!st.bio, rmssd:st.bio?.raw?.rmssd||null, scentFamilies:st.preferenceProfile?.selected||[], standardRecipe:st.standardRecipe||null });
+        hasBio:!!st.bio, scentFamilies:st.preferenceProfile?.selected||[], standardRecipe:st.standardRecipe||null });
       localStorage.setItem('shifti_v5bio', JSON.stringify(list.slice(0,50)));
     }catch(e){ console.error('saveHist',e); }
     // 폐루프 baseline 도 기록
@@ -2454,8 +2611,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   ════════════════════════════════════════════════════════════════ */
   document.addEventListener('DOMContentLoaded', ()=>{
     const n=document.querySelector('.hdr-name'); if(n) n.textContent='SHIFTI · MEDISCENT';
-    const pill=document.getElementById('hdrPill'); if(pill && pill.textContent==='진단 대기') pill.textContent='MEDISCENT 엔진 준비';
-    const t=document.querySelector('title'); if(t) t.textContent='SHIFTI MEDISCENT LAB — Preference-First Engine v11';
+    const pill=document.getElementById('hdrPill'); if(pill && pill.textContent==='분석 대기') pill.textContent='MEDISCENT 엔진 준비';
+    const t=document.querySelector('title'); if(t) t.textContent='SHIFTI MEDISCENT LAB — Preference-First Engine v12';
   });
 })();
 

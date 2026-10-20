@@ -1,0 +1,2464 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>SHIFTI MEDISCENT LAB — Report-Verified Edition</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════
+   SHIFTI MEDISCENT LAB v11 · REPORT RENDER FIX
+   Design: Pastel Glassmorphism
+   Bio-Signal Integration: NNFX2 XLS
+═══════════════════════════════════ */
+:root{
+  --ink:#1a1b3a;--ink70:rgba(26,27,58,.68);--ink45:rgba(26,27,58,.46);
+  --ink22:rgba(26,27,58,.20);--ink08:rgba(26,27,58,.06);
+  --bg-from:#e8d5f5;--bg-mid:#d4e4ff;--bg-to:#fce4ec;
+  --white:#ffffff;--cream:#ffffff;--cream2:rgba(255,255,255,.72);--cream3:rgba(255,255,255,.45);
+  --c:#6c63ff;--clt:#a78bfa;--cdk:#4f46e5;--cbg:rgba(108,99,255,.08);--cln:rgba(108,99,255,.22);
+  --pink:#f472b6;--peach:#fb923c;--mint:#34d399;--sky:#38bdf8;--rose:#f43f5e;
+  --gold:#f59f00;--violet:#8b5cf6;--slate:#64748b;
+  --bd:rgba(255,255,255,.55);--bdm:rgba(255,255,255,.75);--bdd:rgba(108,99,255,.22);
+  --shadow-sm:0 2px 16px rgba(108,99,255,.10),0 1px 4px rgba(0,0,0,.04);
+  --shadow-md:0 8px 32px rgba(108,99,255,.18),0 2px 8px rgba(0,0,0,.06);
+  --shadow-card:0 4px 24px rgba(108,99,255,.14),0 1px 6px rgba(0,0,0,.06);
+  --shadow-glow:0 4px 20px rgba(108,99,255,.35);
+  --glass:rgba(255,255,255,.70);--glass-border:rgba(255,255,255,.65);--glass-md:rgba(255,255,255,.55);
+  --f:'Noto Sans KR',-apple-system,sans-serif;
+  --r8:8px;--r12:12px;--r16:16px;--r20:20px;--r24:24px;--r28:28px;
+  --ease:cubic-bezier(.25,.1,.25,1);--eout:cubic-bezier(0,0,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{height:100%;-webkit-text-size-adjust:100%}
+body{min-height:100vh;background:linear-gradient(135deg,var(--bg-from) 0%,var(--bg-mid) 50%,var(--bg-to) 100%);background-attachment:fixed;color:var(--ink);font-family:var(--f);font-size:14px;font-weight:500;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ── HEADER ── */
+.hdr{position:sticky;top:0;z-index:100;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);box-shadow:0 2px 20px rgba(108,99,255,.08)}
+.hdr-brand{display:flex;align-items:center;gap:9px}
+.hdr-mark{width:30px;height:30px;border-radius:10px;background:linear-gradient(135deg,var(--c),var(--pink));display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#fff;flex-shrink:0;box-shadow:var(--shadow-glow)}
+.hdr-name{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.hdr-pill{font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:5px 12px;border-radius:999px;background:var(--glass-md);border:1px solid var(--glass-border);color:var(--cdk);backdrop-filter:blur(8px)}
+
+/* ── PROGRESS ── */
+.progbar{height:3px;background:rgba(255,255,255,.35);position:sticky;top:54px;z-index:99}
+.progbar-fill{height:100%;background:linear-gradient(90deg,var(--clt),var(--c),var(--pink));transition:width .5s var(--eout);box-shadow:0 0 10px rgba(108,99,255,.50)}
+
+/* ── PAGE ── */
+.page{display:none;min-height:calc(100vh - 57px);padding:18px 16px 110px}
+.page.on{display:block}
+.shell{max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+
+/* ── BOTTOM BAR ── */
+.bbar{position:fixed;bottom:0;left:0;right:0;z-index:100;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:var(--glass);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid var(--glass-border);box-shadow:0 -4px 24px rgba(108,99,255,.10);display:none;gap:8px}
+.bbar.on{display:flex}
+.bbar-back{flex:0 0 auto;padding:12px 18px;border-radius:var(--r12);background:var(--glass-md);border:1px solid var(--glass-border);color:var(--ink70);font-family:var(--f);font-size:12px;font-weight:700;cursor:pointer;transition:all .18s;backdrop-filter:blur(8px)}
+.bbar-next{flex:1;padding:13px;border-radius:var(--r16);background:linear-gradient(135deg,var(--c),var(--cdk));color:#fff;font-family:var(--f);font-size:13px;font-weight:800;cursor:pointer;border:none;transition:all .18s;box-shadow:var(--shadow-glow)}
+.bbar-next.celadon{background:linear-gradient(135deg,var(--mint),#059669);box-shadow:0 4px 16px rgba(52,211,153,.35)}
+.bbar-back:active,.bbar-next:active{transform:scale(.97)}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(10px);padding:10px 20px;border-radius:999px;background:rgba(26,27,58,.85);backdrop-filter:blur(16px);color:#fff;font-size:12px;font-weight:700;z-index:9999;opacity:0;transition:all .22s var(--ease);pointer-events:none;white-space:nowrap;box-shadow:var(--shadow-md)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── COMMON ── */
+.card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--r20);box-shadow:var(--shadow-card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.card-p{padding:18px}
+.lbl{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink45)}
+.lbl-c{color:var(--c)}
+.bar{height:3px;border-radius:999px;background:rgba(255,255,255,.40);overflow:hidden}
+.bfill{height:100%;border-radius:999px;transition:width .5s var(--eout)}
+.btn{appearance:none;border:none;outline:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:5px;font-family:var(--f);font-weight:700;white-space:nowrap;transition:all .16s var(--ease)}
+.btn:active{transform:scale(.97)}
+.btn-ink{padding:11px 20px;border-radius:var(--r12);background:var(--ink);color:#fff;font-size:13px;border:none;box-shadow:0 2px 12px rgba(26,27,58,.28)}
+.btn-c{padding:11px 20px;border-radius:var(--r12);background:linear-gradient(135deg,var(--c),var(--cdk));color:#fff;font-size:13px;border:none;box-shadow:var(--shadow-glow)}
+.btn-ol{padding:10px 18px;border-radius:var(--r12);background:var(--glass-md);color:var(--ink70);font-size:12px;border:1px solid var(--glass-border);backdrop-filter:blur(8px)}
+.btn-gh{padding:8px 12px;border-radius:var(--r8);background:transparent;color:var(--ink45);font-size:12px;border:1px solid transparent}
+.btn-gh:hover{background:rgba(255,255,255,.45)}
+.btn-sm{padding:7px 14px;font-size:11px}
+.vhdr{margin-bottom:14px}
+.vhdr-kicker{display:flex;align-items:center;gap:7px;margin-bottom:7px}
+.vhdr-line{width:16px;height:2.5px;background:linear-gradient(90deg,var(--c),var(--pink));border-radius:999px;flex-shrink:0}
+.vhdr-txt{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--c)}
+.vhdr-title{font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1.3;color:var(--ink)}
+.vhdr-desc{font-size:12px;color:var(--ink45);line-height:1.6;font-weight:500;margin-top:3px}
+
+/* ══ WELCOME ══ */
+@keyframes wIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.wa{opacity:0;animation:wIn .50s var(--eout) both;animation-delay:var(--d,0ms)}
+.hero-box{border-radius:var(--r28);overflow:hidden;position:relative;background:linear-gradient(145deg,#6c63ff 0%,#8b5cf6 40%,#a78bfa 70%,#f472b6 100%);box-shadow:0 8px 40px rgba(108,99,255,.45),0 2px 10px rgba(244,114,182,.25)}
+.hero-scan{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.scan-line{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.40),transparent);animation:scanMove 4s ease-in-out infinite}
+@keyframes scanMove{0%{top:0;opacity:0}8%{opacity:1}92%{opacity:1}100%{top:100%;opacity:0}}
+.scan-c{position:absolute;width:16px;height:16px;border-color:rgba(255,255,255,.30);border-style:solid}
+.scan-c.tl{top:16px;left:16px;border-width:1.5px 0 0 1.5px}.scan-c.tr{top:16px;right:16px;border-width:1.5px 1.5px 0 0}
+.scan-c.bl{bottom:16px;left:16px;border-width:0 0 1.5px 1.5px}.scan-c.br{bottom:16px;right:16px;border-width:0 1.5px 1.5px 0}
+.hero-inner{position:relative;z-index:2;padding:26px 22px 22px;display:flex;flex-direction:column;gap:18px}
+.hero-tag{display:flex;align-items:center;gap:7px;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.95)}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:#fff;animation:dot 1.8s ease-in-out infinite}
+@keyframes dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.65)}}
+.hero-title{font-size:30px;font-weight:800;letter-spacing:-.035em;line-height:1.22;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.30)}
+.hero-title span{color:rgba(255,255,255,.95);font-weight:400}
+.hero-desc{font-size:12.5px;color:rgba(255,255,255,.92);line-height:1.72;font-weight:500}
+.hero-data{display:flex;align-items:center;gap:14px}
+.hero-radar-info{flex:1;display:flex;flex-direction:column;gap:5px}
+.hri-row{display:flex;align-items:center;gap:7px}
+.hri-k{font-size:8.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.80);width:48px;flex-shrink:0}
+.hri-bar{flex:1;height:3px;border-radius:999px;background:rgba(255,255,255,.28);overflow:hidden}
+.hri-fill{height:100%;border-radius:999px;transition:width 1.2s var(--eout)}
+.hri-v{font-size:10px;font-weight:800;color:#fff;width:22px;text-align:right}
+.hero-cta{display:flex;gap:8px}
+.hero-start{flex:1;min-height:48px;border-radius:var(--r20);background:rgba(255,255,255,.22);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.38);color:#fff;font-family:var(--f);font-size:14px;font-weight:800;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.hero-hist{padding:12px 18px;border-radius:var(--r16);background:rgba(0,0,0,.12);color:rgba(255,255,255,.80);font-family:var(--f);font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,.18);transition:all .16s;backdrop-filter:blur(8px)}
+.trust-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.30);border:1px solid var(--glass-border);border-radius:var(--r20);overflow:hidden;box-shadow:var(--shadow-card)}
+.trust-it{background:var(--glass);backdrop-filter:blur(12px);padding:14px 8px;text-align:center}
+.trust-n{font-size:20px;font-weight:800;letter-spacing:-.03em;color:var(--ink);line-height:1}
+.trust-n sup{font-size:11px}
+.trust-u{font-size:7.5px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;color:var(--c);margin-top:3px}
+.trust-d{font-size:9.5px;color:var(--ink45);line-height:1.38;margin-top:3px;font-weight:500}
+.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tech-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--r20);padding:14px;display:flex;gap:10px;align-items:flex-start;box-shadow:var(--shadow-card);backdrop-filter:blur(12px)}
+.tech-ico{font-size:20px;flex-shrink:0;margin-top:1px}
+.tech-t{font-size:11px;font-weight:700;color:var(--ink)}
+.tech-d{font-size:9.5px;color:var(--ink45);line-height:1.45;margin-top:3px;font-weight:500}
+
+/* ══ SURVEY ══ */
+.sq-progress-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--r20);padding:16px;box-shadow:var(--shadow-card);backdrop-filter:blur(12px)}
+.sq-prog-bar{height:4px;border-radius:999px;background:rgba(255,255,255,.40);overflow:hidden;margin:8px 0}
+.sq-prog-fill{height:100%;background:linear-gradient(90deg,var(--clt),var(--c),var(--pink));border-radius:999px;transition:width .4s var(--eout)}
+.sq-axes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.sq-ax{background:rgba(255,255,255,.60);border:1px solid var(--glass-border);border-radius:var(--r12);padding:8px 10px;backdrop-filter:blur(8px)}
+.sq-ax-k{font-size:7.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink45)}
+.sq-ax-v{font-size:18px;font-weight:800;letter-spacing:-.025em;color:var(--ink);line-height:1;margin-top:2px}
+.sq-ax-b{height:3px;border-radius:999px;background:rgba(255,255,255,.40);overflow:hidden;margin-top:4px}
+.sq-ax-f{height:100%;border-radius:999px;transition:width .4s var(--eout)}
+@keyframes sqIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.sq-card{display:none}.sq-card.vis{display:block}
+.sq-inner{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--r24);padding:24px 18px;box-shadow:var(--shadow-card);backdrop-filter:blur(16px);animation:sqIn .28s var(--eout) both}
+.sq-num{display:inline-flex;align-items:center;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--c);margin-bottom:12px;background:var(--cbg);padding:4px 12px;border-radius:999px;border:1px solid var(--cln)}
+.sq-q{font-size:19px;font-weight:800;letter-spacing:-.025em;line-height:1.38;color:var(--ink)}
+.sq-hint{font-size:11.5px;color:var(--ink45);line-height:1.62;margin-top:6px;font-weight:500}
+.sq-dim{margin-top:12px;padding:10px 12px;background:var(--cbg);border:1px solid var(--cln);border-radius:var(--r12);font-size:10.5px;color:var(--cdk);font-weight:600;display:flex;gap:6px;align-items:center}
+.sq-scale-lbl{display:flex;justify-content:space-between;margin:14px 0 8px;font-size:10px;font-weight:600;color:var(--ink45)}
+.sq-opts{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.sq-opt{appearance:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;padding:14px 4px;border-radius:var(--r16);background:rgba(255,255,255,.55);border:2px solid transparent;transition:all .16s var(--ease);gap:4px;backdrop-filter:blur(6px)}
+.sq-opt:hover{background:rgba(255,255,255,.80);border-color:var(--cln);transform:translateY(-3px);box-shadow:var(--shadow-card)}
+.sq-opt.sel{background:rgba(255,255,255,.90);border-color:var(--c);transform:translateY(-3px);box-shadow:0 0 0 3px rgba(108,99,255,.15),var(--shadow-card)}
+.sq-opt-n{font-size:22px;font-weight:800;color:var(--ink22);line-height:1;transition:color .15s}
+.sq-opt.sel .sq-opt-n{color:var(--c)}
+.sq-opt-l{font-size:8px;font-weight:600;color:var(--ink45);text-align:center;line-height:1.3}
+.sq-opt.sel .sq-opt-l{color:var(--cdk)}
+.sq-sem{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
+.sq-sem-opt{appearance:none;border:none;cursor:pointer;padding:20px 15px;border-radius:var(--r20);background:rgba(255,255,255,.55);border:2px solid transparent;text-align:left;transition:all .18s var(--ease);backdrop-filter:blur(8px)}
+.sq-sem-opt:hover{background:rgba(255,255,255,.80);border-color:var(--cln);box-shadow:var(--shadow-card)}
+.sq-sem-opt.sel{background:rgba(255,255,255,.90);border-color:var(--c);box-shadow:0 0 0 3px rgba(108,99,255,.12),var(--shadow-card)}
+.sq-sem-ico{font-size:28px;display:block;margin-bottom:10px}
+.sq-sem-t{font-size:13px;font-weight:800;color:var(--ink);letter-spacing:-.015em}
+.sq-sem-d{font-size:11px;color:var(--ink45);line-height:1.55;margin-top:4px;font-weight:500}
+.sq-sem-opt.sel .sq-sem-t{color:var(--cdk)}
+.sq-done-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--r24);padding:40px 18px;text-align:center;box-shadow:var(--shadow-card);backdrop-filter:blur(16px);animation:sqIn .3s var(--eout) both}
+.sq-done-ico{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--clt),var(--c),var(--pink));display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 18px;box-shadow:0 6px 24px rgba(108,99,255,.45)}
+.sq-done-t{font-size:24px;font-weight:800;letter-spacing:-.025em;color:var(--ink)}
+.sq-done-d{margin-top:7px;font-size:12.5px;color:var(--ink45);line-height:1.72}
+.sq-done-pills{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.sq-pill{padding:4px 11px;border-radius:999px;font-size:9.5px;font-weight:700;letter-spacing:.04em;border:1.5px solid}
+
+/* ══ BIO SIGNAL ══ */
+.bio-upload-zone{border:2px dashed var(--bdd);border-radius:var(--r20);padding:30px 20px;text-align:center;background:var(--cbg);transition:all .2s;cursor:pointer}
+.bio-upload-zone:hover{border-color:var(--c);background:rgba(108,99,255,.12)}
+.bio-upload-zone.drag{border-color:var(--c);background:rgba(108,99,255,.16);transform:scale(1.01)}
+.bio-score-row{display:flex;align-items:center;gap:8px}
+.bio-score-label{width:72px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink45);flex-shrink:0}
+.bio-score-track{flex:1;height:16px;background:rgba(255,255,255,.50);border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.40)}
+.bio-score-fill{height:100%;border-radius:999px;transition:width .9s var(--eout)}
+.bio-score-val{width:32px;text-align:right;font-size:13px;font-weight:800;color:var(--ink);flex-shrink:0}
+.bio-raw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.bio-raw-cell{background:rgba(255,255,255,.60);border:1px solid var(--glass-border);border-radius:var(--r12);padding:10px;text-align:center}
+.bio-raw-k{font-size:7.5px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;color:var(--ink45)}
+.bio-raw-v{font-size:17px;font-weight:800;color:var(--ink);margin-top:2px;line-height:1}
+.bio-raw-u{font-size:8px;color:var(--ink45);margin-top:1px}
+.bio-blend-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;padding:6px 14px;border-radius:999px;background:linear-gradient(135deg,rgba(108,99,255,.12),rgba(167,139,250,.08));border:1px solid var(--cln);color:var(--cdk)}
+
+/* ══ ANALYSIS ══ */
+.ring-wrap{display:flex;justify-content:center;padding:16px}
+.ring-svg{width:130px;height:130px;transform:rotate(-90deg)}
+.ring-track{fill:none;stroke:rgba(255,255,255,.35);stroke-width:6}
+.ring-arc{fill:none;stroke:url(#ringGrad);stroke-width:6;stroke-linecap:round;stroke-dasharray:0 817;transition:stroke-dasharray .65s var(--eout);filter:drop-shadow(0 0 10px rgba(108,99,255,.50))}
+.ring-lbl{text-anchor:middle;dominant-baseline:central}
+.a-step{display:flex;align-items:center;gap:9px;padding:12px 14px;border-radius:var(--r16);background:rgba(255,255,255,.55);border:1px solid var(--glass-border);opacity:.30;transition:all .30s;margin-bottom:7px;backdrop-filter:blur(6px)}
+.a-step.done{opacity:1;background:var(--cbg);border-color:var(--cln)}
+.a-step-n{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.50);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--ink45);flex-shrink:0;transition:all .28s}
+.a-step.done .a-step-n{background:linear-gradient(135deg,var(--clt),var(--c));border:none;color:#fff;box-shadow:0 2px 10px rgba(108,99,255,.45)}
+.a-step-b{font-size:12px;font-weight:700;color:var(--ink);display:block}
+.a-step-s{font-size:10px;color:var(--ink45);display:block;font-weight:500}
+#aWave{width:100%;height:56px;display:block;border-radius:var(--r12);background:rgba(255,255,255,.45);border:1px solid var(--glass-border)}
+
+/* ══ REPORT ══ */
+.scent-hero{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--r24);overflow:hidden;box-shadow:var(--shadow-md);backdrop-filter:blur(16px)}
+.scent-top{padding:22px 18px;background:linear-gradient(145deg,rgba(108,99,255,.10),rgba(167,139,250,.08),rgba(255,255,255,.55));border-bottom:1px solid rgba(255,255,255,.40);position:relative;overflow:hidden}
+.scent-lbl{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--c);margin-bottom:5px}
+.scent-name{font-size:28px;font-weight:800;letter-spacing:-.03em;line-height:1.1;color:var(--ink)}
+.scent-notes{font-size:11.5px;color:var(--ink45);line-height:1.5;margin-top:5px;font-weight:500}
+.scent-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.s-tag{padding:4px 11px;border-radius:999px;background:var(--cbg);border:1px solid var(--cln);font-size:9px;font-weight:700;letter-spacing:.05em;color:var(--cdk)}
+.match-wrap{padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.40)}
+.match-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
+.match-pct{font-size:30px;font-weight:800;letter-spacing:-.035em;background:linear-gradient(135deg,var(--c),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.match-tag{font-size:8.5px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;color:var(--cdk)}
+.match-track{height:7px;border-radius:999px;background:rgba(255,255,255,.40);overflow:hidden}
+.match-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--clt),var(--c),var(--pink));transition:width .8s var(--eout)}
+.match-reason{margin-top:4px;font-size:10px;color:var(--ink45);font-weight:500}
+.match-reason strong{color:var(--c);font-weight:700}
+.eq-wrap{padding:14px 18px}
+.eq-row{display:flex;align-items:center;gap:7px;margin-bottom:8px}
+.eq-k{width:60px;font-size:8.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink45);flex-shrink:0}
+.eq-track{flex:1;height:4px;border-radius:999px;background:rgba(255,255,255,.45);overflow:hidden;position:relative}
+.eq-fill{height:100%;border-radius:999px;font-style:normal;display:block;transition:width .65s var(--eout)}
+.eq-v{width:24px;text-align:right;font-size:9px;font-weight:700;color:var(--ink45);flex-shrink:0}
+.score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.score-pill{padding:14px 8px;border-radius:var(--r20);background:var(--glass);border:1px solid var(--glass-border);text-align:center;box-shadow:var(--shadow-card);backdrop-filter:blur(10px)}
+.score-k{font-size:7.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink45)}
+.score-v{font-size:22px;font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,var(--c),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-top:2px}
+.score-d{font-size:8.5px;color:var(--ink45);margin-top:2px;line-height:1.3;font-weight:500}
+/* bio 출처 배지 */
+.score-pill.bio-src .score-v{background:linear-gradient(135deg,#1D9E75,#0f6e56);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.bio-src-label{font-size:7px;font-weight:700;color:#1D9E75;letter-spacing:.06em;text-transform:uppercase;margin-top:2px}
+.buy-card{display:flex;gap:10px;align-items:center;padding:13px;border-radius:var(--r16);background:var(--glass);border:1px solid var(--glass-border);margin-bottom:8px;box-shadow:var(--shadow-card);backdrop-filter:blur(10px);transition:all .18s}
+.buy-card.top{border-color:var(--cln);background:linear-gradient(135deg,rgba(108,99,255,.10),rgba(167,139,250,.06));border-left:3px solid var(--c)}
+.buy-img{width:42px;height:64px;flex-shrink:0}
+.buy-img img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 3px 8px rgba(108,99,255,.15))}
+.buy-meta{flex:1;min-width:0}
+.buy-rec{font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--c);margin-bottom:2px}
+.buy-name{font-size:15px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.buy-notes{font-size:10px;color:var(--ink45);margin-top:1px;font-weight:500}
+.buy-price{font-size:10px;font-weight:600;color:var(--ink45);margin-top:3px}
+.buy-btns{display:flex;flex-direction:column;gap:4px;flex-shrink:0}
+.buy-btns .btn{padding:6px 12px;font-size:10.5px;border-radius:var(--r12)}
+.copy-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--r20);padding:16px;box-shadow:var(--shadow-card);backdrop-filter:blur(12px)}
+.copy-t{font-size:12.5px;color:var(--ink70);line-height:1.85;font-weight:500}
+.copy-t strong{font-weight:700;color:var(--c)}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{text-align:left;padding:8px 10px;border-bottom:2px solid rgba(255,255,255,.50);font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink45);background:rgba(255,255,255,.55)}
+.tbl td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.40);font-size:11px;color:var(--ink);font-weight:500}
+.tbl tr:last-child td{border-bottom:none}
+.mono{font-weight:700;letter-spacing:.02em}
+
+/* ══ INSIGHT ══ */
+.ins-dark{background:linear-gradient(145deg,#4f46e5 0%,#6c63ff 50%,#8b5cf6 80%,#f472b6 100%);border-radius:var(--r24);padding:26px 22px;position:relative;overflow:hidden;box-shadow:0 8px 40px rgba(108,99,255,.45)}
+.ins-inner{position:relative;z-index:2}
+.ins-over{font-size:8.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.60);margin-bottom:10px}
+.ins-name{font-size:28px;font-weight:800;letter-spacing:-.035em;color:#fff;line-height:1.2}
+.ins-body{margin-top:10px;font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.8;font-weight:500}
+.ins-rule{height:1px;background:rgba(255,255,255,.18);margin:16px 0}
+.ins-box{padding:14px;border-radius:var(--r16);background:var(--glass);border:1px solid var(--glass-border);opacity:0;transform:translateX(10px);transition:opacity .38s var(--eout),transform .38s var(--eout);box-shadow:var(--shadow-card);backdrop-filter:blur(12px)}
+.ins-box.on{opacity:1;transform:translateX(0)}
+.ins-box-k{font-size:8.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--c);margin-bottom:5px}
+.ins-box-t{font-size:12px;color:var(--ink);line-height:1.72;font-weight:500}
+
+/* ══ HISTORY ══ */
+.hist-card{padding:14px;border-radius:var(--r20);background:var(--glass);border:1px solid var(--glass-border);margin-bottom:8px;box-shadow:var(--shadow-card);backdrop-filter:blur(12px)}
+.hist-date{font-size:9px;font-weight:600;letter-spacing:.06em;color:var(--ink45)}
+.hist-name{font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--ink);margin-top:3px}
+.hist-copy{font-size:10.5px;color:var(--ink45);line-height:1.5;margin-top:2px;font-weight:500}
+.hist-chips{display:flex;gap:4px;flex-wrap:wrap;margin-top:7px}
+.hist-chip{padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.60);border:1px solid var(--glass-border);font-size:8.5px;font-weight:700;color:var(--ink45)}
+.hist-chip.match{background:var(--cbg);border-color:var(--cln);color:var(--cdk)}
+.hist-chip.bio{background:rgba(29,158,117,.10);border-color:rgba(29,158,117,.30);color:#0f6e56}
+
+/* ══ SHARE ══ */
+.share-ov{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;flex-direction:column;gap:14px;background:rgba(232,213,245,.88);backdrop-filter:blur(32px);padding:16px}
+.share-ov.on{display:flex}
+.share-card-wrap{width:280px;height:480px;border-radius:24px;overflow:hidden;position:relative;box-shadow:0 16px 60px rgba(108,99,255,.40)}
+.share-inner{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;padding:22px 18px 16px}
+
+/* ===== FORCE CELADON THEME PATCH ===== */
+:root{
+  --c:#6f9d97 !important;
+  --clt:#a8c8c2 !important;
+  --cdk:#4f7872 !important;
+  --cbg:rgba(111,157,151,.12) !important;
+  --cln:rgba(111,157,151,.28) !important;
+  --mint:#7fb8af !important;
+  --sky:#9bc8cf !important;
+  --violet:#6f9d97 !important;
+  --celadon-crackle:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Crect width='800' height='500' fill='none'/%3E%3Cg fill='none' stroke='%23557b76' stroke-opacity='.22' stroke-width='1.4'%3E%3Cpath d='M-20 90 C80 30 160 170 260 105 S430 40 520 95 700 170 830 110'/%3E%3Cpath d='M-30 220 C80 160 120 280 220 225 S420 170 500 220 700 290 820 235'/%3E%3Cpath d='M0 360 C90 300 180 410 290 350 S490 295 580 345 720 415 820 360'/%3E%3Cpath d='M90 -20 C120 80 80 170 150 235 S260 360 210 520'/%3E%3Cpath d='M320 -20 C360 90 300 180 355 260 S430 385 390 520'/%3E%3Cpath d='M590 -20 C630 65 600 165 650 245 S735 380 700 520'/%3E%3Cpath d='M-20 150 C60 145 135 110 200 150 S320 215 390 190 525 125 610 160 735 240 830 205'/%3E%3C/g%3E%3Cg fill='none' stroke='%23f7fbfa' stroke-opacity='.35' stroke-width='.8'%3E%3Cpath d='M-20 90 C80 30 160 170 260 105 S430 40 520 95 700 170 830 110'/%3E%3Cpath d='M-30 220 C80 160 120 280 220 225 S420 170 500 220 700 290 820 235'/%3E%3Cpath d='M0 360 C90 300 180 410 290 350 S490 295 580 345 720 415 820 360'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* report hero / table / insight */
+.scent-top,
+.buy-card.top,
+.celadon-table-shell,
+.tbl th,
+.ins-dark,
+.copy-card,
+.score-pill,
+.match-wrap,
+.eq-wrap{
+  position:relative !important;
+  background-image:
+    linear-gradient(145deg, rgba(221,238,234,.98) 0%, rgba(198,223,217,.96) 48%, rgba(171,204,196,.94) 100%),
+    var(--celadon-crackle) !important;
+  background-size:cover, cover !important;
+  background-position:center, center !important;
+  background-repeat:no-repeat, no-repeat !important;
+  border-color:rgba(86,127,121,.35) !important;
+}
+
+.scent-top{
+  box-shadow:inset 0 0 0 1px rgba(245,251,249,.45), 0 8px 24px rgba(84,121,116,.18) !important;
+}
+
+.buy-card.top{
+  border-left:4px solid #5d8c85 !important;
+}
+
+.buy-card.top .buy-rec,
+.lbl-c,
+.vhdr-txt,
+.scent-lbl,
+.match-tag,
+.ins-box-k,
+.score-k,
+.bio-src-label{
+  color:#4d756f !important;
+}
+
+.scent-name,
+.buy-card.top .buy-name,
+.tbl th,
+.ins-name,
+.score-v,
+.match-pct{
+  color:#27413d !important;
+  -webkit-text-fill-color:initial !important;
+  background:none !important;
+}
+
+.scent-notes,
+.buy-card.top .buy-notes,
+.buy-card.top .buy-price,
+.copy-t,
+.ins-body,
+.match-reason,
+.eq-v,
+.score-d{
+  color:rgba(39,65,61,.78) !important;
+}
+
+.celadon-table-shell{
+  overflow:hidden !important;
+  box-shadow:inset 0 0 0 1px rgba(245,251,249,.42), 0 8px 24px rgba(84,121,116,.14) !important;
+}
+
+.tbl{
+  background:rgba(240,248,246,.70) !important;
+}
+
+.tbl thead tr{
+  background:transparent !important;
+}
+
+.tbl th{
+  color:#2f4b47 !important;
+  border-bottom:1px solid rgba(86,127,121,.28) !important;
+}
+
+.tbl td{
+  background:rgba(246,251,250,.58) !important;
+  color:#29423e !important;
+  border-bottom:1px solid rgba(86,127,121,.16) !important;
+}
+
+.ins-dark{
+  background-image:
+    linear-gradient(145deg, rgba(108,149,144,.98) 0%, rgba(130,172,165,.96) 56%, rgba(167,201,193,.94) 100%),
+    var(--celadon-crackle) !important;
+  color:#f8fcfb !important;
+  box-shadow:0 12px 30px rgba(84,121,116,.26) !important;
+}
+
+.ins-dark .ins-over,
+.ins-dark .ins-body,
+.ins-dark .ins-name{
+  color:#f8fcfb !important;
+}
+
+.score-pill{
+  background-image:
+    linear-gradient(145deg, rgba(235,245,242,.98) 0%, rgba(212,231,226,.96) 100%),
+    var(--celadon-crackle) !important;
+}
+
+.copy-card{
+  background-image:
+    linear-gradient(145deg, rgba(243,249,248,.98) 0%, rgba(223,237,233,.96) 100%),
+    var(--celadon-crackle) !important;
+}
+
+/* make CTA subtly celadon too */
+.hero-box,
+.bbar-next,
+.btn-c{
+  background-image:linear-gradient(135deg,#6f9d97,#4f7872) !important;
+}
+
+.hdr-mark{
+  background-image:linear-gradient(135deg,#6f9d97,#8bb4ad) !important;
+}
+
+
+/* ══ PREFERENCE-FIRST SURVEY & RECIPE ══ */
+.sq-pref-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:14px}
+.sq-pref-opt{appearance:none;border:2px solid transparent;cursor:pointer;padding:15px 12px;border-radius:18px;background:rgba(255,255,255,.58);text-align:left;transition:all .18s var(--ease);backdrop-filter:blur(8px)}
+.sq-pref-opt:hover{background:rgba(255,255,255,.84);border-color:var(--cln);transform:translateY(-2px);box-shadow:var(--shadow-card)}
+.sq-pref-opt.sel{background:rgba(255,255,255,.94);border-color:var(--c);box-shadow:0 0 0 3px rgba(111,157,151,.13),var(--shadow-card)}
+.sq-pref-ico{font-size:22px;display:block;margin-bottom:7px}
+.sq-pref-t{font-size:12.5px;font-weight:800;color:var(--ink)}
+.sq-pref-d{font-size:9.5px;color:var(--ink45);line-height:1.5;margin-top:3px}
+.sq-pref-opt.sel .sq-pref-t{color:var(--cdk)}
+.pref-counter{margin-top:10px;font-size:9.5px;color:var(--ink45);text-align:right;font-weight:700}
+.multi-action-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
+.multi-action-row .pref-counter{margin-top:0;text-align:left}
+.multi-done{
+  appearance:none;border:1px solid var(--cln);cursor:pointer;
+  padding:10px 16px;border-radius:999px;background:linear-gradient(135deg,var(--c),var(--cdk));
+  color:#fff;font-family:var(--f);font-size:11px;font-weight:800;
+  box-shadow:0 4px 14px rgba(79,120,114,.22);transition:all .16s var(--ease)
+}
+.multi-done:active{transform:scale(.97)}
+.multi-done:disabled{cursor:not-allowed;opacity:.35;box-shadow:none}
+.auto-hint{margin-top:10px;font-size:9.5px;color:var(--ink45);text-align:center;font-weight:600}
+.bbar.back-only .bbar-back{flex:1;text-align:center}
+
+.recipe-shell{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--r20);padding:18px;box-shadow:var(--shadow-card);backdrop-filter:blur(12px)}
+.recipe-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.recipe-title{font-size:20px;font-weight:800;letter-spacing:-.025em;color:var(--ink);margin-top:5px}
+.recipe-sub{font-size:10.5px;color:var(--ink45);line-height:1.65;margin-top:4px}
+.recipe-badge{flex-shrink:0;padding:5px 10px;border-radius:999px;background:var(--cbg);border:1px solid var(--cln);font-size:8.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--cdk)}
+.recipe-family-grid{display:flex;gap:5px;flex-wrap:wrap;margin-top:12px}
+.recipe-family{padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.64);border:1px solid var(--glass-border);font-size:9.5px;font-weight:700;color:var(--ink70)}
+.recipe-family strong{color:var(--cdk)}
+.recipe-pyramid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.recipe-layer{padding:13px 10px;border-radius:15px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border);min-height:128px}
+.recipe-layer-k{font-size:8px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--ink45)}
+.recipe-layer-v{font-size:22px;font-weight:900;line-height:1;margin-top:4px;color:var(--ink)}
+.recipe-layer-notes{font-size:9.5px;color:var(--ink45);line-height:1.65;margin-top:7px}
+.recipe-layer-notes b{color:var(--cdk);font-weight:800}
+.recipe-flow{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:14px;padding:10px;border-radius:13px;background:var(--cbg);border:1px solid var(--cln);font-size:9.5px;font-weight:700;color:var(--cdk)}
+.recipe-flow span{padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.62);border:1px solid var(--glass-border)}
+.recipe-grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.recipe-metric{padding:12px;border-radius:13px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border)}
+.recipe-metric-k{font-size:8px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink45)}
+.recipe-metric-v{font-size:14px;font-weight:900;color:var(--ink);margin-top:4px}
+.recipe-note{font-size:9.5px;color:var(--ink45);line-height:1.65;margin-top:10px}
+.system-evidence{margin-top:12px;padding:12px;border-radius:14px;background:rgba(255,255,255,.50);border:1px solid var(--glass-border)}
+.system-evidence-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.system-evidence-cell{padding:9px 7px;border-radius:11px;background:rgba(255,255,255,.62);border:1px solid var(--glass-border);text-align:center}
+.system-evidence-k{font-size:7px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink45)}
+.system-evidence-v{font-size:13px;font-weight:900;color:var(--ink);margin-top:2px}
+@media(max-width:420px){.recipe-pyramid{grid-template-columns:1fr}.recipe-layer{min-height:auto}.system-evidence-grid{grid-template-columns:repeat(2,1fr)}}
+
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-brand">
+    <div class="hdr-mark">S</div>
+    <span class="hdr-name">SHIFTI</span>
+  </div>
+  <div class="hdr-pill" id="hdrPill">진단 대기</div>
+</header>
+<div class="progbar"><div class="progbar-fill" id="progFill" style="width:0%"></div></div>
+
+<!-- ══ PAGE: WELCOME ══ -->
+<div class="page on" id="pageWelcome">
+  <div class="shell">
+    <div class="hero-box wa" style="--d:0ms">
+      <div class="hero-scan">
+        <div class="scan-line"></div>
+        <div class="scan-c tl"></div><div class="scan-c tr"></div>
+        <div class="scan-c bl"></div><div class="scan-c br"></div>
+      </div>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.05) 50%,rgba(0,0,0,.20) 100%);z-index:1;pointer-events:none"></div>
+      <div class="hero-inner">
+        <div>
+          <div class="hero-tag"><span class="hero-dot"></span>Emotion Scent Engine v11 · Report-Verified UX</div>
+          <div class="hero-title" style="margin-top:8px">당신의 향기를<br><span>추천합니다</span></div>
+          <div class="hero-desc" style="margin-top:7px">상태 설문 + 향 취향 프로파일 + 선택형 EEG·HRV<br>→ 스탠다드 레시피 → 개인 향 추천</div>
+        </div>
+        <div class="hero-data">
+          <canvas id="wRadar" width="100" height="100" style="flex-shrink:0"></canvas>
+          <div class="hero-radar-info" id="wLiveScores"></div>
+        </div>
+        <div class="hero-cta">
+          <button class="hero-start" onclick="goPage('survey')">
+            진단 시작하기
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <button class="hero-hist" onclick="goPage('history')">기록</button>
+        </div>
+      </div>
+    </div>
+    <div class="trust-strip wa" style="--d:100ms">
+      <div class="trust-it"><div class="trust-n" data-target="98">0<sup>%</sup></div><div class="trust-u">Natural</div><div class="trust-d">ISO 16128<br>자연유래</div></div>
+      <div class="trust-it"><div class="trust-n" data-target="8">0</div><div class="trust-u">Scent DNA</div><div class="trust-d">8개 향 계열<br>취향 분석</div></div>
+      <div class="trust-it"><div class="trust-n" data-target="6">0</div><div class="trust-u">Axes</div><div class="trust-d">감정축<br>진단엔진</div></div>
+      <div class="trust-it"><div class="trust-n" data-target="6">0</div><div class="trust-u">Scents</div><div class="trust-d">TATE<br>ARCHIVE</div></div>
+    </div>
+    <div class="tech-grid wa" style="--d:180ms">
+      <div class="tech-card"><div class="tech-ico">🧠</div><div><div class="tech-t">EEG·HRV 분석</div><div class="tech-d">NNFX2 XLS → 6축 자동 계산</div></div></div>
+      <div class="tech-card"><div class="tech-ico">🧬</div><div><div class="tech-t">Preference DNA</div><div class="tech-d">향 취향 기반 기준 레시피</div></div></div>
+      <div class="tech-card"><div class="tech-ico">🌿</div><div><div class="tech-t">6D Vector Match</div><div class="tech-d">코사인 유사도 매칭</div></div></div>
+      <div class="tech-card"><div class="tech-ico">🔒</div><div><div class="tech-t">Privacy-First</div><div class="tech-d">카메라·얼굴 이미지 미수집</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAGE: SURVEY ══ -->
+<div class="page" id="pageSurvey">
+  <div class="shell">
+    <div class="sq-progress-card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div class="lbl lbl-c">상태·향 취향 설문</div>
+        <div style="font-size:9.5px;font-weight:700;color:var(--ink45)" id="sqFrac">0 / 7</div>
+      </div>
+      <div class="sq-prog-bar"><div class="sq-prog-fill" id="sqFill" style="width:0%"></div></div>
+      <div class="sq-axes">
+        <div class="sq-ax"><div class="sq-ax-k">Stress</div><div class="sq-ax-v" id="axS">—</div><div class="sq-ax-b"><div class="sq-ax-f" id="axSB" style="background:var(--rose);width:0%"></div></div></div>
+        <div class="sq-ax"><div class="sq-ax-k">Balance</div><div class="sq-ax-v" id="axBal">—</div><div class="sq-ax-b"><div class="sq-ax-f" id="axBalB" style="background:var(--c);width:0%"></div></div></div>
+        <div class="sq-ax"><div class="sq-ax-k">Energy</div><div class="sq-ax-v" id="axE">—</div><div class="sq-ax-b"><div class="sq-ax-f" id="axEB" style="background:var(--slate);width:0%"></div></div></div>
+        <div class="sq-ax"><div class="sq-ax-k">Focus</div><div class="sq-ax-v" id="axF">—</div><div class="sq-ax-b"><div class="sq-ax-f" id="axFB" style="background:#4a8a6a;width:0%"></div></div></div>
+        <div class="sq-ax"><div class="sq-ax-k">Mood</div><div class="sq-ax-v" id="axM">—</div><div class="sq-ax-b"><div class="sq-ax-f" id="axMB" style="background:var(--gold);width:0%"></div></div></div>
+        <div class="sq-ax"><div class="sq-ax-k">Recovery</div><div class="sq-ax-v" id="axR">—</div><div class="sq-ax-b"><div class="sq-ax-f" id="axRB" style="background:#6a5a8a;width:0%"></div></div></div>
+      </div>
+    </div>
+    <div id="sqQuestions"></div>
+  </div>
+</div>
+
+<!-- ══ PAGE: BIO SIGNAL ══ -->
+<div class="page" id="pageBio">
+  <div class="shell">
+    <div class="vhdr">
+      <div class="vhdr-kicker"><div class="vhdr-line"></div><span class="vhdr-txt">Step 3 · Bio-Signal</span></div>
+      <div class="vhdr-title">생체신호 데이터</div>
+      <div class="vhdr-desc">NNFX2 장비 XLS 파일을 업로드하면 EEG·HRV 데이터가 6축 점수에 60% 반영됩니다.</div>
+    </div>
+
+
+    <div class="card card-p" style="background:rgba(255,255,255,.62)">
+      <div class="lbl lbl-c">Privacy Design</div>
+      <div style="font-size:12px;line-height:1.75;color:var(--ink70);margin-top:6px">
+        카메라와 얼굴 이미지는 수집하지 않습니다. 추천에는 향 취향 설문, 현재 상태 설문,
+        고객이 선택적으로 제공한 EEG·HRV 데이터만 사용합니다.
+      </div>
+    </div>
+
+    <!-- 업로드 카드 -->
+    <div class="card card-p" id="bioUploadCard">
+      <div class="bio-blend-badge" style="margin-bottom:14px">
+        🧠 Bio 60% + 📋 설문 40% 블렌딩
+      </div>
+      <div class="bio-upload-zone" id="bioDropZone" onclick="$('bioFile').click()">
+        <div style="font-size:36px;margin-bottom:10px">📂</div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px">NNFX2 XLS 파일 선택</div>
+        <div style="font-size:11px;color:var(--ink45);line-height:1.7">EEG · Power Spectrum · HRV 3개 시트 포함<br>파일명 예: 127016_omnifit001_M_60_*.xls</div>
+        <div style="margin-top:12px;font-size:9px;color:var(--ink22);font-weight:600;letter-spacing:.06em">클릭 또는 드래그 앤 드롭</div>
+      </div>
+      <input type="file" id="bioFile" accept=".xls,.xlsx,.csv" style="display:none"/>
+      <button class="btn btn-c" style="width:100%;margin-top:12px;padding:13px" onclick="$('bioFile').click()">파일 선택하기</button>
+      <button class="btn btn-gh" style="width:100%;margin-top:6px;padding:10px;font-size:12px;color:var(--ink45)" onclick="skipBio()">건너뛰기 → 설문 점수만 사용</button>
+    </div>
+
+    <!-- 파싱 결과 카드 -->
+    <div class="card card-p" id="bioResultCard" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <div class="bio-blend-badge">✓ Bio-Signal 분석 완료</div>
+        <span id="bioFileName" style="font-size:9px;color:var(--ink45);font-weight:600;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+      </div>
+      <div style="font-size:10px;color:var(--ink45);margin-bottom:14px;padding:8px 10px;background:var(--cbg);border-radius:var(--r8);border:1px solid var(--cln)" id="bioInterpret"></div>
+      <div id="bioApplyStatus" style="margin-bottom:12px;padding:11px 12px;border-radius:12px;background:rgba(29,158,117,.10);border:1px solid rgba(29,158,117,.28);font-size:10.5px;line-height:1.7;color:#0f6e56"></div>
+      <div id="bioFusionPreview" style="margin-bottom:15px"></div>
+
+      <!-- 6축 바 -->
+      <div class="lbl" style="margin-bottom:8px">BIO 6축 점수</div>
+      <div id="bioScoreBars" style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px"></div>
+
+      <!-- 원시 지표 -->
+      <div class="lbl" style="margin-bottom:8px">원시 생체 지표</div>
+      <div class="bio-raw-grid" id="bioRawGrid"></div>
+
+      <div style="margin-top:14px;display:flex;gap:8px">
+        <button class="btn btn-c" style="flex:1;padding:12px" onclick="confirmBio()">향 추천 분석으로 →</button>
+        <button class="btn btn-ol btn-sm" onclick="clearBio()">다시 업로드</button>
+      </div>
+    </div>
+
+    <!-- 오류 카드 -->
+    <div class="card card-p" id="bioErrorCard" style="display:none">
+      <div style="color:var(--rose);font-weight:700;margin-bottom:6px;font-size:13px">⚠ 파싱 오류</div>
+      <div style="font-size:12px;color:var(--ink45);margin-bottom:10px" id="bioErrorMsg"></div>
+      <div style="font-size:11px;color:var(--ink22)">EEG · Power Spectrum · HRV 시트가 모두 포함된 NNFX2 파일인지 확인하세요.</div>
+      <div style="margin-top:10px;display:flex;gap:6px">
+        <button class="btn btn-c btn-sm" onclick="clearBio()">다시 시도</button>
+        <button class="btn btn-gh btn-sm" onclick="skipBio()">건너뛰기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAGE: ANALYSIS ══ -->
+<div class="page" id="pageAnalysis">
+  <div class="shell">
+    <div class="vhdr">
+      <div class="vhdr-kicker"><div class="vhdr-line"></div><span class="vhdr-txt">Step 4 · AI Analysis</span></div>
+      <div class="vhdr-title">향 매칭 중</div>
+    </div>
+    <div class="card card-p">
+      <div class="ring-wrap">
+        <svg class="ring-svg" viewBox="0 0 100 100">
+          <defs><linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#a78bfa"/><stop offset="50%" stop-color="#6c63ff"/><stop offset="100%" stop-color="#f472b6"/></linearGradient></defs>
+          <circle class="ring-track" cx="50" cy="50" r="38"/>
+          <circle class="ring-arc" id="ringArc" cx="50" cy="50" r="38"/>
+          <text class="ring-lbl" x="50" y="46" font-family="'Noto Sans KR',sans-serif" font-size="13" font-weight="800" fill="#0e0e0d" id="ringPct">0%</text>
+          <text class="ring-lbl" x="50" y="57" font-family="'Noto Sans KR',sans-serif" font-size="7" font-weight="700" fill="rgba(14,14,13,.5)" letter-spacing="2">MATCHING</text>
+        </svg>
+      </div>
+      <div id="aSteps"></div>
+      <div style="margin-top:10px">
+        <p style="font-size:12px;color:var(--ink45);font-weight:500" id="aStatus">데이터를 정리하고 있습니다…</p>
+        <div class="bar" style="margin-top:5px;height:3px"><div class="bfill" id="aFill" style="background:var(--c);width:0%"></div></div>
+      </div>
+    </div>
+    <div class="card" style="padding:12px">
+      <div class="lbl lbl-c" style="margin-bottom:5px">Emotion Signal</div>
+      <canvas id="aWave"></canvas>
+      <p style="font-size:11.5px;color:var(--ink45);line-height:1.75;margin-top:8px;font-weight:500;min-height:44px" id="aTxt">컨디션 데이터를 분석 중입니다.</p>
+    </div>
+    <button class="btn btn-c" id="btnSkip" style="width:100%;padding:11px">리포트 바로 보기</button>
+  </div>
+</div>
+
+<!-- ══ PAGE: REPORT ══ -->
+<div class="page" id="pageReport">
+  <div class="shell">
+    <div class="vhdr">
+      <div class="vhdr-kicker"><div class="vhdr-line"></div><span class="vhdr-txt">Step 5 · Report</span></div>
+      <div class="vhdr-title">취향 기반 향 추천 리포트</div>
+    </div>
+    <div id="bioReportBadge" style="display:none"></div>
+    <div class="scent-hero">
+      <div class="scent-top">
+        <div class="scent-lbl">Primary Scent</div>
+        <div class="scent-name" id="rCode">—</div>
+        <div class="scent-notes" id="rNotes">—</div>
+        <div class="scent-tags" id="rTags"></div>
+      </div>
+      <div class="match-wrap">
+        <div class="match-header"><span class="lbl lbl-c">Match Score</span><span class="match-pct" id="rMatchPct">—</span></div>
+        <div class="match-track"><div class="match-fill" id="rMatchBar" style="width:0%"></div></div>
+        <div class="match-reason"><strong id="rMatchReason">—</strong></div>
+        <div style="margin-top:3px;display:flex;justify-content:flex-end"><span class="match-tag" id="rMatchTag">—</span></div>
+      </div>
+      <div class="eq-wrap">
+        <div class="lbl" style="margin-bottom:8px">EQUILIBRIUM</div>
+        <div id="eqRows"></div>
+      </div>
+    </div>
+    <div class="score-grid" id="scoreGrid">
+      <div class="score-pill"><div class="score-k">Stress</div><div class="score-v" id="aStress">—</div><div class="score-d">긴장·과부하</div></div>
+      <div class="score-pill"><div class="score-k">Balance</div><div class="score-v" id="aBal">—</div><div class="score-d">안정·회복력</div></div>
+      <div class="score-pill"><div class="score-k">Energy</div><div class="score-v" id="aEne">—</div><div class="score-d">집중·활력</div></div>
+      <div class="score-pill"><div class="score-k">Focus</div><div class="score-v" id="aFocus">—</div><div class="score-d">인지·선명도</div></div>
+      <div class="score-pill"><div class="score-k">Mood</div><div class="score-v" id="aMood">—</div><div class="score-d">정서·쾌감가</div></div>
+      <div class="score-pill"><div class="score-k">Recovery</div><div class="score-v" id="aRecovery">—</div><div class="score-d">회복·탄력성</div></div>
+    </div>
+    <div class="copy-card"><div class="lbl lbl-c" style="margin-bottom:7px">Analysis</div><div class="copy-t" id="rCopy">—</div></div>
+    <div id="preferenceRecipeBlock"></div>
+    <div class="card card-p" id="eqCompare"></div>
+    <div class="card card-p"><div class="lbl lbl-c" style="margin-bottom:10px">Recommended Scents</div><div id="buyList"></div></div>
+    <div class="card" style="overflow:hidden"><table class="tbl"><thead><tr><th>Axis</th><th>Score</th><th>Source</th><th>Interpretation</th></tr></thead><tbody id="rTable"></tbody></table></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <button class="btn btn-ink btn-sm" id="btnShare">공유 카드</button>
+      <button class="btn btn-c btn-sm" id="btnInsight">Insight →</button>
+      <button class="btn btn-gh btn-sm" id="btnReset">새 진단</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAGE: INSIGHT ══ -->
+<div class="page" id="pageInsight">
+  <div class="shell">
+    <div class="vhdr">
+      <div class="vhdr-kicker"><div class="vhdr-line"></div><span class="vhdr-txt">Step 6 · Insight</span></div>
+      <div class="vhdr-title">향 언어로 해석합니다</div>
+    </div>
+    <div class="ins-dark">
+      <div class="ins-inner">
+        <div class="ins-over">Scent Recommendation</div>
+        <div class="ins-name" id="insName">—</div>
+        <div class="ins-body" id="insBody">—</div>
+        <div class="ins-rule"></div>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-sm" id="btnInsProd" style="background:rgba(255,255,255,.20);color:#fff;border:1px solid rgba(255,255,255,.32);backdrop-filter:blur(8px);padding:8px 14px">제품 구매</button>
+          <button class="btn btn-gh btn-sm" onclick="goPage('report')" style="color:rgba(255,255,255,.45)">← 리포트</button>
+        </div>
+      </div>
+    </div>
+    <div class="ins-box" id="insB0"><div class="ins-box-k">A. 상태 요약</div><div class="ins-box-t" id="insA">—</div></div>
+    <div class="ins-box" id="insB1"><div class="ins-box-k">B. 추천 근거</div><div class="ins-box-t" id="insB">—</div></div>
+    <div class="ins-box" id="insB2"><div class="ins-box-k">C. 사용 가이드</div><div class="ins-box-t" id="insC">—</div></div>
+    <div style="display:flex;gap:6px">
+      <button class="btn btn-gh btn-sm" onclick="goPage('welcome')">처음으로</button>
+      <button class="btn btn-gh btn-sm" onclick="resetAll()">새 진단</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAGE: HISTORY ══ -->
+<div class="page" id="pageHistory">
+  <div class="shell">
+    <div class="vhdr">
+      <div class="vhdr-kicker"><div class="vhdr-line"></div><span class="vhdr-txt">History</span></div>
+      <div class="vhdr-title">진단 기록</div>
+    </div>
+    <div style="display:flex;gap:6px;margin-bottom:10px">
+      <button class="btn btn-ink btn-sm" onclick="resetAll()">새 진단</button>
+      <button class="btn btn-gh btn-sm" id="btnHDel">전체 삭제</button>
+      <button class="btn btn-gh btn-sm" onclick="goPage('welcome')">← 홈</button>
+    </div>
+    <div id="histList"></div>
+  </div>
+</div>
+
+<!-- Bottom Bar -->
+<div class="bbar" id="bbar">
+  <button class="bbar-back" id="bbarBack">← 이전</button>
+  <button class="bbar-next" id="bbarNext">다음 →</button>
+</div>
+
+<!-- Share Overlay -->
+<div class="share-ov" id="shareOv">
+  <div class="lbl" style="margin-bottom:4px">Result Card</div>
+  <div class="share-card-wrap" id="shareCard">
+    <div style="position:absolute;inset:0;background:linear-gradient(145deg,#2d1b69 0%,#6c63ff 50%,#8b5cf6 80%,#f472b6 100%)"></div>
+    <div class="share-inner">
+      <div style="display:flex;justify-content:space-between">
+        <div style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.9)">SHIFTI</div>
+        <div id="scDate" style="font-size:8.5px;font-weight:600;color:rgba(255,255,255,.3)"></div>
+      </div>
+      <div style="height:1px;background:rgba(255,255,255,.10);margin:10px 0"></div>
+      <div style="font-size:8px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3)">TODAY'S SCENT</div>
+      <div id="scName" style="font-size:26px;font-weight:800;letter-spacing:-.03em;color:#fff;margin-top:4px;line-height:1.2"></div>
+      <div id="scSub" style="font-size:10px;color:rgba(255,255,255,.4);margin-top:3px;line-height:1.5"></div>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;margin:14px 0">
+        <div style="width:34px;height:54px;border-radius:7px 7px 3px 3px;border:1px solid rgba(255,255,255,.18);background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.03) 30%);position:relative;overflow:hidden">
+          <div style="position:absolute;left:0;right:0;bottom:0;height:60%;background:linear-gradient(180deg,rgba(82,122,108,.65),rgba(82,122,108,.3))"></div>
+        </div>
+      </div>
+      <div id="scAxis" style="margin-bottom:10px"></div>
+      <div style="display:flex;justify-content:space-between;margin-top:auto">
+        <div style="font-size:8.5px;color:rgba(255,255,255,.2)">shifti.co.kr</div>
+        <div style="font-size:7.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.25)">MEDISCENT</div>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;gap:7px;flex-wrap:wrap;justify-content:center">
+    <button class="btn btn-ink btn-sm" id="btnScDl">이미지 저장</button>
+    <button class="btn btn-ol btn-sm" id="btnScCopy">링크 복사</button>
+    <button class="btn btn-gh btn-sm" id="btnScClose">닫기</button>
+  </div>
+</div>
+
+<!-- ★ SheetJS (XLS 파싱) -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" onerror="var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';document.head.appendChild(s)"></script>
+<!-- ★ html2canvas (공유 카드) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+/* ═══════════════════════════════════════════════════════
+   SHIFTI MEDISCENT LAB v11 · REPORT RENDER FIX-SIGNAL EDITION
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   통합 구조:
+   Preference DNA + Survey + optional Bio-Signal/NNFX2 → Standard Recipe → 향 추천
+   
+   Bio 데이터 소스: NNFX2 XLS (EEG + HRV)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+═══════════════════════════════════════════════════════ */
+const $=id=>document.getElementById(id);
+const on=(id,ev,fn)=>{const e=$(id);if(e)e.addEventListener(ev,fn)};
+function toast(msg,dur=2400){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),dur)}
+
+const LINKS={'말괄량이':'https://shifti.co.kr/product/shifti-%EB%A7%90%EA%B4%84%EB%9F%89%EC%9D%B4-eau-de-parfum-30ml/47/','Red Tara':'https://shifti.co.kr/product/shifti-red-tara-eau-de-parfum-30ml/46/','Who am I':'https://shifti.co.kr/product/shifti-who-am-i-eau-de-parfum-30ml/45/','Foggy Study':'https://shifti.co.kr/product/shifti-foggy-study-eau-de-parfum-30ml/44/','AnnE':'https://shifti.co.kr/product/shifti-anne-eau-de-parfum-30ml/43/','The Great':'https://shifti.co.kr/product/shifti-the-great-eau-de-parfum-30ml/38/'};
+
+/* ══ STATE ══ */
+const S={
+  page:'welcome',survey:{},intention:null,preferenceProfile:null,standardRecipe:null,personalizedRecipe:null,
+  scores:{stress:0,balance:0,energy:0,focus:0,mood:0,recovery:0},
+  bio:null,   /* NNFX2 Bio-Signal 데이터 */
+  primary:null,alts:[],copy:'',matchScore:0,matchReason:'',
+  timers:[],waveRAF:null,_userEQ:null
+};
+
+/* ══════════════════════════════════════════════════════
+   BIO-SIGNAL MODULE — NNFX2 XLS 파서
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   검증된 정규화 파라미터 & 6축 가중치 공식
+   (가중치 민감도 테스트 std < 3 — 안정성 확인됨)
+══════════════════════════════════════════════════════ */
+const bioNorm = {
+  eeg:  (v,lo=1,  hi=10)  => v==null?null:Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
+  rmssd:(v,lo=10, hi=80)  => v==null?null:Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
+  lfhf: (v,lo=0.5,hi=3.0) => v==null?null:Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
+  hf:   (v,lo=0.5,hi=15)  => v==null?null:Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
+  tp:   (v,lo=0.5,hi=15)  => v==null?null:Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
+  hr:   (v,lo=50, hi=100) => v==null?null:Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100)),
+  ab:   (v,lo=0.5,hi=3.0) => v==null?null:Math.max(0,Math.min(100,(v-lo)/(hi-lo)*100))
+};
+
+const bioNum=v=>{
+  if(typeof v==='number' && Number.isFinite(v)) return v;
+  if(v==null || v==='') return null;
+  const s=String(v).trim().replace(/,/g,'.').replace(/[^\d+\-.eE]/g,'');
+  const n=Number(s);
+  return Number.isFinite(n)?n:null;
+};
+const bioKey=v=>String(v??'').toLowerCase().replace(/[\s_\-\/().:%·]/g,'');
+const bioMatch=(cell,aliases)=>{
+  const k=bioKey(cell);
+  return aliases.some(a=>{
+    const x=bioKey(a);
+    return x.length<=2 ? k===x : (k===x || k.includes(x));
+  });
+};
+const bioAvg=arr=>{
+  const a=arr.filter(v=>v!=null && Number.isFinite(v));
+  return a.length?a.reduce((s,v)=>s+v,0)/a.length:null;
+};
+const bioClamp=v=>Math.min(100,Math.max(0,Math.round(v)));
+const bioWavg=(parts,fallback=50)=>{
+  let n=0,d=0;
+  parts.forEach(([v,w])=>{if(v!=null&&Number.isFinite(v)){n+=v*w;d+=w;}});
+  return d?n/d:fallback;
+};
+
+const EEG_ALIASES={
+  thetaL:['left theta size determination value','left theta','l theta','theta left'],
+  thetaR:['right theta size determination value','right theta','r theta','theta right'],
+  theta:['theta','theta power'],
+  alphaL:['left alpha size determination value','left alpha','l alpha','alpha left'],
+  alphaR:['right alpha size determination value','right alpha','r alpha','alpha right'],
+  alpha:['alpha','alpha power'],
+  betaL:['left l-beta size determination value','left m-beta size determination value','left beta','l beta','beta left'],
+  betaR:['right l-beta size determination value','right m-beta size determination value','right beta','r beta','beta right'],
+  beta:['beta','low beta','mid beta','beta power'],
+  concentration:['concentration size determination value','concentration','attention','focus index'],
+  relaxationL:['left relaxation size determination value','left relaxation','relaxation left'],
+  relaxationR:['right relaxation size determination value','right relaxation','relaxation right'],
+  relaxation:['relaxation','relax index'],
+  balance:['left-right balance size determination value','left right balance','lr balance','balance']
+};
+const HRV_ALIASES={
+  rr:['rrinterval','rr interval','r-r interval','ibi','inter beat interval'],
+  rmssd:['rmssd'],
+  tp:['total power','totalpower','tp'],
+  hf:['hf power','high frequency','hf'],
+  lf:['lf power','low frequency','lf'],
+  lfhf:['lf/hf','lf hf ratio','lfhfratio'],
+  hr:['heart rate','heartrate','pulse','hr']
+};
+
+function extractMetricsFromRows(rows, aliasMap){
+  if(!Array.isArray(rows)||!rows.length) return {values:{},dataRows:0,headerScore:0};
+  let best={row:-1,score:-1,map:{}};
+  const scan=Math.min(rows.length,80);
+  for(let r=0;r<scan;r++){
+    const row=Array.isArray(rows[r])?rows[r]:[];
+    const map={}; let score=0;
+    Object.entries(aliasMap).forEach(([metric,aliases])=>{
+      const idx=row.findIndex(c=>bioMatch(c,aliases));
+      if(idx>=0){map[metric]=idx;score++;}
+    });
+    if(score>best.score) best={row:r,score,map};
+  }
+
+  const found={};
+  let dataRows=0;
+  if(best.score>0){
+    Object.keys(best.map).forEach(k=>found[k]=[]);
+    for(let r=best.row+1;r<rows.length;r++){
+      const row=Array.isArray(rows[r])?rows[r]:[];
+      let numeric=0;
+      Object.entries(best.map).forEach(([metric,idx])=>{
+        const v=bioNum(row[idx]);
+        if(v!=null){found[metric].push(v);numeric++;}
+      });
+      if(numeric) dataRows++;
+    }
+  }
+
+  // Key-value and report-style fallback: label can be anywhere, value may be beside/below it.
+  for(let r=0;r<rows.length;r++){
+    const row=Array.isArray(rows[r])?rows[r]:[];
+    row.forEach((cell,c)=>{
+      Object.entries(aliasMap).forEach(([metric,aliases])=>{
+        if(!bioMatch(cell,aliases)) return;
+        const candidates=[
+          row[c+1],row[c+2],
+          Array.isArray(rows[r+1])?rows[r+1][c]:null,
+          Array.isArray(rows[r+1])?rows[r+1][c+1]:null
+        ].map(bioNum).filter(v=>v!=null);
+        if(candidates.length){
+          if(!found[metric])found[metric]=[];
+          found[metric].push(candidates[0]);
+        }
+      });
+    });
+  }
+
+  const values={};
+  Object.entries(found).forEach(([k,v])=>values[k]=bioAvg(v));
+  return {values,dataRows,headerScore:Math.max(0,best.score)};
+}
+
+function normalizeRR(raw){
+  const v=bioNum(raw);
+  if(v==null||v<=0) return null;
+  if(v>=0.35&&v<=2.5) return v*1000; // seconds -> milliseconds
+  if(v>=350&&v<=2500) return v;
+  return null;
+}
+
+async function parseBioXLS(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=e=>{
+      try{
+        if(typeof XLSX==='undefined') throw new Error('엑셀 해석 모듈을 불러오지 못했습니다. 인터넷 연결을 확인하고 다시 시도해 주세요.');
+        const data=new Uint8Array(e.target.result);
+        const wb=XLSX.read(data,{type:'array',cellDates:false,raw:true});
+        if(!wb.SheetNames?.length) throw new Error('읽을 수 있는 시트가 없습니다.');
+
+        const sheets=wb.SheetNames.map(name=>({
+          name,
+          rows:XLSX.utils.sheet_to_json(wb.Sheets[name],{header:1,defval:null,raw:true})
+        }));
+
+        // Sheet name is only a hint. Every sheet is inspected to support different NNFX2 exports.
+        let bestEEG={score:-1,name:'',values:{},dataRows:0};
+        let bestHRV={score:-1,name:'',values:{},dataRows:0,rows:[]};
+        sheets.forEach(sh=>{
+          const eeg=extractMetricsFromRows(sh.rows,EEG_ALIASES);
+          const hrv=extractMetricsFromRows(sh.rows,HRV_ALIASES);
+          const nameKey=bioKey(sh.name);
+          const eegScore=eeg.headerScore+(nameKey.includes('eeg')||nameKey.includes('power')?3:0);
+          const hrvScore=hrv.headerScore+(nameKey.includes('hrv')||nameKey.includes('heart')?3:0);
+          if(eegScore>bestEEG.score)bestEEG={...eeg,score:eegScore,name:sh.name,rows:sh.rows};
+          if(hrvScore>bestHRV.score)bestHRV={...hrv,score:hrvScore,name:sh.name,rows:sh.rows};
+        });
+
+        const ev=bestEEG.values||{}, hv=bestHRV.values||{};
+
+        // Collect RR intervals independently; support milliseconds and seconds.
+        const rrIntervals=[];
+        (bestHRV.rows||[]).forEach(row=>{
+          if(!Array.isArray(row))return;
+          row.forEach(cell=>{
+            const rr=normalizeRR(cell);
+            if(rr!=null)rrIntervals.push(rr);
+          });
+        });
+        // Avoid treating unrelated numbers as RR: keep a stable physiological run when possible.
+        const rrClean=rrIntervals.length>4 ? rrIntervals : [];
+
+        let rmssd=hv.rmssd;
+        if((rmssd==null||rmssd<=0) && rrClean.length>2){
+          const diffs=[];
+          for(let i=1;i<rrClean.length;i++)diffs.push(rrClean[i]-rrClean[i-1]);
+          rmssd=Math.sqrt(diffs.reduce((s,d)=>s+d*d,0)/diffs.length);
+        }
+
+        let hr=hv.hr;
+        if((hr==null||hr<=0) && rrClean.length)hr=60000/bioAvg(rrClean);
+
+        const theta=bioAvg([ev.thetaL,ev.thetaR,ev.theta]);
+        const alpha=bioAvg([ev.alphaL,ev.alphaR,ev.alpha]);
+        const beta =bioAvg([ev.betaL,ev.betaR,ev.beta]);
+        const relax=bioAvg([ev.relaxationL,ev.relaxationR,ev.relaxation]);
+        const conc=ev.concentration;
+        const lrbal=ev.balance;
+
+        const hf=hv.hf, lf=hv.lf, tp=hv.tp;
+        const lf_hf=hv.lfhf!=null?hv.lfhf:(hf!=null&&hf>0&&lf!=null?lf/hf:null);
+        const ab_ratio=alpha!=null&&beta!=null&&beta>0?alpha/beta:null;
+
+        const available=[
+          theta,alpha,beta,conc,relax,lrbal,rmssd,lf_hf,hf,tp,hr
+        ].filter(v=>v!=null&&Number.isFinite(v)).length;
+        if(available<2) throw new Error(`생체신호 항목을 충분히 찾지 못했습니다. 인식된 항목 ${available}개 · 시트: ${wb.SheetNames.join(', ')}`);
+
+        const th_n=bioNorm.eeg(theta), al_n=bioNorm.eeg(alpha), bt_n=bioNorm.eeg(beta);
+        const co_n=bioNorm.eeg(conc), re_n=bioNorm.eeg(relax), lr_n=bioNorm.eeg(lrbal);
+        const ab_n=bioNorm.ab(ab_ratio), rm_n=bioNorm.rmssd(rmssd), lf_n=bioNorm.lfhf(lf_hf);
+        const hf_n=bioNorm.hf(hf), tp_n=bioNorm.tp(tp), hr_n=bioNorm.hr(hr);
+
+        // Missing inputs are omitted rather than silently replaced with zero.
+        const stress   =bioWavg([[th_n,.35],[lf_n,.40],[co_n==null?null:100-co_n,.25]]);
+        const balance  =bioWavg([[lf_n==null?null:100-lf_n,.35],[al_n,.35],[lr_n,.30]]);
+        const energy   =bioWavg([[tp_n,.30],[bt_n,.40],[hr_n,.30]]);
+        const focus    =bioWavg([[co_n,.40],[ab_n,.35],[hf_n,.25]]);
+        const mood     =bioWavg([[al_n,.45],[re_n,.35],[th_n==null?null:100-th_n,.20]]);
+        const recovery =bioWavg([[rm_n,.50],[hf_n,.30],[re_n,.20]]);
+
+        const eegMetricCount=[theta,alpha,beta,conc,relax,lrbal].filter(v=>v!=null).length;
+        const hrvMetricCount=[rmssd,lf_hf,hf,tp,hr].filter(v=>v!=null).length;
+        const coverage=(eegMetricCount/6+hrvMetricCount/5)/2;
+        const rowSignal=Math.min(1,((bestEEG.dataRows||0)/20+(rrClean.length||bestHRV.dataRows||0)/40)/2);
+        const quality=Math.max(.45,Math.min(.98,.45+coverage*.40+rowSignal*.13));
+        const sources=[];
+        if(eegMetricCount)sources.push(`EEG:${bestEEG.name}`);
+        if(hrvMetricCount)sources.push(`HRV:${bestHRV.name}`);
+
+        resolve({
+          valid:true,
+          stress:bioClamp(stress),balance:bioClamp(balance),energy:bioClamp(energy),
+          focus:bioClamp(focus),mood:bioClamp(mood),recovery:bioClamp(recovery),
+          quality:Math.round(quality*100)/100,
+          coverage:{eeg:eegMetricCount,hrv:hrvMetricCount,total:available},
+          source:sources.join(' · ')||wb.SheetNames.join(', '),
+          raw:{
+            rmssd:rmssd==null?null:Math.round(rmssd*10)/10,
+            lf_hf:lf_hf==null?null:Math.round(lf_hf*1000)/1000,
+            hf:hf==null?null:Math.round(hf*100)/100,
+            lf:lf==null?null:Math.round(lf*100)/100,
+            tp:tp==null?null:Math.round(tp*100)/100,
+            hr:hr==null?null:Math.round(hr*10)/10,
+            theta:theta==null?null:Math.round(theta*100)/100,
+            alpha:alpha==null?null:Math.round(alpha*100)/100,
+            beta:beta==null?null:Math.round(beta*100)/100,
+            conc:conc==null?null:Math.round(conc*100)/100,
+            relax:relax==null?null:Math.round(relax*100)/100,
+            lrbal:lrbal==null?null:Math.round(lrbal*100)/100
+          },
+          device:file.name,
+          rows:{eeg:bestEEG.dataRows||0,rr:rrClean.length||bestHRV.dataRows||0},
+          sheets:wb.SheetNames
+        });
+      }catch(err){reject(err?.message||String(err)||'생체신호 파일 파싱 실패');}
+    };
+    reader.onerror=()=>reject('파일 읽기에 실패했습니다.');
+    reader.readAsArrayBuffer(file);
+  });
+}
+
+function renderBioResult(bio){
+  $('bioUploadCard').style.display='none';
+  $('bioErrorCard').style.display='none';
+  $('bioResultCard').style.display='';
+  $('bioFileName').textContent=bio.device;
+
+  /* 상태 해석 */
+  const lfStatus=bio.raw.lf_hf<1.0?'부교감 우세 (이완)':bio.raw.lf_hf<2.0?'자율신경 균형':'교감 우세 (긴장)';
+  const dom=bio.focus<40?'집중력 저하':bio.stress>60?'긴장 상태':bio.balance>55?'균형 양호':'보통 상태';
+  const fmt=v=>v==null?'—':v;
+  $('bioInterpret').innerHTML=
+    `<strong>LF/HF ${fmt(bio.raw.lf_hf)}</strong> — ${lfStatus}&nbsp;·&nbsp;`+
+    `<strong>RMSSD ${fmt(bio.raw.rmssd)}${bio.raw.rmssd==null?'':'ms'}</strong>&nbsp;·&nbsp;`+
+    `<strong>HR ${fmt(bio.raw.hr)}${bio.raw.hr==null?'':'bpm'}</strong><br>`+
+    `주요 상태: <strong>${dom}</strong> · EEG ${bio.rows.eeg}행 · RR/HRV ${bio.rows.rr}행`;
+
+  const quality=Math.round((bio.quality||0)*100);
+  $('bioApplyStatus').innerHTML=
+    `<strong>✓ 업로드 데이터가 추천 엔진에 연결되었습니다.</strong><br>`+
+    `인식 소스: ${bio.source||'—'} · 데이터 품질 ${quality}% · `+
+    `EEG 지표 ${bio.coverage?.eeg||0}/6 · HRV 지표 ${bio.coverage?.hrv||0}/5`;
+
+  if(typeof updateScores==='function')updateScores();
+  const survey={...S.scores};
+  const axes=[['Stress','stress'],['Balance','balance'],['Energy','energy'],['Focus','focus'],['Mood','mood'],['Recovery','recovery']];
+  $('bioFusionPreview').innerHTML=
+    `<div class="lbl" style="margin-bottom:7px">업로드 반영 미리보기</div>`+
+    `<div style="overflow:auto;border:1px solid var(--glass-border);border-radius:12px;background:rgba(255,255,255,.58)">`+
+    `<table class="tbl"><thead><tr><th>Axis</th><th>Survey</th><th>Uploaded Bio</th><th>60:40 Preview</th></tr></thead><tbody>`+
+    axes.map(([label,k])=>`<tr><td>${label}</td><td>${survey[k]}</td><td><strong>${bio[k]}</strong></td><td>${Math.round(survey[k]*.4+bio[k]*.6)}</td></tr>`).join('')+
+    `</tbody></table></div>`;
+
+  /* 6축 바 */
+  const scoreColors={stress:'#B87878',balance:'#5E9E98',energy:'#B89050',focus:'#7878A8',mood:'#82B9B4',recovery:'#3B7872'};
+  const scoreLabels={stress:'Stress',balance:'Balance',energy:'Energy',focus:'Focus',mood:'Mood',recovery:'Recovery'};
+  $('bioScoreBars').innerHTML=Object.keys(scoreColors).map(k=>`
+    <div class="bio-score-row">
+      <div class="bio-score-label">${scoreLabels[k]}</div>
+      <div class="bio-score-track"><div class="bio-score-fill" style="width:${bio[k]}%;background:${scoreColors[k]}"></div></div>
+      <div class="bio-score-val">${bio[k]}</div>
+    </div>`).join('');
+
+  /* 원시 지표 */
+  const r=bio.raw;
+  $('bioRawGrid').innerHTML=[
+    {k:'RMSSD',v:r.rmssd??'—',u:r.rmssd==null?'':'ms'},{k:'LF/HF',v:r.lf_hf??'—',u:'ratio'},{k:'HR',v:r.hr??'—',u:r.hr==null?'':'bpm'},
+    {k:'Theta',v:r.theta??'—',u:'/10'},{k:'Alpha',v:r.alpha??'—',u:'/10'},{k:'Conc.',v:r.conc??'—',u:'/10'}
+  ].map(it=>`<div class="bio-raw-cell"><div class="bio-raw-k">${it.k}</div><div class="bio-raw-v">${it.v}</div><div class="bio-raw-u">${it.u}</div></div>`).join('');
+}
+
+function invalidateRecommendation(){
+  S.primary=null;S.alts=[];S.copy='';S.matchScore=0;S.matchReason='';
+  S._userEQ=null;S.engine=null;S.preferenceProfile=null;S.standardRecipe=null;S.personalizedRecipe=null;
+}
+function clearBio(){
+  S.bio=null;invalidateRecommendation();
+  $('bioResultCard').style.display='none';
+  $('bioErrorCard').style.display='none';
+  $('bioUploadCard').style.display='';
+  $('bioFile').value='';
+}
+function skipBio(){S.bio=null;invalidateRecommendation();safeEnterAnalysis();}
+function confirmBio(){
+  if(!S.bio?.valid){toast('먼저 유효한 생체신호 파일을 업로드하거나 건너뛰기를 선택해 주세요.');return;}
+  safeEnterAnalysis();
+}
+
+function initBioHandler(){
+  const bioFile=$('bioFile');
+  if(!bioFile) return;
+  bioFile.addEventListener('change',async e=>{
+    const file=e.target.files?.[0];
+    if(!file) return;
+    toast('XLS 파싱 중…');
+    try{
+      const bio=await parseBioXLS(file);
+      invalidateRecommendation();
+      S.bio=bio;
+      renderBioResult(bio);
+      toast('✓ 생체신호 적용 완료 — 향 추천 분석을 진행합니다');
+    }catch(err){
+      $('bioErrorMsg').textContent=err;
+      $('bioErrorCard').style.display='';
+      $('bioUploadCard').style.display='none';
+      S.bio=null;
+    }
+    bioFile.value='';
+  });
+
+  /* 드래그 앤 드롭 */
+  const zone=$('bioDropZone');
+  if(zone){
+    zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('drag');});
+    zone.addEventListener('dragleave',()=>zone.classList.remove('drag'));
+    zone.addEventListener('drop',async e=>{
+      e.preventDefault();zone.classList.remove('drag');
+      const file=e.dataTransfer?.files?.[0];
+      if(!file) return;
+      toast('XLS 파싱 중…');
+      try{
+        const bio=await parseBioXLS(file);
+        invalidateRecommendation();
+        S.bio=bio;renderBioResult(bio);
+        toast('✓ 생체신호 적용 완료');
+      }catch(err){
+        $('bioErrorMsg').textContent=err;
+        $('bioErrorCard').style.display='';
+        $('bioUploadCard').style.display='none';
+        S.bio=null;
+      }
+    });
+  }
+}
+
+/* ══ SCENT DATABASE v5 ══ */
+const SCENTS=[
+  {code:'Foggy Study',mood:'calm-focus',notes:'Tea Leaves · Cedar · Warm Musk',use:'과부하된 사고를 정돈하고 집중력을 정제합니다',color:'#2b5c8a',keywords:['집중','정돈','지적'],
+   eq:{valence:50,arousal:78,stress:22,engagement:92,relaxation:28,interest:95},
+   profile:{stress:30,balance:60,energy:65,focus:80,mood:55,recovery:50},intentW:{change:1.4,keep:0.8,neutral:1.1},
+   strength:'인지 과부하 → 집중 정제. Engagement 92·Interest 95'},
+  {code:'AnnE',mood:'gentle-balance',notes:'White Floral · Cotton · Clean Musk',use:'섬세함과 안정감의 균형',color:'#a85560',keywords:['균형','안정','우아'],
+   eq:{valence:88,arousal:72,stress:25,engagement:85,relaxation:65,interest:90},
+   profile:{stress:25,balance:78,energy:58,focus:65,mood:76,recovery:68},intentW:{change:0.7,keep:1.5,neutral:1.2},
+   strength:'균형·안정의 완성형. Valence 88·Relaxation 65'},
+  {code:'Who am I',mood:'introspective',notes:'Iris · Dark Wood · Quiet Amber',use:'내면 정리와 깊은 사색',color:'#5a4a8a',keywords:['내면','사색','고요'],
+   eq:{valence:8,arousal:18,stress:92,engagement:15,relaxation:10,interest:12},
+   profile:{stress:82,balance:28,energy:18,focus:30,mood:22,recovery:18},intentW:{change:0.5,keep:1.6,neutral:0.9},
+   strength:'극한 소진 수용. Stress 92 target'},
+  {code:'Red Tara',mood:'recovery',notes:'Warm Spice · Benzoin · Sandalwood',use:'소진 후 회복과 따뜻한 전환',color:'#a03a3a',keywords:['회복','따뜻함','재생'],
+   eq:{valence:72,arousal:85,stress:78,engagement:82,relaxation:18,interest:88},
+   profile:{stress:65,balance:44,energy:58,focus:48,mood:52,recovery:76},intentW:{change:1.5,keep:0.9,neutral:1.1},
+   strength:'소진 → 회복 전환. Arousal 85·Engagement 82'},
+  {code:'The Great',mood:'lifted-energy',notes:'Bergamot · Green Tea · Bright Cedar',use:'활력과 방향성의 확장',color:'#2a6040',keywords:['활력','확장','방향'],
+   eq:{valence:75,arousal:88,stress:85,engagement:40,relaxation:15,interest:82},
+   profile:{stress:40,balance:55,energy:85,focus:75,mood:68,recovery:50},intentW:{change:1.6,keep:0.6,neutral:1.2},
+   strength:'에너지 폭발. Arousal 88 — Bergamot으로 방향성 부여'},
+  {code:'말괄량이',mood:'playful-reset',notes:'Yuzu · Peony · Soft Fig',use:'가벼운 기분 전환과 리프레시',color:'#4a8a6a',keywords:['리프레시','경쾌','전환'],
+   eq:{valence:90,arousal:80,stress:12,engagement:35,relaxation:78,interest:92},
+   profile:{stress:14,balance:72,energy:70,focus:50,mood:90,recovery:65},intentW:{change:1.2,keep:1.1,neutral:1.4},
+   strength:'기분 전환의 왕. Valence 90·Relaxation 78·Interest 92'}
+];
+
+/* ══ SURVEY ══ */
+const QS=[
+  {id:'tension',type:'scale',q:'지금 몸 어딘가에 힘이 들어가 있습니까?',hint:'어깨, 턱, 복부 등의 신체 긴장을 떠올려 보세요.',dim:'→ Stress 축 반영',low:'완전 이완',high:'전신 긴장',labels:['전혀','약간','보통','꽤','심하게']},
+  {id:'fatigue',type:'scale',q:'지금 피로가 얼마나 쌓여 있습니까?',hint:'어제부터 현재까지 전반적인 소진 정도를 평가하세요.',dim:'→ Energy·Stress 반영',low:'충분히 회복',high:'완전 소진',labels:['없음','가벼움','보통','많이','완전소진']},
+  {id:'focus',type:'scale',q:'지금 한 가지에 집중하는 것이 가능합니까?',hint:'뇌가 얼마나 선명하게 작동하고 있는지를 평가하세요.',dim:'→ Focus·Energy 반영',low:'집중 불가',high:'선명 집중',labels:['불가','어려움','보통','가능','매우명확']},
+  {id:'mood',type:'scale',q:'지금 기분의 무게감은 어떻습니까?',hint:'감정이 가볍고 활기찬지, 무겁고 가라앉아 있는지 표시하세요.',dim:'→ Mood·Balance 반영',low:'가볍고 활기',high:'무겁게 가라앉음',labels:['가벼움','약간무거움','중간','무거움','매우무거움']},
+  {id:'social',type:'scale',q:'다른 사람과 교류할 에너지가 있습니까?',hint:'지금 이 순간 에너지 수준을 평가하세요.',dim:'→ Energy·Balance 반영',low:'전혀 없음',high:'충분히 있음',labels:['없음','부족','보통','충분','넘침']},
+  {id:'sensitivity',type:'scale',q:'소리, 빛, 자극에 얼마나 예민하게 반응합니까?',hint:'자극에 대한 반응 역치를 평가하세요.',dim:'→ Stress·Recovery 반영',low:'거의 반응 없음',high:'매우 예민',labels:['둔감','약간','보통','예민','극도예민']},
+  {id:'intention',type:'semantic',q:'향을 통해 지금 무엇을 원하십니까?',hint:'현재 상태를 바꿀지 유지할지 선택합니다.',dim:'→ 목표 감정 상태·개입 방향 결정',
+   options:[{val:'change',ico:'🔥',t:'전환이 필요합니다',d:'현재 감정에서 벗어나 새로운 상태로'},{val:'keep',ico:'🌿',t:'지금을 유지합니다',d:'현재 컨디션을 깊고 안정적으로 유지'}]},
+  {id:'scentFamilies',type:'multi',q:'평소 좋아하는 향 계열을 선택해 주세요.',hint:'최대 3개까지 선택할 수 있습니다. 이 값이 스탠다드 레시피의 가장 큰 기준이 됩니다.',dim:'→ 취향 DNA·스탠다드 레시피 40% 핵심 기준',max:3,min:1,
+   options:[
+    {val:'citrus',ico:'🍋',t:'시트러스',d:'베르가못·유자처럼 밝고 산뜻함'},
+    {val:'green',ico:'🍃',t:'그린·티',d:'찻잎·허브·잎사귀의 선명함'},
+    {val:'floral',ico:'🌸',t:'플로럴',d:'네롤리·피오니·화이트 플로럴'},
+    {val:'woody',ico:'🌲',t:'우디',d:'시더·샌달우드의 차분한 깊이'},
+    {val:'musk',ico:'☁️',t:'머스크·클린',d:'코튼·화이트 머스크의 깨끗함'},
+    {val:'powdery',ico:'🫧',t:'파우더리',d:'아이리스·파우더 머스크의 부드러움'},
+    {val:'amber_spice',ico:'🪵',t:'앰버·스파이스',d:'벤조인·앰버·은은한 향신료'},
+    {val:'fruity',ico:'🍐',t:'프루티',d:'배·무화과처럼 생기 있는 달콤함'}]},
+  {id:'scentAvoid',type:'multi',q:'피하고 싶은 향 계열이 있습니까?',hint:'불호 향은 추천 점수와 레시피에서 제외하거나 강하게 감점합니다.',dim:'→ 비선호 배제 마스크',max:3,min:1,exclusive:'none',
+   options:[
+    {val:'none',ico:'✓',t:'특별히 없음',d:'모든 계열을 후보로 유지'},
+    {val:'citrus',ico:'🍋',t:'시트러스',d:'산뜻하고 톡 쏘는 향'},
+    {val:'green',ico:'🍃',t:'그린·티',d:'풀·허브·찻잎 향'},
+    {val:'floral',ico:'🌸',t:'플로럴',d:'꽃 중심의 화사한 향'},
+    {val:'woody',ico:'🌲',t:'우디',d:'나무·흙·수지 계열'},
+    {val:'musk',ico:'☁️',t:'머스크',d:'살결·세탁물 같은 잔향'},
+    {val:'powdery',ico:'🫧',t:'파우더리',d:'분가루처럼 포근한 향'},
+    {val:'amber_spice',ico:'🪵',t:'앰버·스파이스',d:'따뜻하고 묵직한 향신료'},
+    {val:'fruity',ico:'🍐',t:'프루티',d:'과일의 달콤한 향'}]},
+  {id:'scentCharacter',type:'semantic',q:'가장 선호하는 향의 인상은 무엇입니까?',hint:'동일한 향 계열도 원하는 인상에 따라 탑·미들·베이스 비율이 달라집니다.',dim:'→ 스탠다드 레시피의 노트 구조 결정',
+   options:[
+    {val:'fresh_clean',ico:'💧',t:'맑고 깨끗한',d:'산뜻하고 투명한 첫인상'},
+    {val:'soft_comfort',ico:'🕊️',t:'부드럽고 편안한',d:'포근하고 안정적인 잔향'},
+    {val:'elegant_floral',ico:'🤍',t:'섬세하고 우아한',d:'정제된 플로럴과 균형감'},
+    {val:'deep_woody',ico:'🌒',t:'깊고 차분한',d:'우디·앰버 중심의 지속감'}]},
+  {id:'scentIntensity',type:'semantic',q:'원하는 향의 강도는 어느 정도입니까?',hint:'추천 제품의 사용량과 개인화 레시피의 확산감을 결정합니다.',dim:'→ 제공 강도·사용 가이드 결정',
+   options:[
+    {val:'light',ico:'○',t:'가볍게',d:'가까이에서 은은하게 느껴지는 정도'},
+    {val:'medium',ico:'◐',t:'보통',d:'일상에서 존재감이 느껴지는 정도'},
+    {val:'strong',ico:'●',t:'분명하게',d:'공간과 잔향에 존재감이 남는 정도'}]}
+];
+
+/* ══ PAGE MANAGEMENT ══ */
+const PAGES=['welcome','survey','bio','analysis','report','insight','history'];
+const PROG_MAP={welcome:0,survey:24,bio:46,analysis:70,report:90,insight:100,history:0};
+const HDR_LABEL={welcome:'진단 대기',survey:'설문 중',bio:'생체신호',analysis:'AI 매칭',report:'추천 완료',insight:'Insight',history:'기록'};
+const BBAR_CFG={
+  survey: {back:'← 처음으로',   backFn:surveyBack, next:null, nextFn:null, nc:false},
+  bio:    {back:'← 설문으로',   backFn:()=>goPage('survey'),  next:'향 추천 분석 →', nextFn:confirmBio, nc:false},
+  analysis:{back:'← 생체신호', backFn:()=>goPage('bio'),      next:'리포트 →',      nextFn:()=>goPage('report'),nc:true},
+  report: {back:'← 다시 분석',  backFn:()=>goPage('analysis'), next:'Insight →',    nextFn:()=>goPage('insight'),nc:false},
+  insight:{back:'← 리포트',     backFn:()=>goPage('report'),  next:'새 진단',       nextFn:resetAll,     nc:false}
+};
+
+function goPage(name){
+  S.page=name;
+  PAGES.forEach(p=>{
+    const el=$('page'+p[0].toUpperCase()+p.slice(1));
+    if(el) el.className='page'+(p===name?' on':'');
+  });
+  try{ window.scrollTo({top:0,behavior:'auto'}); }catch(_){ try{ window.scrollTo(0,0); }catch(__){} }
+  const hdr=$('hdrPill');if(hdr)hdr.textContent=HDR_LABEL[name]||name;
+  const prog=$('progFill');if(prog)prog.style.width=(PROG_MAP[name]||0)+'%';
+  const bbar=$('bbar'),cfg=BBAR_CFG[name];
+  if(cfg&&bbar){
+    const hasNext=!!cfg.next;
+    bbar.className='bbar on'+(hasNext?'':' back-only');
+    const back=$('bbarBack'),next=$('bbarNext');
+    if(back){back.style.display='';back.textContent=cfg.back;back.onclick=cfg.backFn;}
+    if(next){
+      if(hasNext){
+        next.style.display='';
+        next.textContent=cfg.next;
+        next.onclick=cfg.nextFn;
+        next.className='bbar-next'+(cfg.nc?' celadon':'');
+      }else{
+        next.style.display='none';
+        next.onclick=null;
+      }
+    }
+  }else if(bbar){bbar.className='bbar';}
+  try{
+    if(name==='analysis') (window.runAnalysis || runAnalysis)();
+    if(name==='report')   (window.renderReport || renderReport)();
+    if(name==='insight')  (window.renderInsight || renderInsight)();
+    if(name==='history')  (window.renderHistory || renderHistory)();
+  }catch(err){
+    console.error('goPage render error', name, err);
+    if(name==='analysis'){
+      toast('분석 화면 오류로 리포트로 바로 이동합니다');
+      try{ (window.renderReport || renderReport)(); }catch(err2){ console.error('report fallback failed', err2); }
+      PAGES.forEach(p=>{ const el=$('page'+p[0].toUpperCase()+p.slice(1)); if(el) el.className='page'+(p==='report'?' on':''); });
+      const hdr2=$('hdrPill'); if(hdr2) hdr2.textContent=HDR_LABEL.report||'report';
+    }
+  }
+}
+
+/* ══ SURVEY ══ */
+let sqCur=0;
+function initSurvey(){sqCur=0;buildCards();updateSqUI();}
+function buildCards(){
+  const wrap=$('sqQuestions');wrap.innerHTML='';
+  QS.forEach((q,i)=>{
+    const div=document.createElement('div');
+    div.className='sq-card'+(i===0?' vis':'');div.id='sqC'+i;
+    let body='';
+    if(q.type==='scale'){
+      body=`<div class="sq-scale-lbl"><span>${q.low}</span><span>${q.high}</span></div>
+      <div class="sq-opts">${[1,2,3,4,5].map(v=>`<button class="sq-opt${S.survey[q.id]===v?' sel':''}" type="button" data-q="${q.id}" data-v="${v}"><div class="sq-opt-n">${v}</div><div class="sq-opt-l">${q.labels[v-1]}</div></button>`).join('')}</div><div class="auto-hint">응답을 선택하면 다음 질문으로 자동 이동합니다.</div>`;
+    }else if(q.type==='multi'){
+      const selected=Array.isArray(S.survey[q.id])?S.survey[q.id]:[];
+      body=`<div class="sq-pref-grid">${q.options.map(o=>`<button class="sq-pref-opt${selected.includes(o.val)?' sel':''}" type="button" data-q="${q.id}" data-v="${o.val}"><span class="sq-pref-ico">${o.ico}</span><div class="sq-pref-t">${o.t}</div><div class="sq-pref-d">${o.d}</div></button>`).join('')}</div><div class="multi-action-row"><div class="pref-counter" id="prefCount-${q.id}">${selected.length} / ${q.max} 선택</div><button type="button" class="multi-done" data-multi-done="${q.id}" ${selected.length>=(q.min||1)?'':'disabled'}>선택 완료</button></div>`;
+    }else{
+      body=`<div class="sq-sem">${q.options.map(o=>`<button class="sq-sem-opt${S.survey[q.id]===o.val?' sel':''}" type="button" data-q="${q.id}" data-v="${o.val}"><span class="sq-sem-ico">${o.ico}</span><div class="sq-sem-t">${o.t}</div><div class="sq-sem-d">${o.d}</div></button>`).join('')}</div><div class="auto-hint">카드를 선택하면 다음 질문으로 자동 이동합니다.</div>`;
+    }
+    div.innerHTML=`<div class="sq-inner"><div class="sq-num">Q${i+1}/${QS.length}</div><div class="sq-q">${q.q}</div><div class="sq-hint">${q.hint}</div>${body}<div class="sq-dim">📊 ${q.dim}</div></div>`;
+    div.querySelectorAll('.sq-opt,.sq-sem-opt,.sq-pref-opt').forEach(btn=>btn.addEventListener('click',()=>{
+      if(q.type==='multi'){
+        let arr=Array.isArray(S.survey[q.id])?[...S.survey[q.id]]:[];
+        const val=btn.dataset.v;
+        if(q.exclusive && val===q.exclusive){ arr=[val]; }
+        else{
+          arr=arr.filter(x=>x!==q.exclusive);
+          if(arr.includes(val)) arr=arr.filter(x=>x!==val);
+          else if(arr.length<(q.max||3)) arr.push(val);
+          else { toast(`최대 ${q.max||3}개까지 선택할 수 있습니다.`); return; }
+        }
+        S.survey[q.id]=arr;
+        div.querySelectorAll('.sq-pref-opt').forEach(b=>b.classList.toggle('sel',arr.includes(b.dataset.v)));
+        const cnt=$(`prefCount-${q.id}`);if(cnt)cnt.textContent=`${arr.length} / ${q.max} 선택`;
+        const doneBtn=div.querySelector(`[data-multi-done="${q.id}"]`);
+        if(doneBtn) doneBtn.disabled=arr.length<(q.min||1);
+
+        // Exclusive "없음" and maximum selections are unambiguous completion points.
+        if((q.exclusive && val===q.exclusive) || arr.length===(q.max||3)){
+          setTimeout(()=>sqGo(i+1),260);
+        }
+      }else{
+        const isScale=q.type==='scale',val=isScale?Number(btn.dataset.v):btn.dataset.v;
+        S.survey[q.id]=val;if(q.id==='intention')S.intention=val;
+        div.querySelectorAll('.sq-opt,.sq-sem-opt').forEach(b=>b.classList.toggle('sel',isScale?Number(b.dataset.v)===val:b.dataset.v===val));
+        setTimeout(()=>sqGo(i+1),260);
+      }
+      updateScores();updateAxes();updateSqUI();
+    }));
+
+    const multiDone=div.querySelector(`[data-multi-done="${q.id}"]`);
+    if(multiDone){
+      multiDone.addEventListener('click',()=>{
+        if(!isSurveyAnswered(q)){toast('향 취향을 1개 이상 선택해 주세요.');return;}
+        sqGo(i+1);
+      });
+    }
+    wrap.appendChild(div);
+  });
+  const done=document.createElement('div');done.className='sq-card';done.id='sqC'+QS.length;
+  done.innerHTML=`<div class="sq-done-card"><div class="sq-done-ico">✓</div><div class="sq-done-t">취향 프로파일 완료</div><div class="sq-done-d">선택한 향 취향으로 스탠다드 레시피를 만들고,<br>현재 상태와 선택형 생체신호를 반영해 오늘의 추천을 계산합니다.</div><div class="sq-done-pills" id="donePills"></div><div style="margin-top:14px;display:flex;gap:6px;justify-content:center"><button class="btn btn-c" onclick="goPage('bio')">생체신호 업로드 →</button><button class="btn btn-ol btn-sm" onclick="safeEnterAnalysis()">생체신호 없이 분석</button></div></div>`;
+  wrap.appendChild(done);
+}
+function sqGo(idx){
+  const prev=sqCur;sqCur=Math.max(0,Math.min(QS.length,idx));
+  $('sqC'+prev)?.classList.remove('vis');
+  const nc=$('sqC'+sqCur);
+  if(nc){nc.classList.add('vis');const inn=nc.querySelector('.sq-inner');if(inn){inn.style.animation='none';void inn.offsetWidth;inn.style.animation='';}}
+  if(sqCur===QS.length){
+    const p=$('donePills');if(p){const fam=(S.survey.scentFamilies||[]).map(x=>({citrus:'시트러스',green:'그린',floral:'플로럴',woody:'우디',musk:'머스크',powdery:'파우더리',amber_spice:'앰버',fruity:'프루티'}[x]||x)).join(' · ');p.innerHTML=[{l:'취향',v:fam||'미선택',c:'#4f7872'},{l:'Stress',v:S.scores.stress,c:'#a85560'},{l:'Focus',v:S.scores.focus,c:'#4a8a6a'},{l:'Mood',v:S.scores.mood,c:'#8a6f3c'}].map(x=>`<div class="sq-pill" style="border-color:${x.c};color:${x.c}">${x.l}·${x.v}</div>`).join('');}
+  }
+  updateSqUI();
+}
+function isSurveyAnswered(q){
+  const v=S.survey[q.id];
+  if(q.type==='multi') return Array.isArray(v) && v.length>=(q.min||1);
+  return v!==undefined && v!==null && v!=='';
+}
+function surveyBack(){
+  if(sqCur>0) sqGo(sqCur-1);
+  else goPage('welcome');
+}
+function sqNext(){
+  if(sqCur<QS.length){
+    const q=QS[sqCur];
+    if(!isSurveyAnswered(q)){ toast(q.type==='multi'?'향 취향을 1개 이상 선택해 주세요.':'응답을 선택해 주세요.'); return; }
+    sqGo(sqCur+1);
+  }else goPage('bio');
+}
+function updateSqUI(){
+  const ans=QS.filter(isSurveyAnswered).length,pct=Math.round(ans/QS.length*100);
+  const fill=$('sqFill');if(fill)fill.style.width=pct+'%';
+  const frac=$('sqFrac');if(frac)frac.textContent=`${ans} / ${QS.length}`;
+
+  if(S.page==='survey'){
+    const back=$('bbarBack');
+    if(back){
+      back.textContent=sqCur>0?'← 이전 질문':'← 처음으로';
+      back.onclick=surveyBack;
+    }
+  }
+}
+function updateAxes(){
+  const sc=S.scores;
+  [['axS','axSB',sc.stress,'var(--rose)'],['axBal','axBalB',sc.balance,'var(--c)'],['axE','axEB',sc.energy,'var(--slate)'],['axF','axFB',sc.focus,'#4a8a6a'],['axM','axMB',sc.mood,'var(--gold)'],['axR','axRB',sc.recovery,'#6a5a8a']]
+  .forEach(([vid,bid,val,col])=>{const ve=$(vid),be=$(bid);if(ve)ve.textContent=val;if(be){be.style.width=val+'%';be.style.background=col;}});
+}
+function updateScores(){
+  const sv=k=>Number(S.survey[k]||0);
+  S.scores.stress   =Math.round(((sv('tension')+sv('fatigue')+sv('sensitivity')+sv('mood'))/20)*100);
+  S.scores.balance  =Math.round((((6-sv('tension'))+(6-sv('mood'))+sv('focus')+sv('social'))/20)*100);
+  S.scores.energy   =Math.round(((sv('focus')+sv('social')+(6-sv('fatigue')))/15)*100);
+  S.scores.focus    =Math.round(((sv('focus')*2+(6-sv('tension'))+(6-sv('fatigue')))/20)*100);
+  S.scores.mood     =Math.round((((6-sv('mood'))+(6-sv('sensitivity'))+sv('social'))/15)*100);
+  S.scores.recovery =Math.round((((6-sv('fatigue'))*2+(6-sv('tension'))+sv('social'))/20)*100);
+}
+
+function safeEnterAnalysis(){
+  try{
+    if(typeof window.computeFinal==='function') window.computeFinal();
+    else if(typeof window.computeFinalMediscent==='function') window.computeFinalMediscent();
+    else if(typeof computeFinal==='function') computeFinal();
+  }catch(err){
+    console.error('compute before analysis failed', err);
+    toast('추천 계산 중 오류가 발생했습니다. 입력값을 다시 확인해 주세요.');
+  }
+  try{
+    if(typeof saveMediscentHistory==='function') saveMediscentHistory();
+    else if(typeof saveHist==='function') saveHist();
+  }catch(err){
+    console.error('save history failed', err);
+  }
+  try{
+    S.page='analysis';
+    requestAnimationFrame(()=>goPage('analysis'));
+  }catch(err){
+    console.error('go analysis failed', err);
+    try{ goPage('report'); }catch(err2){ console.error('report fallback failed', err2); }
+  }
+}
+/* ══════════════════════════════════════════════════════
+   MATCHING ENGINE v6 + BIO-SIGNAL INTEGRATION
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Bio 데이터가 있으면: Bio 60% + Survey 40% 블렌딩
+   없으면: Survey 100%
+   
+   설문과 선택형 Bio-Signal을 신뢰도 기반으로 통합
+   → 6D EQ Vector → 코사인 유사도 매칭
+══════════════════════════════════════════════════════ */
+function computeFinal(){
+  updateScores();
+
+  if(S.bio && S.bio.valid){
+    const BW=0.60, SW=0.40;
+    const sc=S.scores;
+    S.scores={
+      stress:Math.round(sc.stress*SW+S.bio.stress*BW),
+      balance:Math.round(sc.balance*SW+S.bio.balance*BW),
+      energy:Math.round(sc.energy*SW+S.bio.energy*BW),
+      focus:Math.round(sc.focus*SW+S.bio.focus*BW),
+      mood:Math.round(sc.mood*SW+S.bio.mood*BW),
+      recovery:Math.round(sc.recovery*SW+S.bio.recovery*BW)
+    };
+    Object.keys(S.scores).forEach(k=>S.scores[k]=Math.min(100,Math.max(0,S.scores[k])));
+  }
+
+  const a=S.scores;
+  const userEQ={
+    valence:Math.round(a.mood*.50+a.balance*.30+(100-a.stress)*.20),
+    arousal:Math.round(a.energy*.45+a.focus*.30+(100-a.recovery)*.25),
+    stress:a.stress,
+    engagement:Math.round(a.focus*.55+a.energy*.30+a.balance*.15),
+    relaxation:Math.round((100-a.stress)*.40+a.recovery*.35+a.balance*.25),
+    interest:Math.round(a.focus*.40+a.mood*.30+a.energy*.30)
+  };
+  const keys=['valence','arousal','stress','engagement','relaxation','interest'];
+  const weights={valence:2,arousal:1.6,stress:1.8,engagement:1.4,relaxation:1.5,interest:1.2};
+  const cosine=(x,y)=>{
+    let dot=0,mx=0,my=0;
+    keys.forEach(k=>{const w=weights[k];dot+=x[k]*y[k]*w;mx+=x[k]*x[k]*w;my+=y[k]*y[k]*w;});
+    return mx&&my?dot/Math.sqrt(mx*my):0;
+  };
+  const scored=SCENTS.map(sc=>({sc,final:Math.min(98,Math.round(cosine(userEQ,sc.eq)*100))})).sort((x,y)=>y.final-x.final);
+  S.primary=scored[0].sc;
+  S.alts=scored.slice(1,3).map(x=>x.sc);
+  S.matchScore=scored[0].final;
+  S._userEQ=userEQ;
+  S.matchReason=`상태 벡터 적합도 ${S.matchScore}%${S.bio?' · Bio-Signal 반영':''}`;
+  S.copy=makeCopy(a.stress,a.balance,a.energy,a.focus,a.mood,a.recovery,S.primary.code,userEQ,S.primary.eq);
+}
+
+function makeCopy(stress,balance,energy,focus,mood,recovery,code,userEQ,productEQ){
+  const pe=productEQ||{},uv=userEQ||{};
+  const bioNote=S.bio?`(Bio: RMSSD ${S.bio.raw.rmssd}ms · LF/HF ${S.bio.raw.lf_hf}) `:'' ;
+  const C={
+    'Foggy Study':()=>`${bioNote}Focus ${focus}로 인지 과부하 상태. Foggy Study의 Engagement(${pe.engagement})·Interest(${pe.interest})가 인지 몰입을 자극합니다.`,
+    'AnnE':()=>`${bioNote}Balance ${balance}·Mood ${mood} 상태. AnnE의 Valence(${pe.valence})·Relaxation(${pe.relaxation})·Engagement(${pe.engagement})로 정서와 집중을 동시에 지원합니다.`,
+    'Who am I':()=>`${bioNote}Stress ${stress}·Mood ${mood} — 저항보다 수용이 필요한 시간. Who am I의 Stress EQ(${pe.stress})가 가장 무거운 상태를 target합니다.`,
+    'Red Tara':()=>`${bioNote}Stress ${stress}·Recovery ${recovery}에서 따뜻한 전환. Arousal(${pe.arousal})·Engagement(${pe.engagement})로 에너지를 재점화합니다.`,
+    'The Great':()=>`${bioNote}Energy ${energy} 상태에 방향이 필요합니다. Arousal(${pe.arousal}) — 전 향수 중 최고 각성값. Bergamot이 막힌 흐름을 터뜨립니다.`,
+    '말괄량이':()=>`${bioNote}Mood ${mood} 상태에 즉각 리프레시. Valence(${pe.valence})·Interest(${pe.interest})·Relaxation(${pe.relaxation}) — Yuzu·Peony가 즉각 긍정 에너지를 생성합니다.`
+  };
+  return C[code]?C[code]():'EQ 데이터 기반으로 최적의 향을 추천했습니다.';
+}
+
+/* ══ ANALYSIS ══ */
+const CIRC=2*Math.PI*38;
+function runAnalysis(){
+  try{
+    if(typeof computeFinalMediscent==='function') computeFinalMediscent();
+    else computeFinal();
+  }catch(err){
+    console.error('runAnalysis compute error', err);
+    try{ computeFinal(); }catch(_){ }
+  }
+  S.timers.forEach(clearTimeout);S.timers=[];
+  if(S.waveRAF)cancelAnimationFrame(S.waveRAF);
+  const steps=[['01','Survey Normalize','7문항 → 6축 정규화']];
+  if(S.bio)steps.push(['02','Bio-Signal Blend',`NNFX2 EEG·HRV → 6축 (Bio 60% + Survey 40%)`]);
+  steps.push(['0'+(steps.length+1),'Dynamic Weight','Survey·Bio 신뢰도 통합'],['0'+(steps.length+2),'Vector Match','코사인 유사도 매칭']);
+  $('aSteps').innerHTML=steps.map(x=>`<div class="a-step" id="as${x[0]}"><div class="a-step-n">${x[0]}</div><div><span class="a-step-b">${x[1]}</span><span class="a-step-s">${x[2]}</span></div></div>`).join('');
+  let frame=0;const wEl=$('aWave');
+  const wLoop=()=>{frame+=2;if(wEl){const ctx=wEl.getContext('2d'),W=wEl.width=wEl.offsetWidth||340,H=wEl.height=56;ctx.clearRect(0,0,W,H);ctx.strokeStyle='rgba(82,122,108,.65)';ctx.lineWidth=1.4;ctx.beginPath();for(let x=0;x<W;x++){const t=(x/W)*Math.PI*6,amp=7+(S.scores.stress||50)*.07,y=H/2+Math.sin(t+frame*.04)*amp+Math.sin(t*.5+frame*.06)*3;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();}S.waveRAF=requestAnimationFrame(wLoop);};wLoop();
+  const stages=[{t:500,p:20,status:'설문 데이터 정규화 중…',text:'상태 설문과 향 취향을 공통 벡터로 변환했습니다.'},{t:1200,p:S.bio?45:52,status:S.bio?'Bio-Signal 블렌딩 중…':'설문 신뢰도 평가 중…',text:S.bio?`EEG·HRV → 6축 블렌딩 (Bio 60% + Survey 40%) S${S.scores.stress}·B${S.scores.balance}·F${S.scores.focus}`:`향 취향과 상태 설문만으로 분석합니다.`},{t:2200,p:75,status:'6D 벡터 매칭 중…',text:`S${S.scores.stress}·B${S.scores.balance}·E${S.scores.energy}·F${S.scores.focus}·M${S.scores.mood}·R${S.scores.recovery} — 매칭`},{t:3200,p:100,status:'추천 완료',text:S.copy}];
+  stages.forEach((st,idx)=>{const tid=setTimeout(()=>{try{$('aFill').style.width=st.p+'%';$('aStatus').textContent=st.status;$('aTxt').textContent=st.text;const arc=$('ringArc');if(arc)arc.style.strokeDasharray=`${(st.p/100)*CIRC} ${CIRC}`;const pt=$('ringPct');if(pt)pt.textContent=st.p+'%';const step=$('as'+String(idx+1).padStart(2,'0'));if(step)step.classList.add('done');if(st.p===100)setTimeout(()=>{if(S.waveRAF)cancelAnimationFrame(S.waveRAF);goPage('report');},700);}catch(err){console.error('analysis stage error', err);if(S.waveRAF)cancelAnimationFrame(S.waveRAF);try{goPage('report');}catch(_){}}},st.t);S.timers.push(tid);});
+}
+
+/* ══ REPORT ══ */
+const EQ_META={valence:{l:'Valence',c:'#4a8a6a',d:'긍정 정서'},arousal:{l:'Arousal',c:'#4a5570',d:'각성 에너지'},stress:{l:'Stress',c:'#a85560',d:'스트레스 대응'},engagement:{l:'Engagement',c:'#8a6f3c',d:'집중 몰입도'},relaxation:{l:'Relaxation',c:'#527a6c',d:'이완 효과'},interest:{l:'Interest',c:'#6a5a8a',d:'자극 흥미도'}};
+function renderReport(){
+  if(!S.primary)computeFinal();
+  const p=S.primary;
+  $('rCode').textContent=p.code;
+  $('rNotes').textContent=`${p.notes} · ${p.use}`;
+  $('rTags').innerHTML=p.keywords.map(k=>`<div class="s-tag">${k}</div>`).join('');
+  if(S.bio){const badge=$('bioReportBadge');if(badge){badge.style.display='';badge.innerHTML=`<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(29,158,117,.10);border:1px solid rgba(29,158,117,.30);border-radius:12px;margin-bottom:-4px"><span style="font-size:16px">🧠</span><div><div style="font-size:10px;font-weight:700;color:#0f6e56">Bio-Signal 반영됨 (Bio 60% + 설문 40%)</div><div style="font-size:9px;color:#1D9E75;margin-top:1px">RMSSD ${S.bio.raw.rmssd}ms · LF/HF ${S.bio.raw.lf_hf} · HR ${S.bio.raw.hr}bpm · ${S.bio.device}</div></div></div>`;}}
+  const mp=Math.min(100,S.matchScore);
+  $('rMatchPct').textContent=mp+'%';$('rMatchBar').style.width=mp+'%';
+  $('rMatchReason').textContent=S.matchReason||'EQ 코사인 유사도 기반';
+  $('rMatchTag').textContent=mp>=82?'Excellent Match':mp>=68?'Good Match':'Suggested';
+  $('rCopy').innerHTML=(S.copy||'').replace(/(\d+[%점ms])/g,'<strong>$1</strong>');
+  [['aStress','stress'],['aBal','balance'],['aEne','energy'],['aFocus','focus'],['aMood','mood'],['aRecovery','recovery']].forEach(([id,k])=>{const el=$(id);if(el)el.textContent=S.scores[k];});
+  /* Bio 출처 표시 */
+  if(S.bio){document.querySelectorAll('.score-pill').forEach((el,i)=>{const k=['stress','balance','energy','focus','mood','recovery'][i];if(k){el.classList.add('bio-src');const d=el.querySelector('.score-d');if(d&&!el.querySelector('.bio-src-label')){const lb=document.createElement('div');lb.className='bio-src-label';lb.textContent='🧠 Bio+Survey';el.appendChild(lb);}}});}
+  const uEQ=S._userEQ||{};
+  $('eqRows').innerHTML=Object.entries(p.eq).map(([k,v])=>{const m=EQ_META[k]||{l:k,c:'#888'};const uv=Math.round(uEQ[k]||0);return`<div class="eq-row"><div class="eq-k">${m.l}</div><div class="eq-track" style="position:relative"><i class="eq-fill" style="width:${v}%;background:${m.c}"></i>${uv>0?`<div style="position:absolute;top:-1px;left:${uv}%;width:2px;height:calc(100%+2px);background:#0e0e0d;border-radius:1px;transform:translateX(-50%);opacity:.5"></div>`:''}</div><div class="eq-v">${v}</div></div>`;}).join('');
+  const eqCompare=$('eqCompare');
+  if(eqCompare)eqCompare.innerHTML=`<div class="lbl lbl-c" style="margin-bottom:8px">나의 EQ vs 제품 EQ</div>`+Object.keys(EQ_META).map(k=>{const m=EQ_META[k],pv=p.eq[k]||0,uv=Math.round(uEQ[k]||0),diff=pv-uv,diffStr=diff>0?`+${diff}`:String(diff),dc=Math.abs(diff)<15?'var(--c)':diff>0?'var(--gold)':'var(--slate)';return`<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div style="width:60px;font-size:9px;font-weight:700;color:var(--ink45)">${m.l}</div><div style="flex:1;height:5px;border-radius:999px;background:var(--cream3);position:relative;overflow:visible"><div style="position:absolute;top:0;left:0;height:100%;border-radius:999px;background:${m.c};opacity:.3;width:${pv}%"></div><div style="position:absolute;top:0;left:0;height:100%;border-radius:999px;background:${m.c};width:${uv}%"></div></div><div style="font-size:9px;font-weight:700;color:var(--ink45);width:22px">${uv}</div><div style="font-size:9px;font-weight:700;color:${dc};width:28px">${diffStr}</div><div style="font-size:9px;font-weight:700;color:var(--ink22);width:22px">${pv}</div></div>`;}).join('')+`<div style="display:flex;justify-content:flex-end;gap:10px;margin-top:4px;font-size:8.5px;color:var(--ink45)"><span>나 ←</span><span style="color:var(--ink22)">→ 제품</span></div>`;
+  $('buyList').innerHTML=[p,...S.alts].map((sc,i)=>`<div class="buy-card ${i===0?'top':''}"><div class="buy-img"><img src="https://ecimg.cafe24img.com/pg2145b53722962042/shifti/web/mobile/newDesign/30p.png" alt="${sc.code}"/></div><div class="buy-meta"><div class="buy-rec" style="${i>0?'color:var(--ink45)':''}">${i===0?'Primary':'Alt.'+i}</div><div class="buy-name">${sc.code}</div><div class="buy-notes">${sc.notes}</div><div class="buy-price">EDP 30ml · ₩58,000</div></div><div class="buy-btns"><button class="btn btn-ink" onclick="location.href='${LINKS[sc.code]||'#'}'">구매</button><button class="btn btn-ol" onclick="location.href='${LINKS[sc.code]||'#'}'">상세</button></div></div>`).join('');
+  const bioSrc=S.bio?'Bio+Survey':'Survey';
+  $('rTable').innerHTML=[
+    ['Stress',S.scores.stress,bioSrc,'긴장·과부하'],['Balance',S.scores.balance,bioSrc,'안정·회복력'],['Energy',S.scores.energy,bioSrc,'집중·활력'],['Focus',S.scores.focus,bioSrc,'인지·선명도'],['Mood',S.scores.mood,bioSrc,'정서·쾌감가'],['Recovery',S.scores.recovery,bioSrc,'회복·탄력성'],
+    ...(S.bio?[['Bio RMSSD',S.bio.raw.rmssd+'ms','NNFX2','부교감 회복력'],['Bio LF/HF',S.bio.raw.lf_hf,'NNFX2','자율신경 균형'],['Bio HR',S.bio.raw.hr+'bpm','NNFX2','심박수'],['Bio Theta',S.bio.raw.theta+'/10','NNFX2','감정·스트레스'],['Bio Alpha',S.bio.raw.alpha+'/10','NNFX2','이완·집중'],['Bio Conc.',S.bio.raw.conc+'/10','NNFX2','집중도']]:
+    [['EQ Valence',Math.round(uEQ.valence||0),'추정','긍정 정서'],['EQ Arousal',Math.round(uEQ.arousal||0),'추정','각성 에너지']]),
+    ['Privacy','NO CAMERA','MEDISCENT','얼굴·이미지 미수집'],['Match',S.matchScore+'%','Engine','EQ 코사인 매칭']
+  ].map(r=>`<tr><td class="mono">${r[0]}</td><td class="mono">${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('');
+}
+
+/* ══ INSIGHT ══ */
+function renderInsight(){
+  if(!S.primary)computeFinal();const{stress,balance,energy,focus,mood,recovery}=S.scores,p=S.primary;
+  $('insName').textContent=p.code;$('insBody').textContent=S.copy;
+  let st='';
+  if(stress>=75)st=`Stress ${stress}·Recovery ${recovery} — 긴장이 상당합니다.${S.bio?` (Bio RMSSD ${S.bio.raw.rmssd}ms 확인됨)`:''} 이완이 필요합니다.`;
+  else if(focus<40)st=`Focus ${focus} — 인지 선명도가 낮습니다.${S.bio?` (Bio Conc. ${S.bio.raw.conc}/10)`:''} 집중력 회복이 우선입니다.`;
+  else if(mood<40)st=`Mood ${mood} — 정서 무게감이 높습니다. 향이 기분을 조율합니다.`;
+  else if(recovery<40)st=`Recovery ${recovery} — 재충전이 필요합니다.${S.bio?` (RMSSD ${S.bio.raw.rmssd}ms)`:''} 회복 방향으로 추천했습니다.`;
+  else st=`6축: S${stress}·B${balance}·E${energy}·F${focus}·M${mood}·R${recovery}${S.bio?` | Bio: RMSSD ${S.bio.raw.rmssd}ms`:''}.`;
+  const topEQ=Object.entries(p.eq).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([k,v])=>`${EQ_META[k]?.l||k} ${v}%`).join('·');
+  const G={'Foggy Study':'작업 전 손목에 1회. 3회 깊게 호흡하면 Focus 전환이 촉진됩니다.','AnnE':'외출 전 목선·소매에 각 1회. 하루 종일 Mood·Balance를 유지합니다.','Who am I':'혼자 있는 공간에서 2~3회 공간 분사. 호흡 속도를 낮춥니다.','Red Tara':'저녁 마무리 시 가슴에 1회. Recovery를 따뜻하게 지원합니다.','The Great':'아침 손목에 1회, 자연건조. Energy·Focus를 동시에 활성화합니다.','말괄량이':'언제 어디서나. 옷깃·가방에도 OK. Mood 즉각 상승 효과.'};
+  $('insA').textContent=st;$('insB').textContent=`${p.code}의 EQUILIBRIUM에서 ${topEQ}가 두드러집니다.`;$('insC').textContent=G[p.code]||'손목·목선에 1~2회. 처음 3분은 호흡에 집중하세요.';
+  $('btnInsProd').onclick=()=>location.href=LINKS[p.code]||'https://shifti.co.kr/product/list.html?cate_no=60';
+  ['insB0','insB1','insB2'].forEach(id=>$(id).classList.remove('on'));
+  ['insB0','insB1','insB2'].forEach((id,i)=>setTimeout(()=>$(id).classList.add('on'),140+i*230));
+}
+
+/* ══ HISTORY ══ */
+function saveHist(){
+  if(!S.primary)return;
+  try{
+    const list=JSON.parse(localStorage.getItem('shifti_v5bio')||'[]');
+    list.unshift({ts:Date.now(),primary:S.primary.code,scores:{...S.scores},matchScore:S.matchScore,copy:(S.copy||'').slice(0,80),hasBio:!!S.bio,rmssd:S.bio?.raw.rmssd||null});
+    localStorage.setItem('shifti_v5bio',JSON.stringify(list.slice(0,50)));
+  }catch(e){}
+}
+function renderHistory(){
+  try{
+    const list=JSON.parse(localStorage.getItem('shifti_v5bio')||'[]');
+    const g=$('histList');
+    if(!list.length){g.innerHTML=`<div class="card card-p" style="text-align:center;padding:40px"><div style="font-size:22px;font-weight:800;margin-bottom:8px">기록이 없습니다</div><div style="color:var(--ink45)">첫 진단을 시작하세요.</div></div>`;return;}
+    g.innerHTML=list.map(it=>{const d=new Date(it.ts),ds=`${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+    return`<div class="hist-card"><div class="hist-date">${ds}</div><div class="hist-name">${it.primary}</div><div class="hist-copy">${(it.copy||'').slice(0,50)}…</div><div class="hist-chips"><div class="hist-chip">S·${it.scores.stress??'—'}</div><div class="hist-chip">B·${it.scores.balance??'—'}</div><div class="hist-chip">F·${it.scores.focus??'—'}</div><div class="hist-chip">M·${it.scores.mood??'—'}</div><div class="hist-chip">R·${it.scores.recovery??'—'}</div><div class="hist-chip match">Match ${it.matchScore||0}%</div>${it.hasBio?`<div class="hist-chip bio">🧠 Bio·${it.rmssd}ms</div>`:''}</div></div>`;
+    }).join('');
+  }catch(e){}
+}
+
+/* ══ SHARE ══ */
+function openShare(){if(!S.primary)return;const p=S.primary,now=new Date();$('scDate').textContent=`${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;$('scName').textContent=p.code;$('scSub').textContent=p.notes;$('scAxis').innerHTML=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;width:100%">${[['STRESS',S.scores.stress],['BALANCE',S.scores.balance],['ENERGY',S.scores.energy],['FOCUS',S.scores.focus],['MOOD',S.scores.mood],['MATCH',S.matchScore+'%']].map(([l,v])=>`<div style="border:1px solid rgba(255,255,255,.12);border-radius:6px;text-align:center;padding:5px 3px;background:rgba(255,255,255,.05)"><div style="font-size:5.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.4)">${l}</div><div style="font-size:13px;font-weight:800;color:rgba(255,255,255,.92);margin-top:2px">${v}</div></div>`).join('')}</div>`;$('shareOv').classList.add('on');}
+function closeShare(){$('shareOv').classList.remove('on');}
+function dlShare(){if(typeof html2canvas==='undefined'){toast('html2canvas 미로드');return;}html2canvas($('shareCard'),{scale:3,useCORS:true,backgroundColor:null}).then(c=>{const a=document.createElement('a');a.href=c.toDataURL('image/png');a.download=`shifti-${(S.primary?.code||'result').replace(/\s/g,'-')}.png`;a.click();toast('이미지 저장 완료');}).catch(()=>toast('저장 실패'));}
+
+/* ══ RESET ══ */
+function resetAll(){
+  S.timers.forEach(clearTimeout);S.timers=[];if(S.waveRAF)cancelAnimationFrame(S.waveRAF);
+  sqCur=0;
+  S.survey={};S.intention=null;S.bio=null;S.preferenceProfile=null;S.standardRecipe=null;S.personalizedRecipe=null;
+  S.scores={stress:0,balance:0,energy:0,focus:0,mood:0,recovery:0};
+  S.primary=null;S.alts=[];S.copy='';S.matchScore=0;S.matchReason='';S._userEQ=null;
+  /* Bio 카드 초기화 */
+  $('bioResultCard').style.display='none';$('bioErrorCard').style.display='none';$('bioUploadCard').style.display='';
+  const badge=$('bioReportBadge');if(badge)badge.style.display='none';
+  /* 리포트 score-pill bio 배지 제거 */
+  document.querySelectorAll('.score-pill').forEach(el=>{el.classList.remove('bio-src');const lb=el.querySelector('.bio-src-label');if(lb)lb.remove();});
+  initSurvey();closeShare();goPage('welcome');toast('새 진단 시작');
+}
+
+/* ══ BIND ══ */
+function bind(){
+  on('btnSkip','click',()=>{S.timers.forEach(clearTimeout);if(S.waveRAF)cancelAnimationFrame(S.waveRAF);goPage('report');});
+  on('btnShare','click',openShare);on('btnInsight','click',()=>goPage('insight'));on('btnReset','click',resetAll);
+  on('btnHDel','click',()=>{if(confirm('모든 기록을 삭제하시겠습니까?')){localStorage.removeItem('shifti_v5bio');renderHistory();toast('삭제 완료');}});
+  on('btnScClose','click',closeShare);on('btnScDl','click',dlShare);
+  on('btnScCopy','click',()=>{const txt=location.href;if(navigator.clipboard)navigator.clipboard.writeText(txt).then(()=>toast('링크 복사'));else toast('링크 복사 실패');});
+  $('shareOv').addEventListener('click',e=>{if(e.target===$('shareOv'))closeShare();});
+}
+
+/* ══ WELCOME ══ */
+function animCounters(){document.querySelectorAll('.trust-n[data-target]').forEach(el=>{const tg=parseInt(el.dataset.target),hp=el.innerHTML.includes('%');let v=0;const inc=tg/60;const t=setInterval(()=>{v=Math.min(v+inc,tg);el.innerHTML=Math.round(v)+(hp?'<sup>%</sup>':'');if(v>=tg)clearInterval(t);},16);});}
+function initWelcomeRadar(){
+  const canvas=$('wRadar');if(!canvas)return;
+  const sl=$('wLiveScores');
+  const axes=[{k:'STRESS',c:'#a85560',base:62,amp:15},{k:'BALANCE',c:'#527a6c',base:50,amp:18},{k:'ENERGY',c:'#4a5570',base:54,amp:16},{k:'FOCUS',c:'#4a8a6a',base:48,amp:20},{k:'MOOD',c:'#8a6f3c',base:44,amp:22},{k:'RECOVERY',c:'#6a5a8a',base:40,amp:16}];
+  if(sl)sl.innerHTML=axes.map(a=>`<div class="hri-row"><div class="hri-k">${a.k}</div><div class="hri-bar"><div class="hri-fill" id="wl_${a.k}" style="background:${a.c};width:0%"></div></div><div class="hri-v" id="wv_${a.k}">0</div></div>`).join('');
+  let t=0;(function draw(){t+=.020;const ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height,cx=W/2,cy=H/2,r=W/2-7;ctx.clearRect(0,0,W,H);const N=6,angles=Array.from({length:N},(_,i)=>(i*2*Math.PI/N)-Math.PI/2);[.33,.66,1].forEach(s=>{ctx.beginPath();angles.forEach((a,i)=>{const x=cx+Math.cos(a)*r*s,y=cy+Math.sin(a)*r*s;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});ctx.closePath();ctx.strokeStyle=`rgba(255,255,255,${s===1?.28:.11})`;ctx.lineWidth=.8;ctx.stroke();});angles.forEach(a=>{ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);ctx.strokeStyle='rgba(255,255,255,.16)';ctx.lineWidth=.7;ctx.stroke();});const vals=axes.map((a,i)=>Math.max(0,Math.min(100,a.base+Math.sin(t+i*1.1)*a.amp))/100);ctx.beginPath();angles.forEach((a,i)=>{const x=cx+Math.cos(a)*r*vals[i],y=cy+Math.sin(a)*r*vals[i];i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});ctx.closePath();ctx.fillStyle='rgba(82,122,108,.28)';ctx.fill();ctx.strokeStyle='rgba(122,168,152,.85)';ctx.lineWidth=1.4;ctx.stroke();axes.forEach((a,i)=>{const v=Math.round(vals[i]*100);const fl=$('wl_'+a.k),vl=$('wv_'+a.k);if(fl)fl.style.width=v+'%';if(vl)vl.textContent=v;});requestAnimationFrame(draw);})();
+}
+
+/* ══ INIT ══ */
+document.addEventListener('DOMContentLoaded',()=>{
+  initSurvey();
+  initBioHandler();
+  bind();
+  setTimeout(()=>animCounters(),350);
+  setTimeout(()=>initWelcomeRadar(),550);
+});
+</script>
+<script>
+/*
+  MEDISCENT / SHIFTI Engine Patch
+  Purpose: Replace demo-only matching logic with a business-ready architecture.
+
+  How to use:
+  1) Load this file AFTER the original HTML's inline script, or copy the functions below into the original source.
+  2) Replace SCENTS / computeFinal / saveHist / renderReport hook points as noted.
+  3) Keep the existing UI. This patch swaps the engine, not the visual layer.
+*/
+
+(function(){
+  if (typeof window === 'undefined') return;
+
+  const clamp = (v, min=0, max=100) => Math.max(min, Math.min(max, Math.round(v)));
+  const safe = v => Number.isFinite(Number(v)) ? Number(v) : 0;
+
+  // Stable access to the page-level state declared earlier in this document.
+  const getS = () => {
+    try {
+      if (typeof S !== 'undefined' && S) return S;
+    } catch (_) {}
+    return window.S || null;
+  };
+
+  // Bridge the new recommendation engine to the original product/report UI data.
+  const DISPLAY_BY_CODE = Object.fromEntries(
+    ((typeof SCENTS !== 'undefined' && Array.isArray(SCENTS)) ? SCENTS : [])
+      .map(item => [item.code, item])
+  );
+
+  const LINKS_MAP = {
+    'Foggy Study':'#',
+    'AnnE':'#',
+    'Who am I':'#',
+    'Red Tara':'#',
+    'The Great':'#',
+    '말괄량이':'#'
+  };
+
+  const EQ_META_SAFE = {
+    valence:{l:'Valence',c:'#4a8a6a'},
+    arousal:{l:'Arousal',c:'#4a5570'},
+    stressLoad:{l:'Stress Load',c:'#a85560'},
+    stress:{l:'Stress',c:'#a85560'},
+    focus:{l:'Focus',c:'#4f7872'},
+    engagement:{l:'Engagement',c:'#8a6f3c'},
+    relaxation:{l:'Relaxation',c:'#527a6c'},
+    curiosity:{l:'Curiosity',c:'#6a5a8a'},
+    interest:{l:'Interest',c:'#6a5a8a'}
+  };
+
+  /* ------------------------------------------------------------------
+     1) Canonical state model for MEDISCENT
+     ------------------------------------------------------------------ */
+  const CANON_KEYS = ['valence','arousal','stressLoad','focus','relaxation','curiosity'];
+
+  const FAMILY_LABELS={citrus:'시트러스',green:'그린·티',floral:'플로럴',woody:'우디',musk:'머스크·클린',powdery:'파우더리',amber_spice:'앰버·스파이스',fruity:'프루티'};
+  const FAMILY_KEYS=Object.keys(FAMILY_LABELS);
+  const FAMILY_NOTES={
+    citrus:{top:'Bergamot / Yuzu',middle:'Neroli',base:'Citrus Musk'},
+    green:{top:'Green Tea / Fig Leaf',middle:'Tea Leaves',base:'Vetiver'},
+    floral:{top:'Neroli',middle:'Peony / White Floral',base:'Iris'},
+    woody:{top:'Cypress',middle:'Cedar',base:'Sandalwood'},
+    musk:{top:'Aldehydic Air',middle:'Cotton',base:'White Musk'},
+    powdery:{top:'Soft Aldehyde',middle:'Iris',base:'Powdery Musk'},
+    amber_spice:{top:'Pink Pepper',middle:'Soft Spice',base:'Amber / Benzoin'},
+    fruity:{top:'Pear / Yuzu',middle:'Fig',base:'Soft Musk'}
+  };
+  const FAMILY_AFFINITY={
+    citrus:{top:.78,middle:.18,base:.04},green:{top:.45,middle:.40,base:.15},floral:{top:.15,middle:.70,base:.15},
+    woody:{top:.08,middle:.34,base:.58},musk:{top:.03,middle:.18,base:.79},powdery:{top:.04,middle:.44,base:.52},
+    amber_spice:{top:.08,middle:.34,base:.58},fruity:{top:.55,middle:.40,base:.05}
+  };
+  const CHARACTER_CONFIG={
+    fresh_clean:{label:'맑고 깨끗한',layers:{top:38,middle:38,base:24},boost:{citrus:18,green:12,musk:5}},
+    soft_comfort:{label:'부드럽고 편안한',layers:{top:18,middle:38,base:44},boost:{musk:18,powdery:14,woody:7}},
+    elegant_floral:{label:'섬세하고 우아한',layers:{top:22,middle:52,base:26},boost:{floral:22,musk:8,powdery:6}},
+    deep_woody:{label:'깊고 차분한',layers:{top:14,middle:34,base:52},boost:{woody:20,amber_spice:16,musk:7}}
+  };
+  const PRODUCT_SCENT_PROFILES={
+    'AnnE':{floral:42,musk:32,powdery:16,woody:10},
+    'Foggy Study':{green:34,woody:30,musk:20,citrus:16},
+    'Who am I':{woody:34,powdery:26,amber_spice:25,floral:15},
+    'Red Tara':{amber_spice:38,woody:30,floral:12,musk:10,citrus:10},
+    'The Great':{citrus:36,green:30,woody:24,amber_spice:10},
+    '말괄량이':{fruity:34,citrus:30,floral:24,green:12}
+  };
+  function normalizeMap(map){
+    const out={}; let sum=0; FAMILY_KEYS.forEach(k=>{out[k]=Math.max(0,safe(map?.[k]));sum+=out[k];});
+    if(!sum){out.musk=35;out.woody=35;out.citrus=30;sum=100;}
+    FAMILY_KEYS.forEach(k=>out[k]=Math.round(out[k]/sum*100));
+    let diff=100-FAMILY_KEYS.reduce((s,k)=>s+out[k],0); if(diff) out[FAMILY_KEYS.sort((a,b)=>out[b]-out[a])[0]]+=diff;
+    return out;
+  }
+  function buildPreferenceProfile(st){
+    const selected=Array.isArray(st.survey?.scentFamilies)?st.survey.scentFamilies:[];
+    const avoid=(Array.isArray(st.survey?.scentAvoid)?st.survey.scentAvoid:[]).filter(x=>x!=='none');
+    const character=st.survey?.scentCharacter||'fresh_clean';
+    const intensity=st.survey?.scentIntensity||'medium';
+    const base={}; const rankWeights=selected.length===1?[100]:selected.length===2?[58,42]:[46,34,20];
+    selected.forEach((k,i)=>base[k]=(base[k]||0)+(rankWeights[i]||20));
+    const cfg=CHARACTER_CONFIG[character]||CHARACTER_CONFIG.fresh_clean;
+    Object.entries(cfg.boost||{}).forEach(([k,v])=>base[k]=(base[k]||0)+v);
+    avoid.forEach(k=>base[k]=0);
+    const familyWeights=normalizeMap(base);
+    return {selected,avoid,character,intensity,characterLabel:cfg.label,familyWeights};
+  }
+  function recipeNotes(familyWeights,layers){
+    const out={top:[],middle:[],base:[]};
+    ['top','middle','base'].forEach(layer=>{
+      const weighted=FAMILY_KEYS.map(k=>({k,v:(familyWeights[k]||0)*(FAMILY_AFFINITY[k]?.[layer]||0)})).filter(x=>x.v>0).sort((a,b)=>b.v-a.v);
+      const denom=weighted.reduce((s,x)=>s+x.v,0)||1;
+      weighted.slice(0,4).forEach(x=>{
+        const pct=Math.round((x.v/denom)*(layers[layer]||0));
+        if(pct>=2) out[layer].push({family:x.k,note:FAMILY_NOTES[x.k]?.[layer]||FAMILY_LABELS[x.k],pct});
+      });
+      const diff=(layers[layer]||0)-out[layer].reduce((s,x)=>s+x.pct,0); if(out[layer][0])out[layer][0].pct+=diff;
+    });
+    return out;
+  }
+  function buildStandardRecipe(profile){
+    const cfg=CHARACTER_CONFIG[profile.character]||CHARACTER_CONFIG.fresh_clean;
+    const layers={...cfg.layers};
+    return {type:'standard',familyWeights:{...profile.familyWeights},layers,notes:recipeNotes(profile.familyWeights,layers),characterLabel:profile.characterLabel,intensity:profile.intensity};
+  }
+  function buildPersonalizedRecipe(standard,state,ctx){
+    const f={...standard.familyWeights}; const l={...standard.layers}; const reasons=[];
+    if(state.stressLoad>=65){f.woody=(f.woody||0)+8;f.musk=(f.musk||0)+7;l.base+=5;l.top-=5;reasons.push('긴장 완화를 위해 우디·머스크와 베이스를 보강');}
+    if(state.relaxation<45){f.musk=(f.musk||0)+6;f.powdery=(f.powdery||0)+4;reasons.push('회복도가 낮아 포근한 잔향을 보강');}
+    if(state.focus<55 && ctx.useCase==='work'){f.green=(f.green||0)+9;f.woody=(f.woody||0)+4;reasons.push('집중 보조를 위해 그린·우디를 보강');}
+    if(state.valence<50){f.citrus=(f.citrus||0)+8;f.fruity=(f.fruity||0)+5;reasons.push('기분 전환을 위해 시트러스·프루티를 보강');}
+    if(state.arousal<45){f.citrus=(f.citrus||0)+8;f.green=(f.green||0)+5;l.top+=5;l.base-=5;reasons.push('활력 보완을 위해 탑 노트를 보강');}
+    const familyWeights=normalizeMap(f); l.top=clamp(l.top,10,50);l.middle=clamp(l.middle,25,55);l.base=100-l.top-l.middle;if(l.base<15){l.base=15;l.middle=100-l.top-l.base;}
+    return {type:'personalized',familyWeights,layers:l,notes:recipeNotes(familyWeights,l),reasons:reasons.length?reasons:['현재 상태가 스탠다드 레시피와 안정적으로 일치'],characterLabel:standard.characterLabel,intensity:standard.intensity};
+  }
+  function familyCosine(a,b){
+    let dot=0,ma=0,mb=0; FAMILY_KEYS.forEach(k=>{const x=safe(a?.[k]),y=safe(b?.[k]);dot+=x*y;ma+=x*x;mb+=y*y;});
+    return ma&&mb?(dot/Math.sqrt(ma*mb))*100:50;
+  }
+  function avoidPenalty(profile,productCode){
+    const pp=PRODUCT_SCENT_PROFILES[productCode]||{}; return (profile.avoid||[]).reduce((s,k)=>s+(safe(pp[k])*.55),0);
+  }
+
+
+  const MEDISCENT_PRODUCTS = [
+    {
+      code:'AnnE',
+      narrative:'균형형 안정',
+      eq:{valence:88, arousal:72, stressLoad:25, focus:85, relaxation:65, curiosity:90},
+      profile:{ideal:['stabilize','work','daily'], avoidWhen:['hyper-low-energy']},
+      formatPriority:['perfume','pillow_mist','diffuser'],
+      formatRules:{perfume:1.0,pillow_mist:0.9,diffuser:0.85},
+      guardrail:{autoRecommend:true, maxIntensity:'medium'}
+    },
+    {
+      code:'Foggy Study',
+      narrative:'인지 몰입',
+      eq:{valence:50, arousal:78, stressLoad:22, focus:92, relaxation:28, curiosity:95},
+      profile:{ideal:['focus','work','study'], avoidWhen:['high-contradiction-high-stress']},
+      formatPriority:['perfume','diffuser'],
+      formatRules:{perfume:1.0,diffuser:0.95,pillow_mist:0.4},
+      guardrail:{autoRecommend:true, maxIntensity:'medium'}
+    },
+    {
+      code:'Who am I',
+      narrative:'깊은 내면 리셋',
+      eq:{valence:8, arousal:18, stressLoad:92, focus:15, relaxation:10, curiosity:12},
+      profile:{ideal:['introspective','night','solo'], avoidWhen:['default-auto','uncertain-state']},
+      formatPriority:['diffuser','pillow_mist'],
+      formatRules:{diffuser:1.0,pillow_mist:0.9,perfume:0.3},
+      guardrail:{autoRecommend:false, requireOptIn:true, maxIntensity:'low'}
+    },
+    {
+      code:'The Great',
+      narrative:'확장 에너지',
+      eq:{valence:75, arousal:88, stressLoad:85, focus:40, relaxation:15, curiosity:82},
+      profile:{ideal:['social','drive','outdoor'], avoidWhen:['high-stress-low-confidence']},
+      formatPriority:['perfume'],
+      formatRules:{perfume:1.0,diffuser:0.55,pillow_mist:0.15},
+      guardrail:{autoRecommend:true, maxIntensity:'medium'}
+    },
+    {
+      code:'Red Tara',
+      narrative:'생존 에너지/회복 전환',
+      eq:{valence:72, arousal:85, stressLoad:78, focus:82, relaxation:18, curiosity:88},
+      profile:{ideal:['transition','reboot','evening'], avoidWhen:['sleep-prep']},
+      formatPriority:['perfume','diffuser'],
+      formatRules:{perfume:1.0,diffuser:0.8,pillow_mist:0.2},
+      guardrail:{autoRecommend:true, maxIntensity:'medium'}
+    },
+    {
+      code:'말괄량이',
+      narrative:'밝은 전환',
+      eq:{valence:90, arousal:80, stressLoad:12, focus:35, relaxation:78, curiosity:92},
+      profile:{ideal:['change','refresh','gift'], avoidWhen:['deep-focus-needed']},
+      formatPriority:['perfume','diffuser'],
+      formatRules:{perfume:1.0,diffuser:0.85,pillow_mist:0.4},
+      guardrail:{autoRecommend:true, maxIntensity:'medium'}
+    }
+  ];
+
+
+  const PRODUCTS = MEDISCENT_PRODUCTS.map(product => {
+    const display = DISPLAY_BY_CODE[product.code] || {};
+    return {
+      ...display,
+      ...product,
+      code: product.code,
+      narrative: product.narrative,
+      eq: product.eq
+    };
+  });
+
+  /* ------------------------------------------------------------------
+     2) Modality -> canonical state translators
+     ------------------------------------------------------------------ */
+  function surveyToCanonical(scores){
+    return {
+      valence: clamp(scores.mood * 0.50 + scores.balance * 0.30 + (100 - scores.stress) * 0.20),
+      arousal: clamp(scores.energy * 0.50 + scores.focus * 0.25 + scores.stress * 0.25),
+      stressLoad: clamp(scores.stress),
+      focus: clamp(scores.focus * 0.60 + scores.balance * 0.15 + scores.energy * 0.25),
+      relaxation: clamp((100 - scores.stress) * 0.40 + scores.recovery * 0.35 + scores.balance * 0.25),
+      curiosity: clamp(scores.focus * 0.35 + scores.energy * 0.30 + scores.mood * 0.35)
+    };
+  }
+
+  function bioToCanonical(bio){
+    if(!bio || !bio.valid) return null;
+    return {
+      valence: clamp(bio.mood * 0.55 + bio.balance * 0.25 + (100 - bio.stress) * 0.20),
+      arousal: clamp(bio.energy * 0.60 + bio.focus * 0.20 + bio.stress * 0.20),
+      stressLoad: clamp(bio.stress),
+      focus: clamp(bio.focus * 0.70 + bio.energy * 0.30),
+      relaxation: clamp(bio.recovery * 0.45 + bio.mood * 0.20 + (100 - bio.stress) * 0.35),
+      curiosity: clamp(bio.focus * 0.30 + bio.energy * 0.35 + bio.mood * 0.35)
+    };
+  }
+
+
+  /* ════════════════════════════════════════════════════════════════
+     3. 신뢰도 / 상충도 / 불확실성
+  ════════════════════════════════════════════════════════════════ */
+  function computeReliability(st){
+    const q = Object.keys(st.survey || {}).length;
+    const survey = q>=6 ? 0.92 : q>=4 ? 0.75 : 0.45;
+    let bio=0;
+    if(st.bio?.valid){
+      const parserQ=Number(st.bio.quality);
+      if(Number.isFinite(parserQ)&&parserQ>0) bio=clamp(parserQ,0,1);
+      else bio=clamp(
+        Math.min((st.bio.rows?.eeg||0)/20,1)*30 +
+        Math.min((st.bio.rows?.rr ||0)/30,1)*30 +
+        (st.bio.raw?.rmssd!=null ? 20:0) + (st.bio.raw?.lf_hf!=null ? 20:0), 0, 100) / 100;
+      bio=Math.max(.45,bio);
+    }
+    return { survey, bio };
+  }
+  function weightedMean(states, w){
+    const out = {};
+    CANON_KEYS.forEach(k=>{
+      let num=0, den=0;
+      Object.keys(states).forEach(m=>{
+        if(states[m] && typeof states[m][k]==='number' && w[m]>0){ num += states[m][k]*w[m]; den += w[m]; }
+      });
+      out[k] = den ? clamp(num/den) : 50;
+    });
+    return out;
+  }
+  function meanGap(a,b){
+    const v = CANON_KEYS.map(k=>Math.abs((a?.[k]??50)-(b?.[k]??50)));
+    return v.reduce((x,y)=>x+y,0)/v.length;
+  }
+  function computeContradiction(states, w){
+    const act = Object.keys(states).filter(k=>states[k] && w[k]>0.12);
+    if(act.length<2) return 0;
+    const gaps=[];
+    for(let i=0;i<act.length;i++) for(let j=i+1;j<act.length;j++) gaps.push(meanGap(states[act[i]], states[act[j]]));
+    return clamp(gaps.reduce((a,b)=>a+b,0)/gaps.length);
+  }
+  function computeUncertainty(rel, contradiction){
+    const active = [rel.survey, rel.bio].filter(v=>v>0);
+    const mean = active.length ? active.reduce((a,b)=>a+b,0)/active.length : 0;
+    return clamp((1-mean)*70 + contradiction*0.30);
+  }
+
+  /* ════════════════════════════════════════════════════════════════
+     4. 문맥 / 개입 정책
+  ════════════════════════════════════════════════════════════════ */
+  function inferContext(st){
+    const intent = st.intention || st.survey?.intention || 'neutral';
+    const focus=safe(st.scores?.focus), recovery=safe(st.scores?.recovery), energy=safe(st.scores?.energy);
+    let useCase='daily';
+    if(intent==='change' && focus>=65) useCase='work';
+    else if(intent==='change' && recovery<45) useCase='reboot';
+    else if(intent==='keep' && recovery>=60) useCase='night';
+    else if(energy>=75) useCase='social';
+    return { intent, useCase };
+  }
+  function chooseFormat(p, st8, ctx, unc){
+    const sc = { perfume:p.formatRules?.perfume??0.5, pillow_mist:p.formatRules?.pillow_mist??0.5, diffuser:p.formatRules?.diffuser??0.5 };
+    if(ctx.useCase==='night'){ sc.pillow_mist+=0.35; sc.diffuser+=0.15; sc.perfume-=0.10; }
+    if(ctx.useCase==='work')   sc.perfume+=0.20;
+    if(ctx.useCase==='reboot') sc.diffuser+=0.15;
+    if(unc>60) sc.diffuser+=0.10;
+    return Object.entries(sc).sort((a,b)=>b[1]-a[1])[0][0];
+  }
+  function chooseIntensity(state, unc, p){
+    if(unc>65) return 'low';
+    if(state.stressLoad>75 && p.code!=='The Great') return 'low';
+    if(state.arousal>75 && state.relaxation<35) return 'low';
+    if(p.guardrail?.maxIntensity==='low') return 'low';
+    return 'medium';
+  }
+  function remeasureMinutes(fmt, unc){
+    if(unc>65) return 3;
+    if(fmt==='pillow_mist') return 10;
+    if(fmt==='diffuser') return 15;
+    return 5;
+  }
+
+  /* ════════════════════════════════════════════════════════════════
+     5. 이력 / 선호 / SKU / 매칭
+  ════════════════════════════════════════════════════════════════ */
+  const CL_KEY = 'mediscent_closed_loop_history';
+  function loadCL(){ try { return JSON.parse(localStorage.getItem(CL_KEY) || '[]'); } catch { return []; } }
+
+  function historyScore(code, h){
+    const r = h.filter(x=>x.primary===code);
+    if(!r.length) return 50;
+    return clamp(50 + (r.reduce((s,x)=>s+safe(x.deltaScore),0)/r.length)*0.5);
+  }
+  function preferenceScore(code, h){
+    const r = h.filter(x=>x.primary===code);
+    if(!r.length) return 55;
+    return clamp(r.reduce((s,x)=>s+safe(x.selfLike??60),0)/r.length);
+  }
+  function contextScore(p, ctx){
+    let s=55;
+    if(p.profile?.ideal?.includes(ctx.intent))  s+=15;
+    if(p.profile?.ideal?.includes(ctx.useCase)) s+=20;
+    if(p.profile?.avoidWhen?.includes('default-auto') && ctx.intent!=='keep') s-=25;
+    return clamp(s);
+  }
+  function skuScore(p, st8){
+    let s=50;
+    if(p.code==='AnnE'        && safe(st8.valence)>=55) s+=18;
+    if(p.code==='Foggy Study' && safe(st8.focus)>=60)   s+=18;
+    if(p.code==='말괄량이'    && safe(st8.valence)<55)  s+=15;
+    if(p.code==='Who am I') s-=20;
+    return clamp(s);
+  }
+  function cosineW(a,b){
+    const W={valence:2.0,arousal:1.6,stressLoad:1.9,focus:1.6,relaxation:1.7,curiosity:1.2};
+    let dot=0,ma=0,mb=0;
+    CANON_KEYS.forEach(k=>{ const w=W[k]; dot+=a[k]*b[k]*w; ma+=a[k]*a[k]*w; mb+=b[k]*b[k]*w; });
+    return ma && mb ? (dot/Math.sqrt(ma*mb))*100 : 0;
+  }
+  function guardrailPenalty(p, state, unc, ctx){
+    let pen=0;
+    if(p.code==='Who am I'   && (unc>45 || ctx.intent==='change')) pen+=45;
+    if(p.code==='The Great'  && state.stressLoad>75 && unc>45)     pen+=30;
+    if(p.code==='Red Tara'   && ctx.useCase==='night')             pen+=20;
+    if(p.code==='말괄량이'   && state.focus>80 && ctx.useCase==='work') pen+=15;
+    return pen;
+  }
+
+  /* ════════════════════════════════════════════════════════════════
+     6. 메인 엔진
+  ════════════════════════════════════════════════════════════════ */
+  function makeCopy(p, state, ctx, unc){
+    const u = unc>60 ? '측정 신뢰도가 낮아 보수적으로 추천합니다.' : '현재 상태와 가장 가까운 향 반응 프로파일입니다.';
+    const common = `Valence ${state.valence} · Arousal ${state.arousal} · Stress ${state.stressLoad} · Relaxation ${state.relaxation}. ${u}`;
+    const map = {
+      'AnnE':`정서 안정과 집중 균형이 필요한 상태입니다. ${common}`,
+      'Foggy Study':`몰입 회복이 우선인 상태입니다. ${common}`,
+      'Who am I':`내면 정리용 옵션입니다. 자동 추천보다는 명시적 선택일 때 적합합니다. ${common}`,
+      'The Great':`에너지 확장 욕구가 있으나 과자극 리스크를 함께 봐야 합니다. ${common}`,
+      'Red Tara':`소진 뒤 재가동이 필요한 전환 상태입니다. ${common}`,
+      '말괄량이':`기분 반전과 밝은 전환이 필요한 상태입니다. ${common}`
+    };
+    return map[p.code] || common;
+  }
+
+  function computeDynamicWeights(st,states,rel,contradiction,hist){
+    const base={survey:.40,bio:.60};
+    const availability={survey:1,bio:states.bio?1:0};
+    const quality={survey:rel.survey||0,bio:rel.bio||0};
+    const completed=hist.filter(x=>x.stage==='remeasured').length;
+    // A first valid device upload must not be suppressed simply because no personal history exists yet.
+    const longTerm={survey:.94,bio:Math.min(.98,.90+completed*.01)};
+    const conflict={survey:1,bio:contradiction>55?.78:contradiction>40?.88:1};
+    const raw={}; let sum=0;
+    ['survey','bio'].forEach(m=>{raw[m]=base[m]*availability[m]*quality[m]*longTerm[m]*conflict[m];sum+=raw[m];});
+    const normalized={survey:0,bio:0};
+    if(sum>0)Object.keys(normalized).forEach(m=>normalized[m]=raw[m]/sum);else normalized.survey=1;
+    return {base,availability,quality,longTerm,conflict,raw,normalized};
+  }
+  function computeIntervention(state,rel,contradiction,uncertainty,historyPreference,ctx){
+    const targetDistance=clamp((Math.abs(state.stressLoad-35)+Math.abs(state.relaxation-65)+Math.abs(state.valence-68)+Math.abs(state.focus-(ctx.useCase==='work'?72:60)))/4);
+    const activeRel=[rel.survey,rel.bio].filter(v=>v>0);
+    const confidence=clamp((activeRel.length?activeRel.reduce((a,b)=>a+b,0)/activeRel.length:0)*100);
+    const safety=100;
+    const score=clamp(targetDistance*.34+confidence*.26+historyPreference*.18+(100-contradiction)*.12+safety*.10);
+    const override=contradiction>=60 || uncertainty>=68 || confidence<38;
+    const stage=override?'HOLD':score>=70?'STAGE 1':score>=45?'STAGE 2':'HOLD';
+    return {score,targetDistance,confidence,historyPreference,safety,override,stage};
+  }
+  function computeFinalMediscent(){
+    if(typeof window.updateScores === 'function') window.updateScores();
+    const st=getS(); if(!st)throw new Error('전역 상태 S를 찾을 수 없습니다');
+    const surveyAxes={...(st.scores||{})};
+    const states={survey:surveyToCanonical(st.scores||{}),bio:bioToCanonical(st.bio)};
+    const rel=computeReliability(st);
+    const hist=loadCL();
+    const baseForConflict={survey:rel.survey,bio:rel.bio};
+    const contradiction=computeContradiction(states,baseForConflict);
+    const uncertainty=computeUncertainty(rel,contradiction);
+    const dynamic=computeDynamicWeights(st,states,rel,contradiction,hist);
+    const finalState=weightedMean(states,dynamic.normalized);
+    const ctx=inferContext(st);
+    const preferenceProfile=buildPreferenceProfile(st);
+    const standardRecipe=buildStandardRecipe(preferenceProfile);
+    const personalizedRecipe=buildPersonalizedRecipe(standardRecipe,finalState,ctx);
+    st.preferenceProfile=preferenceProfile;st.standardRecipe=standardRecipe;st.personalizedRecipe=personalizedRecipe;
+
+    const ranked=PRODUCTS.map(p=>{
+      const stateFit=cosineW(finalState,p.eq);
+      const preferenceFit=familyCosine(personalizedRecipe.familyWeights,PRODUCT_SCENT_PROFILES[p.code]||{});
+      const h=historyScore(p.code,hist);
+      const pr=preferenceScore(p.code,hist);
+      const c=contextScore(p,ctx);
+      const k=skuScore(p,finalState);
+      const prefHistory=(h+pr)/2;
+      const pen=guardrailPenalty(p,finalState,uncertainty,ctx)+avoidPenalty(preferenceProfile,p.code);
+      const final=clamp(preferenceFit*.40+stateFit*.30+prefHistory*.10+c*.10+k*.10-pen,0,100);
+      return {product:p,stateFit:Math.round(stateFit),preferenceFit:Math.round(preferenceFit),history:Math.round(h),preference:Math.round(pr),context:Math.round(c),sku:Math.round(k),penalty:Math.round(pen),final};
+    }).sort((a,b)=>b.final-a.final);
+
+    const primary=ranked[0].product,secondary=ranked[1].product,avoid=ranked[ranked.length-1].product;
+    const intervention=computeIntervention(finalState,rel,contradiction,uncertainty,ranked[0].preference,ctx);
+    const format=chooseFormat(primary,finalState,ctx,uncertainty);
+    let intensity=preferenceProfile.intensity||chooseIntensity(finalState,uncertainty,primary);
+    if(intervention.stage==='STAGE 2'||intervention.stage==='HOLD')intensity='low';
+
+    st.primary=primary;st.alts=[secondary];st.avoid=avoid;st.matchScore=ranked[0].final;
+    st.matchReason=[`Preference fit ${ranked[0].preferenceFit}`,`State fit ${ranked[0].stateFit}`,`History ${ranked[0].history}`,`Context ${ranked[0].context}`,contradiction>35?`Contradiction ${contradiction}`:null].filter(Boolean).join(' · ');
+    st.engine={canonicalState:finalState,modalityWeights:dynamic.normalized,weightComponents:dynamic,reliability:rel,contradiction,uncertainty,ranked,context:ctx,preferenceProfile,standardRecipe,personalizedRecipe,
+      axisSources:{survey:surveyAxes,bio:st.bio?{stress:st.bio.stress,balance:st.bio.balance,energy:st.bio.energy,focus:st.bio.focus,mood:st.bio.mood,recovery:st.bio.recovery}:null},
+      intervention:{...intervention,primary:primary.code,secondary:secondary.code,avoid:avoid.code,format,intensity,remeasureIn:remeasureMinutes(format,uncertainty),duration:format==='diffuser'?'15-20min':format==='pillow_mist'?'10min before sleep':'1-2 spray'}};
+    st.copy=makeCopy(primary,finalState,ctx,uncertainty)+` 선호 향 계열 적합도 ${ranked[0].preferenceFit}점을 우선 반영했으며, 스탠다드 레시피를 현재 상태에 맞게 조정했습니다.`;
+    return st.engine;
+  }
+  window.computeFinalMediscent = computeFinalMediscent;
+  window.getMediscentDiagnostic = ()=>({
+    hasBio:!!getS()?.bio?.valid,
+    bio:getS()?.bio?{device:getS().bio.device,quality:getS().bio.quality,coverage:getS().bio.coverage,rows:getS().bio.rows,scores:{stress:getS().bio.stress,balance:getS().bio.balance,energy:getS().bio.energy,focus:getS().bio.focus,mood:getS().bio.mood,recovery:getS().bio.recovery}}:null,
+    weights:getS()?.engine?.modalityWeights||null,
+    finalScores:getS()?.scores||null
+  });
+
+  /* ════════════════════════════════════════════════════════════════
+     7. 표시 상태/제품 동기화 → computeFinal (단일 정의)
+  ════════════════════════════════════════════════════════════════ */
+  function syncDisplay(){
+    const st = getS();
+    if(!st?.engine?.canonicalState) return;
+    const cs = st.engine.canonicalState;
+    st._userEQ = {
+      valence:clamp(cs.valence), arousal:clamp(cs.arousal), stress:clamp(cs.stressLoad),
+      engagement:clamp(cs.focus), relaxation:clamp(cs.relaxation), interest:clamp(cs.curiosity)
+    };
+    st.scores = {
+      stress:clamp(cs.stressLoad),
+      balance:clamp(cs.valence*0.55 + cs.relaxation*0.45),
+      energy:clamp(cs.arousal), focus:clamp(cs.focus),
+      mood:clamp(cs.valence), recovery:clamp(cs.relaxation)
+    };
+    // 표시용 SCENTS 객체(노트/키워드/링크 보유)로 매핑
+    if(st.primary?.code && DISPLAY_BY_CODE[st.primary.code]) st.primary = DISPLAY_BY_CODE[st.primary.code];
+    if(Array.isArray(st.alts)) st.alts = st.alts.map(x=>DISPLAY_BY_CODE[x.code]||x);
+    if(st.avoid?.code && DISPLAY_BY_CODE[st.avoid.code]) st.avoid = DISPLAY_BY_CODE[st.avoid.code];
+  }
+
+  window.computeFinal = function computeFinal(){
+    const engine = computeFinalMediscent();
+    syncDisplay();
+    return engine;
+  };
+
+  /* ════════════════════════════════════════════════════════════════
+     8. runAnalysis (단일 정의) — 엔진 인지형 진행 단계
+  ════════════════════════════════════════════════════════════════ */
+  window.runAnalysis = function runAnalysis(){
+    const st = getS();
+    window.computeFinal();
+    st.timers.forEach(clearTimeout); st.timers = [];
+    if(st.waveRAF) cancelAnimationFrame(st.waveRAF);
+
+    const e = st.engine || {}, rel = e.reliability || {};
+    const contradiction = Math.round(e.contradiction||0), uncertainty = Math.round(e.uncertainty||0);
+    const steps = [
+      ['01','Preference DNA','선호·비선호 향 계열 → 스탠다드 레시피'],
+      ['02','State Normalize','상태 설문 → 공통 감정 벡터'],
+      ['03','Dynamic Weight', st.bio ? 'Survey·EEG·HRV 신뢰도 동적 가중' : 'Survey 신뢰도 기반 분석'],
+      ['04','Contradiction Control',`상충도 ${contradiction} · 불확실성 ${uncertainty}`],
+      ['05','Recipe Personalize','스탠다드 레시피 + 현재 상태 조정'],
+      ['06','Preference-first Ranking','취향 40% · 상태 30% · 이력·문맥 30%']
+    ];
+    const aSteps = document.getElementById('aSteps');
+    if(aSteps) aSteps.innerHTML = steps.map(x=>`<div class="a-step" id="as${x[0]}"><div class="a-step-n">${x[0]}</div><div><span class="a-step-b">${x[1]}</span><span class="a-step-s">${x[2]}</span></div></div>`).join('');
+
+    let frame=0; const wEl=document.getElementById('aWave');
+    const wLoop=()=>{ frame+=2;
+      if(wEl){ const ctx=wEl.getContext('2d'),W=wEl.width=wEl.offsetWidth||340,H=wEl.height=56;
+        ctx.clearRect(0,0,W,H); ctx.strokeStyle='rgba(82,122,108,.65)'; ctx.lineWidth=1.4; ctx.beginPath();
+        for(let x=0;x<W;x++){ const t=(x/W)*Math.PI*6, amp=7+((st.scores?.stress||50)*0.07),
+          y=H/2+Math.sin(t+frame*.04)*amp+Math.sin(t*.5+frame*.06)*3; x===0?ctx.moveTo(x,y):ctx.lineTo(x,y); }
+        ctx.stroke(); }
+      st.waveRAF=requestAnimationFrame(wLoop); }; wLoop();
+
+    const CIRCv = (typeof window.CIRC!=='undefined') ? window.CIRC : 2*Math.PI*38;
+    const stages = [
+      {t:350, p:14, s:'향 취향 DNA 생성 중…', x:'선호·비선호 향 계열과 원하는 인상을 스탠다드 레시피로 변환합니다.'},
+      {t:950,p:30, s:'상태 벡터 정규화 중…', x:'상태 설문을 공통 감정 공간으로 변환합니다.'},
+      {t:1550,p:48, s:'동적 가중치 계산 중…', x:`Survey ${Math.round((rel.survey||0)*100)} · Bio ${Math.round((rel.bio||0)*100)}`},
+      {t:2200,p:66, s:'상충도·안전 게이트 확인 중…', x:`Contradiction ${contradiction} · Uncertainty ${uncertainty}`},
+      {t:2850,p:84, s:'개인화 레시피 조정 중…', x:(st.personalizedRecipe?.reasons||[]).join(' · ')},
+      {t:3600,p:100,s:'추천 완료', x:st.matchReason||'취향 40%를 우선 적용한 추천이 완료되었습니다.'}
+    ];
+    stages.forEach((stg,idx)=>{ const tid=setTimeout(()=>{
+      try{
+        const f=document.getElementById('aFill'); if(f)f.style.width=stg.p+'%';
+        const a=document.getElementById('aStatus'); if(a)a.textContent=stg.s;
+        const tx=document.getElementById('aTxt'); if(tx)tx.textContent=stg.x;
+        const arc=document.getElementById('ringArc'); if(arc)arc.style.strokeDasharray=`${(stg.p/100)*CIRCv} ${CIRCv}`;
+        const pt=document.getElementById('ringPct'); if(pt)pt.textContent=stg.p+'%';
+        const step=document.getElementById('as'+String(idx+1).padStart(2,'0')); if(step)step.classList.add('done');
+        if(stg.p===100) setTimeout(()=>{ if(st.waveRAF)cancelAnimationFrame(st.waveRAF); window.goPage('report'); },700);
+      }catch(err){ console.error('analysis stage',err); if(st.waveRAF)cancelAnimationFrame(st.waveRAF); try{window.goPage('report');}catch(_){} }
+    }, stg.t); st.timers.push(tid); });
+  };
+
+  /* ════════════════════════════════════════════════════════════════
+     9. renderReport (단일 정의)
+  ════════════════════════════════════════════════════════════════ */
+  function renderAxis(st){
+    [['aStress','stress'],['aBal','balance'],['aEne','energy'],['aFocus','focus'],['aMood','mood'],['aRecovery','recovery']]
+      .forEach(([id,k])=>{ const el=document.getElementById(id); if(el)el.textContent=clamp(st.scores?.[k]||0); });
+  }
+  function renderEqRows(st){
+    const el=document.getElementById('eqRows'); if(!el) return;
+    const pEq=st.primary?.eq||{}, u=st._userEQ||{};
+    el.innerHTML = Object.entries(pEq).map(([k,v])=>{
+      const m=EQ_META_SAFE[k]||{l:k,c:'#888'}, uv=clamp(u[k]||0);
+      return `<div class="eq-row"><div class="eq-k">${m.l}</div><div class="eq-track" style="position:relative"><i class="eq-fill" style="width:${clamp(v)}%;background:${m.c}"></i><div style="position:absolute;top:-1px;left:${uv}%;width:2px;height:calc(100% + 2px);background:#0e0e0d;border-radius:1px;transform:translateX(-50%);opacity:.45"></div></div><div class="eq-v">${clamp(v)}</div></div>`;
+    }).join('');
+  }
+  function renderBuy(st){
+    const buy=document.getElementById('buyList'); if(!buy) return;
+    const items=[st.primary, ...(st.alts||[])].filter(Boolean);
+    buy.innerHTML = items.map((sc,i)=>`<div class="buy-card ${i===0?'top':''}"><div class="buy-img"><img src="https://ecimg.cafe24img.com/pg2145b53722962042/shifti/web/mobile/newDesign/30p.png" alt="${sc.code}"/></div><div class="buy-meta"><div class="buy-rec" style="${i>0?'color:var(--ink45)':''}">${i===0?'Primary':'Alt.'+i}</div><div class="buy-name">${sc.code}</div><div class="buy-notes">${sc.notes||sc.narrative||''}</div><div class="buy-price">EDP 30ml · ₩58,000</div></div><div class="buy-btns"><button class="btn btn-ink" onclick="location.href='${LINKS_MAP[sc.code]||'#'}'">구매</button><button class="btn btn-ol" onclick="location.href='${LINKS_MAP[sc.code]||'#'}'">상세</button></div></div>`).join('')
+      || '<div class="buy-card top"><div class="buy-meta"><div class="buy-rec">Primary</div><div class="buy-name">추천 결과 준비 중</div></div></div>';
+  }
+  function renderRecoBlock(st){
+    const copyCard=document.querySelector('#pageReport .copy-card');if(!copyCard||!st.engine)return;
+    let block=document.getElementById('recommendationBlock');if(!block){block=document.createElement('div');block.id='recommendationBlock';copyCard.insertAdjacentElement('afterend',block);}
+    const i=st.engine.intervention||{},rel=st.engine.reliability||{},top=st.engine.ranked?.[0]||{};
+    const cell=(k,v)=>`<div style="padding:12px;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border)"><div style="font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink45)">${k}</div><div style="font-size:13px;font-weight:800;margin-top:4px">${v}</div></div>`;
+    block.innerHTML=`<div class="card card-p"><div class="lbl lbl-c">MEDISCENT Preference-First Recommendation Service</div>
+      <div style="font-size:21px;font-weight:800;margin-top:8px">${i.primary||st.primary?.code||'—'}</div>
+      <div style="font-size:11px;color:var(--ink45);margin-top:4px;line-height:1.7">${st.matchReason||'향 취향·현재 상태·이력·문맥을 통합한 추천'}</div>
+      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        ${cell('Preference Fit',(top.preferenceFit??'—')+' / 100')}${cell('State Fit',(top.stateFit??'—')+' / 100')}
+        ${cell('Secondary',i.secondary||st.alts?.[0]?.code||'—')}${cell('Avoid',i.avoid||st.avoid?.code||'—')}
+        ${cell('Intervention',`${i.stage||'—'} · ${i.score??'—'}`)}${cell('Format / Intensity',`${i.format||'perfume'} · ${i.intensity||'medium'}`)}
+      </div>
+      <div style="margin-top:10px;padding:12px;border-radius:12px;background:var(--cbg);border:1px solid var(--cln);font-size:11px;line-height:1.8;color:var(--cdk)">
+        추천 가중치 <strong>향 취향 40%</strong> · 현재 상태 30% · 개인 이력 10% · 사용 문맥 10% · 제품 적합성 10%<br>
+        권장 사용 <strong>${i.duration||'1-2 spray'}</strong> · 재측정 <strong>${i.remeasureIn||5}분 후</strong><br>
+        모달 신뢰도 Survey <strong>${Math.round((rel.survey||0)*100)}%</strong> · Bio <strong>${Math.round((rel.bio||0)*100)}%</strong>
+      </div></div>`;
+  }
+
+
+  function renderPreferenceRecipeBlock(st){
+    const host=document.getElementById('preferenceRecipeBlock');if(!host||!st.engine)return;
+    const pf=st.engine.preferenceProfile||{},sr=st.engine.standardRecipe||{},pr=st.engine.personalizedRecipe||{},wc=st.engine.weightComponents||{},i=st.engine.intervention||{};
+    const fams=Object.entries(sr.familyWeights||{}).filter(([,v])=>v>=3).sort((a,b)=>b[1]-a[1]);
+    const noteHtml=(layer)=>((pr.notes?.[layer]||[]).map(n=>`<div><b>${n.pct}%</b> ${n.note}</div>`).join('')||'—');
+    const weight=(m)=>Math.round((st.engine.modalityWeights?.[m]||0)*100)+'%';
+    host.innerHTML=`<div class="recipe-shell">
+      <div class="recipe-head"><div><div class="lbl lbl-c">Preference DNA → Standard Recipe</div><div class="recipe-title">${pf.characterLabel||'개인 향 취향'} 스탠다드 레시피</div><div class="recipe-sub">선호 향을 먼저 기준선으로 만들고, 현재 상태 설문과 선택형 생체신호는 오늘의 조정값으로 사용합니다.</div></div><div class="recipe-badge">Preference First</div></div>
+      <div class="recipe-family-grid">${fams.map(([k,v])=>`<div class="recipe-family">${FAMILY_LABELS[k]||k} <strong>${v}%</strong></div>`).join('')}</div>
+      <div class="recipe-flow"><span>향 취향 DNA</span>→<span>Standard Recipe</span>→<span>Current-State Adjustment</span>→<span>Product / Custom Blend</span></div>
+      <div class="recipe-pyramid">
+        <div class="recipe-layer"><div class="recipe-layer-k">Top Note</div><div class="recipe-layer-v">${pr.layers?.top||0}%</div><div class="recipe-layer-notes">${noteHtml('top')}</div></div>
+        <div class="recipe-layer"><div class="recipe-layer-k">Middle Note</div><div class="recipe-layer-v">${pr.layers?.middle||0}%</div><div class="recipe-layer-notes">${noteHtml('middle')}</div></div>
+        <div class="recipe-layer"><div class="recipe-layer-k">Base Note</div><div class="recipe-layer-v">${pr.layers?.base||0}%</div><div class="recipe-layer-notes">${noteHtml('base')}</div></div>
+      </div>
+      <div class="recipe-grid2"><div class="recipe-metric"><div class="recipe-metric-k">Standard Character</div><div class="recipe-metric-v">${sr.characterLabel||'—'} · ${pf.intensity||'medium'}</div></div><div class="recipe-metric"><div class="recipe-metric-k">Today Adjustment</div><div class="recipe-metric-v">${(pr.reasons||[])[0]||'기준 레시피 유지'}</div></div></div>
+      <div class="system-evidence"><div class="lbl">PCT-aligned System Evidence</div><div class="system-evidence-grid">
+        <div class="system-evidence-cell"><div class="system-evidence-k">Survey W</div><div class="system-evidence-v">${weight('survey')}</div></div>
+        <div class="system-evidence-cell"><div class="system-evidence-k">Bio W</div><div class="system-evidence-v">${weight('bio')}</div></div>
+        <div class="system-evidence-cell"><div class="system-evidence-k">Contradiction</div><div class="system-evidence-v">${st.engine.contradiction}</div></div>
+        <div class="system-evidence-cell"><div class="system-evidence-k">Uncertainty</div><div class="system-evidence-v">${st.engine.uncertainty}</div></div>
+        <div class="system-evidence-cell"><div class="system-evidence-k">Intervention</div><div class="system-evidence-v">${i.stage||'—'}</div></div>
+      </div></div>
+      <div class="recipe-note">※ 본 레시피는 향 추천 서비스용 상대 조합비입니다. 실제 제조 처방은 원료 규격·IFRA 제한·안전성 검토 후 별도 확정해야 합니다.</div>
+    </div>`;
+  }
+
+
+  function renderBioFusionBlock(st){
+    const old=document.getElementById('bioFusionBlock');
+    if(!st.bio?.valid){if(old)old.remove();return;}
+    const anchor=document.getElementById('preferenceRecipeBlock')||document.getElementById('bioReportBadge');
+    if(!anchor)return;
+    let block=old;
+    if(!block){block=document.createElement('div');block.id='bioFusionBlock';anchor.insertAdjacentElement('afterend',block);}
+    const src=st.engine?.axisSources||{},sw=Math.round((st.engine?.modalityWeights?.survey||0)*100),bw=Math.round((st.engine?.modalityWeights?.bio||0)*100);
+    const axes=[['Stress','stress'],['Balance','balance'],['Energy','energy'],['Focus','focus'],['Mood','mood'],['Recovery','recovery']];
+    block.innerHTML=`<div class="card card-p">
+      <div class="lbl lbl-c">Uploaded Bio Data Application Check</div>
+      <div style="font-size:12px;font-weight:800;margin-top:6px">실제 최종 가중치 · Survey ${sw}% / Bio ${bw}%</div>
+      <div style="font-size:10px;color:var(--ink45);margin-top:4px;line-height:1.7">${st.bio.device} · 품질 ${Math.round((st.bio.quality||0)*100)}% · ${st.bio.source||''}</div>
+      <div style="overflow:auto;margin-top:10px;border:1px solid var(--glass-border);border-radius:12px;background:rgba(255,255,255,.58)">
+        <table class="tbl"><thead><tr><th>Axis</th><th>Survey</th><th>Uploaded Bio</th><th>Final</th></tr></thead><tbody>
+        ${axes.map(([label,k])=>`<tr><td>${label}</td><td>${src.survey?.[k]??'—'}</td><td><strong>${src.bio?.[k]??'—'}</strong></td><td><strong>${st.scores?.[k]??'—'}</strong></td></tr>`).join('')}
+        </tbody></table>
+      </div>
+    </div>`;
+  }
+
+  window.renderReport = function renderReport(){
+    const st=getS();
+    if(!st){
+      console.error('MEDISCENT report: global state S is unavailable');
+      return;
+    }
+    try{
+      window.computeFinal();
+    }catch(err){
+      console.error('MEDISCENT report compute error', err);
+      const copy=document.getElementById('rCopy');
+      if(copy) copy.innerHTML='<strong>리포트 계산 오류</strong><br>설문 또는 업로드 데이터를 다시 확인해 주세요.';
+      return;
+    }
+    const p=st.primary||{code:'추천 결과',notes:'',use:'',keywords:[],eq:{}};
+    const pct=clamp(st.matchScore||0);
+    const T=(id,v)=>{ const el=document.getElementById(id); if(el)el.textContent=v; };
+    const H=(id,v)=>{ const el=document.getElementById(id); if(el)el.innerHTML=v; };
+    T('rCode', p.code||'추천 결과');
+    T('rNotes', [p.notes,p.use].filter(Boolean).join(' · ') || (p.narrative||'MEDISCENT 추천 결과'));
+    H('rTags', (p.keywords||[p.narrative]).filter(Boolean).map(k=>`<div class="s-tag">${k}</div>`).join(''));
+    T('rMatchPct', pct+'%');
+    const bar=document.getElementById('rMatchBar'); if(bar)bar.style.width=pct+'%';
+    T('rMatchReason', st.matchReason||'메디센츠 추천 엔진');
+    T('rMatchTag', pct>=85?'Excellent Match':pct>=70?'Good Match':'Suggested');
+    H('rCopy', String(st.copy||'추천 결과를 준비했습니다.').replace(/(\d+[%점ms])/g,'<strong>$1</strong>'));
+    renderAxis(st); renderEqRows(st); renderBuy(st); renderPreferenceRecipeBlock(st); renderBioFusionBlock(st);
+
+    const rTable=document.getElementById('rTable');
+    if(rTable){
+      const u=st._userEQ||{};
+      const rows=[
+        ['Stress',st.scores?.stress,'Engine','긴장·과부하'],['Balance',st.scores?.balance,'Engine','정서 균형'],
+        ['Energy',st.scores?.energy,'Engine','활력·각성'],['Focus',st.scores?.focus,'Engine','집중·선명도'],
+        ['Mood',st.scores?.mood,'Engine','긍정 정서'],['Recovery',st.scores?.recovery,'Engine','회복·이완'],
+        ...(st.bio?[
+          ['Bio RMSSD',st.bio.raw.rmssd+'ms','NNFX2','부교감 회복력'],
+          ['Bio LF/HF',st.bio.raw.lf_hf,'NNFX2','자율신경 균형'],
+          ['Bio HR',st.bio.raw.hr+'bpm','NNFX2','심박수']
+        ]:[
+          ['EQ Valence',clamp(u.valence),'Canonical','정서 가치'],
+          ['EQ Arousal',clamp(u.arousal),'Canonical','각성 에너지']
+        ]),
+        ['Preference Fit',(st.engine?.ranked?.[0]?.preferenceFit??'—')+'/100','Preference DNA','선호 향 계열 적합도'],
+        ['Intervention',`${st.engine?.intervention?.stage||'—'} · ${st.engine?.intervention?.score??'—'}`,'Safety Gate','개입 단계·점수'],
+        ['Match',pct+'%','Engine','취향 우선 하이브리드 매칭'],
+        ['Closed-loop','READY','MEDISCENT','재측정 가능']
+      ];
+      rTable.innerHTML = rows.map(r=>`<tr><td class="mono">${r[0]}</td><td class="mono">${r[1]??'—'}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('');
+    }
+
+    // Bio 배지
+    if(st.bio){
+      const badge=document.getElementById('bioReportBadge');
+      if(badge){ const bw=Math.round((st.engine?.modalityWeights?.bio||0)*100),sw=Math.round((st.engine?.modalityWeights?.survey||0)*100); badge.style.display=''; badge.innerHTML=`<div style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:rgba(29,158,117,.10);border:1px solid rgba(29,158,117,.30);border-radius:12px;margin-bottom:-4px"><span style="font-size:16px">🧠</span><div><div style="font-size:10px;font-weight:700;color:#0f6e56">Bio-Signal 실제 반영 완료 · Bio ${bw}% / Survey ${sw}%</div><div style="font-size:9px;color:#1D9E75;margin-top:1px">품질 ${Math.round((st.bio.quality||0)*100)}% · RMSSD ${st.bio.raw.rmssd??'—'} · LF/HF ${st.bio.raw.lf_hf??'—'} · HR ${st.bio.raw.hr??'—'}</div></div></div>`; }
+      document.querySelectorAll('.score-pill').forEach(el=>{ el.classList.add('bio-src'); if(!el.querySelector('.bio-src-label')){ const lb=document.createElement('div'); lb.className='bio-src-label'; lb.textContent='🧠 Bio+Survey'; el.appendChild(lb); } });
+    }
+
+    renderRecoBlock(st);
+    renderClosedLoop(st);
+  };
+
+  /* ════════════════════════════════════════════════════════════════
+     10. saveHist (단일 정의) — 듀얼 라이트
+  ════════════════════════════════════════════════════════════════ */
+  window.saveHist = function saveHist(){
+    const st=getS(); if(!st?.primary) return;
+    try{
+      const list=JSON.parse(localStorage.getItem('shifti_v5bio')||'[]');
+      list.unshift({ ts:Date.now(), primary:st.primary.code, scores:{...st.scores},
+        matchScore:Math.round(st.matchScore||0), copy:(st.copy||'').slice(0,120),
+        hasBio:!!st.bio, rmssd:st.bio?.raw?.rmssd||null, scentFamilies:st.preferenceProfile?.selected||[], standardRecipe:st.standardRecipe||null });
+      localStorage.setItem('shifti_v5bio', JSON.stringify(list.slice(0,50)));
+    }catch(e){ console.error('saveHist',e); }
+    // 폐루프 baseline 도 기록
+    try{
+      if(!st.engine) return;
+      const h=loadCL();
+      h.unshift({ ts:Date.now(), primary:st.primary.code, secondary:st.alts?.[0]?.code||null,
+        avoid:st.avoid?.code||null, format:st.engine.intervention?.format||null,
+        intensity:st.engine.intervention?.intensity||null, before:st.engine.canonicalState||{},
+        contradiction:st.engine.contradiction, uncertainty:st.engine.uncertainty,
+        deltaScore:0, selfLike:null, note:'', stage:'baseline' });
+      localStorage.setItem(CL_KEY, JSON.stringify(h.slice(0,100)));
+    }catch(e){}
+  };
+  window.saveMediscentHistory = window.saveHist;
+
+  /* ════════════════════════════════════════════════════════════════
+     11. 폐루프 재측정 피드백
+  ════════════════════════════════════════════════════════════════ */
+  function calcDelta(before, after){
+    const parts=[
+      clamp((before.stressLoad||0)-(after.stressLoad||0),-100,100),
+      clamp((after.relaxation||0)-(before.relaxation||0),-100,100),
+      clamp((after.valence||0)-(before.valence||0),-100,100),
+      clamp((after.focus||0)-(before.focus||0),-100,100)
+    ];
+    return Math.round(parts.reduce((a,b)=>a+b,0)/parts.length);
+  }
+  window.applyClosedLoopFeedback = function(payload={}){
+    const st=getS();
+    if(!st?.engine || !st?.primary) throw new Error('추천 결과가 먼저 생성되어야 합니다.');
+    const before=st.engine.canonicalState||{};
+    const after={
+      valence:clamp(payload.afterValence??before.valence), arousal:clamp(payload.afterArousal??before.arousal),
+      stressLoad:clamp(payload.afterStress??before.stressLoad), focus:clamp(payload.afterFocus??before.focus),
+      relaxation:clamp(payload.afterRelaxation??before.relaxation), curiosity:clamp(payload.afterCuriosity??before.curiosity)
+    };
+    const entry={
+      ts:Date.now(), primary:st.primary.code, secondary:st.alts?.[0]?.code||null, avoid:st.avoid?.code||null,
+      format:st.engine.intervention?.format||null, intensity:st.engine.intervention?.intensity||null,
+      before, after, contradiction:clamp(st.engine.contradiction||0), uncertainty:clamp(st.engine.uncertainty||0),
+      deltaScore:calcDelta(before,after), selfLike:payload.selfLike==null?null:clamp(payload.selfLike,0,100),
+      note:String(payload.note||''), remeasureIn:st.engine.intervention?.remeasureIn||null, stage:'remeasured'
+    };
+    const h=loadCL(); h.unshift(entry); localStorage.setItem(CL_KEY, JSON.stringify(h.slice(0,100)));
+    renderClosedLoop(st);
+    return entry;
+  };
+  window.prefillClosedLoopDemo = function(){
+    const st=getS(); if(!st?.engine) return;
+    const b=st.engine.canonicalState||{}, set=(id,v)=>{ const el=document.getElementById(id); if(el)el.value=String(v); };
+    set('clAfterStress', clamp((b.stressLoad||50)-15)); set('clAfterRelax', clamp((b.relaxation||50)+18));
+    set('clAfterValence', clamp((b.valence||50)+15)); set('clAfterFocus', clamp((b.focus||50)+12));
+    set('clSelfLike', 82); const n=document.getElementById('clNote'); if(n)n.value='Demo QA feedback';
+  };
+  window.submitClosedLoopFeedback = function(){
+    const val=id=>Number(document.getElementById(id)?.value||0);
+    const entry=window.applyClosedLoopFeedback({
+      afterStress:val('clAfterStress'), afterRelaxation:val('clAfterRelax'),
+      afterValence:val('clAfterValence'), afterFocus:val('clAfterFocus'),
+      selfLike:val('clSelfLike'), note:document.getElementById('clNote')?.value||''
+    });
+    toastSafe(`폐루프 저장 완료 · Δ ${entry.deltaScore}`);
+    return entry;
+  };
+  function renderClosedLoop(st){
+    const anchor=document.getElementById('recommendationBlock') || document.querySelector('#pageReport .copy-card');
+    if(!anchor || !st.engine) return;
+    let block=document.getElementById('closedLoopBlock');
+    if(!block){ block=document.createElement('div'); block.id='closedLoopBlock'; anchor.insertAdjacentElement('afterend', block); }
+    const b=st.engine.canonicalState||{};
+    const hist=loadCL().filter(x=>x.primary===st.primary.code && x.stage==='remeasured').slice(0,5);
+    const inp=(id,v)=>`<input id="${id}" type="number" min="0" max="100" value="${v}" style="width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.72)">`;
+    block.innerHTML = `<div class="card card-p">
+      <div class="lbl lbl-c">Closed Loop Re-measure</div>
+      <div style="font-size:12px;color:var(--ink45);margin-top:8px;line-height:1.8">향 사용 후 재측정값을 넣으면 <strong>개인 반응 이력</strong>으로 저장되어, 이후 추천의 history·preference 점수에 반영됩니다.</div>
+      <div style="margin-top:10px;padding:12px;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border);font-size:11px;line-height:1.8">
+        권장 재측정 타이밍: <strong>${st.engine.intervention?.remeasureIn||5}분 후</strong><br>
+        Baseline — Stress <strong>${clamp(b.stressLoad)}</strong> · Relaxation <strong>${clamp(b.relaxation)}</strong> · Valence <strong>${clamp(b.valence)}</strong> · Focus <strong>${clamp(b.focus)}</strong>
+      </div>
+      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">After Stress</div>${inp('clAfterStress',clamp(b.stressLoad))}</div>
+        <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">After Relaxation</div>${inp('clAfterRelax',clamp(b.relaxation))}</div>
+        <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">After Valence</div>${inp('clAfterValence',clamp(b.valence))}</div>
+        <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">After Focus</div>${inp('clAfterFocus',clamp(b.focus))}</div>
+      </div>
+      <div style="margin-top:8px;display:grid;grid-template-columns:1fr;gap:8px">
+        <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">Self Like (0-100)</div>${inp('clSelfLike',80)}</div>
+        <div><div style="font-size:9px;font-weight:700;color:var(--ink45);margin-bottom:4px">Note</div><textarea id="clNote" rows="2" style="width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.72);resize:vertical"></textarea></div>
+      </div>
+      <div style="margin-top:10px;display:flex;gap:8px">
+        <button class="btn btn-c" style="flex:1" onclick="submitClosedLoopFeedback()">폐루프 저장</button>
+        <button class="btn btn-ol" onclick="prefillClosedLoopDemo()">Demo 값 채우기</button>
+      </div>
+      <div style="margin-top:12px;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink45)">Recent Closed-loop History</div>
+      <div style="margin-top:8px;display:flex;flex-direction:column;gap:6px">
+        ${hist.length ? hist.map(x=>`<div style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border);font-size:10.5px;line-height:1.7"><strong>${x.primary}</strong> · Δ <strong>${x.deltaScore}</strong> · Like <strong>${x.selfLike??'—'}</strong><br><span style="color:var(--ink45)">Stress ${clamp(x.before?.stressLoad)} → ${clamp(x.after?.stressLoad)} · Relax ${clamp(x.before?.relaxation)} → ${clamp(x.after?.relaxation)}</span></div>`).join('') : '<div style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.58);border:1px solid var(--glass-border);font-size:10.5px;color:var(--ink45)">아직 저장된 폐루프 피드백이 없습니다.</div>'}
+      </div>
+    </div>`;
+  }
+
+  /* ════════════════════════════════════════════════════════════════
+     12. 헤더 리브랜드
+  ════════════════════════════════════════════════════════════════ */
+  document.addEventListener('DOMContentLoaded', ()=>{
+    const n=document.querySelector('.hdr-name'); if(n) n.textContent='SHIFTI · MEDISCENT';
+    const pill=document.getElementById('hdrPill'); if(pill && pill.textContent==='진단 대기') pill.textContent='MEDISCENT 엔진 준비';
+    const t=document.querySelector('title'); if(t) t.textContent='SHIFTI MEDISCENT LAB — Preference-First Engine v11';
+  });
+})();
+
+</script>
+</body>
+</html>
