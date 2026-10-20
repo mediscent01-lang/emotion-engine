@@ -595,6 +595,9 @@ html{background:#DCDCD6}
 .btn-gh{background:rgba(14,34,23,.66)!important;border-radius:999px!important;text-decoration:none!important;color:#fff!important}
 .light .btn-gh,.panel-light .btn-gh{background:transparent!important;color:var(--deep70)!important}
 .welcome-cta .btn-gh{align-self:flex-start;min-height:46px;padding:0 22px}
+/* v12.5.1 배경을 더 희미하게: 아이보리 안개를 덮고 채도·선명도를 낮춤 */
+.scene::before{filter:saturate(.65) blur(1.5px);opacity:.55}
+.scene::after{background:linear-gradient(180deg,rgba(244,241,232,.55) 0%,rgba(244,241,232,.42) 50%,rgba(236,233,222,.55) 100%)!important}
 
 </style>
 </head>
