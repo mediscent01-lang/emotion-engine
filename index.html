@@ -512,6 +512,43 @@ body{background:transparent!important;color:var(--on)}
 .scent-notes,.scent-coll,.state-axis{color:rgba(255,255,255,.88)!important}
 .stepper li .dot{background:rgba(255,255,255,.22);color:#fff}
 
+/* ── v12.4.1 가독성 보정: 흰 글자 뒤 배경을 충분히 어둡게 (WCAG 대비 4.5:1 이상 목표) ── */
+:root{
+  --on70:rgba(255,255,255,.92); --on50:rgba(255,255,255,.82); --on30:rgba(255,255,255,.66);
+  --glass-bg:rgba(20,33,41,.46); --glass-bd:rgba(255,255,255,.2); --glass-hi:rgba(20,33,41,.6);
+  --frost-1:rgba(246,249,250,.96); --frost-2:rgba(230,237,240,.95);
+}
+.scene{background:
+    radial-gradient(90% 50% at 85% 8%,rgba(255,226,196,.22),transparent 55%),
+    linear-gradient(180deg,#5E7482 0%,#4D6270 35%,#3C505D 65%,#2B3A44 100%)}
+.scene .fog{opacity:.32!important}
+.scene .fog.f1{top:30%}
+.scene .bokeh.sun{width:90px;height:90px;right:4%;top:10%;opacity:.55}
+.scene .bokeh{opacity:.7}
+.scene .rain{opacity:.18}
+.scene .veil{background:linear-gradient(180deg,rgba(16,26,32,.38),rgba(16,26,32,.28) 50%,rgba(16,26,32,.45))}
+.hdr{background:linear-gradient(180deg,rgba(24,38,46,.82),rgba(24,38,46,.55))}
+.bbar{background:linear-gradient(0deg,rgba(20,32,40,.95),rgba(20,32,40,.75))}
+.card,.meta-row li,.sq-opt,.sq-sem-opt,.sq-pref-opt,.hist-card,.welcome-visual,.stepper,.state-card,.sq-num{background:rgba(20,33,41,.48)!important;border-color:rgba(255,255,255,.2)!important}
+.scent-hero,.ins-dark{background:linear-gradient(160deg,rgba(24,38,47,.72),rgba(18,30,37,.62))!important;border-color:rgba(255,255,255,.22)!important}
+.scent-hero::before{opacity:.5}
+.sq-opt.sel,.sq-sem-opt.sel,.sq-pref-opt.sel{background:linear-gradient(180deg,#FFFFFF,#E3ECEF)!important;color:var(--deep)!important}
+.welcome-hero{padding:18px 16px;margin:0 -4px;border-radius:26px;background:linear-gradient(180deg,rgba(18,30,37,.5),rgba(18,30,37,.22))}
+.welcome-hero .brandline{color:#fff}
+.welcome-hero .en,.welcome-hero p,.page-desc,.vhdr-desc,.sq-hint,.trust-note,.auto-hint,.eyebrow{color:rgba(255,255,255,.88)!important}
+.vhdr{padding:14px 16px;border-radius:22px;background:linear-gradient(180deg,rgba(18,30,37,.42),rgba(18,30,37,.18))}
+.sq-progress-card,.sq-card .sq-inner{padding:16px;border-radius:22px;background:rgba(18,30,37,.42)}
+.sq-scale-lbl,#sqFrac,.pref-counter,.sq-progress-row .lbl{color:#fff!important}
+.hri-k,.hri-v,.wv-cap{color:#fff!important}
+.scent-hero,.ins-dark,.state-card,.welcome-hero,.vhdr,.sq-inner,.meta-row li{text-shadow:0 1px 3px rgba(10,18,24,.45)}
+.scent-lbl,.ins-over,.state-chip{background:rgba(255,255,255,.18)!important;color:#fff!important}
+.match-wrap{background:rgba(10,20,26,.45)!important}
+.state-tip{background:rgba(20,33,41,.75)!important}
+.trust-note{padding:12px 14px;border-radius:18px;background:rgba(18,30,37,.4)}
+.btn-gh{color:#fff!important;text-decoration:underline;text-underline-offset:4px}
+.light .btn-gh,.panel-light .btn-gh{color:var(--deep70)!important}
+.toast{background:#fff;color:var(--deep)}
+
 </style>
 </head>
 
