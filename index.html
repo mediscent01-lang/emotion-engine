@@ -8,7 +8,7 @@
 <meta name="description" content="지금의 상태와 취향에 어울리는 SHIFTI 향을 찾아드리는 향 컨설테이션."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"/>
 <style>
 /* ═══════════════════════════════════════════════════════════
@@ -607,6 +607,76 @@ html{background:#DCDCD6}
 .scene::before{background-image:url("bg-window.jpg")!important;background-position:center 40%!important;filter:saturate(1.05) blur(.6px);opacity:.78}
 .scene::after{background:linear-gradient(180deg,rgba(244,241,232,.3) 0%,rgba(244,241,232,.22) 50%,rgba(236,233,222,.3) 100%)!important}
 
+
+/* ═══════════════════════════════════════════════════════════
+   v12.7 Highland — 안개 낀 초록 산맥 + 투명 유리 패널 (레퍼런스 무드, 사진 없이 CSS로 그림)
+   ═══════════════════════════════════════════════════════════ */
+:root{--fd:'Outfit','Plus Jakarta Sans','Pretendard Variable',Pretendard,sans-serif}
+html{background:#1F3A26}
+.scene{background:linear-gradient(170deg,#E9E7B8 0%,#B9C79A 12%,#6F8F64 30%,#3E6440 55%,#22402A 80%,#152B1B 100%)!important}
+.scene::before{display:none!important}
+.scene::after{background:radial-gradient(70% 45% at 8% 4%,rgba(255,246,196,.75),rgba(255,246,196,0) 60%),linear-gradient(180deg,rgba(10,24,14,0) 40%,rgba(10,24,14,.45) 100%)!important}
+.scene>.ridge,.scene>.haze,.scene>.canopy{display:block!important;position:absolute}
+.scene .ridge{left:-10%;right:-10%}
+.scene .ridge.r1{top:6%;bottom:0;background:linear-gradient(160deg,#7FA078 0%,#5C8258 40%,#4A6F48 100%);clip-path:polygon(0 70%,12% 52%,22% 56%,34% 36%,46% 30%,58% 18%,70% 12%,82% 4%,100% 0,100% 100%,0 100%);filter:blur(3px);opacity:.75}
+.scene .ridge.r2{top:20%;bottom:0;background:linear-gradient(165deg,#4F7A4C 0%,#36603A 45%,#27492C 100%);clip-path:polygon(0 62%,10% 58%,20% 46%,30% 44%,42% 30%,54% 26%,64% 14%,76% 10%,88% 2%,100% 0,100% 100%,0 100%);filter:blur(1.5px)}
+.scene .ridge.r3{top:42%;bottom:0;background:
+  radial-gradient(circle at 30% 40%,rgba(98,150,82,.55) 0 2.5px,transparent 3.5px) 0 0/13px 11px,
+  radial-gradient(circle at 70% 60%,rgba(30,62,32,.6) 0 3px,transparent 4px) 4px 3px/15px 13px,
+  linear-gradient(170deg,#2E5A31 0%,#1F4325 50%,#15301A 100%);
+  clip-path:polygon(0 48%,8% 40%,18% 42%,28% 30%,40% 26%,50% 16%,62% 12%,74% 6%,86% 4%,100% 0,100% 100%,0 100%)}
+.scene .canopy{left:-10%;right:-10%;bottom:0;height:30%;background:
+  radial-gradient(circle at 40% 35%,rgba(120,170,96,.45) 0 3px,transparent 4px) 0 0/12px 10px,
+  radial-gradient(circle at 60% 65%,rgba(12,32,16,.55) 0 4px,transparent 5px) 5px 4px/16px 14px,
+  linear-gradient(180deg,#1C3A20,#0F2414)}
+.scene .haze{left:-30%;width:160%;height:26%;border-radius:50%;background:radial-gradient(closest-side,rgba(236,240,226,.6),rgba(236,240,226,0));filter:blur(26px);animation:fogDrift 34s ease-in-out infinite alternate}
+.scene .haze.h1{top:12%;opacity:.8} .scene .haze.h2{top:36%;opacity:.55;animation-duration:46s;animation-direction:alternate-reverse} .scene .haze.h3{top:58%;opacity:.35;animation-duration:40s}
+/* ── 투명 유리 ── */
+.card,.meta-row li,.sq-opt,.sq-sem-opt,.sq-pref-opt,.hist-card,.welcome-visual,.stepper,.state-card,.sq-num,.scent-hero,.ins-dark,.welcome-hero,.vhdr,.sq-progress-card,.sq-card .sq-inner,.trust-note{background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.04))!important;border:1.5px solid rgba(255,255,255,.42)!important;backdrop-filter:blur(7px) saturate(1.1)!important;-webkit-backdrop-filter:blur(7px) saturate(1.1)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 20px 50px rgba(6,20,10,.25)!important}
+.scent-hero,.ins-dark,.welcome-hero{border-radius:34px!important}
+.match-wrap,.state-tip{background:rgba(8,24,12,.42)!important;border:1px solid rgba(255,255,255,.22)!important}
+.hdr{background:linear-gradient(180deg,rgba(14,32,18,.72),rgba(14,32,18,.35))!important;border-bottom:1px solid rgba(255,255,255,.18)}
+.bbar{background:linear-gradient(0deg,rgba(12,28,16,.92),rgba(12,28,16,.6))!important}
+.sq-opt.sel,.sq-sem-opt.sel,.sq-pref-opt.sel{background:rgba(255,255,255,.92)!important;color:#183020!important}
+.scene>*:not(.ridge):not(.haze):not(.canopy){display:none!important}
+/* 버튼: 투명 유리 위 흰 알약 */
+.btn-c,.bbar-next,.bbar-next.celadon,.multi-done,.hero-actions .btn-light,.ins-dark #btnInsProd{background:rgba(255,255,255,.94)!important;color:#183020!important;box-shadow:0 12px 30px rgba(6,20,10,.3)!important}
+.btn-c::after,.bbar-next::after{background:linear-gradient(100deg,transparent,rgba(150,200,140,.35),transparent)!important}
+.match-tag,.recipe-badge,.hist-chip.match{background:#CFE6B8!important;color:#183020!important}
+/* ── 시작 화면: 노치 유리 카드 + 큰 대문자 + 세로 분절 막대 ── */
+.welcome-hero{position:relative;padding:30px 26px 34px!important;margin:0!important;
+  -webkit-mask:radial-gradient(circle 30px at 0 112px,#0000 29px,#000 30px),radial-gradient(circle 30px at 100% calc(100% - 120px),#0000 29px,#000 30px);-webkit-mask-composite:source-in;
+  mask:radial-gradient(circle 30px at 0 112px,#0000 29px,#000 30px) intersect,radial-gradient(circle 30px at 100% calc(100% - 120px),#0000 29px,#000 30px)}
+.hero-emblem{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.emblem{width:38px;height:38px;border-radius:50%;border:2px solid #fff;display:grid;place-items:center;position:relative}
+.emblem::before{content:"";width:16px;height:16px;border-radius:50%;border:1.5px solid #fff}
+.emblem::after{content:"";position:absolute;width:4px;height:4px;border-radius:50%;background:#fff}
+.hero-emblem b{font-family:var(--fd);font-size:20px;font-weight:700;letter-spacing:.08em;color:#fff}
+.hero-emblem small{font-family:var(--fd);font-size:12px;letter-spacing:.24em;color:rgba(255,255,255,.85)}
+.welcome-hero .brandline{display:none}
+.welcome-hero .big{font-family:var(--fd)!important;font-size:46px!important;line-height:1.02!important;font-weight:500!important;letter-spacing:.05em!important;text-transform:uppercase;text-align:right;margin-top:26px!important}
+.welcome-hero h1{text-align:right;font-size:19px!important;font-weight:600!important;margin-top:16px!important}
+.welcome-hero .en{text-align:right}
+.welcome-hero p{display:none}
+.rhythm{display:grid;grid-template-columns:1fr 22px;gap:16px;align-items:stretch;margin-top:26px}
+.rhythm ul{list-style:none;margin:0;padding:0;display:grid;gap:14px;text-align:right}
+.rhythm li{font-size:15px;line-height:1.45;color:#fff}
+.rhythm li span{display:block;font-size:12.5px;color:rgba(255,255,255,.82)}
+.seg{border-radius:999px;border:1.5px solid rgba(255,255,255,.55);overflow:hidden;display:grid;grid-template-rows:repeat(8,1fr)}
+.seg i{display:block;background:rgba(255,255,255,.08)}
+.seg i:nth-child(odd){background:rgba(10,24,14,.55)}
+.seg i{animation:segOn 4.8s ease-in-out infinite}
+.seg i:nth-child(1){animation-delay:0s}.seg i:nth-child(2){animation-delay:.3s}.seg i:nth-child(3){animation-delay:.6s}.seg i:nth-child(4){animation-delay:.9s}
+.seg i:nth-child(5){animation-delay:1.2s}.seg i:nth-child(6){animation-delay:1.5s}.seg i:nth-child(7){animation-delay:1.8s}.seg i:nth-child(8){animation-delay:2.1s}
+@keyframes segOn{0%,100%{filter:none}40%{background:rgba(255,255,255,.75)}}
+.page-title,.vhdr-title,.scent-name,.ins-name{font-family:var(--fd)!important;letter-spacing:.02em}
+.scent-name{text-transform:uppercase;font-weight:500!important;letter-spacing:.05em!important}
+.eyebrow{font-family:var(--fd);letter-spacing:.2em!important;text-transform:uppercase}
+.welcome-hero,.scent-hero,.ins-dark,.vhdr,.state-card,.sq-inner{text-shadow:0 2px 14px rgba(6,20,10,.45)}
+@media (prefers-reduced-motion:reduce){.scene .haze,.seg i{animation:none!important}}
+.scene .ridge.r3{filter:blur(1.4px)}
+.scene .canopy{filter:blur(1.8px)}
+
 </style>
 </head>
 
@@ -617,6 +687,7 @@ html{background:#DCDCD6}
   <div class="fog f1"></div><div class="fog f2"></div><div class="fog f3"></div>
   <div class="bokeh sun"></div><div class="bokeh b1"></div><div class="bokeh b2"></div><div class="bokeh b3"></div><div class="bokeh b4"></div><div class="bokeh b5"></div><div class="bokeh b6"></div>
   <div class="rain"></div><div class="veil"></div>
+  <div class="ridge r1"></div><div class="haze h1"></div><div class="ridge r2"></div><div class="haze h2"></div><div class="ridge r3"></div><div class="haze h3"></div><div class="canopy"></div>
 </div>
 <a class="sr-only" href="#main">본문으로 건너뛰기</a>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -640,11 +711,13 @@ html{background:#DCDCD6}
 <section class="page on" id="pageWelcome" aria-labelledby="wTitle">
   <div class="shell">
     <div class="welcome-hero">
+      <div class="hero-emblem" aria-hidden="true"><span class="emblem"></span><b>SHIFTI</b><small>SCENT ESSENTIALS</small></div>
       <p class="brandline">SHIFTI</p>
-      <span class="big">Welcome</span>
+      <span class="big">Scent is<br>Balance</span>
       <h1 id="wTitle">오늘의 당신에게 <em>머무를 향</em>을 찾습니다</h1>
       <span class="en">a quiet moment, a personal scent</span>
       <p>지금의 마음과 몸의 상태, 그리고 당신이 사랑하는 향의 결을 여쭙고 SHIFTI의 향 가운데 하나를 골라 드립니다.</p>
+      <div class="rhythm"><ul><li>오늘의 마음을 듣고<span>지금의 컨디션을 여쭙니다</span></li><li>취향의 결을 읽고<span>좋아하는 향, 피하고 싶은 향</span></li><li>몸의 신호를 더해<span>측정 장비가 있다면 함께</span></li><li>당신의 향을 건넵니다<span>어울리는 향과 그 이유</span></li></ul><div class="seg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
     </div>
     <div class="welcome-visual scanbox" aria-hidden="true">
       <div class="scan-line"></div><span class="scan-c tl"></span><span class="scan-c tr"></span><span class="scan-c bl"></span><span class="scan-c br"></span>
