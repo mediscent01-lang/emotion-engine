@@ -676,6 +676,13 @@ html{background:#1F3A26}
 @media (prefers-reduced-motion:reduce){.scene .haze,.seg i{animation:none!important}}
 .scene .ridge.r3{filter:blur(1.4px)}
 .scene .canopy{filter:blur(1.8px)}
+/* v12.8 배경: 보태니컬 회화 + 투명 유리(흰 글자) 가독성을 위해 짙은 숲빛 그늘 */
+.scene{background:#1C3322!important}
+.scene>.ridge,.scene>.haze,.scene>.canopy{display:none!important}
+.scene::before{display:block!important;background-image:url("bg-botanical.jpg")!important;background-position:center 30%!important;background-size:cover!important;filter:saturate(1.1) blur(.4px)!important;opacity:1!important}
+.scene::after{background:radial-gradient(80% 50% at 50% 0%,rgba(10,26,16,.3),transparent 70%),linear-gradient(180deg,rgba(10,28,16,.5) 0%,rgba(10,28,16,.38) 45%,rgba(10,28,16,.58) 100%)!important}
+.card,.meta-row li,.sq-opt,.sq-sem-opt,.sq-pref-opt,.hist-card,.welcome-visual,.stepper,.state-card,.sq-num,.scent-hero,.ins-dark,.welcome-hero,.vhdr,.sq-progress-card,.sq-card .sq-inner,.trust-note{background:linear-gradient(160deg,rgba(16,40,24,.62),rgba(10,28,16,.5))!important;backdrop-filter:blur(16px) saturate(1.1)!important;-webkit-backdrop-filter:blur(16px) saturate(1.1)!important}
+.sq-opt.sel,.sq-sem-opt.sel,.sq-pref-opt.sel{background:rgba(255,255,255,.94)!important}
 
 </style>
 </head>
