@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-<meta name="theme-color" content="#1E3A66"/>
+<meta name="theme-color" content="#97ACB6"/>
 <title>SHIFTI · Scent Consultation — MEDISCENT LAB</title>
 <meta name="description" content="지금의 상태와 취향에 어울리는 SHIFTI 향을 찾아드리는 향 컨설테이션."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"/>
 <style>
 /* ═══════════════════════════════════════════════════════════
-   SHIFTI MEDISCENT LAB · Glass Edition (v12.3)
+   SHIFTI MEDISCENT LAB · Mist Edition (v12.4) — Glass 기반
    톤: 딥 네이비 그라데이션 + 글래스 카드 + 프로스티드 라이트 패널 + 파스텔 CTA
    원칙: 어두운 바탕엔 흰 글자, 밝은 패널엔 네이비 글자 · 글자 최소 12px · 터치 48px
    ═══════════════════════════════════════════════════════════ */
@@ -383,10 +383,146 @@ img{max-width:100%}
   .stepper li .lab{display:inline}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* ═══════════════════════════════════════════════════════════
+   Mist Edition (v12.4) — 안개 낀 도시의 시네마틱 무드 + 초기 버전식 애니메이션
+   ═══════════════════════════════════════════════════════════ */
+:root{
+  --navy-1:#9DB2BC; --navy-2:#7F97A3; --navy-3:#5D7480; --navy-4:#3E525C;
+  --on:#FFFFFF; --on70:rgba(255,255,255,.82); --on50:rgba(255,255,255,.66); --on30:rgba(255,255,255,.42);
+  --glass-bg:rgba(255,255,255,.13); --glass-bd:rgba(255,255,255,.28); --glass-hi:rgba(255,255,255,.22);
+  --frost-1:rgba(244,247,248,.86); --frost-2:rgba(222,231,234,.8);
+  --deep:#203038; --deep70:#3B4D56; --deep50:#5A6D76; --deep30:#8C9CA3;
+  --lav-1:#5FAAB5; --lav-2:#3F8794; --teal:#4E9AA6; --sun:#F3C98B; --sun-dk:#E8AE5E;
+  --c:#BFE3E8; --cdk:#E6F6F8; --clt:rgba(95,170,181,.25); --cbg:rgba(95,170,181,.18); --cln:rgba(95,170,181,.4);
+  --shadow-card:0 12px 34px rgba(30,45,55,.22); --shadow-md:0 30px 70px rgba(25,38,46,.4);
+}
+.light{--c:#2F7A86;--cdk:#1F5A63;--clt:#DDEEF0;--cbg:#E8F3F4;--cln:#BFDDE1;--gold:#A9772A}
+html{background:#7F97A3}
+body{background:transparent!important;color:var(--on)}
+/* ── 장면: 안개 낀 거리 ── */
+.scene{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;
+  background:
+    radial-gradient(120% 70% at 70% 10%,rgba(255,236,214,.35),transparent 55%),
+    linear-gradient(180deg,#B9C8CF 0%,#97ACB6 32%,#71889A 62%,#4C6170 86%,#3A4C57 100%)}
+.scene .bld{position:absolute;bottom:18%;background:linear-gradient(180deg,rgba(40,55,64,.0),rgba(40,55,64,.55));filter:blur(6px)}
+.scene .bld.l1{left:-4%;width:30%;height:58%;opacity:.55}
+.scene .bld.l2{left:20%;width:14%;height:44%;opacity:.35}
+.scene .bld.r1{right:-6%;width:34%;height:64%;opacity:.6;clip-path:polygon(0 12%,30% 0,60% 10%,100% 4%,100% 100%,0 100%)}
+.scene .bld.r2{right:24%;width:12%;height:40%;opacity:.3}
+.scene .street{position:absolute;left:-10%;right:-10%;bottom:0;height:26%;background:linear-gradient(180deg,rgba(60,78,88,.0),rgba(38,50,58,.75));filter:blur(2px)}
+.scene .street::after{content:"";position:absolute;inset:30% 20% 0;background:linear-gradient(90deg,transparent,rgba(255,220,180,.18),transparent);filter:blur(14px)}
+.scene .fog{position:absolute;left:-30%;width:160%;height:45%;border-radius:50%;background:radial-gradient(closest-side,rgba(232,238,240,.55),rgba(232,238,240,0));filter:blur(30px);animation:fogDrift 38s ease-in-out infinite alternate}
+.scene .fog.f1{top:18%} .scene .fog.f2{top:48%;opacity:.7;animation-duration:52s;animation-direction:alternate-reverse} .scene .fog.f3{top:68%;opacity:.55;animation-duration:44s}
+@keyframes fogDrift{from{transform:translateX(-8%)}to{transform:translateX(8%)}}
+.scene .bokeh{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,214,160,.95) 0%,rgba(255,190,120,.55) 35%,rgba(255,180,110,0) 70%);filter:blur(2px);animation:bokeh 9s ease-in-out infinite}
+.scene .bokeh.sun{width:120px;height:120px;right:6%;top:16%;filter:blur(6px);animation-duration:12s}
+.scene .bokeh.b1{width:26px;height:26px;right:22%;bottom:30%;animation-delay:-2s}
+.scene .bokeh.b2{width:18px;height:18px;right:14%;bottom:34%;animation-delay:-5s}
+.scene .bokeh.b3{width:34px;height:34px;right:30%;bottom:26%;animation-delay:-1s}
+.scene .bokeh.b4{width:14px;height:14px;left:18%;bottom:31%;animation-delay:-7s;opacity:.7}
+.scene .bokeh.b5{width:22px;height:22px;left:30%;bottom:27%;animation-delay:-3s;opacity:.6}
+.scene .bokeh.b6{width:10px;height:10px;right:40%;bottom:36%;animation-delay:-4s}
+@keyframes bokeh{0%,100%{transform:translateY(0) scale(1);opacity:.85}50%{transform:translateY(-10px) scale(1.12);opacity:1}}
+.scene .rain{position:absolute;inset:0;background-image:repeating-linear-gradient(100deg,rgba(255,255,255,.06) 0 1px,transparent 1px 7px);opacity:.35;animation:rain 1.2s linear infinite}
+@keyframes rain{from{background-position:0 0}to{background-position:-40px 160px}}
+.scene .veil{position:absolute;inset:0;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,0) 40%,rgba(30,44,52,.25))}
+
+/* ── 서리 유리 ── */
+.hdr{background:linear-gradient(180deg,rgba(150,172,182,.55),rgba(150,172,182,.15));border-bottom:1px solid rgba(255,255,255,.18)}
+.hdr-mark{background:linear-gradient(135deg,#FFFFFF,#DCE8EC);color:#203038}
+.card,.scent-hero,.ins-dark,.meta-row li,.sq-opt,.sq-sem-opt,.sq-pref-opt,.hist-card,.welcome-visual{backdrop-filter:blur(20px) saturate(1.1);-webkit-backdrop-filter:blur(20px) saturate(1.1)}
+.scent-hero,.ins-dark{background:linear-gradient(160deg,rgba(255,255,255,.26),rgba(255,255,255,.08));border:1px solid rgba(255,255,255,.35)}
+.scent-hero::before{background:radial-gradient(circle,rgba(255,214,160,.55),transparent 65%)}
+.scent-hero::after{background:radial-gradient(circle,rgba(95,170,181,.35),transparent 65%)}
+.panel-light,.how,.sq-done-card,.expert,.ins-box,.card.light,.light.card{background:linear-gradient(180deg,var(--frost-1),var(--frost-2))!important;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,.6)}
+.bbar{background:linear-gradient(0deg,rgba(58,76,87,.85),rgba(58,76,87,.35));border-top:1px solid rgba(255,255,255,.14)}
+
+/* ── 타이포: 크고 얇게 ── */
+.welcome-hero .brandline{font-family:var(--fx);font-size:34px;font-weight:700;letter-spacing:-.02em;color:#1F2B31;margin:0}
+.welcome-hero .big{display:block;font-family:var(--fx);font-size:54px;line-height:1.05;font-weight:500;letter-spacing:-.03em;color:#fff;margin-top:14px;text-shadow:0 6px 30px rgba(30,45,55,.25)}
+.welcome-hero h1{font-size:26px;font-weight:600;margin-top:14px}
+.welcome-hero h1 em{background:none;color:#fff;-webkit-text-fill-color:#fff}
+.welcome-hero .en{font-style:italic;color:var(--on70)}
+.page-title,.vhdr-title{font-weight:600;text-shadow:0 4px 24px rgba(30,45,55,.18)}
+.scent-name{font-weight:600}
+
+/* ── 버튼: 틸 알약 ── */
+.btn-c,.bbar-next,.bbar-next.celadon,.multi-done,.hero-actions .btn-light,.ins-dark #btnInsProd{background:linear-gradient(135deg,var(--lav-1),var(--lav-2))!important;color:#fff!important;border-radius:999px!important;box-shadow:0 12px 30px rgba(47,110,122,.4)}
+.welcome-cta .btn-c{width:auto;align-self:flex-start;padding:0 44px;min-height:58px}
+.btn-c,.bbar-next{position:relative;overflow:hidden}
+.btn-c::after,.bbar-next::after{content:"";position:absolute;top:0;left:-60%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-18deg);animation:shine 4.5s ease-in-out infinite}
+@keyframes shine{0%,70%{left:-60%}100%{left:130%}}
+.bbar-back,.hero-actions .btn-line,.btn-ol{border-radius:999px!important}
+.sq-done-card .btn-c{background:linear-gradient(135deg,var(--lav-1),var(--lav-2))!important}
+.buy-btns .btn{background:rgba(32,48,56,.08)!important;color:var(--deep)!important;border:1px solid rgba(32,48,56,.15)!important;border-radius:999px!important}
+.match-tag,.recipe-badge,.hist-chip.match{background:var(--sun);color:#4A3110}
+
+/* ── 시작: 초기 버전의 라이브 레이더 + 스캔 ── */
+.welcome-visual{height:auto;min-height:0;padding:18px;display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center;border-radius:28px;background:linear-gradient(160deg,rgba(255,255,255,.22),rgba(255,255,255,.06));border:1px solid rgba(255,255,255,.32)}
+.welcome-visual::before,.welcome-visual::after{display:none}
+.welcome-visual .wv-ring,.welcome-visual .wv-bottle{display:none}
+.welcome-visual .wv-cap{position:static;grid-column:1 / -1;font-size:12.5px;color:var(--on70)}
+#wRadar{width:110px;height:110px}
+.hri-row{display:grid;grid-template-columns:78px 1fr 26px;gap:8px;align-items:center;margin:3px 0}
+.hri-k{font-family:var(--fx);font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--on70)}
+.hri-bar{height:4px;border-radius:999px;background:rgba(255,255,255,.18);overflow:hidden}
+.hri-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#FFFFFF,#BFE3E8)!important;transition:width .25s linear}
+.hri-v{font-family:var(--fx);font-size:12px;font-weight:700;text-align:right;color:#fff}
+.scanbox{position:relative;overflow:hidden}
+.scanbox .scan-line{position:absolute;left:0;right:0;top:0;height:40%;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.16),rgba(255,255,255,0));animation:scan 3.6s ease-in-out infinite;pointer-events:none}
+@keyframes scan{0%{transform:translateY(-100%)}100%{transform:translateY(260%)}}
+.scanbox .scan-c{position:absolute;width:14px;height:14px;border:2px solid rgba(255,255,255,.7)}
+.scanbox .tl{top:10px;left:10px;border-right:0;border-bottom:0;border-radius:6px 0 0 0}
+.scanbox .tr{top:10px;right:10px;border-left:0;border-bottom:0;border-radius:0 6px 0 0}
+.scanbox .bl{bottom:10px;left:10px;border-right:0;border-top:0;border-radius:0 0 0 6px}
+.scanbox .br{bottom:10px;right:10px;border-left:0;border-top:0;border-radius:0 0 6px 0}
+.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#7FF0C8;margin-right:6px;box-shadow:0 0 0 0 rgba(127,240,200,.7);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(127,240,200,.6)}70%{box-shadow:0 0 0 10px rgba(127,240,200,0)}100%{box-shadow:0 0 0 0 rgba(127,240,200,0)}}
+.meta-row li{border-radius:22px}
+
+/* ── 등장 애니메이션 (초기 버전 .wa 스타일) ── */
+.page.on .shell>*{opacity:0;animation:rise .8s var(--eout) forwards}
+.page.on .shell>*:nth-child(1){animation-delay:.05s}.page.on .shell>*:nth-child(2){animation-delay:.14s}.page.on .shell>*:nth-child(3){animation-delay:.23s}
+.page.on .shell>*:nth-child(4){animation-delay:.32s}.page.on .shell>*:nth-child(5){animation-delay:.41s}.page.on .shell>*:nth-child(6){animation-delay:.5s}
+.page.on .shell>*:nth-child(7){animation-delay:.59s}.page.on .shell>*:nth-child(8){animation-delay:.68s}.page.on .shell>*:nth-child(n+9){animation-delay:.76s}
+@keyframes rise{from{opacity:0;transform:translateY(18px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.how li{opacity:0;animation:rise .7s var(--eout) forwards}
+.how li:nth-child(1){animation-delay:.6s}.how li:nth-child(2){animation-delay:.75s}.how li:nth-child(3){animation-delay:.9s}
+.sq-opt,.sq-sem-opt,.sq-pref-opt{transition:transform .18s var(--ease),background .25s,box-shadow .25s}
+.sq-opt:active,.sq-sem-opt:active,.sq-pref-opt:active{transform:scale(.95)}
+.sq-opt.sel,.sq-sem-opt.sel,.sq-pref-opt.sel{animation:pick .45s var(--eout)}
+@keyframes pick{0%{transform:scale(.94)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
+.scent-name{animation:nameIn 1.1s var(--eout) .2s both}
+@keyframes nameIn{from{opacity:0;letter-spacing:.08em;filter:blur(8px)}to{opacity:1;letter-spacing:-.02em;filter:none}}
+.state-chart path.line{stroke-dasharray:900;stroke-dashoffset:900;animation:draw 1.8s var(--eout) .3s forwards}
+.state-chart path.area{opacity:0;animation:fadeIn 1.2s ease 1s forwards}
+.state-chart circle,.state-chart .dash,.state-tip{opacity:0;animation:fadeIn .6s ease 1.7s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fadeIn{to{opacity:1}}
+.state-tip{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.4)}
+/* 분석 중: 초기 버전처럼 파형 보이기 */
+#aWave{display:block!important;filter:brightness(4) saturate(0) opacity(.9);margin-top:12px}
+.ring-arc{stroke:#FFFFFF;filter:drop-shadow(0 0 10px rgba(255,255,255,.6))}
+.ring-svg{animation:breathe 3.2s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+.toast{background:rgba(255,255,255,.9);color:var(--deep)}
+@media (prefers-reduced-motion:reduce){.scene .fog,.scene .bokeh,.scene .rain,.scan-line{animation:none!important}.page.on .shell>*,.how li{opacity:1!important}}
+.scent-hero,.ins-dark,.state-card,.welcome-hero{text-shadow:0 2px 18px rgba(25,38,46,.28)}
+.scent-notes,.scent-coll,.state-axis{color:rgba(255,255,255,.88)!important}
+.stepper li .dot{background:rgba(255,255,255,.22);color:#fff}
+
 </style>
 </head>
 
 <body>
+<div class="scene" aria-hidden="true">
+  <div class="bld l1"></div><div class="bld l2"></div><div class="bld r1"></div><div class="bld r2"></div>
+  <div class="street"></div>
+  <div class="fog f1"></div><div class="fog f2"></div><div class="fog f3"></div>
+  <div class="bokeh sun"></div><div class="bokeh b1"></div><div class="bokeh b2"></div><div class="bokeh b3"></div><div class="bokeh b4"></div><div class="bokeh b5"></div><div class="bokeh b6"></div>
+  <div class="rain"></div><div class="veil"></div>
+</div>
 <a class="sr-only" href="#main">본문으로 건너뛰기</a>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -409,18 +545,19 @@ img{max-width:100%}
 <section class="page on" id="pageWelcome" aria-labelledby="wTitle">
   <div class="shell">
     <div class="welcome-hero">
-      <p class="eyebrow">Welcome 👋</p>
-      <h1 id="wTitle">오늘의 당신에게<br><em>머무를 향</em>을 찾습니다</h1>
-      <span class="en">Private Scent Consultation · MEDISCENT LAB</span>
+      <p class="brandline">SHIFTI</p>
+      <span class="big">Welcome</span>
+      <h1 id="wTitle">오늘의 당신에게 <em>머무를 향</em>을 찾습니다</h1>
+      <span class="en">a quiet moment, a personal scent</span>
       <p>지금의 마음과 몸의 상태, 그리고 당신이 사랑하는 향의 결을 여쭙고 SHIFTI의 향 가운데 하나를 골라 드립니다.</p>
     </div>
-    <div class="welcome-visual" aria-hidden="true">
-      <span class="wv-ring b"></span><span class="wv-ring"></span>
-      <div class="wv-bottle"></div>
-      <div class="wv-cap">SHIFTI · Natural Origin Eau de Parfum</div>
+    <div class="welcome-visual scanbox" aria-hidden="true">
+      <div class="scan-line"></div><span class="scan-c tl"></span><span class="scan-c tr"></span><span class="scan-c bl"></span><span class="scan-c br"></span>
+      <canvas id="wRadar" width="240" height="240"></canvas>
+      <div><div class="wv-cap" style="margin-bottom:6px"><span class="live-dot"></span>LIVE · Emotion Signal</div><div id="wLiveScores"></div></div>
     </div>
     <ul class="meta-row" aria-label="안내">
-      <li><b>2분</b>소요 시간</li><li><b>11</b>질문</li><li><b>선택</b>생체 측정</li>
+      <li><b data-count="2" data-suf="분">0분</b>소요 시간</li><li><b data-count="11">0</b>질문</li><li><b data-count="10" data-suf="향">0향</b>추천 가능한 향</li>
     </ul>
     <div class="welcome-cta">
       <button class="btn btn-c btn-block" type="button" onclick="goPage('survey')">컨설테이션 시작</button>
@@ -624,9 +761,9 @@ img{max-width:100%}
         </div>
       </div>
     </div>
-    <div class="ins-box" id="insB2"><div class="ins-box-k">사용 방법</div><div class="ins-box-t" id="insC">—</div></div>
-    <div class="ins-box" id="insB1"><div class="ins-box-k">추천 이유</div><div class="ins-box-t" id="insB">—</div></div>
-    <div class="ins-box" id="insB0"><div class="ins-box-k">오늘의 상태</div><div class="ins-box-t" id="insA">—</div></div>
+    <div class="ins-box" id="insB2"><div class="ins-box-k">Ritual · 사용 방법</div><div class="ins-box-t" id="insC">—</div></div>
+    <div class="ins-box" id="insB1"><div class="ins-box-k">Notes · 추천 이유</div><div class="ins-box-t" id="insB">—</div></div>
+    <div class="ins-box" id="insB0"><div class="ins-box-k">Today · 오늘의 상태</div><div class="ins-box-t" id="insA">—</div></div>
     <p class="disclaimer">본 결과는 향 선택을 돕는 참고 정보입니다. 의학적 진단·치료를 위한 것이 아니며, 향에 대한 느낌은 사람마다 다를 수 있습니다.</p>
   </div>
 </section>
@@ -2580,10 +2717,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     const [mx,my]=pts[mi];
     const grid=[0,25,50,75,100].map(v=>{const y=pt+(1-v/100)*(H-pt-pb);return '<line x1="0" x2="'+W+'" y1="'+y+'" y2="'+y+'" stroke="rgba(255,255,255,.08)"/>';}).join('');
     host.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="오늘의 상태 6가지 지표 곡선">'+
-      '<defs><linearGradient id="stFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(216,211,246,.45)"/><stop offset="1" stop-color="rgba(216,211,246,0)"/></linearGradient></defs>'+grid+
-      '<path d="'+area+'" fill="url(#stFill)"/><path d="'+d+'" fill="none" stroke="#F4F7FF" stroke-width="2.4" stroke-linecap="round"/>'+
-      '<line x1="'+mx+'" x2="'+mx+'" y1="'+my+'" y2="'+H+'" stroke="rgba(255,255,255,.55)" stroke-dasharray="3 4"/>'+
-      '<circle cx="'+mx+'" cy="'+my+'" r="6" fill="#D8D3F6" stroke="#fff" stroke-width="2"/></svg>'+
+      '<defs><linearGradient id="stFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(255,255,255,.45)"/><stop offset="1" stop-color="rgba(255,255,255,0)"/></linearGradient></defs>'+grid+
+      '<path class="area" d="'+area+'" fill="url(#stFill)"/><path class="line" d="'+d+'" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round"/>'+
+      '<line class="dash" x1="'+mx+'" x2="'+mx+'" y1="'+my+'" y2="'+H+'" stroke="rgba(255,255,255,.6)" stroke-dasharray="3 4"/>'+
+      '<circle cx="'+mx+'" cy="'+my+'" r="6" fill="#F3C98B" stroke="#fff" stroke-width="2"/></svg>'+
       '<div class="state-tip" style="left:'+Math.min(88,Math.max(12,mx/W*100))+'%;top:'+(my/H*100-6)+'%"><b>'+(Math.round(+sc[keys[mi]]||0))+'</b><span>'+names[keys[mi]]+'</span></div>';
     const chip=el('stateChip'); if(chip)chip.textContent=S.bio&&S.bio.valid?'설문 + 생체신호':'설문 기준';
   }
@@ -2633,18 +2770,25 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(b)b.textContent=`${sc.code}은(는) ${topFamilies(sc.code).join('·')} 계열이 중심인 향이에요.`+(nm.notes.length?` 선택하신 취향과 겹치는 노트: ${nm.notes.join(', ')}.`:'');
   }
 
+  function countUp(){
+    document.querySelectorAll('[data-count]').forEach(n=>{
+      const tg=+n.dataset.count,suf=n.dataset.suf||'';let v=0;const step=Math.max(1,tg/24);
+      clearInterval(n._t);n._t=setInterval(()=>{v=Math.min(tg,v+step);n.textContent=Math.round(v)+suf;if(v>=tg)clearInterval(n._t);},40);
+    });
+  }
+
   const orig=window.goPage;
   window.goPage=function(name){
     orig(name);
     stepper(name);
     if(name==='report'){try{enhanceReport();}catch(e){console.error('enhanceReport',e);}}
     if(name==='insight'){try{enhanceInsight();}catch(e){console.error('enhanceInsight',e);}}
-    if(name==='welcome'){const d=el('expertDetails');if(d)d.open=false;}
+    if(name==='welcome'){const d=el('expertDetails');if(d)d.open=false;countUp();}
   };
 
   document.addEventListener('DOMContentLoaded',()=>{
-    stepper('welcome');
-    const t=document.querySelector('title'); if(t)t.textContent='SHIFTI · Scent Consultation — MEDISCENT LAB';
+    stepper('welcome');setTimeout(countUp,500);
+    const t=document.querySelector('title'); if(t)t.textContent='SHIFTI · Welcome — Scent Consultation';
     const n=document.querySelector('.hdr-name'); if(n)n.textContent='SHIFTI';
     if(typeof STORE_MODE!=='undefined'&&STORE_MODE){document.querySelectorAll('[onclick="goPage(\'history\')"]').forEach(b=>b.hidden=true);}
     // 키보드: Esc로 결과 카드 닫기
