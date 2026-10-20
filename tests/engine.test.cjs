@@ -100,7 +100,7 @@ test('업로드 파일명(측정 ID·성별·나이)을 남기지 않는다', as
 });
 
 test('화면 문구에 "진단"·효능 단정 표현이 없다', () => {
-  const visible = html.replace('의학적 진단·치료를 위한 것이 아니며', '');
+  const visible = html.replaceAll('의학적 진단·치료를 위한 것이 아니며', '');
   for (const w of ['진단', '즉각 상승 효과', '이완 효과', '긴장 완화를 위해', '촉진됩니다', '호흡 속도를 낮춥니다']) assert.ok(!visible.includes(w), w);
 });
 
