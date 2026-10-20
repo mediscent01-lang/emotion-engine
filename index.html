@@ -603,6 +603,9 @@ html{background:#DCDCD6}
 .scene::after{background:linear-gradient(180deg,rgba(244,241,232,.66) 0%,rgba(244,241,232,.56) 50%,rgba(236,233,222,.66) 100%)!important}
 /* v12.5.3 채도 높임 (희미함은 유지) */
 .scene::before{filter:saturate(1.25) blur(1.5px);opacity:.42}
+/* v12.6 배경 교체: 창가의 새 그림, 약간만 흐리게 */
+.scene::before{background-image:url("bg-window.jpg")!important;background-position:center 40%!important;filter:saturate(1.05) blur(.6px);opacity:.78}
+.scene::after{background:linear-gradient(180deg,rgba(244,241,232,.3) 0%,rgba(244,241,232,.22) 50%,rgba(236,233,222,.3) 100%)!important}
 
 </style>
 </head>
